@@ -34,6 +34,10 @@ public class Restaurant {
     @Column(nullable = false)
     private Byte peopleCount;
 
+    @ManyToOne
+    @JoinColumn(name = "menu_id")
+    private Menu menu;
+
     public Restaurant(String name, String address, Set<KitchenType> kitchenTypes, User user, Byte peopleCount) {
         this.name = name;
         this.address = address;

@@ -20,7 +20,7 @@ public class Menu {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDateTime date;
+    private LocalDateTime approvalDate;
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "Menu_dishes",
@@ -29,12 +29,12 @@ public class Menu {
     private Set<Dish> dishes = new LinkedHashSet<>();
 
     public Menu(LocalDateTime date, Set<Dish> dishes) {
-        this.date = date;
+        this.approvalDate = date;
         this.dishes = dishes;
     }
 
     public Menu(LocalDateTime date) {
-        this.date = date;
+        this.approvalDate = date;
     }
 
     @Override
@@ -42,12 +42,12 @@ public class Menu {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Menu menu = (Menu) o;
-        return Objects.equals(date, menu.date) && Objects.equals(dishes, menu.dishes);
+        return Objects.equals(approvalDate, menu.approvalDate) && Objects.equals(dishes, menu.dishes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(date, dishes);
+        return Objects.hash(approvalDate, dishes);
     }
 
 }

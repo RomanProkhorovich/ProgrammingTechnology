@@ -1,6 +1,7 @@
 package com.example.ProgrammingTechnology.model;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
@@ -8,12 +9,18 @@ import java.util.Objects;
 import java.util.Set;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Order {
     @Id
     @Column(name = "id")
     private Long id;
 
     @ManyToMany
+    @Builder.Default
     @JoinTable(name = "Order_dishes",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "dishes_id"))
