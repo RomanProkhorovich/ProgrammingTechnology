@@ -27,7 +27,7 @@ public class Restaurant {
     @JoinColumn(name = "kitchen_id", nullable = false)
     private Set<KitchenType> kitchenTypes = new LinkedHashSet<>();
 
-    @OneToOne(orphanRemoval = true)
+    @OneToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User manager;
 
