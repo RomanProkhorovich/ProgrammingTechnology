@@ -37,7 +37,7 @@ public class Order {
     @Column(nullable = false, name = "delivery_time")
     private LocalDateTime deliveryTime;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "courier_id")
     private User courier;
 

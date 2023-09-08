@@ -36,7 +36,7 @@ public class Restaurant {
     @Column(nullable = false, name = "seats_number")
     private Byte peopleCount;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "menu_id")
     private Menu menu;
 
