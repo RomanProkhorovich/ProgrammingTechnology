@@ -20,21 +20,21 @@ public class Menu {
     private Long id;
 
     @Column(nullable = false)
-    private LocalDateTime approvalDate;
+    private LocalDateTime approval;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "Menu_dishes",
-            joinColumns = @JoinColumn(name = "menu_id"),
-            inverseJoinColumns = @JoinColumn(name = "dishes_id"))
+    @JoinTable(name = "Menu_Dish",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "dish_id"))
     private Set<Dish> dishes = new LinkedHashSet<>();
 
     public Menu(LocalDateTime date, Set<Dish> dishes) {
-        this.approvalDate = date;
+        this.approval = date;
         this.dishes = dishes;
     }
 
     public Menu(LocalDateTime date) {
-        this.approvalDate = date;
+        this.approval = date;
     }
 
     @Override
@@ -42,12 +42,12 @@ public class Menu {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Menu menu = (Menu) o;
-        return Objects.equals(approvalDate, menu.approvalDate) && Objects.equals(dishes, menu.dishes);
+        return Objects.equals(approval, menu.approval) && Objects.equals(dishes, menu.dishes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(approvalDate, dishes);
+        return Objects.hash(approval, dishes);
     }
 
 }

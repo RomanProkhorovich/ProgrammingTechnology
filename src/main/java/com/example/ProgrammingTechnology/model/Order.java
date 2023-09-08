@@ -21,33 +21,29 @@ public class Order {
 
     @ManyToMany
     @Builder.Default
-    @JoinTable(name = "Order_dishes",
-            joinColumns = @JoinColumn(name = "order_id"),
+    @JoinTable(name = "Order_Dish",
+            joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "dishes_id"))
     private Set<Dish> dishes = new LinkedHashSet<>();
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "order_time")
     private LocalDateTime orderTime;
 
     @ManyToOne
-    @JoinColumn(name = "order_status_id")
+    @JoinColumn(name = "status_id")
     private OrderStatus orderStatus;
 
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "delivery_time")
     private LocalDateTime deliveryTime;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "user_id")
+    @OneToOne
+    @JoinColumn(name = "courier_id")
     private User courier;
 
-    public Order(Set<Dish> dishes, LocalDateTime orderTime, OrderStatus orderStatus, LocalDateTime deliveryTime, User courier) {
-        this.dishes = dishes;
-        this.orderTime = orderTime;
-        this.orderStatus = orderStatus;
-        this.deliveryTime = deliveryTime;
-        this.courier = courier;
-    }
+    @Column(name = "is_offline", nullable = false)
+    private Boolean isOffline;
+
 
     @Override
     public boolean equals(Object o) {
