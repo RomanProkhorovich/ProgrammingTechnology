@@ -6,6 +6,6 @@ CREATE TABLE app_Order
 	status_id INTEGER REFERENCES Status (id) UNIQUE,
 	delivery_time TIMESTAMP DEFAULT NULL,
 	courier_id INTEGER REFERENCES Customer (id) UNIQUE,
-	client INTEGER REFERENCES Customer (id) UNIQUE,
+	client_id INTEGER REFERENCES Customer (id) UNIQUE,
 	is_offline BOOLEAN NOT NULL
 );

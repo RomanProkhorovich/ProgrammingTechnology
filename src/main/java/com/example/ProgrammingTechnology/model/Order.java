@@ -44,6 +44,9 @@ public class Order {
     @Column(name = "is_offline", nullable = false)
     private Boolean isOffline;
 
+    @ManyToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "client_id")
+    private User user;
 
     @Override
     public boolean equals(Object o) {
