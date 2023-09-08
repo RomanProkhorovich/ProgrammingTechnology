@@ -7,5 +7,5 @@ CREATE TABLE Restaurant
 	manager_id INTEGER REFERENCES Customer (id) UNIQUE,
 	cuisine_type_id INTEGER REFERENCES Cuisine_type (id) NOT NULL,
 	seats_number INTEGER,
-	menu_id INTEGER REFERENCES Menu (id) UNIQUE NOT NULL
+	menu_id INTEGER REFERENCES Menu (id)  NOT NULL
 );
