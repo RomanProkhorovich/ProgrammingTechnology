@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
@@ -29,11 +31,27 @@ public class User {
     @Column(nullable = false, unique = true)
     private String email;
 
-    public User(String firstname, String lastname, String surname, Role role, String email) {
+    private String address;
+
+    public User(String firstname, String lastname, String surname, Role role, String email, String address) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.surname = surname;
         this.role = role;
         this.email = email;
+        this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return Objects.equals(email, user.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(email);
     }
 }
