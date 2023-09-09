@@ -42,28 +42,4 @@ public class KitchenTypeService {
     public List<KitchenType> findKitchenTypes() {
         return kitchenTypeRepository.findAll();
     }
-
-    //изменение вида кухни
-    public KitchenType updateKitchenType(KitchenType upKitchenType) {
-        if(kitchenTypeRepository.findById(upKitchenType.getId()).isPresent()) {
-            kitchenTypeRepository.findById(upKitchenType.getId()).ifPresent(kitchenTypeRepository::delete);
-            kitchenTypeRepository.save(upKitchenType);
-            return upKitchenType;
-        }
-        return null;
-    }
-
-    //удаление вида кухни по id
-    public void deleteKitchenTypeById(Long id) {
-        if(kitchenTypeRepository.findById(id).isPresent()) {
-            kitchenTypeRepository.deleteById(id);
-        }
-    }
-
-    //удаление вида кухни по названию
-    public void deleteKitchenTypeByName(String name) {
-        if(kitchenTypeRepository.findByName(name)!=null) {
-            kitchenTypeRepository.deleteByName(name);
-        }
-    }
 }

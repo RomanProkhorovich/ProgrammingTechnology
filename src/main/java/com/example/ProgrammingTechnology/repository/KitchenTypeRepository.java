@@ -10,5 +10,4 @@ import java.util.Optional;
 @Repository
 public interface KitchenTypeRepository extends JpaRepository<KitchenType, Long> {
     Optional<KitchenType> findByName(String name);
-    void deleteByName(String name);
 }

@@ -50,7 +50,7 @@ public class Order {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "client_id")
-    private User user;
+    private User client;
 
     @Override
     public boolean equals(Object o) {

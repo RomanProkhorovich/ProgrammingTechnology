@@ -1,0 +1,46 @@
+package com.example.ProgrammingTechnology.service;
+
+import com.example.ProgrammingTechnology.model.ReceivingType;
+import com.example.ProgrammingTechnology.repository.ReceivingTypeRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@RequiredArgsConstructor
+public class ReceivingTypeService {
+    private final ReceivingTypeRepository receivingTypeRepository;
+
+    //создание способа получения заказа
+    public ReceivingType createReceivingType(ReceivingType newReceivingType) {
+        if(receivingTypeRepository.findById(newReceivingType.getId()).isEmpty()) {
+            receivingTypeRepository.save(newReceivingType);
+            return newReceivingType;
+        }
+        return null;
+    }
+
+    //поиск способа получения заказа по id
+    public ReceivingType findReceivingTypeById(Long id) {
+        if(receivingTypeRepository.findById(id).isPresent()) {
+            return receivingTypeRepository.findById(id).orElseThrow();
+        }
+        return null;
+    }
+
+    //поиск способа получения заказа по названию
+    public Optional<ReceivingType> findReceivingTypeByName(String name) {
+        if(receivingTypeRepository.findByName(name).isPresent()) {
+            return receivingTypeRepository.findByName(name);
+        }
+        return null;
+    }
+
+    //поиск всех способов получения заказа
+    public List<ReceivingType> findReceivingTypes() {
+        return receivingTypeRepository.findAll();
+    }
+}

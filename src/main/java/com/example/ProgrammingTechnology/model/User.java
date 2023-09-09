@@ -26,7 +26,7 @@ public class User {
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @Column(unique = true)
+    @Column(nullable = false, unique = true)
     private String email;
 
     public User(String firstname, String lastname, String surname, Role role, String email) {

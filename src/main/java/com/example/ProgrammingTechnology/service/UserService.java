@@ -3,7 +3,10 @@ package com.example.ProgrammingTechnology.service;
 import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -26,4 +29,15 @@ public class UserService {
         }
         return null;
     }
+
+    //поиск пользователя по почте
+    public Optional<User> findUserByEmail(String email) {
+        if(userRepository.findByEmail(email).isPresent()) {
+            return userRepository.findByEmail(email);
+        }
+        return null;
+    }
+
+
+
 }

@@ -42,18 +42,4 @@ public class OrderStatusService {
     public List<OrderStatus> findOrderStatuses() {
         return orderStatusRepository.findAll();
     }
-
-    //удаление статуса по id
-    public void deleteOrderStatusById(Long id) {
-        if(orderStatusRepository.findById(id).isPresent()) {
-            orderStatusRepository.deleteById(id);
-        }
-    }
-
-    //удаление статуса по названию
-    public void deleteOrderStatusByName(String name) {
-        if(orderStatusRepository.findByName(name).isPresent()) {
-            orderStatusRepository.deleteByName(name);
-        }
-    }
 }
