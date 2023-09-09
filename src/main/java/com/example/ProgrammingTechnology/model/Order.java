@@ -41,8 +41,12 @@ public class Order {
     @JoinColumn(name = "courier_id")
     private User courier;
 
-    @Column(name = "is_offline", nullable = false)
-    private Boolean isOffline;
+    @Column(nullable = false)
+    private String address;
+
+    @ManyToOne
+    @JoinColumn(name = "receiving_type")
+    private ReceivingType receivingType;
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "client_id")

@@ -7,5 +7,6 @@ CREATE TABLE app_Order
 	delivery_time TIMESTAMP DEFAULT NULL,
 	courier_id INTEGER REFERENCES Customer (id) ,
 	client_id INTEGER REFERENCES Customer (id) ,
-	is_offline BOOLEAN NOT NULL
+	receiving_type INTEGER REFERENCES Receiving-type(id) NOT NULL,
+	address varchar(255) NOT NULL
 );
