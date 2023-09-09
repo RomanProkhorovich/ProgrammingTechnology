@@ -11,6 +11,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "Cuisine_type")
 public class KitchenType {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

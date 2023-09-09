@@ -21,17 +21,19 @@ public class Restaurant {
 
     @Column(nullable = false)
     private String name;
+
+    @Column(nullable = false)
     private String address;
 
     @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "kitchen_id", nullable = false)
+    @JoinColumn(name = "cuisine_type_id", nullable = false)
     private Set<KitchenType> kitchenTypes = new LinkedHashSet<>();
 
     @OneToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "manager_id", nullable = false)
     private User manager;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "seats_number")
     private Byte peopleCount;
 
     @ManyToOne
