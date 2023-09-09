@@ -5,6 +5,7 @@ import com.example.ProgrammingTechnology.repository.MenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -44,10 +45,30 @@ public class MenuService {
         return null;
     }
 
-    //удаление меню
-    public void deleteMenu(Long id) {
+    //изменение даты утверждения меню
+    public Menu updateApproval(Long id, LocalDateTime approval) {
+        if(menuRepository.findById(id).isPresent()) {
+            Menu menu = menuRepository.findById(id).orElseThrow();
+            menu.setApproval(approval);
+            menuRepository.save(menu);
+            return menu;
+        }
+        return null;
+    }
+
+    //удаление меню по id
+    public void deleteMenuById(Long id) {
         if(menuRepository.findById(id).isPresent()) {
             menuRepository.deleteById(id);
         }
     }
+
+    //удаление меню
+    public void deleteMenu(Menu menu) {
+        if(menuRepository.findById(menu.getId()).isPresent()) {
+            menuRepository.delete(menu);
+        }
+    }
+
+    //TODO: сделать добавление и удаления блюда из меню
 }

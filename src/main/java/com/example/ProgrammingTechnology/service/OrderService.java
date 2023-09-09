@@ -16,8 +16,10 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final UserService userService;
     private final OrderStatusService orderStatusService;
+    private final ReceivingTypeService receivingTypeService;
 
     //TODO: сделать проверку на количество мест, если заказали в зале
+    //TODO: адрес по дефолту это адрес у клиента
     //создание заказа
     public Order createOrder(Order newOrder) {
         if(orderRepository.findById(newOrder.getId()).isEmpty()) {
@@ -47,9 +49,16 @@ public class OrderService {
         return null;
     }
 
-    //TODO: допилить клиента в заказе, чтобы сделать поиск по клиенту
     //поиск заказов по клиенту
-    //public List<Order> findOrderByClient
+    public List<Order> findOrdersByClient(Long clientId) {
+        if(userService.findUserById(clientId)!=null) {
+            User client = userService.findUserById(clientId);
+            if(client.getRole().getName().equals("Client")) {
+                return orderRepository.findAllByUser(client);
+            }
+        }
+        return null;
+    }
 
     //поиск заказов по статусу
     public List<Order> findOrderByOrderStatus(Long orderStatusId) {
@@ -61,7 +70,7 @@ public class OrderService {
         return null;
     }
 
-    //изменение времени заказа
+    //изменение времени создания заказа
     public Order updateOrderTime(Long id, LocalDateTime upOrderTime) {
         Order order = orderRepository.findById(id).orElseThrow();
         if(orderRepository.findById(id).isPresent()) {
@@ -83,6 +92,7 @@ public class OrderService {
         return null;
     }
 
+    //TODO: сделать проверку: новое значение времени доставки не должно быть раньше времени создания заказа
     //изменение времени доставки заказа
     public Order updateDeliveryTime(Long id, LocalDateTime upDeliveryTime) {
         Order order = orderRepository.findById(id).orElseThrow();
@@ -97,7 +107,9 @@ public class OrderService {
     //изменение курьера заказа
     public Order updateCourier(Long id, Long courierId) {
         Order order = orderRepository.findById(id).orElseThrow();
-        if(orderRepository.findById(id).isPresent() && userService.findUserById(courierId)!=null) {
+        if(orderRepository.findById(id).isPresent()
+                && userService.findUserById(courierId)!=null
+                && userService.findUserById(courierId).getRole().equals("Courier")) {
             order.setCourier(userService.findUserById(courierId));
             orderRepository.save(order);
             return order;
@@ -105,10 +117,52 @@ public class OrderService {
         return null;
     }
 
-    //TODO: прописать изменение клиента заказа
-    //TODO: прописать изменение способа получения заказа (самовывоз, доставка, в зале)
-    //TODO: адрес по дефолту это адрес у клиента
+    //изменение клиента заказа
+    public Order updateClient(Long id, Long clientId) {
+        Order order = orderRepository.findById(id).orElseThrow();
+        if(orderRepository.findById(id).isPresent()
+                && userService.findUserById(clientId)!=null
+                && userService.findUserById(clientId).getRole().equals("Client")) {
+            order.setClient(userService.findUserById(clientId));
+            orderRepository.save(order);
+            return order;
+        }
+        return null;
+    }
+
+    //изменение способа получения заказа
+    public Order updateReceivingType(Long id, String name) {
+        if(orderRepository.findById(id).isPresent() && receivingTypeService.findReceivingTypeByName(name).isPresent()) {
+            Order order = orderRepository.findById(id).orElseThrow();
+            order.setReceivingType(receivingTypeService.findReceivingTypeByName(name).orElseThrow());
+            orderRepository.save(order);
+            return order;
+        }
+        return null;
+    }
+
+    //изменение адреса заказа
+    public Order updateAddress(Long id, String address) {
+        if(orderRepository.findById(id).isPresent() && !address.isEmpty() && !address.isBlank()) {
+            Order order = orderRepository.findById(id).orElseThrow();
+            order.setAddress(address);
+            orderRepository.save(order);
+            return order;
+        }
+        return null;
+    }
+
+    //удаление заказа по id
+    public void deleteOrderById(Long id) {
+        if(orderRepository.findById(id).isPresent()) {
+            orderRepository.deleteById(id);
+        }
+    }
 
     //удаление заказа
-
+    public void deleteOrder(Order order) {
+        if(orderRepository.findById(order.getId()).isPresent()) {
+            orderRepository.delete(order);
+        }
+    }
 }

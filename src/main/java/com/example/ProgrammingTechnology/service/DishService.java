@@ -44,8 +44,59 @@ public class DishService {
         return null;
     }
 
+    //изменение названия блюда
+    public Dish updateName(Long id,String name) {
+        if(dishRepository.findById(id).isPresent() && !name.isEmpty() && !name.isBlank()) {
+            Dish dish = dishRepository.findById(id).orElseThrow();
+            dish.setName(name);
+            dishRepository.save(dish);
+            return dish;
+        }
+        return null;
+    }
+
+    //изменение цены блюда
+    public Dish updatePrice(Long id, Float price) {
+        if(dishRepository.findById(id).isPresent() && price>0) {
+            Dish dish = dishRepository.findById(id).orElseThrow();
+            dish.setPrice(price);
+            dishRepository.save(dish);
+            return dish;
+        }
+        return null;
+    }
+
+    //изменение калорийности блюда
+    public Dish updateCalories(Long id, Float calories) {
+        if(dishRepository.findById(id).isPresent() && calories>0) {
+            Dish dish = dishRepository.findById(id).orElseThrow();
+            dish.setPrice(calories);
+            dishRepository.save(dish);
+            return dish;
+        }
+        return null;
+    }
+
+    //изменение веса блюда
+    public Dish updateWeight(Long id, Float weight) {
+        if(dishRepository.findById(id).isPresent() && weight>0) {
+            Dish dish = dishRepository.findById(id).orElseThrow();
+            dish.setPrice(weight);
+            dishRepository.save(dish);
+            return dish;
+        }
+        return null;
+    }
+
     //удаление блюда
-    public void delete(Long id) {
+    public void deleteDish(Dish dish) {
+        if(dishRepository.findById(dish.getId()).isPresent()) {
+            dishRepository.delete(dish);
+        }
+    }
+
+    //удаление блюда по id
+    public void deleteDishById(Long id) {
         if(dishRepository.findById(id).isPresent()) {
             dishRepository.deleteById(id);
         }
