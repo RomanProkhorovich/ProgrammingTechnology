@@ -15,18 +15,14 @@ public class DishService {
 
     //создание блюда
     public Dish createDish(Dish newDish) {
-        if(dishRepository.findById(newDish.getId()).isEmpty()) {
-            dishRepository.save(newDish);
-        }
-        return null;
+
+        return dishRepository.save(newDish);
+
     }
 
     //поиск блюда по id
     public Dish findDishById(Long id) {
-        if(dishRepository.findById(id).isPresent()) {
-            return dishRepository.findById(id).orElseThrow();
-        }
-        return null;
+        return dishRepository.findById(id).orElseThrow();
     }
 
     //поиск всех блюд
@@ -36,17 +32,18 @@ public class DishService {
 
     //изменение блюда
     public Dish updateDish(Dish upDish) {
-        if(dishRepository.findById(upDish.getId()).isPresent()) {
-            dishRepository.findById(upDish.getId()).ifPresent(dishRepository::delete);
-            dishRepository.save(upDish);
-            return upDish;
-        }
-        return null;
+
+        Dish dish = dishRepository.findById(upDish.getId()).orElseThrow();
+        dishRepository.delete(dish);
+        dishRepository.save(upDish);
+        return upDish;
+
+
     }
 
     //изменение названия блюда
-    public Dish updateName(Long id,String name) {
-        if(dishRepository.findById(id).isPresent() && !name.isEmpty() && !name.isBlank()) {
+    public Dish updateName(Long id, String name) {
+        if (dishRepository.findById(id).isPresent() && !name.isEmpty() && !name.isBlank()) {
             Dish dish = dishRepository.findById(id).orElseThrow();
             dish.setName(name);
             dishRepository.save(dish);
@@ -57,7 +54,7 @@ public class DishService {
 
     //изменение цены блюда
     public Dish updatePrice(Long id, Float price) {
-        if(dishRepository.findById(id).isPresent() && price>0) {
+        if (dishRepository.findById(id).isPresent() && price > 0) {
             Dish dish = dishRepository.findById(id).orElseThrow();
             dish.setPrice(price);
             dishRepository.save(dish);
@@ -68,7 +65,7 @@ public class DishService {
 
     //изменение калорийности блюда
     public Dish updateCalories(Long id, Float calories) {
-        if(dishRepository.findById(id).isPresent() && calories>0) {
+        if (dishRepository.findById(id).isPresent() && calories > 0) {
             Dish dish = dishRepository.findById(id).orElseThrow();
             dish.setPrice(calories);
             dishRepository.save(dish);
@@ -79,7 +76,7 @@ public class DishService {
 
     //изменение веса блюда
     public Dish updateWeight(Long id, Float weight) {
-        if(dishRepository.findById(id).isPresent() && weight>0) {
+        if (dishRepository.findById(id).isPresent() && weight > 0) {
             Dish dish = dishRepository.findById(id).orElseThrow();
             dish.setPrice(weight);
             dishRepository.save(dish);
@@ -90,14 +87,14 @@ public class DishService {
 
     //удаление блюда
     public void deleteDish(Dish dish) {
-        if(dishRepository.findById(dish.getId()).isPresent()) {
-            dishRepository.delete(dish);
-        }
+
+        dishRepository.delete(dish);
+
     }
 
     //удаление блюда по id
     public void deleteDishById(Long id) {
-        if(dishRepository.findById(id).isPresent()) {
+        if (dishRepository.findById(id).isPresent()) {
             dishRepository.deleteById(id);
         }
     }
