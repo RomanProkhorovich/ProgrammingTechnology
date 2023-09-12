@@ -18,39 +18,27 @@ public class OrderDishService {
 
     //создание заказанного блюда
     public OrderDish createOrderDish(OrderDish newOrderDish) {
-        if(orderDishRepository.findById(newOrderDish.getId()).isEmpty()) {
-            orderDishRepository.save(newOrderDish);
-            return newOrderDish;
+        if (orderDishRepository.findById(newOrderDish.getId()).isEmpty()) {
+            return orderDishRepository.save(newOrderDish);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //поиск заказанного блюда по id
     public OrderDish findOrderDish(Long id) {
-        if(orderDishRepository.findById(id).isPresent()) {
-            return orderDishRepository.findById(id).orElseThrow();
-        }
-        return null;
+        return orderDishRepository.findById(id).orElseThrow();
     }
 
     //TODO: ХЗ ?поиск блюд у заказа и поиск заказов у блюда?
     //поиск всех заказов у блюда
     public List<OrderDish> findAllOrderDishByDish(Long dishId) {
-        if(dishService.findDishById(dishId)!=null) {
-            Dish dish = dishService.findDishById(dishId);
-            return orderDishRepository.findAllByDishOrOrder(dishId);
-        }
-        return null;
+        return orderDishRepository.findAllByDish(dishService.findDishById(dishId));
     }
 
     //TODO: hz
     //поиск всех блюд у заказа
     public List<OrderDish> findAllOrderDishByOrder(Long orderId) {
-        if(orderService.findOrderById(orderId)!=null) {
-            Order order = orderService.findOrderById(orderId);
-            return orderDishRepository.findAllByDishOrOrder(orderId);
-        }
-        return null;
+        return orderDishRepository.findAllByOrder(orderService.findOrderById(orderId));
     }
 
     //поиск всех заказанных блюд
@@ -60,15 +48,11 @@ public class OrderDishService {
 
     //удаление заказанного блюда по id
     public void deleteOrderDishById(Long id) {
-        if(orderDishRepository.findById(id).isPresent()) {
-            orderDishRepository.deleteById(id);
-        }
+        orderDishRepository.deleteById(id);
     }
 
     //удаление заказанного блюда
     public void deleteOrderDish(OrderDish orderDish) {
-        if(orderDishRepository.findById(orderDish.getId()).isPresent()) {
-            orderDishRepository.delete(orderDish);
-        }
+        orderDishRepository.delete(orderDish);
     }
 }

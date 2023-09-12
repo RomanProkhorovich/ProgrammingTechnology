@@ -16,26 +16,19 @@ public class OrderStatusService {
     //создание статуса
     public OrderStatus createOrderStatus(OrderStatus newOrderStatus) {
         if(orderStatusRepository.findById(newOrderStatus.getId()).isEmpty()) {
-            orderStatusRepository.save(newOrderStatus);
-            return newOrderStatus;
+            return orderStatusRepository.save(newOrderStatus);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //поиск статуса по id
     public OrderStatus findOrderStatusById(Long id) {
-        if(orderStatusRepository.findById(id).isPresent()) {
-            return orderStatusRepository.findById(id).orElseThrow();
-        }
-        return null;
+        return orderStatusRepository.findById(id).orElseThrow();
     }
 
     //поиск статуса по названию
-    public Optional<OrderStatus> findOrderStatusByName(String name) {
-        if(orderStatusRepository.findByName(name).isPresent()) {
-            return orderStatusRepository.findByName(name);
-        }
-        return null;
+    public OrderStatus findOrderStatusByName(String name) {
+            return orderStatusRepository.findByName(name).orElseThrow();
     }
 
     //поиск всех статусов

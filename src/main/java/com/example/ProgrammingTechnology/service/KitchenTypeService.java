@@ -16,26 +16,19 @@ public class KitchenTypeService {
     //создание вида кухни
     public KitchenType createKitchenType(KitchenType newKitchenType) {
         if(kitchenTypeRepository.findById(newKitchenType.getId()).isEmpty()) {
-            kitchenTypeRepository.save(newKitchenType);
-            return newKitchenType;
+            return kitchenTypeRepository.save(newKitchenType);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //поиск вида кухни по id
     public KitchenType findKitchenTypeById(Long id) {
-        if(kitchenTypeRepository.findById(id).isPresent()) {
-            return kitchenTypeRepository.findById(id).orElseThrow();
-        }
-        return null;
+        return kitchenTypeRepository.findById(id).orElseThrow();
     }
 
     //поиск вида кухни по названию
-    public Optional<KitchenType> findKitchenTypeByName(String name) {
-        if(kitchenTypeRepository.findByName(name).isPresent()) {
-            return kitchenTypeRepository.findByName(name);
-        }
-        return null;
+    public KitchenType findKitchenTypeByName(String name) {
+        return kitchenTypeRepository.findByName(name).orElseThrow();
     }
 
     //поиск всех видов кухонь

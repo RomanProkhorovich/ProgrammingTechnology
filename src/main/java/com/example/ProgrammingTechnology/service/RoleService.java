@@ -16,26 +16,19 @@ public class RoleService {
     //создание роли
     public Role createRole(Role newRole) {
         if(roleRepository.findById(newRole.getId()).isEmpty()) {
-            roleRepository.save(newRole);
-            return newRole;
+            return roleRepository.save(newRole);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //поиск роли по id
     public Role findRoleById(Long id) {
-        if(roleRepository.findById(id).isPresent()) {
-            return roleRepository.findById(id).orElseThrow();
-        }
-        return null;
+        return roleRepository.findById(id).orElseThrow();
     }
 
     //поиск роли по названию
-    public Optional<Role> findRoleByName(String name) {
-        if(roleRepository.findByName(name).isPresent()) {
-            return roleRepository.findByName(name);
-        }
-        return null;
+    public Role findRoleByName(String name) {
+        return roleRepository.findByName(name).orElseThrow();
     }
 
     //поиск всех ролей

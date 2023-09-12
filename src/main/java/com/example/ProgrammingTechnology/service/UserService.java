@@ -22,35 +22,25 @@ public class UserService {
     //создание пользователя
     public User createUser(User newUser) {
         if(userRepository.findById(newUser.getId()).isEmpty()) {
-            userRepository.save(newUser);
-            return newUser;
+            return userRepository.save(newUser);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //поиск пользователя по id
     public User findUserById(Long id) {
-        if(userRepository.findById(id).isPresent()) {
-            return userRepository.findById(id).orElseThrow();
-        }
-        return null;
+        return userRepository.findById(id).orElseThrow();
     }
 
     //поиск пользователя по почте
-    public Optional<User> findUserByEmail(String email) {
-        if(userRepository.findByEmail(email).isPresent()) {
-            return userRepository.findByEmail(email);
-        }
-        return null;
+    public User findUserByEmail(String email) {
+            return userRepository.findByEmail(email).orElseThrow();
     }
 
     //поиск пользователей по роли
     public List<User> findUsersByRole(Long id) {
-        if(roleRepository.findById(id).isPresent()) {
-            Role role = roleRepository.findById(id).orElseThrow();
-            return userRepository.findAllByRole(role);
-        }
-        return null;
+        Role role = roleRepository.findById(id).orElseThrow();
+        return userRepository.findAllByRole(role);
     }
 
     //поиск всех пользователей
@@ -60,83 +50,70 @@ public class UserService {
 
     //изменение имени пользователя
     public User updateFirstname(Long id, String firstname) {
-        if(!firstname.isEmpty() && !firstname.isBlank() && userRepository.findById(id).isPresent()) {
-            User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(id).orElseThrow();
+        if(!firstname.isEmpty() && !firstname.isBlank()) {
             user.setFirstname(firstname);
-            userRepository.save(user);
-            return user;
+            return userRepository.save(user);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //изменение фамилии пользователя
     public User updateLastname(Long id, String lastname) {
-        if(!lastname.isEmpty() && !lastname.isBlank() && userRepository.findById(id).isPresent()) {
-            User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(id).orElseThrow();
+        if(!lastname.isEmpty() && !lastname.isBlank()) {
             user.setFirstname(lastname);
-            userRepository.save(user);
-            return user;
+            return userRepository.save(user);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //изменение отчества пользователя
     public User updateSurname(Long id, String surname) {
-        if(!surname.isEmpty() && !surname.isBlank() && userRepository.findById(id).isPresent()) {
-            User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(id).orElseThrow();
+        if(!surname.isEmpty() && !surname.isBlank()) {
             user.setFirstname(surname);
-            userRepository.save(user);
-            return user;
+            return userRepository.save(user);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //изменение почты пользователя
     public User updateEmail(Long id, String email) {
-        if(!email.isEmpty() && !email.isBlank() && userRepository.findById(id).isPresent()) {
-            User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(id).orElseThrow();
+        if(!email.isEmpty() && !email.isBlank()) {
             user.setFirstname(email);
-            userRepository.save(user);
-            return user;
+            return userRepository.save(user);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //изменение адреса пользователя
     public User updateAddress(Long id, String address) {
-        if(!address.isEmpty() && !address.isBlank() && userRepository.findById(id).isPresent()) {
-            User user = userRepository.findById(id).orElseThrow();
+        User user = userRepository.findById(id).orElseThrow();
+        if(!address.isEmpty() && !address.isBlank()) {
             user.setFirstname(address);
-            userRepository.save(user);
-            return user;
+            return userRepository.save(user);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //изменение роли пользователя
     public User updateRole(Long id, Long roleId) {
-        if(roleRepository.findById(roleId).isPresent() && userRepository.findById(id).isPresent()) {
-            User user = userRepository.findById(id).orElseThrow();
-            Role role = roleRepository.findById(roleId).orElseThrow();
-            user.setRole(role);
-            userRepository.save(user);
-            return user;
-        }
-        return null;
+        User user = userRepository.findById(id).orElseThrow();
+        Role role = roleRepository.findById(roleId).orElseThrow();
+        user.setRole(role);
+        return userRepository.save(user);
     }
 
     //удаление пользователя по id
     public void deleteUserById(Long id) {
-        if (userRepository.findById(id).isPresent()) {
-            userRepository.deleteById(id);
-        }
+        userRepository.deleteById(id);
     }
 
     //удаление пользователя
     public void deleteUser(User user) {
-        if(userRepository.findById(user.getId()).isPresent()) {
-            userRepository.delete(user);
-        }
+        userRepository.delete(user);
     }
 
     //удаление пользователя по почте

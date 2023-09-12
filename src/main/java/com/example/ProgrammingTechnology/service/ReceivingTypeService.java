@@ -17,26 +17,19 @@ public class ReceivingTypeService {
     //создание способа получения заказа
     public ReceivingType createReceivingType(ReceivingType newReceivingType) {
         if(receivingTypeRepository.findById(newReceivingType.getId()).isEmpty()) {
-            receivingTypeRepository.save(newReceivingType);
-            return newReceivingType;
+            return receivingTypeRepository.save(newReceivingType);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //поиск способа получения заказа по id
     public ReceivingType findReceivingTypeById(Long id) {
-        if(receivingTypeRepository.findById(id).isPresent()) {
-            return receivingTypeRepository.findById(id).orElseThrow();
-        }
-        return null;
+        return receivingTypeRepository.findById(id).orElseThrow();
     }
 
     //поиск способа получения заказа по названию
-    public Optional<ReceivingType> findReceivingTypeByName(String name) {
-        if(receivingTypeRepository.findByName(name).isPresent()) {
-            return receivingTypeRepository.findByName(name);
-        }
-        return null;
+    public ReceivingType findReceivingTypeByName(String name) {
+        return receivingTypeRepository.findByName(name).orElseThrow();
     }
 
     //поиск всех способов получения заказа

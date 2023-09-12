@@ -16,18 +16,14 @@ public class MenuService {
     //создание меню
     public Menu createMenu(Menu newMenu) {
         if(menuRepository.findById(newMenu.getId()).isEmpty()) {
-            menuRepository.save(newMenu);
-            return newMenu;
+            return menuRepository.save(newMenu);
         }
-        return null;
+        throw new IllegalArgumentException();
     }
 
     //поиск меню по id
     public Menu findMenuById(Long id) {
-        if(menuRepository.findById(id).isPresent()) {
-            return menuRepository.findById(id).orElseThrow();
-        }
-        return null;
+        return menuRepository.findById(id).orElseThrow();
     }
 
     //поиск всех меню
@@ -37,37 +33,26 @@ public class MenuService {
 
     //изменение меню
     public Menu updateMenu(Menu upMenu) {
-        if(menuRepository.findById(upMenu.getId()).isPresent()) {
-            menuRepository.findById(upMenu.getId()).ifPresent(menuRepository::delete);
-            menuRepository.save(upMenu);
-            return upMenu;
-        }
-        return null;
+        Menu menu = menuRepository.findById(upMenu.getId()).orElseThrow();
+        return menuRepository.save(upMenu);
     }
 
+    //TODO: проверка новой даты, она не ожет быть позже настоящего времени
     //изменение даты утверждения меню
     public Menu updateApproval(Long id, LocalDateTime approval) {
-        if(menuRepository.findById(id).isPresent()) {
-            Menu menu = menuRepository.findById(id).orElseThrow();
-            menu.setApproval(approval);
-            menuRepository.save(menu);
-            return menu;
-        }
-        return null;
+        Menu menu = menuRepository.findById(id).orElseThrow();
+        menu.setApproval(approval);
+        return menuRepository.save(menu);
     }
 
     //удаление меню по id
     public void deleteMenuById(Long id) {
-        if(menuRepository.findById(id).isPresent()) {
-            menuRepository.deleteById(id);
-        }
+        menuRepository.deleteById(id);
     }
 
     //удаление меню
     public void deleteMenu(Menu menu) {
-        if(menuRepository.findById(menu.getId()).isPresent()) {
-            menuRepository.delete(menu);
-        }
+        menuRepository.delete(menu);
     }
 
     //TODO: сделать добавление и удаления блюда из меню
