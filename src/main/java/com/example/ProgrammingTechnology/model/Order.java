@@ -27,7 +27,8 @@ public class Order {
     private Set<Dish> dishes = new LinkedHashSet<>();
 
     @Column(nullable = false, name = "order_time")
-    private LocalDateTime orderTime;
+    @Builder.Default
+    private LocalDateTime orderTime= LocalDateTime.now();
 
     @ManyToOne
     @JoinColumn(name = "status_id")

@@ -29,15 +29,16 @@ public class OrderDishService {
         return orderDishRepository.findById(id).orElseThrow();
     }
 
-    //TODO: ХЗ ?поиск блюд у заказа и поиск заказов у блюда?
+
+    //TODO: использовать в сервисе заказов
     //поиск всех заказов у блюда
-    public List<OrderDish> findAllOrderDishByDish(Long dishId) {
+    public List<OrderDish> findAllOrderByDish(Long dishId) {
         return orderDishRepository.findAllByDish(dishService.findDishById(dishId));
     }
 
-    //TODO: hz
+    //TODO: использовать в сервисе блюд
     //поиск всех блюд у заказа
-    public List<OrderDish> findAllOrderDishByOrder(Long orderId) {
+    public List<OrderDish> findAllDishByOrder(Long orderId) {
         return orderDishRepository.findAllByOrder(orderService.findOrderById(orderId));
     }
 

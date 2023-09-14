@@ -33,14 +33,16 @@ public class MenuService {
 
     //изменение меню
     public Menu updateMenu(Menu upMenu) {
+        //TODO: fix
         Menu menu = menuRepository.findById(upMenu.getId()).orElseThrow();
         return menuRepository.save(upMenu);
     }
 
-    //TODO: проверка новой даты, она не ожет быть позже настоящего времени
     //изменение даты утверждения меню
     public Menu updateApproval(Long id, LocalDateTime approval) {
         Menu menu = menuRepository.findById(id).orElseThrow();
+        if (approval.isAfter(LocalDateTime.now()))
+            throw new IllegalArgumentException();
         menu.setApproval(approval);
         return menuRepository.save(menu);
     }

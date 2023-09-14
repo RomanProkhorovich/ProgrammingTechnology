@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,7 +14,7 @@ public class DishService {
 
     //создание блюда
     public Dish createDish(Dish newDish) {
-        if(dishRepository.findById(newDish.getId()).isEmpty())
+        if (dishRepository.findById(newDish.getId()).isEmpty())
             return dishRepository.save(newDish);
         throw new IllegalArgumentException();
     }
@@ -30,16 +29,11 @@ public class DishService {
         return dishRepository.findAll();
     }
 
-    //изменение блюда
-    public Dish updateDish(Dish upDish) {
-        Dish dish = dishRepository.findById(upDish.getId()).orElseThrow();
-        return dishRepository.save(upDish);
-    }
 
     //изменение названия блюда
     public Dish updateName(Long id, String name) {
         Dish dish = dishRepository.findById(id).orElseThrow();
-        if (!name.isEmpty() && !name.isBlank()) {
+        if (name != null && !name.isEmpty() && !name.isBlank()) {
             dish.setName(name);
             dishRepository.save(dish);
             return dish;
@@ -50,18 +44,19 @@ public class DishService {
     //изменение цены блюда
     public Dish updatePrice(Long id, Float price) {
         Dish dish = dishRepository.findById(id).orElseThrow();
-        if (price > 0) {
+        if (price != null && price > 0 && !price.isInfinite()) {
             dish.setPrice(price);
             dishRepository.save(dish);
             return dish;
         }
+        //TODO: exc
         return null;
     }
 
     //изменение калорийности блюда
     public Dish updateCalories(Long id, Float calories) {
         Dish dish = dishRepository.findById(id).orElseThrow();
-        if (calories > 0) {
+        if (calories != null && calories > 0 && !calories.isInfinite()) {
             dish.setPrice(calories);
             dishRepository.save(dish);
             return dish;
@@ -72,7 +67,7 @@ public class DishService {
     //изменение веса блюда
     public Dish updateWeight(Long id, Float weight) {
         Dish dish = dishRepository.findById(id).orElseThrow();
-        if (weight > 0) {
+        if (weight != null && weight > 0 && !weight.isInfinite()) {
             dish.setPrice(weight);
             dishRepository.save(dish);
             return dish;
