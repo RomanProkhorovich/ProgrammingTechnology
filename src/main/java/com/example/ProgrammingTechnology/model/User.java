@@ -33,6 +33,9 @@ public class User {
 
     private String address;
 
+    @Column(nullable = false)
+    private String password;
+
     public User(String firstname, String lastname, String surname, Role role, String email, String address) {
         this.firstname = firstname;
         this.lastname = lastname;
