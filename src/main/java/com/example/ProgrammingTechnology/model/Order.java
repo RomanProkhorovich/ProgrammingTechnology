@@ -46,6 +46,10 @@ public class Order {
     private String address;
 
     @ManyToOne
+    @JoinColumn(name = "restaurant_id")
+    private Restaurant restaurant;
+
+    @ManyToOne
     @JoinColumn(name = "receiving_type")
     private ReceivingType receivingType;
 

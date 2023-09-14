@@ -118,10 +118,8 @@ public class UserService {
     }
 
     //удаление пользователя по почте
-    //TODO: помогите пожалуйста с методом
     public void deleteUserByEmail(String email) {
-        if (userRepository.findByEmail(email).isPresent()) {
-            //userRepository.delete(deleteUser(userRepository.findByEmail(email).orElseThrow()));
-        }
+        var user=findUserByEmail(email);
+        deleteUser(user);
     }
 }
