@@ -7,5 +7,6 @@ CREATE TABLE Customer
 	surname VARCHAR(100),
 	email VARCHAR(100) UNIQUE,
 	address VARCHAR(200) DEFAULT NULL,
+	password VARCHAR(100) NOT NULL,
 	role_id INTEGER REFERENCES Role (id)
 );

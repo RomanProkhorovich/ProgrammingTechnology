@@ -6,6 +6,7 @@ import com.example.ProgrammingTechnology.repository.RoleRepository;
 import com.example.ProgrammingTechnology.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.parameters.P;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class UserService {
 
     //поиск пользователя по почте
     public User findUserByEmail(String email) {
-            return userRepository.findByEmail(email).orElseThrow();
+            return userRepository.findByEmail(email).orElseThrow(()->new UsernameNotFoundException(""));
     }
 
     //поиск пользователей по роли
