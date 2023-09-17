@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,7 +15,7 @@ import java.util.Set;
 @Builder
 public class OrderDto {
     private Long id;
-    private Set<DishDto> dishDtos = new LinkedHashSet<>();
+    private List<DishDto> dishDtos ;
     @Builder.Default
     private LocalDateTime orderTime = LocalDateTime.now();
     private OrderStatusDto orderStatusDto;
