@@ -1,12 +1,16 @@
 package com.example.ProgrammingTechnology.service;
 
+import com.example.ProgrammingTechnology.model.Dish;
 import com.example.ProgrammingTechnology.model.Menu;
 import com.example.ProgrammingTechnology.repository.MenuRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -57,5 +61,19 @@ public class MenuService {
         menuRepository.delete(menu);
     }
 
-    //TODO: сделать добавление и удаления блюда из меню
+    public Menu addDish(Long menuId, Dish dish){
+        var menu=findMenuById(menuId);
+        var dishes=new HashSet<>(menu.getDishes());
+        dishes.add(dish);
+        menu.setDishes(dishes);
+        return menuRepository.save(menu);
+    }
+
+    public Menu deleteDish(Long menuId, Long dishId){
+        var menu=findMenuById(menuId);
+        var dishes=new HashSet<>(menu.getDishes());
+        var newDishes =  dishes.stream().filter(x->!x.getId().equals(dishId)).collect(Collectors.toSet());
+        menu.setDishes(newDishes);
+        return menuRepository.save(menu);
+    }
 }

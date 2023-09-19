@@ -11,7 +11,7 @@ import java.util.List;
 @Mapper(componentModel = "spring", uses = {DishMapper.class})
 public interface MenuMapper {
 
-    Menu toModel(KitchenTypeDto dto);
+    Menu toModel(MenuDto dto);
     MenuDto toDto(Menu dish);
 
     List<Menu> toModelList(List<MenuDto> dto);
