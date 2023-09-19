@@ -19,12 +19,17 @@ public class Order {
     @Column(name = "id")
     private Long id;
 
-    @ManyToMany
+  /*  @ManyToMany
     @Builder.Default
     @JoinTable(name = "Order_Dish",
             joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = @JoinColumn(name = "dishes_id"))
     private Set<Dish> dishes = new LinkedHashSet<>();
+*/
+    @Builder.Default
+    @OneToMany(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "order_id",table = "Order_Dish")
+    private Set<CartItem> cartItems = new LinkedHashSet<>();
 
     @Column(nullable = false, name = "order_time")
     @Builder.Default

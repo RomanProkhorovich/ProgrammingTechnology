@@ -7,13 +7,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class OrderDishDto {
+public class CartItemDto {
     private Long id;
     private DishDto dishDto;
     private OrderDto orderDto;
     private Byte count;
 
-    public OrderDishDto(DishDto dishDto, OrderDto orderDto, Byte count) {
+    public CartItemDto(DishDto dishDto, OrderDto orderDto, Byte count) {
         this.dishDto = dishDto;
         this.orderDto = orderDto;
         this.count=count;

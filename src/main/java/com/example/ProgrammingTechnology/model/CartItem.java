@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name = "Order_dishes")
-public class OrderDish {
+public class CartItem {
     @Id
     @Column(name = "id", nullable = false)
     private Long id;
@@ -18,17 +18,18 @@ public class OrderDish {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "dish_id")
     private Dish dish;
+/*
 
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
+*/
 
     @Column(nullable = false)
     private Byte count;
 
-    public OrderDish(Dish dish, Order order, Byte count) {
+    public CartItem(Dish dish, Byte count) {
         this.dish = dish;
-        this.order = order;
         this.count=count;
     }
 }
