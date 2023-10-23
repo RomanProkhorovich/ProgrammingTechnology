@@ -1,0 +1,22 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changeset/create-receiving-type-table.sql
+  - include:
+      file: db/changelog/changeset/create-Role-table.sql
+  - include:
+      file: db/changelog/changeset/create-Status-table.sql
+  - include:
+      file: db/changelog/changeset/create-Cuisine_type-table.sql
+  - include:
+      file: db/changelog/changeset/create-Customer-table.sql
+  - include:
+      file: db/changelog/changeset/create-Dish-table.sql
+  - include:
+      file: db/changelog/changeset/create-Menu-table.sql
+  - include:
+      file: db/changelog/changeset/create-Restaurant-table.sql
+  - include:
+      file: db/changelog/changeset/create-Menu_Dish-table.sql
+  - include:
+      file: db/changelog/changeset/create-Order-table.sql
+
