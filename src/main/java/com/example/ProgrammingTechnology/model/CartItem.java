@@ -30,6 +30,6 @@ public class CartItem {
 
     public CartItem(Dish dish, Byte count) {
         this.dish = dish;
-        this.count=count;
+        this.count = count;
     }
 }

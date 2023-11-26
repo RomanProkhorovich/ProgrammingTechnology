@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +18,7 @@ public class MenuService {
 
     //создание меню
     public Menu createMenu(Menu newMenu) {
-        if(menuRepository.findById(newMenu.getId()).isEmpty()) {
+        if (menuRepository.findById(newMenu.getId()).isEmpty()) {
             return menuRepository.save(newMenu);
         }
         throw new IllegalArgumentException();
@@ -61,18 +60,18 @@ public class MenuService {
         menuRepository.delete(menu);
     }
 
-    public Menu addDish(Long menuId, Dish dish){
-        var menu=findMenuById(menuId);
-        var dishes=new HashSet<>(menu.getDishes());
+    public Menu addDish(Long menuId, Dish dish) {
+        var menu = findMenuById(menuId);
+        var dishes = new HashSet<>(menu.getDishes());
         dishes.add(dish);
         menu.setDishes(dishes);
         return menuRepository.save(menu);
     }
 
-    public Menu deleteDish(Long menuId, Long dishId){
-        var menu=findMenuById(menuId);
-        var dishes=new HashSet<>(menu.getDishes());
-        var newDishes =  dishes.stream().filter(x->!x.getId().equals(dishId)).collect(Collectors.toSet());
+    public Menu deleteDish(Long menuId, Long dishId) {
+        var menu = findMenuById(menuId);
+        var dishes = new HashSet<>(menu.getDishes());
+        var newDishes = dishes.stream().filter(x -> !x.getId().equals(dishId)).collect(Collectors.toSet());
         menu.setDishes(newDishes);
         return menuRepository.save(menu);
     }

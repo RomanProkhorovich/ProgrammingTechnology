@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,7 +14,7 @@ public class OrderStatusService {
 
     //создание статуса
     public OrderStatus createOrderStatus(OrderStatus newOrderStatus) {
-        if(orderStatusRepository.findById(newOrderStatus.getId()).isEmpty()) {
+        if (orderStatusRepository.findById(newOrderStatus.getId()).isEmpty()) {
             return orderStatusRepository.save(newOrderStatus);
         }
         throw new IllegalArgumentException();
@@ -28,7 +27,7 @@ public class OrderStatusService {
 
     //поиск статуса по названию
     public OrderStatus findOrderStatusByName(String name) {
-            return orderStatusRepository.findByName(name).orElseThrow();
+        return orderStatusRepository.findByName(name).orElseThrow();
     }
 
     //поиск всех статусов

@@ -19,17 +19,17 @@ public class RoleController {
     private final RoleService service;
 
     @GetMapping
-    public List<RoleDto> findAll(){
+    public List<RoleDto> findAll() {
         return mapper.toDtoList(service.findRoles());
     }
 
     @GetMapping
-    public RoleDto findByName(@PathParam("name") String name){
+    public RoleDto findByName(@PathParam("name") String name) {
         return mapper.toDto(service.findRoleByName(name));
     }
 
     @GetMapping
-    public RoleDto findById(@PathParam("id") Long id){
+    public RoleDto findById(@PathParam("id") Long id) {
         return mapper.toDto(service.findRoleById(id));
     }
 

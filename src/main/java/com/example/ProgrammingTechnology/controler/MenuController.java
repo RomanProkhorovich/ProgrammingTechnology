@@ -20,21 +20,23 @@ public class MenuController {
     private final DishMapper dishMapper;
 
     @GetMapping
-    public List<MenuDto> findAll(){
+    public List<MenuDto> findAll() {
         return mapper.toDtoList(service.findMenus());
     }
+
     @PostMapping
-    public MenuDto create(@RequestBody MenuDto dto){
+    public MenuDto create(@RequestBody MenuDto dto) {
         return mapper.toDto(service.createMenu(mapper.toModel(dto)));
     }
+
     @PutMapping("/{id}")
-    public MenuDto addDish(@PathVariable Long id, @RequestBody DishDto dto){
-        return mapper.toDto(service.addDish(id,dishMapper.toModel(dto)));
+    public MenuDto addDish(@PathVariable Long id, @RequestBody DishDto dto) {
+        return mapper.toDto(service.addDish(id, dishMapper.toModel(dto)));
     }
 
     @PutMapping()
     public MenuDto deleteDish(@PathParam("menu_id") Long id,
-                              @PathParam("dish_id") Long dishId){
-        return mapper.toDto(service.deleteDish(id,dishId));
+                              @PathParam("dish_id") Long dishId) {
+        return mapper.toDto(service.deleteDish(id, dishId));
     }
 }

@@ -1,9 +1,7 @@
 package com.example.ProgrammingTechnology.controler;
 
 import com.example.ProgrammingTechnology.dto.OrderDto;
-import com.example.ProgrammingTechnology.dto.UserDto;
 import com.example.ProgrammingTechnology.mapper.OrderMapper;
-import com.example.ProgrammingTechnology.mapper.UserMapper;
 import com.example.ProgrammingTechnology.model.Order;
 import com.example.ProgrammingTechnology.service.OrderService;
 import jakarta.websocket.server.PathParam;
@@ -22,7 +20,7 @@ public class OrderController {
 
 
     @PostMapping
-    public OrderDto create(@RequestBody OrderDto dto){
+    public OrderDto create(@RequestBody OrderDto dto) {
 
         Order order = service.createOrder(mapper.toModel(dto));
 
@@ -32,11 +30,12 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderDto> findAllByUser(@PathParam("user_id") Long id){
+    public List<OrderDto> findAllByUser(@PathParam("user_id") Long id) {
         return mapper.toDtoList(service.findOrdersByUser(id));
     }
+
     @GetMapping
-    public OrderDto findById(@PathParam("id") Long id){
+    public OrderDto findById(@PathParam("id") Long id) {
         return mapper.toDto(service.findOrderById(id));
     }
 

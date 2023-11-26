@@ -5,12 +5,10 @@ import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.repository.RoleRepository;
 import com.example.ProgrammingTechnology.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -22,7 +20,7 @@ public class UserService {
 
     //создание пользователя
     public User createUser(User newUser) {
-        if(userRepository.findById(newUser.getId()).isEmpty()) {
+        if (userRepository.findById(newUser.getId()).isEmpty()) {
             return userRepository.save(newUser);
         }
         throw new IllegalArgumentException();
@@ -35,7 +33,7 @@ public class UserService {
 
     //поиск пользователя по почте
     public User findUserByEmail(String email) {
-            return userRepository.findByEmail(email).orElseThrow(()->new UsernameNotFoundException(""));
+        return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(""));
     }
 
     //поиск пользователей по роли
@@ -52,7 +50,7 @@ public class UserService {
     //изменение имени пользователя
     public User updateFirstname(Long id, String firstname) {
         User user = userRepository.findById(id).orElseThrow();
-        if(!firstname.isEmpty() && !firstname.isBlank()) {
+        if (!firstname.isEmpty() && !firstname.isBlank()) {
             user.setFirstname(firstname);
             return userRepository.save(user);
         }
@@ -62,7 +60,7 @@ public class UserService {
     //изменение фамилии пользователя
     public User updateLastname(Long id, String lastname) {
         User user = userRepository.findById(id).orElseThrow();
-        if(!lastname.isEmpty() && !lastname.isBlank()) {
+        if (!lastname.isEmpty() && !lastname.isBlank()) {
             user.setFirstname(lastname);
             return userRepository.save(user);
         }
@@ -72,7 +70,7 @@ public class UserService {
     //изменение отчества пользователя
     public User updateSurname(Long id, String surname) {
         User user = userRepository.findById(id).orElseThrow();
-        if(!surname.isEmpty() && !surname.isBlank()) {
+        if (!surname.isEmpty() && !surname.isBlank()) {
             user.setFirstname(surname);
             return userRepository.save(user);
         }
@@ -82,7 +80,7 @@ public class UserService {
     //изменение почты пользователя
     public User updateEmail(Long id, String email) {
         User user = userRepository.findById(id).orElseThrow();
-        if(!email.isEmpty() && !email.isBlank()) {
+        if (!email.isEmpty() && !email.isBlank()) {
             user.setFirstname(email);
             return userRepository.save(user);
         }
@@ -92,7 +90,7 @@ public class UserService {
     //изменение адреса пользователя
     public User updateAddress(Long id, String address) {
         User user = userRepository.findById(id).orElseThrow();
-        if(!address.isEmpty() && !address.isBlank()) {
+        if (!address.isEmpty() && !address.isBlank()) {
             user.setFirstname(address);
             return userRepository.save(user);
         }
@@ -119,7 +117,7 @@ public class UserService {
 
     //удаление пользователя по почте
     public void deleteUserByEmail(String email) {
-        var user=findUserByEmail(email);
+        var user = findUserByEmail(email);
         deleteUser(user);
     }
 }
