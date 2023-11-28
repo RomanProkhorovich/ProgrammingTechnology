@@ -33,8 +33,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
+                .authorizeHttpRequests(x->
+                        x.anyRequest().authenticated())
                 .build();
     }
 }
