@@ -22,6 +22,7 @@ public class RoleController {
     public List<RoleDto> findAll() {
         return mapper.toDtoList(service.findRoles());
     }
+/*
 
     @GetMapping
     public RoleDto findByName(@PathParam("name") String name) {
@@ -32,5 +33,6 @@ public class RoleController {
     public RoleDto findById(@PathParam("id") Long id) {
         return mapper.toDto(service.findRoleById(id));
     }
+*/
 
 }

@@ -5,11 +5,11 @@ CREATE TABLE Status
 	name VARCHAR(15) UNIQUE
 );
 
-INSERT INTO Status (Name)
+INSERT INTO Status (name)
 VALUES
 ('В обработке'),
 ('Готовится'),
 ('Готово'),
 ('В доставке'),
 ('Получено'),
-('Отменено')
+('Отменено');

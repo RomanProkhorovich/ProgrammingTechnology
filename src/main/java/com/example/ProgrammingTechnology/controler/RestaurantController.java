@@ -7,6 +7,7 @@ import com.example.ProgrammingTechnology.service.RestaurantService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,18 +25,18 @@ public class RestaurantController {
         return mapper.toDtoList(service.findRestaurants());
     }
 
-    @GetMapping
+    @GetMapping("/byName")
     public List<RestaurantDto> findByName(@PathParam("name") String name) {
         return mapper.toDtoList(service.findRestaurantsByName(name));
     }
 
-    @GetMapping
+    @GetMapping("/btKitchenType")
     public List<RestaurantDto> findByKitchen(@PathParam("kitchen_type") String type) {
         return mapper.toDtoList(service.findRestaurantsByKitchenType(type));
     }
 
-    @GetMapping
-    public RestaurantDto findById(@PathParam("id") Long id) {
+    @GetMapping("/byId")
+    public RestaurantDto findById(@PathVariable("id") Long id) {
         return mapper.toDto(service.findRestaurantById(id));
     }
 
