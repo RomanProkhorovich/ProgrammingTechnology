@@ -7,16 +7,31 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles/reset.css">
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./src/styles/reset.css">
+    <link rel="stylesheet" href="./index.css">
+    <link rel="shortcut icon" href="#">
     <title>Ресторан Roman`s</title>
 </head>
 
 <body>
+    <div class="popup">
+        <form id="authorization-form" method="get">
+            <h1>
+                Войдите, чтобы сделать заказ
+            </h1>
+            <input type="text" placeholder="Номер телефона или E-Mail">
+            <input type="password" placeholder="Пароль">
+            <div class="button-group">
+                <button id="registration-button" type="button">Зарегистрироваться</button>
+                <button id="authorization-button" type="button">Войти</button>
+            </div>
+        </form>
+    </div>
+
     <header>
         <div class="header-wrapper">
             <div class="header-logo">
-                <img src="./img/logo.png" alt="">
+                <img src="./src/img/logo.png" alt="">
             </div>
             <ul class="header-menu">
                 <li>Меню</li>
@@ -25,14 +40,20 @@
                 <li>Отзывы</li>
             </ul>
             <div class="header-cart">
-                <img class="header-cart-logo" src="./svg/cart-shopping-svgrepo-com.svg" alt="">
+                <img class="header-cart-logo" src="./src/svg/cart-shopping-svgrepo-com.svg" alt="">
+                <p class="header-cart-sum">999р.</p>
             </div>
             <div class="header-account">
-                <img class="header-account-logo" src="./svg/circle-user-svgrepo-com.svg" alt="">
+                <img class="header-account-logo" src="./src/svg/circle-user-svgrepo-com.svg" alt="">
             </div>
         </div>
     </header>
+
     <div class="content">
+        <div class="content-status">
+
+        </div>
+
         <div class="content-menu">
             <div class="content-menu-dish">
                 <img class="content-menu-dish-photo" src="https://placehold.co/400" alt="">
@@ -99,10 +120,14 @@
                 </div>
             </div>
         </div>
+        <div class="content-cart">
+
+        </div>
     </div>
+
     <footer>
         <div class="footer-info">
-            <img src="./img/logo-white.png" alt="">
+            <img src="./src/img/logo-white.png" alt="">
             <br>
             <p>Roman's™ All rights reserved.</p>
         </div>
@@ -113,5 +138,7 @@
         </div>
     </footer>
 </body>
+
+<script src="./index.js"></script>
 
 </html>
