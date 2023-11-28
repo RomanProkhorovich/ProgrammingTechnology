@@ -14,16 +14,13 @@ const authXhr = () => {
 
   console.log(params);
 
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "/auth/reg");
-  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
-  xhr.setRequestHeader("Referrer-Policy", "origin");
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState !== 4) return false;
-    console.log(JSON.parse(xhr.responseText));
-  };
-  xhr.onload;
-  xhr.send(JSON.stringify(params));
+  const xhr1 = new XMLHttpRequest();
+  xhr1.open("POST", "/auth/reg");
+  xhr1.send();
+
+  const xhr2 = new XMLHttpRequest();
+  xhr2.open("GET", "/auth/reg");
+  xhr2.send();
 };
 
 const register = () => {
