@@ -1,5 +1,6 @@
 package com.example.ProgrammingTechnology.controler;
 
+import com.example.ProgrammingTechnology.dto.AuthDto;
 import com.example.ProgrammingTechnology.dto.RegistrationDto;
 import com.example.ProgrammingTechnology.dto.UserDto;
 import lombok.AllArgsConstructor;
@@ -25,16 +26,22 @@ public class AuthController {
     private final UserDetailsService service;
 
 
-    @PostMapping()
-    public ResponseEntity<?> auth(@RequestBody RegistrationDto regDto) {
-        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(regDto.getEmail(), regDto.getPassword());
+    @PostMapping
+    public ResponseEntity<?> auth(@RequestBody AuthDto authDto) {
+        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authDto.getEmail(), authDto.getPassword());
         try {
             manager.authenticate(token);
-            return ResponseEntity.ok(service.loadUserByUsername(regDto.getEmail()));
+            return ResponseEntity.ok(service.loadUserByUsername(authDto.getEmail()));
 
         }
         catch (AuthenticationException e){
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User doesnt exists");
         }
+    }
+
+
+    @PostMapping
+    public ResponseEntity<?> registration(@RequestBody AuthDto authDto) {
+            return ResponseEntity.ok("");
     }
 }
