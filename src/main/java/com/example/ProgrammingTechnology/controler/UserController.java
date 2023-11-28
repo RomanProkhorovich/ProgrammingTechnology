@@ -24,6 +24,7 @@ public class UserController {
         return mapper.toDto(service.findUserById(id));
     }
 
+/*
 
     @GetMapping
     public UserDto findById(@PathParam("email") String email) {
@@ -39,4 +40,5 @@ public class UserController {
     public List<UserDto> findAll() {
         return mapper.toDtoList(service.findUsers());
     }
+*/
 }

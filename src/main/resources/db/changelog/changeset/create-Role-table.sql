@@ -10,4 +10,4 @@ VALUES
 ('Manager'),
 ('Courier'),
 ('Administrator'),
-('Client')
+('Client');

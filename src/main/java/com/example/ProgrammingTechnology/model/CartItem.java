@@ -28,6 +28,10 @@ public class CartItem {
     @Column(nullable = false)
     private Byte count;
 
+    @ManyToOne
+    @JoinColumn(name = "order_id")
+    private Order order;
+
     public CartItem(Dish dish, Byte count) {
         this.dish = dish;
         this.count = count;

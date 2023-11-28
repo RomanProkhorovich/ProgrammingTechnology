@@ -36,19 +36,19 @@ public class DishController {
     }
 
 
-    @PutMapping()
+    @PutMapping("/price")
     public DishDto changePrice(@RequestParam Long id, @RequestParam Float price) {
         return mapper.toDto(service.updatePrice(id, price));
     }
 
 
-    @PutMapping()
+    @PutMapping("/cal")
     public DishDto changeCalories(@RequestParam Long id, @RequestParam Float calories) {
         return mapper.toDto(service.updateCalories(id, calories));
     }
 
 
-    @PutMapping()
+    @PutMapping("/weight")
     public DishDto changeWeight(@RequestParam Long id, @RequestParam Float weight) {
         return mapper.toDto(service.updateWeight(id, weight));
     }

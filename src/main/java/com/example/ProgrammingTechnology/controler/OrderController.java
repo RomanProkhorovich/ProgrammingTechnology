@@ -34,8 +34,8 @@ public class OrderController {
         return mapper.toDtoList(service.findOrdersByUser(id));
     }
 
-    @GetMapping
-    public OrderDto findById(@PathParam("id") Long id) {
+    @GetMapping("/{id}")
+    public OrderDto findById(@PathVariable Long id) {
         return mapper.toDto(service.findOrderById(id));
     }
 

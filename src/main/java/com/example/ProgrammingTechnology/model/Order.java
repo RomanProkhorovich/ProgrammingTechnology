@@ -26,10 +26,10 @@ public class Order {
               inverseJoinColumns = @JoinColumn(name = "dishes_id"))
       private Set<Dish> dishes = new LinkedHashSet<>();
   */
-    @Builder.Default
+   /* @Builder.Default
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "order_id", table = "Order_Dish")
-    private Set<CartItem> cartItems = new LinkedHashSet<>();
+    private Set<CartItem> cartItems = new LinkedHashSet<>();*/
 
     @Column(nullable = false, name = "order_time")
     @Builder.Default
@@ -61,6 +61,10 @@ public class Order {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "client_id")
     private User client;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "order")
+    private Set<CartItem> cartItems = new LinkedHashSet<>();
 
     @Override
     public boolean equals(Object o) {

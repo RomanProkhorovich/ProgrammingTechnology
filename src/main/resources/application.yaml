@@ -4,7 +4,7 @@ spring:
       dialect: org.hibernate.dialect.PostgreSQLDialect
   jpa:
     hibernate:
-      ddl-auto: none
+      ddl-auto: create-drop
   datasource:
     driverClassName: org.postgresql.Driver
     username: postgres

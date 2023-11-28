@@ -42,7 +42,7 @@ public class OrderService {
     //TODO: сделать разные контроллеры для клиента и курьера
     //поиск заказов по курьеру
     public List<Order> findOrdersByUser(Long userId) {
-        return orderRepository.findAllByUser(userService.findUserById(userId));
+        return orderRepository.findAllByClient(userService.findUserById(userId));
     }
 
     //поиск заказов по статусу
