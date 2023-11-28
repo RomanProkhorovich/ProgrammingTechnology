@@ -1,6 +1,5 @@
 package com.example.ProgrammingTechnology.security;
 
-import com.example.ProgrammingTechnology.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,24 +17,26 @@ public class SecurityConfig {
     private final UserDetailsService userService;
 
     @Bean
-    public BCryptPasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(8);
     }
 
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(){
-        var dao= new DaoAuthenticationProvider();
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        var dao = new DaoAuthenticationProvider();
         dao.setPasswordEncoder(passwordEncoder());
         dao.setUserDetailsService(userService);
         return dao;
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .httpBasic(Customizer.withDefaults())
-        .build();
+                .authorizeHttpRequests(x->
+                        x.anyRequest().authenticated())
+                .build();
     }
 }

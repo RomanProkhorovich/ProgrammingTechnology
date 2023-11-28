@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,7 +14,7 @@ public class RoleService {
 
     //создание роли
     public Role createRole(Role newRole) {
-        if(roleRepository.findById(newRole.getId()).isEmpty()) {
+        if (roleRepository.findById(newRole.getId()).isEmpty()) {
             return roleRepository.save(newRole);
         }
         throw new IllegalArgumentException();

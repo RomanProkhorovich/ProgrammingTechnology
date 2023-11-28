@@ -13,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name","address"}))
+@Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name", "address"}))
 public class Restaurant {
     @Id
     @Column(name = "id")

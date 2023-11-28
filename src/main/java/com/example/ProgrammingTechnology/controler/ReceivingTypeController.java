@@ -17,17 +17,17 @@ public class ReceivingTypeController {
     private final ReceivingTypeService service;
 
     @GetMapping
-    public List<ReceivingTypeDto> findAll(){
+    public List<ReceivingTypeDto> findAll() {
         return mapper.toDtoList(service.findReceivingTypes());
     }
 
     @GetMapping("/{name}")
-    public ReceivingTypeDto findByName(@PathVariable String name){
+    public ReceivingTypeDto findByName(@PathVariable String name) {
         return mapper.toDto(service.findReceivingTypeByName(name));
     }
 
     @PostMapping
-    public ReceivingTypeDto create(@RequestBody ReceivingTypeDto dto){
+    public ReceivingTypeDto create(@RequestBody ReceivingTypeDto dto) {
         ReceivingType receivingType = service.createReceivingType(mapper.toModel(dto));
         return mapper.toDto(receivingType);
     }

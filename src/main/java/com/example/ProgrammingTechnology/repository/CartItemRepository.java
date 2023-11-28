@@ -1,8 +1,8 @@
 package com.example.ProgrammingTechnology.repository;
 
+import com.example.ProgrammingTechnology.model.CartItem;
 import com.example.ProgrammingTechnology.model.Dish;
 import com.example.ProgrammingTechnology.model.Order;
-import com.example.ProgrammingTechnology.model.CartItem;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

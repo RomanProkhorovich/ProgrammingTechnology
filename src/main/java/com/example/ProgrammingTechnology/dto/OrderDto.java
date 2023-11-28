@@ -3,10 +3,8 @@ package com.example.ProgrammingTechnology.dto;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -15,7 +13,7 @@ import java.util.Set;
 @Builder
 public class OrderDto {
     private Long id;
-    private List<DishDto> dishDtos ;
+    private List<DishDto> dishDtos;
     @Builder.Default
     private LocalDateTime orderTime = LocalDateTime.now();
     private OrderStatusDto orderStatusDto;

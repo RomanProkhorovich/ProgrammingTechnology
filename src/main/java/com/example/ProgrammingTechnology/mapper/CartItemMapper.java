@@ -10,9 +10,11 @@ import java.util.List;
 public interface CartItemMapper {
 
     CartItem toModel(CartItemDto dto);
+
     CartItemDto toDto(CartItem model);
 
     List<CartItem> toModelList(List<CartItemDto> dto);
+
     List<CartItemDto> toDtoList(List<CartItem> model);
 
 }

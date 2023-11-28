@@ -3,11 +3,9 @@ package com.example.ProgrammingTechnology.service;
 import com.example.ProgrammingTechnology.model.ReceivingType;
 import com.example.ProgrammingTechnology.repository.ReceivingTypeRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,7 +14,7 @@ public class ReceivingTypeService {
 
     //создание способа получения заказа
     public ReceivingType createReceivingType(ReceivingType newReceivingType) {
-        if(receivingTypeRepository.findById(newReceivingType.getId()).isEmpty()) {
+        if (receivingTypeRepository.findById(newReceivingType.getId()).isEmpty()) {
             return receivingTypeRepository.save(newReceivingType);
         }
         throw new IllegalArgumentException();

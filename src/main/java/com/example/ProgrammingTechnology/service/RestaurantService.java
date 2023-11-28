@@ -2,7 +2,6 @@ package com.example.ProgrammingTechnology.service;
 
 import com.example.ProgrammingTechnology.model.KitchenType;
 import com.example.ProgrammingTechnology.model.Restaurant;
-import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class RestaurantService {
 
     //создание ресторана
     public Restaurant createRestaurant(Restaurant newRestaurant) {
-        if(restaurantRepository.findById(newRestaurant.getId()).isEmpty()) {
+        if (restaurantRepository.findById(newRestaurant.getId()).isEmpty()) {
             return restaurantRepository.save(newRestaurant);
         }
         throw new IllegalArgumentException();
@@ -50,7 +49,7 @@ public class RestaurantService {
     //изменение названия ресторана
     public Restaurant updateName(Long id, String name) {
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow();
-        if(!name.isEmpty() && !name.isBlank()) {
+        if (!name.isEmpty() && !name.isBlank()) {
             restaurant.setName(name);
             return restaurantRepository.save(restaurant);
         }
@@ -60,7 +59,7 @@ public class RestaurantService {
     //изменение адреса ресторана
     public Restaurant updateAddress(Long id, String address) {
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow();
-        if(!address.isEmpty() && !address.isBlank()) {
+        if (!address.isEmpty() && !address.isBlank()) {
             restaurant.setAddress(address);
             return restaurantRepository.save(restaurant);
         }
@@ -70,7 +69,7 @@ public class RestaurantService {
     //изменение видов кухни ресторана
     public Restaurant updateKitchenType(Long id, Set<KitchenType> kitchenTypeSet) {
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow();
-        if(!kitchenTypeSet.isEmpty()) {
+        if (!kitchenTypeSet.isEmpty()) {
             restaurant.setKitchenTypes(kitchenTypeSet);
             return restaurantRepository.save(restaurant);
         }
@@ -87,7 +86,7 @@ public class RestaurantService {
     //изменение количества мест в ресторане
     public Restaurant updatePeopleCount(Long id, Byte peopleCount) {
         Restaurant restaurant = restaurantRepository.findById(id).orElseThrow();
-        if(peopleCount>=0) {
+        if (peopleCount >= 0) {
             restaurant.setPeopleCount(peopleCount);
             return restaurantRepository.save(restaurant);
         }

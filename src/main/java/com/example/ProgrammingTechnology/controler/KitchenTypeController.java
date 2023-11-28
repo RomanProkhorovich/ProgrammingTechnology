@@ -16,16 +16,17 @@ public class KitchenTypeController {
     private final KitchenTypeMapper mapper;
 
     @GetMapping
-    public List<KitchenTypeDto> findAll(){
+    public List<KitchenTypeDto> findAll() {
         return mapper.toDtoList(service.findKitchenTypes());
     }
+
     @PostMapping
-    public KitchenTypeDto save(@RequestBody KitchenTypeDto dto){
+    public KitchenTypeDto save(@RequestBody KitchenTypeDto dto) {
         return mapper.toDto(service.createKitchenType(mapper.toModel(dto)));
     }
 
     @GetMapping("/{name}")
-    public KitchenTypeDto findByName(@PathVariable String name){
+    public KitchenTypeDto findByName(@PathVariable String name) {
         return mapper.toDto(service.findKitchenTypeByName(name));
     }
 }

@@ -17,7 +17,7 @@ public class ReceivingType {
     @Id
     @Column(name = "id")
     private Long id;
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     private String name;
 
     public ReceivingType(String name) {

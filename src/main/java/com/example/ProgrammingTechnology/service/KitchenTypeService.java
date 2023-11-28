@@ -6,7 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -15,7 +14,7 @@ public class KitchenTypeService {
 
     //создание вида кухни
     public KitchenType createKitchenType(KitchenType newKitchenType) {
-        if(kitchenTypeRepository.findById(newKitchenType.getId()).isEmpty()) {
+        if (kitchenTypeRepository.findById(newKitchenType.getId()).isEmpty()) {
             return kitchenTypeRepository.save(newKitchenType);
         }
         throw new IllegalArgumentException();

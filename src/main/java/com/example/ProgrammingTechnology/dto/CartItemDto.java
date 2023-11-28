@@ -16,6 +16,6 @@ public class CartItemDto {
     public CartItemDto(DishDto dishDto, OrderDto orderDto, Byte count) {
         this.dishDto = dishDto;
         this.orderDto = orderDto;
-        this.count=count;
+        this.count = count;
     }
 }
