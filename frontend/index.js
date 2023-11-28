@@ -10,13 +10,17 @@ const authXhr = () => {
     params[item.name] = item.value;
   });
 
-  console.log();
-
   console.log(params);
 
   const xhr1 = new XMLHttpRequest();
   xhr1.open("POST", "http://localhost:8080/auth/reg");
-  xhr1.send();
+  xhr1.setRequestHeader("Content-Type", "application/json");
+  xhr1.onreadystatechange = () => {
+    if (xhr1.readyState === 4 && xhr1.status === 200) {
+      console.log(JSON.parse(xhr1.responseText));
+    }
+  };
+  xhr1.send(JSON.stringify(params));
 
   const xhr2 = new XMLHttpRequest();
   xhr2.open("GET", "http://localhost:8080/auth/reg");
