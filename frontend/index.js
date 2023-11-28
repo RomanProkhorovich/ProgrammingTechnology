@@ -1,23 +1,46 @@
 const popups = document.getElementsByClassName("popup");
 const accountButton = document.querySelector(".header-account");
 
+const authXhr = () => {
+  const authForm = document.forms["registration-form"];
+
+  let params = {};
+
+  Array.from(document.getElementsByTagName("input")).map((item) => {
+    params[item.name] = item.value;
+  });
+
+  console.log(params);
+
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "/auth/reg");
+  xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  xhr.onreadystatechange = () => {
+    console.log(xhr.readyState);
+  };
+  xhr.send(params);
+};
+
 const register = () => {
   const popup = document.querySelector(".popup");
-  popup.innerHTML = `
-  <form id="authorization-form" method="get">
-      <h1>
-          Регистрация
-      </h1>
-      <input type="text" placeholder="Фамилия">
-      <input type="text" placeholder="Имя">
-      <input type="text" placeholder="Отчество (при наличии)">
-      <input type="text" placeholder="E-mail">
-      <input type="text" placeholder="Номер телефона">
-      <input type="password" placeholder="Пароль">
-      <div class="button-group">
-          <button id="authorization-button" type="button">Зарегистрироваться</button>
-      </div>
-  </form>`;
+  popup.innerHTML = `<form id="registration-form">
+  <h1>
+      Регистрация
+  </h1>
+  <input type="text" placeholder="Фамилия" name="lastname" value="Kirkorov">
+  <input type="text" placeholder="Имя" name="firstname" value="Philipp">
+  <input type="text" placeholder="Отчество (при наличии)" name="surname" value="hh">
+  <input type="text" placeholder="E-mail" name="e-mail" value="fasfjnakf@fsda.sga">
+  <input type="text" placeholder="Номер телефона" name="phone" value="9037285732">
+  <input type="password" placeholder="Пароль" name="password" value="fhsdfghdf87">
+  <div class="button-group">
+      <button id="registration-button" type="button">Зарегистрироваться</button>
+  </div>
+</form>
+`;
+  popup
+    .querySelector("#registration-button")
+    .addEventListener("click", () => authXhr());
 };
 
 const insertForm = () => {
@@ -42,6 +65,7 @@ const insertForm = () => {
   popup
     .querySelector("#registration-button")
     .addEventListener("click", () => register());
+  popup.querySelector("#authorization-button");
 };
 
 document.addEventListener("click", (e) => {
