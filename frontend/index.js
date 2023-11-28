@@ -15,11 +15,11 @@ const authXhr = () => {
   console.log(params);
 
   const xhr1 = new XMLHttpRequest();
-  xhr1.open("POST", "/auth/reg");
+  xhr1.open("POST", "http://localhost:8080/auth/reg");
   xhr1.send();
 
   const xhr2 = new XMLHttpRequest();
-  xhr2.open("GET", "/auth/reg");
+  xhr2.open("GET", "http://localhost:8080/auth/reg");
   xhr2.send();
 };
 
