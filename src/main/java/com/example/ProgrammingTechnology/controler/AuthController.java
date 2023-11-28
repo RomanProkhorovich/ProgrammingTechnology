@@ -39,14 +39,14 @@ public class AuthController {
     }
 
     @GetMapping
-    public ResponseEntity<?> r(HttpServletResponse response) {
+    public ResponseEntity<?> r() {
         System.out.println("Get");
         return ResponseEntity.ok("");
     }
 
     @PostMapping("/reg")
-    public ResponseEntity<?> registration(HttpServletResponse response) {
-        System.out.println("post");
+    public ResponseEntity<?> registration(@RequestBody RegistrationDto reg) {
+        System.out.println(reg.getFirstname());
             return ResponseEntity.ok("");
     }
 }
