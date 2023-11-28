@@ -40,7 +40,7 @@ public class AuthController {
     }
 
 
-    @PostMapping
+    @PostMapping("/reg")
     public ResponseEntity<?> registration(@RequestBody AuthDto authDto) {
             return ResponseEntity.ok("");
     }
