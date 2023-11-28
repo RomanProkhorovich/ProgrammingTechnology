@@ -10,16 +10,19 @@ const authXhr = () => {
     params[item.name] = item.value;
   });
 
+  console.log();
+
   console.log(params);
 
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "/auth/reg");
   xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
+  xhr.setRequestHeader("Referrer-Policy", "origin");
   xhr.onreadystatechange = () => {
-    if (xhr.readyState!==4) return false;
+    if (xhr.readyState !== 4) return false;
     console.log(JSON.parse(xhr.responseText));
   };
-  xhr.onload
+  xhr.onload;
   xhr.send(JSON.stringify(params));
 };
 
