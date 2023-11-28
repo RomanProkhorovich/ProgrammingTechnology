@@ -3,6 +3,9 @@ package com.example.ProgrammingTechnology.controler;
 import com.example.ProgrammingTechnology.dto.AuthDto;
 import com.example.ProgrammingTechnology.dto.RegistrationDto;
 import com.example.ProgrammingTechnology.dto.UserDto;
+import com.example.ProgrammingTechnology.model.User;
+import com.example.ProgrammingTechnology.service.RoleService;
+import com.example.ProgrammingTechnology.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -14,6 +17,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,6 +27,9 @@ public class AuthController {
 
     private final AuthenticationManager manager;
     private final UserDetailsService service;
+    private final UserService userService;
+    private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
 
     @PostMapping
@@ -46,7 +53,13 @@ public class AuthController {
 
     @PostMapping("/reg")
     public ResponseEntity<?> registration(@RequestBody RegistrationDto reg) {
-        System.out.println(reg.getFirstname());
-            return ResponseEntity.ok("");
+        User user = new User();
+        user.setEmail(reg.getEmail());
+        user.setRole(roleService.findRoleByName("USER"));
+        user.setFirstname(reg.getFirstname());
+        user.setLastname(reg.getLastname());
+        user.setPassword(passwordEncoder.encode(reg.getPassword()));
+        userService.createUser(user);
+        return ResponseEntity.ok("");
     }
 }
