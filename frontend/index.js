@@ -16,9 +16,11 @@ const authXhr = () => {
   xhr.open("POST", "/auth/reg");
   xhr.setRequestHeader("Content-type", "application/json; charset=utf-8");
   xhr.onreadystatechange = () => {
-    console.log(xhr.readyState);
+    if (xhr.readyState!==4) return false;
+    console.log(JSON.parse(xhr.responseText));
   };
-  xhr.send(params);
+  xhr.onload
+  xhr.send(JSON.stringify(params));
 };
 
 const register = () => {
