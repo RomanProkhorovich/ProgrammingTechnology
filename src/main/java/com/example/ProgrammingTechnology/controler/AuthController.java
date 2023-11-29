@@ -55,11 +55,11 @@ public class AuthController {
     public ResponseEntity<?> registration(@RequestBody RegistrationDto reg) {
         User user = new User();
         user.setEmail(reg.getEmail());
-        user.setRole(roleService.findRoleByName("USER"));
+        user.setRole(roleService.findRoleByName("Client"));
         user.setFirstname(reg.getFirstname());
         user.setLastname(reg.getLastname());
         user.setPassword(passwordEncoder.encode(reg.getPassword()));
         userService.createUser(user);
-        return ResponseEntity.ok("");
+        return ResponseEntity.ok(user);
     }
 }

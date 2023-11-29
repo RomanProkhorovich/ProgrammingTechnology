@@ -14,7 +14,7 @@ public class RoleService {
 
     //создание роли
     public Role createRole(Role newRole) {
-        if (roleRepository.findById(newRole.getId()).isEmpty()) {
+        if (roleRepository.findByName(newRole.getName()).isEmpty()) {
             return roleRepository.save(newRole);
         }
         throw new IllegalArgumentException();

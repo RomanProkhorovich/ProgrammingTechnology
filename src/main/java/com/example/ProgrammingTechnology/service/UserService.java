@@ -20,7 +20,7 @@ public class UserService {
 
     //создание пользователя
     public User createUser(User newUser) {
-        if (userRepository.findById(newUser.getId()).isEmpty()) {
+        if (userRepository.findByEmail(newUser.getEmail()).isEmpty()) {
             return userRepository.save(newUser);
         }
         throw new IllegalArgumentException();
