@@ -182,6 +182,7 @@ footer {
 }
 
 .content-menu-dish {
+  position: relative;
   align-items: center;
   text-align: center;
   color: var(--main-dark);
@@ -206,9 +207,11 @@ footer {
 }
 
 .content-menu-dish-description {
+  width: 100%;
   font-size: 14px;
+  word-wrap: break-word;
   height: 100px;
-  overflow: hidden;
+  overflow-y: auto;
   margin: 5% 0;
 }
 
