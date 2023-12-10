@@ -1,8 +1,6 @@
 const popups = document.getElementsByClassName("popup");
 const accountButton = document.querySelector(".header-account");
 
-import { Dish } from "./src/js/dish";
-
 // GET DISHES
 const getDish = () => {
   const xhr = new XMLHttpRequest();
