@@ -22,9 +22,6 @@ const authXhr = () => {
   };
   xhr1.send(JSON.stringify(params));
 
-  const xhr2 = new XMLHttpRequest();
-  xhr2.open("GET", "http://localhost:8080/auth/reg");
-  xhr2.send();
 };
 
 const register = () => {
@@ -36,7 +33,7 @@ const register = () => {
   <input type="text" placeholder="Фамилия" name="lastname" value="Kirkorov">
   <input type="text" placeholder="Имя" name="firstname" value="Philipp">
   <input type="text" placeholder="Отчество (при наличии)" name="surname" value="hh">
-  <input type="text" placeholder="E-mail" name="e-mail" value="fasfjnakf@fsda.sga">
+  <input type="text" placeholder="E-mail" name="email" value="fasfjnakf@fsda.sga">
   <input type="text" placeholder="Номер телефона" name="phone" value="9037285732">
   <input type="password" placeholder="Пароль" name="password" value="fhsdfghdf87">
   <div class="button-group">
