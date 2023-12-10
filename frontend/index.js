@@ -8,9 +8,10 @@ const getDish = () => {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:8080/api/v1/dishes");
   xhr.onreadystatechange = () => {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      console.log(JSON.parse(xhr.responseText));
+    if (xhr.readyState !== 4 || xhr.status !== 200) {
+      return;
     }
+    console.log(JSON.parse(xhr.responseText));
   };
   xhr.send();
 };
@@ -34,9 +35,10 @@ const authXhr = (authForm) => {
   );
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = () => {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      console.log(JSON.parse(xhr.responseText));
+    if (xhr.readyState !== 4 || xhr.status !== 200) {
+      return;
     }
+    console.log(JSON.parse(xhr.responseText));
   };
   xhr.send(JSON.stringify(params));
 
