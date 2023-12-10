@@ -1,6 +1,20 @@
 const popups = document.getElementsByClassName("popup");
 const accountButton = document.querySelector(".header-account");
 
+import { Dish } from "./src/js/dish";
+
+// GET DISHES
+const getDish = () => {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://localhost:8080/api/v1/dishes");
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      console.log(JSON.parse(xhr.responseText));
+    }
+  };
+  xhr.send();
+};
+
 // REGISTRATION DATA SEND
 const authXhr = (authForm) => {
   let params = {};
