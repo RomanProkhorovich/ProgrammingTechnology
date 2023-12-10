@@ -18,11 +18,6 @@ const authXhr = (authForm) => {
       authForm.id === "authorization-form" ? "" : "/reg"
     }`
   );
-  console.log(
-    `http://localhost:8080/auth${
-      authForm.id === "authorization-form" ? "" : "/reg"
-    }`
-  );
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = () => {
     if (xhr.readyState === 4 && xhr.status === 200) {
@@ -66,7 +61,7 @@ const insertForm = () => {
         <h1>
             Войдите, чтобы сделать заказ
         </h1>
-        <input type="text" placeholder="Номер телефона или E-Mail" name="phone-Email" value="fasfjnakf@fsda.sga">
+        <input type="text" placeholder="Номер телефона или E-Mail" name="phone-email" value="fasfjnakf@fsda.sga">
         <input type="password" placeholder="Пароль" name="password" value="fhsdfghdf87">
         <div class="button-group">
             <button id="registration-button" type="button">Зарегистрироваться</button>
