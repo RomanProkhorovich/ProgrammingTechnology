@@ -19,7 +19,7 @@ const getDish = () => {
       dishesContainer.insertAdjacentHTML(
         "beforeend",
         `<div class="content-menu-dish">
-      <img class="content-menu-dish-photo" src="https://placehold.co/400" alt="">
+      <img class="content-menu-dish-photo" src="data:image/png;base64,${item.photo}" alt="${item.name}">
       <h1>${item.name}</h1>
       <p class="content-menu-dish-description">${item.description}</p>
       <div class="content-menu-dish-cart">
