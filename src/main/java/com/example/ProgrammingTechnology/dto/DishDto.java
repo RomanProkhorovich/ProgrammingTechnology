@@ -15,6 +15,8 @@ public class DishDto {
     private Float price;
     private Float calories;
     private Float weight;
+    private String description;
+    private byte[] photo;
 
     public DishDto(String name, Float price, Float calories, Float weight) {
         this.name = name;

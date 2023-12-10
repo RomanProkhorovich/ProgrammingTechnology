@@ -1,11 +1,11 @@
 package com.example.ProgrammingTechnology.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.util.Objects;
 
@@ -15,6 +15,7 @@ import java.util.Objects;
 @NoArgsConstructor
 public class Dish {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
@@ -26,11 +27,23 @@ public class Dish {
 
     @Column(nullable = false)
     private Float calories;
-
-
     @Column(nullable = false)
     private Float weight;
+    @Column(length = 5000)
+    private String description;
 
+    @Column(name = "photo")
+    @JdbcTypeCode(SqlTypes.BLOB)
+    private byte[] photo;
+
+
+    public Dish(String name, Float price, Float calories, Float weight, byte[] photo) {
+        this.name = name;
+        this.price = price;
+        this.calories = calories;
+        this.weight = weight;
+        this.photo = photo;
+    }
     public Dish(String name, Float price, Float calories, Float weight) {
         this.name = name;
         this.price = price;

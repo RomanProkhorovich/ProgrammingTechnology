@@ -14,7 +14,8 @@ public class DishService {
 
     //создание блюда
     public Dish createDish(Dish newDish) {
-        if (dishRepository.findById(newDish.getId()).isEmpty())
+        //TODO fix
+        if (newDish.getId() == null || dishRepository.findById(newDish.getId()).isEmpty())
             return dishRepository.save(newDish);
         throw new IllegalArgumentException();
     }

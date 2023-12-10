@@ -39,7 +39,7 @@ public class AuthController {
     public ResponseEntity<?> auth(@RequestBody AuthDto authDto) {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authDto.getEmail(), authDto.getPassword());
         try {
-            manager.authenticate(token);
+            var a = manager.authenticate(token);
             return ResponseEntity.ok(service.loadUserByUsername(authDto.getEmail()));
 
         }
@@ -51,6 +51,7 @@ public class AuthController {
     @PostMapping("/reg")
     public ResponseEntity<?> registration(@RequestBody RegistrationDto reg) {
         User user = mapper.toModel(reg);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(roleService.findRoleByName("Client"));
         userService.createUser(user);
         return ResponseEntity.ok(user);
