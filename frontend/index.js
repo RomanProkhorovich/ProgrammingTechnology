@@ -9,7 +9,25 @@ const getDish = () => {
     if (xhr.readyState !== 4 || xhr.status !== 200) {
       return;
     }
-    console.log(JSON.parse(xhr.responseText));
+
+    const dishes = JSON.parse(xhr.responseText);
+
+    const dishesContainer = document.querySelector("content-menu");
+
+    dishes.forEach((item) => {
+      dishesContainer.insertAdjacentHTML(
+        "beforeend",
+        `<div class="content-menu-dish">
+      <img class="content-menu-dish-photo" src="https://placehold.co/400" alt="">
+      <h1>${item.name}</h1>
+      <p class="content-menu-dish-description">${item.description}</p>
+      <div class="content-menu-dish-cart">
+          <p class="content-menu-dish-cart-price">${item.price} р.</p>
+          <button class="content-menu-dish-cart-button">В корзину</button>
+      </div>
+  </div>`
+      );
+    });
   };
   xhr.send();
 };
