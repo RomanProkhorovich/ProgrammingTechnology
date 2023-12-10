@@ -1,7 +1,7 @@
 const popups = document.getElementsByClassName("popup");
 const accountButton = document.querySelector(".header-account");
 
-// GET DISHES
+// DISHES RENDERING
 const getDish = () => {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:8080/api/v1/dishes");
@@ -12,8 +12,9 @@ const getDish = () => {
 
     const dishes = JSON.parse(xhr.responseText);
 
-    const dishesContainer = document.querySelector("content-menu");
+    const dishesContainer = document.querySelector(".content-menu");
 
+    console.time("dishRender");
     dishes.forEach((item) => {
       dishesContainer.insertAdjacentHTML(
         "beforeend",
@@ -28,6 +29,7 @@ const getDish = () => {
   </div>`
       );
     });
+    console.timeEnd("dishRender");
   };
   xhr.send();
 };
