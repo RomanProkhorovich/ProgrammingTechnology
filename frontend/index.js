@@ -101,3 +101,5 @@ document.addEventListener("click", (e) => {
 });
 
 accountButton.addEventListener("click", () => insertForm());
+
+getDish();
