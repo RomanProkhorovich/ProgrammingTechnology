@@ -15,6 +15,13 @@ public class DishController {
     private final DishService service;
     private final DishMapper mapper;
 
+
+    @GetMapping("/{id}")
+    public DishDto findById(@PathVariable Long id)
+    {
+        return mapper.toDto(service.findDishById(id));
+    }
+
     @GetMapping
     public List<DishDto> findAll() {
         return mapper.toDtoList(service.findDishes());
