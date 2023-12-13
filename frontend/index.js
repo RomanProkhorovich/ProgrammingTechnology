@@ -1,8 +1,11 @@
-const popups = document.getElementsByClassName("popup");
 const accountButton = document.querySelector(".header-account");
+const cartButton = document.querySelector(".header-cart-logo");
+const cartSum = document.querySelector("header-cart-sum-value");
+
+const dishesInCart = [];
 
 // DISHES RENDERING
-const getDish = () => {
+const getDishes = () => {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:8080/api/v1/dishes");
   xhr.onreadystatechange = () => {
@@ -18,12 +21,13 @@ const getDish = () => {
     dishes.forEach((item) => {
       dishesContainer.insertAdjacentHTML(
         "beforeend",
-        `<div class="content-menu-dish">
+        `<div class="content-menu-dish" data-menu-id="${item.id}">
       <img class="content-menu-dish-photo" src="data:image/png;base64,${item.photo}" alt="${item.name}">
       <h1>${item.name}</h1>
       <p class="content-menu-dish-description">${item.description}</p>
       <div class="content-menu-dish-cart">
-          <p class="content-menu-dish-cart-price">${item.price} р.</p>
+          <p class="content-menu-dish-cart-price"><span
+          class="content-menu-dish-cart-price-value">${item.price}</span>р.</p>
           <button class="content-menu-dish-cart-button">В корзину</button>
       </div>
   </div>`
@@ -35,7 +39,7 @@ const getDish = () => {
 };
 
 // REGISTRATION DATA SEND
-const authXhr = (authForm) => {
+const authSendRequest = (authForm) => {
   let params = {};
 
   Array.from(authForm.getElementsByTagName("input")).map((item) => {
@@ -63,8 +67,8 @@ const authXhr = (authForm) => {
   authForm.closest(".popup").remove();
 };
 
-// SWITCH TO REGISTRATION
-const register = () => {
+// SWITCH TO REGISTRATION !!!remove values
+const popupRegForm = () => {
   const popup = document.querySelector(".popup");
   popup.innerHTML = `<form id="registration-form">
   <h1>
@@ -83,14 +87,16 @@ const register = () => {
 `;
   popup
     .querySelector("#registration-button")
-    .addEventListener("click", (e) => authXhr(e.target.closest("form")));
+    .addEventListener("click", (e) =>
+      authSendRequest(e.target.closest("form"))
+    );
 };
 
-// AUTH POPUP
-const insertForm = () => {
+// AUTH POPUP !!!remove values
+const popupAuthForm = () => {
   document.body.insertAdjacentHTML(
     "afterbegin",
-    `<div class="popup">
+    `<div class="popup hidden">
     <form id="authorization-form">
         <h1>
             Войдите, чтобы сделать заказ
@@ -104,22 +110,122 @@ const insertForm = () => {
     </form>
 </div>`
   );
-  document
-    .getElementById("authorization-button")
-    .addEventListener("click", () => {});
   const popup = document.querySelector(".popup");
+  setTimeout(() => {
+    popup.classList.remove("hidden");
+  }, 0);
   popup
     .querySelector("#registration-button")
-    .addEventListener("click", () => register());
+    .addEventListener("click", () => popupRegForm());
   popup
     .querySelector("#authorization-button")
-    .addEventListener("click", (e) => authXhr(e.target.closest("form")));
+    .addEventListener("click", (e) =>
+      authSendRequest(e.target.closest("form"))
+    );
 };
 
-document.addEventListener("click", (e) => {
-  if (e.target.classList.contains("popup")) e.target.remove();
+// HIDE POPUP
+document.body.addEventListener("click", (e) => {
+  if (e.target.classList.contains("popup")) {
+    e.target.classList.add("hidden");
+    setTimeout(() => {
+      e.target.remove();
+    }, 200);
+  }
 });
 
-accountButton.addEventListener("click", () => insertForm());
+// SHOW/HIDE CART
+cartButton.addEventListener("click", () => {
+  const cartContent = document.querySelector(".header-cart-content");
+  if (cartContent.classList.contains("display-none")) {
+    cartContent.classList.toggle("display-none");
+    setTimeout(() => {
+      cartContent.classList.toggle("hidden");
+    }, 0);
+  } else {
+    cartContent.classList.toggle("hidden");
+    setTimeout(() => {
+      cartContent.classList.toggle("display-none");
+    }, 200);
+  }
+});
 
-getDish();
+// ADD DISH TO CART LISTENER
+const addToCart = () => {
+  document
+    .querySelectorAll(".content-menu-dish-cart-button")
+    .forEach((item) => {
+      item.addEventListener("click", (e) => {
+        e.preventDefault();
+
+        const dish = e.target.closest(".content-menu-dish");
+        const id = dish.dataset.menuId;
+
+        if (dishesInCart.includes(id)) {
+          const dishCart = document.querySelector(`[data-cart-id="${id}"]`);
+          dishCart.querySelector(
+            ".header-cart-content-dish-info-quantity-value"
+          ).textContent++;
+          return;
+        }
+
+        dishesInCart.push(id);
+        const src = dish.querySelector(".content-menu-dish-photo").src;
+        const alt = dish.querySelector(".content-menu-dish-photo").alt;
+        const name = dish.querySelector("h1").textContent;
+        const price = dish.querySelector(
+          ".content-menu-dish-cart-price"
+        ).textContent;
+
+        document.getElementById("cart-to-order").insertAdjacentHTML(
+          "beforebegin",
+          `<div class="header-cart-content-dish" data-cart-id="${id}">
+      <img class="header-cart-content-dish-photo" src="${src}" alt="${alt}">
+      <div class="header-cart-content-dish-info">
+          <h1>${name}</h1>
+          <p class="header-cart-content-dish-info-quantity">
+              <span class="header-cart-content-dish-info-quantity-control minus">-</span><input
+              class="header-cart-content-dish-info-quantity-value" value="1"></input><span
+              class="header-cart-content-dish-info-quantity-control plus">+</span>
+          </p>
+          <p class="header-cart-content-dish-info-price">${price}</p>
+      </div>
+  </div>`
+        );
+
+        item.outerHTML = `<span class="header-cart-content-dish-info-quantity-control minus">-</span><input
+        class="header-cart-content-dish-info-quantity-value" value="1"></input><span
+        class="header-cart-content-dish-info-quantity-control plus">+</span>`;
+
+        console.log(item);
+      });
+    });
+};
+
+// ACCOUNT LISTENER
+accountButton.addEventListener("click", () => popupAuthForm());
+
+// CART QUANTITY LISTENER
+document
+  .querySelector(".header-cart-content")
+  .addEventListener("click", (e) => {
+    if (
+      !e.target.classList.contains(
+        "header-cart-content-dish-info-quantity-control"
+      )
+    ) {
+      return;
+    }
+    if (e.target.classList.contains("plus")) {
+      e.target
+        .closest(".header-cart-content-dish-info-quantity")
+        .querySelector(".header-cart-content-dish-info-quantity-value").value++;
+      return;
+    }
+    e.target
+      .closest(".header-cart-content-dish-info-quantity")
+      .querySelector(".header-cart-content-dish-info-quantity-value").value--;
+  });
+
+getDishes();
+addToCart();

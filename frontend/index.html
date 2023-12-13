@@ -28,7 +28,25 @@
             </ul>
             <div class="header-cart">
                 <img class="header-cart-logo" src="./src/svg/cart-shopping-svgrepo-com.svg" alt="">
-                <p class="header-cart-sum">999р.</p>
+                <p class="header-cart-sum"><span class="header-cart-sum-value">0</span>р.</p>
+                <div class="header-cart-content display-none hidden">
+                    <!-- CART DISH EXAMPLE -->
+                    <!-- <div class="header-cart-content-dish">
+                        <img class="header-cart-content-dish-photo" src="https://placehold.co/400" alt="">
+                        <div class="header-cart-content-dish-info">
+                            <h1>Name</h1>
+                            <span class="header-cart-content-dish-info-quantity-control minus">-</span>
+                            <input class="header-cart-content-dish-info-quantity-value" value="1"></input>
+                            <span class="header-cart-content-dish-info-quantity-control plus">+</span>
+                            <p class="header-cart-content-dish-info-price"><span
+                                    class="header-cart-content-dish-info-price-value">9999</span>р.</p>
+                        </div>
+                    </div> -->
+
+                    <button id="cart-to-order" class="header-cart-content-button">
+                        Перейти к оформлению
+                    </button>
+                </div>
             </div>
             <div class="header-account">
                 <img class="header-account-logo" src="./src/svg/circle-user-svgrepo-com.svg" alt="">
@@ -38,28 +56,38 @@
 
     <div class="content">
         <div class="content-status">
-
+            <p>У вас нет активных заказов</p>
         </div>
 
         <div class="content-menu">
             <!-- DISH EXAMPLE -->
 
-            <!-- <div class="content-menu-dish">
+            <!-- <div class="content-menu-dish" data-menu-id="1">
                 <img class="content-menu-dish-photo" src="https://placehold.co/400" alt="">
-                <h1>Name</h1>
-                <p class="content-menu-dish-description">Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Cupiditate pariatur consequuntur cumque
-                    blanditiis earum laborum.</p>
+                <h1>Name1</h1>
+                <p class="content-menu-dish-description">Lorem, ipsum dolor sit amet consectetur adipisicing
+                    elit. Similique ad voluptas enim earum soluta laboriosam sequi, eos pariatur ab dignissimos optio
+                    ratione atque voluptate nulla sit fugit tempora esse repudiandae?</p>
                 <div class="content-menu-dish-cart">
-                    <p class="content-menu-dish-cart-price">9999р.</p>
+                    <p class="content-menu-dish-cart-price"><span
+                            class="content-menu-dish-cart-price-value">1111</span>р.</p>
                     <button class="content-menu-dish-cart-button">В корзину</button>
                 </div>
-            </div> -->
-            
-        </div>
-        <div class="content-cart">
+            </div>
 
-        </div>
+            <div class="content-menu-dish" data-menu-id="2">
+                <img class="content-menu-dish-photo" src="https://placehold.co/400" alt="">
+                <h1>Name2</h1>
+                <p class="content-menu-dish-description">Lorem, ipsum dolor sit amet consectetur adipisicing
+                    elit. Similique ad voluptas enim earum soluta laboriosam sequi, eos pariatur ab dignissimos optio
+                    ratione atque voluptate nulla sit fugit tempora esse repudiandae?</p>
+                <div class="content-menu-dish-cart">
+                    <p class="content-menu-dish-cart-price"><span
+                            class="content-menu-dish-cart-price-value">2222</span>р.</p>
+                    <button class="content-menu-dish-cart-button">В корзину</button>
+                </div>
+            </div>
+        </div> -->
     </div>
 
     <footer>
@@ -69,9 +97,9 @@
             <p>Roman's™ All rights reserved.</p>
         </div>
         <div class="footer-contact">
-            <img src="https://thumb.cloud.mail.ru/weblink/thumb/xw1/TfKk/QGyS93cW7/PNG%20-%20digital/VK%20Logo%20White.png"
-                alt="">
-            <img src="https://freelogopng.com/images/all_img/1683045332telegram-logo-black-and-white.png" alt="">
+            <img
+                src="https://thumb.cloud.mail.ru/weblink/thumb/xw1/TfKk/QGyS93cW7/PNG%20-%20digital/VK%20Logo%20White.png">
+            <img src="https://freelogopng.com/images/all_img/1683045332telegram-logo-black-and-white.png">
         </div>
     </footer>
 </body>
