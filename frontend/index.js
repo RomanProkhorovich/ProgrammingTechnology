@@ -25,7 +25,13 @@ const sendOrder = () => {
     console.log(JSON.parse(xhr.responseText));
   };
   console.log(dishes);
-  xhr.send(JSON.stringify(dishes));
+  xhr.send(
+    JSON.stringify({
+      dishes: dishes,
+      address: "hui",
+      deliveryTime: new Date().getDate(),
+    })
+  );
 };
 
 // DISHES RENDERING XHR
