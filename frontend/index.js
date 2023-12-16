@@ -4,7 +4,29 @@ const cartSum = document.querySelector("header-cart-sum-value");
 
 const dishesInCart = [];
 
-// DISHES RENDERING
+// SEND ORDER
+const sendOrder = () => {
+  document.querySelectorAll(".header-cart-content-dish").forEach((item) => {
+    dishesInCart.push({
+      id: item.dataset.cartId,
+      quantity: item.querySelector(
+        ".header-cart-content-dish-info-quantity-value"
+      ).value,
+    });
+  });
+  const xhr = new XMLHttpRequest();
+  xhr.open("POST", "http://localhost:8080/api/v1/orders");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState !== 4 || xhr.status !== 200) {
+      return;
+    }
+    console.log(JSON.parse(xhr.responseText));
+  };
+  xhr.send(JSON.stringify(dishesInCart));
+};
+
+// DISHES RENDERING XHR
 const getDishes = () => {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:8080/api/v1/dishes");
@@ -17,7 +39,6 @@ const getDishes = () => {
 
     const dishesContainer = document.querySelector(".content-menu");
 
-    console.time("dishRender");
     dishes.forEach((item) => {
       dishesContainer.insertAdjacentHTML(
         "beforeend",
@@ -33,20 +54,17 @@ const getDishes = () => {
   </div>`
       );
     });
-    console.timeEnd("dishRender");
   };
   xhr.send();
 };
 
-// REGISTRATION DATA SEND
+// REGISTRATION DATA SEND XHR
 const authSendRequest = (authForm) => {
   let params = {};
 
   Array.from(authForm.getElementsByTagName("input")).map((item) => {
     params[item.name] = item.value;
   });
-
-  console.log(params);
 
   const xhr = new XMLHttpRequest();
   xhr.open(
@@ -160,16 +178,6 @@ const addToCart = () => {
 
         const dish = e.target.closest(".content-menu-dish");
         const id = dish.dataset.menuId;
-
-        if (dishesInCart.includes(id)) {
-          const dishCart = document.querySelector(`[data-cart-id="${id}"]`);
-          dishCart.querySelector(
-            ".header-cart-content-dish-info-quantity-value"
-          ).textContent++;
-          return;
-        }
-
-        dishesInCart.push(id);
         const src = dish.querySelector(".content-menu-dish-photo").src;
         const alt = dish.querySelector(".content-menu-dish-photo").alt;
         const name = dish.querySelector("h1").textContent;
@@ -177,7 +185,7 @@ const addToCart = () => {
           ".content-menu-dish-cart-price"
         ).textContent;
 
-        document.getElementById("cart-to-order").insertAdjacentHTML(
+        document.querySelector("#cart-to-order").insertAdjacentHTML(
           "beforebegin",
           `<div class="header-cart-content-dish" data-cart-id="${id}">
       <img class="header-cart-content-dish-photo" src="${src}" alt="${alt}">
@@ -193,11 +201,33 @@ const addToCart = () => {
   </div>`
         );
 
+        // switch to quantity control
+
+        const parent = item.parentElement;
+
         item.outerHTML = `<span class="header-cart-content-dish-info-quantity-control minus">-</span><input
         class="header-cart-content-dish-info-quantity-value" value="1"></input><span
         class="header-cart-content-dish-info-quantity-control plus">+</span>`;
 
-        console.log(item);
+        const plus = parent.querySelector(".plus");
+        const minus = parent.querySelector(".minus");
+        const value = parent.querySelector(
+          ".header-cart-content-dish-info-quantity-value"
+        );
+
+        plus.addEventListener("click", (e) => {
+          value.value++;
+          document
+            .querySelector(`[data-cart-id="${id}"]`)
+            .querySelector("input").value = value.value;
+        });
+
+        minus.addEventListener("click", (e) => {
+          value.value--;
+          document
+            .querySelector(`[data-cart-id="${id}"]`)
+            .querySelector("input").value = value.value;
+        });
       });
     });
 };
@@ -213,18 +243,25 @@ document
       !e.target.classList.contains(
         "header-cart-content-dish-info-quantity-control"
       )
-    ) {
+    )
       return;
-    }
+
+    const id = e.target.closest(".header-cart-content-dish").dataset.cartId;
+    const value = e.target.parentElement.querySelector(
+      ".header-cart-content-dish-info-quantity-value"
+    );
+
     if (e.target.classList.contains("plus")) {
-      e.target
-        .closest(".header-cart-content-dish-info-quantity")
-        .querySelector(".header-cart-content-dish-info-quantity-value").value++;
+      value.value++;
+      document
+        .querySelector(`[data-menu-id="${id}"]`)
+        .querySelector("input").value = value.value;
       return;
     }
-    e.target
-      .closest(".header-cart-content-dish-info-quantity")
-      .querySelector(".header-cart-content-dish-info-quantity-value").value--;
+    value.value--;
+    document
+      .querySelector(`[data-menu-id="${id}"]`)
+      .querySelector("input").value = value.value;
   });
 
 getDishes();
