@@ -2,10 +2,10 @@ const accountButton = document.querySelector(".header-account");
 const cartButton = document.querySelector(".header-cart-logo");
 const cartSum = document.querySelector("header-cart-sum-value");
 
-const dishesInCart = [];
-
 // SEND ORDER
 const sendOrder = () => {
+  const dishesInCart = [];
+
   document.querySelectorAll(".header-cart-content-dish").forEach((item) => {
     dishesInCart.push({
       id: item.dataset.cartId,
@@ -14,6 +14,7 @@ const sendOrder = () => {
       ).value,
     });
   });
+
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "http://localhost:8080/api/v1/orders");
   xhr.setRequestHeader("Content-Type", "application/json");
@@ -23,6 +24,7 @@ const sendOrder = () => {
     }
     console.log(JSON.parse(xhr.responseText));
   };
+  console.log(dishesInCart);
   xhr.send(JSON.stringify(dishesInCart));
 };
 
@@ -235,7 +237,7 @@ const addToCart = () => {
 // ACCOUNT LISTENER
 accountButton.addEventListener("click", () => popupAuthForm());
 
-document.querySelector("#cart-to-order").addEventListener("click", sendOrder());
+document.querySelector("#cart-to-order").addEventListener("click", sendOrder);
 
 // CART QUANTITY LISTENER
 document
