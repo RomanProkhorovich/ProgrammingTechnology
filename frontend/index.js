@@ -265,4 +265,7 @@ document
   });
 
 getDishes();
-addToCart();
+
+setTimeout(() => {
+  addToCart();
+}, 0);
