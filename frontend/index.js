@@ -235,6 +235,8 @@ const addToCart = () => {
 // ACCOUNT LISTENER
 accountButton.addEventListener("click", () => popupAuthForm());
 
+document.querySelector("#cart-to-order").addEventListener("click", sendOrder());
+
 // CART QUANTITY LISTENER
 document
   .querySelector(".header-cart-content")
