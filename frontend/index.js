@@ -4,10 +4,10 @@ const cartSum = document.querySelector("header-cart-sum-value");
 
 // SEND ORDER
 const sendOrder = () => {
-  const dishesInCart = [];
+  const dishes = [];
 
   document.querySelectorAll(".header-cart-content-dish").forEach((item) => {
-    dishesInCart.push({
+    dishes.push({
       id: item.dataset.cartId,
       quantity: item.querySelector(
         ".header-cart-content-dish-info-quantity-value"
@@ -24,8 +24,8 @@ const sendOrder = () => {
     }
     console.log(JSON.parse(xhr.responseText));
   };
-  console.log(dishesInCart);
-  xhr.send(JSON.stringify(dishesInCart));
+  console.log(dishes);
+  xhr.send(JSON.stringify(dishes));
 };
 
 // DISHES RENDERING XHR
@@ -56,6 +56,7 @@ const getDishes = () => {
   </div>`
       );
     });
+    addToCart();
   };
   xhr.send();
 };
@@ -269,7 +270,3 @@ document
   });
 
 getDishes();
-
-setTimeout(() => {
-  addToCart();
-}, 0);
