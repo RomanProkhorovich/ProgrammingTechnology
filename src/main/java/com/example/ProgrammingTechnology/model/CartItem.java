@@ -18,19 +18,9 @@ public class CartItem {
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "dish_id")
     private Dish dish;
-/*
-
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-*/
 
     @Column(nullable = false)
     private Byte count;
-
-    @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
 
     public CartItem(Dish dish, Byte count) {
         this.dish = dish;

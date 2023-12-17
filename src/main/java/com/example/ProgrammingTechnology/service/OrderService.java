@@ -1,8 +1,10 @@
 package com.example.ProgrammingTechnology.service;
 
+import com.example.ProgrammingTechnology.dto.CreateOrderDto;
 import com.example.ProgrammingTechnology.model.Order;
 import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.repository.OrderRepository;
+import com.example.ProgrammingTechnology.security.SecurityHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
+    private final RestaurantService restaurantService;
     private final UserService userService;
     private final OrderStatusService orderStatusService;
     private final ReceivingTypeService receivingTypeService;
@@ -22,13 +25,15 @@ public class OrderService {
     //создание заказа
     public Order createOrder(Order newOrder) {
         if (orderRepository.findById(newOrder.getId()).isPresent()) {
-
             throw new IllegalArgumentException();
         }
         if (newOrder.getAddress() != null)
             return orderRepository.save(newOrder);
+        if (newOrder.getClient() == null)
+            newOrder.setClient(userService
+                    .findUserByEmail(SecurityHelper.getCurrentUser().getUsername()));
 
-        if (newOrder.getClient() != null && newOrder.getClient().getAddress() != null)
+        if ( newOrder.getClient().getAddress() != null)
             newOrder.setAddress(newOrder.getClient().getAddress());
 
         return orderRepository.save(newOrder);

@@ -1,10 +1,13 @@
 package com.example.ProgrammingTechnology.dto;
 
+import com.example.ProgrammingTechnology.model.CartItem;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -13,7 +16,8 @@ import java.util.Objects;
 @Builder
 public class OrderDto {
     private Long id;
-    private List<DishDto> dishDtos;
+    @Builder.Default
+    private Set<CartItemDto> cartItems = new LinkedHashSet<>();
     @Builder.Default
     private LocalDateTime orderTime = LocalDateTime.now();
     private OrderStatusDto orderStatusDto;

@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface CartItemRepository extends JpaRepository<CartItem, Long> {
-    List<CartItem> findAllByOrder(Order order);
 
     List<CartItem> findAllByDish(Dish dish);
 }
