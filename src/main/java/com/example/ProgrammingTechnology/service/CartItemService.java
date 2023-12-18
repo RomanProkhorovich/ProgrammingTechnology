@@ -34,12 +34,6 @@ public class CartItemService {
         return cartItemRepository.findAllByDish(dishService.findDishById(dishId));
     }
 
-    //TODO: использовать в сервисе блюд
-    //поиск всех блюд у заказа
-    public List<CartItem> findAllDishByOrder(Long orderId) {
-        return cartItemRepository.findAllByOrder(orderService.findOrderById(orderId));
-    }
-
     //поиск всех заказанных блюд
     public List<CartItem> findAllOrderDish() {
         return cartItemRepository.findAll();

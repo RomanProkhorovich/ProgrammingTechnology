@@ -1,5 +1,6 @@
 package com.example.ProgrammingTechnology.mapper;
 
+import com.example.ProgrammingTechnology.dto.CreateOrderDto;
 import com.example.ProgrammingTechnology.dto.OrderDto;
 import com.example.ProgrammingTechnology.model.Order;
 import org.mapstruct.Mapper;
@@ -22,4 +23,6 @@ public interface OrderMapper {
     List<Order> toModelList(List<OrderDto> dto);
 
     List<OrderDto> toDtoList(List<Order> model);
+
+
 }

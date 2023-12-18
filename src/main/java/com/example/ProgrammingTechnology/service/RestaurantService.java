@@ -27,6 +27,8 @@ public class RestaurantService {
 
     //поиск ресторана по id
     public Restaurant findRestaurantById(Long id) {
+        if (id == null)
+            throw new IllegalArgumentException("id cant be null");
         return restaurantRepository.findById(id).orElseThrow();
     }
 
