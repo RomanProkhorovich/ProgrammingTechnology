@@ -1,6 +1,20 @@
 const accountButton = document.querySelector(".header-account");
 const cartButton = document.querySelector(".header-cart-logo");
-const cartSum = document.querySelector("header-cart-sum-value");
+const cartSum = document.querySelector(".header-cart-sum-value");
+
+// EDIT USER FIELD
+const editUserField = () => {
+  xhr = new XMLHttpRequest();
+  xhr.open("POST", "http://localhost:8080/api/v1/orders");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState !== 4 || xhr.status !== 200) {
+      return;
+    }
+    console.log(JSON.parse(xhr.responseText));
+  };
+  xhr.send();
+};
 
 // SEND ORDER
 const sendOrder = () => {
@@ -32,6 +46,32 @@ const sendOrder = () => {
       deliveryTime: new Date().getDate(),
     })
   );
+};
+
+// ORDERS RENDERING XHR
+
+const getOrders = () => {
+  const xhr = new XMLHttpRequest();
+  xhr.open("GET", "http://localhost:8080/api/v1/orders");
+  let email = "cherni@example.ru";
+  let pass = "password";
+  xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
+  console.log(btoa(`${email}:${pass}`));
+  xhr.onreadystatechange = () => {
+    if (xhr.readyState !== 4 || xhr.status !== 200) {
+      return;
+    }
+
+    const orders = JSON.parse(xhr.responseText);
+    console.log(orders);
+
+    const ordersContainer = document.querySelector(".content-cabinet-orders");
+
+    orders.forEach((item) => {
+      ordersContainer.insertAdjacentHTML("beforeend", ``);
+    });
+  };
+  xhr.send({ user_id: 1 });
 };
 
 // DISHES RENDERING XHR
@@ -191,7 +231,7 @@ const addToCart = () => {
         const alt = dish.querySelector(".content-menu-dish-photo").alt;
         const name = dish.querySelector("h1").textContent;
         const price = dish.querySelector(
-          ".content-menu-dish-cart-price"
+          ".content-menu-dish-cart-price-value"
         ).textContent;
 
         document.querySelector("#cart-to-order").insertAdjacentHTML(
@@ -205,10 +245,13 @@ const addToCart = () => {
               class="header-cart-content-dish-info-quantity-value" value="1"></input><span
               class="header-cart-content-dish-info-quantity-control plus">+</span>
           </p>
-          <p class="header-cart-content-dish-info-price">${price}</p>
+          <p class="header-cart-content-dish-info-price"><span
+              class="content-menu-dish-cart-price-value">${price}</span>р.</p>
       </div>
   </div>`
         );
+
+        cartSum.textContent = +cartSum.textContent + +price;
 
         // switch to quantity control
 
@@ -276,3 +319,4 @@ document
   });
 
 getDishes();
+addToCart();
