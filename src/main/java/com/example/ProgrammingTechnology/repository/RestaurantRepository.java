@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
-    // List<Restaurant> finaAllByKitchenType(KitchenType kitchenType);
+     List<Restaurant> finaAllByKitchenType(KitchenType kitchenType);
 
     List<Restaurant> findAllByName(String name);
 }

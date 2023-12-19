@@ -34,8 +34,8 @@ public class RestaurantService {
 
     //поиск ресторанов по виду кухни
     public List<Restaurant> findRestaurantsByKitchenType(String name) {
-        KitchenType kitchenType = kitchenTypeService.findKitchenTypeByName(name);
-        return null;
+         KitchenType kitchenType = kitchenTypeService.findKitchenTypeByName(name);
+         return restaurantRepository.finaAllByKitchenType(kitchenType);
     }
 
     //поиск ресторанов по названию

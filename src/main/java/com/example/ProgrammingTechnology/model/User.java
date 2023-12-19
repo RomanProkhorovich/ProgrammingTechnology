@@ -18,7 +18,7 @@ public class User {
     @Column(name = "id")
     private Long id;
 
-
+    @Column(nullable = false, unique = true)
     private String phone;
 
     @Column(nullable = false)

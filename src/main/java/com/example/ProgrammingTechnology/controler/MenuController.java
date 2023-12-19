@@ -19,6 +19,11 @@ public class MenuController {
     private final MenuService service;
     private final DishMapper dishMapper;
 
+    @GetMapping("/{id}")
+    public MenuDto find(@PathVariable Long id) {
+        return mapper.toDto(service.findMenuById(id));
+    }
+
     @GetMapping
     public List<MenuDto> findAll() {
         return mapper.toDtoList(service.findMenus());

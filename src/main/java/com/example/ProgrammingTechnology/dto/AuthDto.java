@@ -12,6 +12,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class AuthDto {
+
+    //TODO: свериться с постановкой задачи по поводу авторизации и регистрации
+
     @JsonAlias("phone-Email")
     private String email;
     private String password;

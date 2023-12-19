@@ -34,6 +34,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper mapper;
 
+    //TODO: добавить изменение пароля
 
     @PostMapping
     public ResponseEntity<?> auth(@RequestBody AuthDto authDto) {

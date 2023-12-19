@@ -6,10 +6,7 @@ import com.example.ProgrammingTechnology.mapper.RestaurantMapper;
 import com.example.ProgrammingTechnology.service.RestaurantService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -38,6 +35,16 @@ public class RestaurantController {
     @GetMapping("/byId")
     public RestaurantDto findById(@PathVariable("id") Long id) {
         return mapper.toDto(service.findRestaurantById(id));
+    }
+
+    @PostMapping
+    public RestaurantDto create(@RequestBody RestaurantDto restaurantDto) {
+        return mapper.toDto(service.createRestaurant(mapper.toModel(restaurantDto)));
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        service.deleteRestaurantById(id);
     }
 
 }

@@ -6,6 +6,7 @@ import com.example.ProgrammingTechnology.repository.RoleRepository;
 import com.example.ProgrammingTechnology.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class UserService {
     private final RoleRepository roleRepository;
 
     //TODO: сделать проверку почты при создании пользователя и при изменении почты
-
+    //TODO: проверка по номеру телефона
     //создание пользователя
     public User createUser(User newUser) {
         if (userRepository.findByEmail(newUser.getEmail()).isEmpty()) {
@@ -34,6 +35,10 @@ public class UserService {
     //поиск пользователя по почте
     public User findUserByEmail(String email) {
         return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(""));
+    }
+
+    public User findUserByPhone(String phone) {
+        return userRepository.findByPhone(phone).orElseThrow();
     }
 
     //поиск пользователей по роли
@@ -105,6 +110,7 @@ public class UserService {
         return userRepository.save(user);
     }
 
+
     //удаление пользователя по id
     public void deleteUserById(Long id) {
         userRepository.deleteById(id);
@@ -119,5 +125,18 @@ public class UserService {
     public void deleteUserByEmail(String email) {
         var user = findUserByEmail(email);
         deleteUser(user);
+    }
+    public void deleteUserByPhone(String phone) {
+        User user = findUserByPhone(phone);
+        deleteUser(user);
+    }
+
+    //TODO: проверка на рабочий телефон
+    public User updatePhone(Long id, String phone) {
+        User user = userRepository.findById(id).orElseThrow();
+        //проверочку бы
+        user.setPhone(phone);
+        userRepository.save(user);
+        return user;
     }
 }

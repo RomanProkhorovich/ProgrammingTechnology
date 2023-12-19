@@ -14,6 +14,8 @@ public class CartItemService {
     private final DishService dishService;
     private final OrderService orderService;
 
+
+    //TODO: соединить методы create  update
     //создание заказанного блюда
     public CartItem createOrderDish(CartItem newOrderDish) {
         //if (cartItemRepository.findById(newOrderDish.getId()).isEmpty()) {
