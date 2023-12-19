@@ -5,6 +5,7 @@ import com.example.ProgrammingTechnology.model.Order;
 import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.repository.OrderRepository;
 import com.example.ProgrammingTechnology.security.SecurityHelper;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -48,6 +49,7 @@ public class OrderService {
 
     //TODO: сделать разные контроллеры для клиента и курьера
     //поиск заказов по курьеру
+    @Transactional
     public List<Order> findOrdersByUser(Long userId) {
         return orderRepository.findAllByClient(userService.findUserById(userId));
     }

@@ -14,7 +14,7 @@ public class RegistrationDto {
     private String firstname;
     private String lastname;
     private String surname;
-    private RoleDto roleDto;
+    private RoleDto role;
     private String email;
     private String password;
 }

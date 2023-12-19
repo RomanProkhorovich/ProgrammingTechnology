@@ -52,8 +52,9 @@ public class Order {
     @JoinColumn(name = "client_id")
     private User client;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
+
     private Set<CartItem> cartItems = new LinkedHashSet<>();
 
     @Override

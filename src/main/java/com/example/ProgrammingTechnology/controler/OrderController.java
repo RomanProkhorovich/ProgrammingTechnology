@@ -56,7 +56,8 @@ public class OrderController {
     public List<OrderDto> findAllByUser(@PathParam(value = "user_id") Long id) {
         if (id==null)
             id =userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
-        return mapper.toDtoList(service.findOrdersByUser(id));
+        List<Order> ordersByUser = service.findOrdersByUser(id);
+        return mapper.toDtoList(ordersByUser);
     }
 
     @GetMapping("/{id}")

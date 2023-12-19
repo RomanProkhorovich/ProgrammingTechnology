@@ -13,13 +13,6 @@ import lombok.Setter;
 public class CartItemDto {
     private Long id;
     @JsonAlias()
-    private DishDto dishDto;
+    private DishDto dish;
     private Byte count;
-
-    public CartItemDto(DishDto dishDto, OrderDto orderDto, Byte count) {
-        this.dishDto = dishDto;
-        this.count = count;
-    }
-
-
 }

@@ -28,7 +28,7 @@ public class DishesConfig {
     private final CartItemService cartItemService;
 
     @Bean
-    void addData() throws IOException {
+    int addData() throws IOException {
         Dish dish = new Dish();
         dish.setName("Кур очка");
         dish.setPrice(300f);
@@ -72,10 +72,11 @@ public class DishesConfig {
         fileContent = Files.readAllBytes(fi.toPath());
         kakleti.setPhoto(fileContent);
         service.createDish(kakleti);
+        return 1;
     }
 
     @Bean
-    void addUsers() {
+    int addUsers() {
         User user = new User();
         user.setRole(roleService.findRoleByName("Client"));
         user.setPassword(passwordEncoder.encode("password"));
@@ -84,6 +85,7 @@ public class DishesConfig {
         user.setSurname("Иванович");
         user.setEmail("cherni@example.ru");
         user.setAddress("г. Самара, ул. Мичурина, д. 375, кв. 19");
+        user.setPhone("89095492710");
         user = userService.createUser(user);
 
         Order order = new Order();
@@ -107,5 +109,6 @@ public class DishesConfig {
         order.setCartItems(Set.of(item2));
         order.setOrderTime(LocalDateTime.now());
         orderService.createOrder(order);
+        return 1;
     }
 }

@@ -17,22 +17,20 @@ public class DBConfig {
     private final KitchenTypeService kitchenTypeService;
 
     @Bean
-    public void createKType(){
-
-    }
-    @Bean
-    public void createRoles(){
+    public int createRoles(){
         roleService.createRole(new Role("Client"));
         roleService.createRole(new Role("Courier"));
         roleService.createRole(new Role("Administration"));
         roleService.createRole(new Role("Manager"));
+        return 1;
     }
 
 
     @Bean
-    public void createRecType(){
+    public int createRecType(){
         receivingTypeService.createReceivingType(new ReceivingType("Самовывоз"));
         receivingTypeService.createReceivingType(new ReceivingType("Курьер на дом"));
         receivingTypeService.createReceivingType(new ReceivingType("В ресторане"));
+        return 1;
     }
 }

@@ -20,12 +20,12 @@ public class OrderDto {
     private Set<CartItemDto> cartItems = new LinkedHashSet<>();
     @Builder.Default
     private LocalDateTime orderTime = LocalDateTime.now();
-    private OrderStatusDto orderStatusDto;
+    private OrderStatusDto orderStatus;
     private LocalDateTime deliveryTime;
     private UserDto courier;
     private String address;
-    private RestaurantDto restaurantDto;
-    private ReceivingTypeDto receivingTypeDto;
+    private RestaurantDto restaurant;
+    private ReceivingTypeDto receivingType;
     private UserDto client;
 
     @Override
