@@ -2,83 +2,9 @@ const accountButton = document.querySelector(".header-account");
 const cartButton = document.querySelector(".header-cart-logo");
 const cartSum = document.querySelector(".header-cart-sum-value");
 
-// EDIT USER FIELD
-const editUserField = () => {
-  xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost:8080/api/v1/orders");
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState !== 4 || xhr.status !== 200) {
-      return;
-    }
-    console.log(JSON.parse(xhr.responseText));
-  };
-  xhr.send();
-};
-
-// SEND ORDER
-const sendOrder = () => {
-  const dishes = [];
-
-  document.querySelectorAll(".header-cart-content-dish").forEach((item) => {
-    dishes.push({
-      id: item.dataset.cartId,
-      quantity: item.querySelector(
-        ".header-cart-content-dish-info-quantity-value"
-      ).value,
-    });
-  });
-
-  const xhr = new XMLHttpRequest();
-  xhr.open("POST", "http://localhost:8080/api/v1/orders");
-  let email = "cherni@example.ru";
-  let pass = "password";
-  xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
-  xhr.setRequestHeader("Content-Type", "application/json");
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState !== 4 || xhr.status !== 200) {
-      return;
-    }
-    console.log(JSON.parse(xhr.responseText));
-  };
-  console.log(dishes);
-  xhr.send(
-    JSON.stringify({
-      dishes: dishes,
-      address: "hui",
-      deliveryTime: new Date(),
-    })
-  );
-};
-
-// ORDERS RENDERING XHR
-
-const getOrders = () => {
-  const xhr = new XMLHttpRequest();
-  xhr.open("GET", "http://localhost:8080/api/v1/orders");
-  let email = "cherni@example.ru";
-  let pass = "password";
-  xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
-  console.log(btoa(`${email}:${pass}`));
-  xhr.onreadystatechange = () => {
-    if (xhr.readyState !== 4 || xhr.status !== 200) {
-      return;
-    }
-
-    const orders = JSON.parse(xhr.responseText);
-    console.log(orders);
-
-    const ordersContainer = document.querySelector(".content-cabinet-orders");
-
-    orders.forEach((item) => {
-      ordersContainer.insertAdjacentHTML("beforeend", ``);
-    });
-  };
-  xhr.send();
-};
-
 // DISHES RENDERING XHR
 const getDishes = () => {
+  if (!document.querySelector(".content-menu")) return;
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:8080/api/v1/dishes");
   let email = "cherni@example.ru";
@@ -294,9 +220,16 @@ const addToCart = () => {
 };
 
 // ACCOUNT LISTENER
-accountButton.addEventListener("click", () => popupAuthForm());
+accountButton.addEventListener("click", () => {
+  if (!localStorage.getItem("user")) popupAuthForm();
+  else {
+    window.location.href = "./src/html/cabinet.html";
+  }
+});
 
-document.querySelector("#cart-to-order").addEventListener("click", sendOrder);
+document.querySelector("#cart-to-order").addEventListener("click", () => {
+  window.location.href = "./src/html/summary.html";
+});
 
 // CART QUANTITY LISTENER
 document
@@ -328,5 +261,4 @@ document
   });
 
 getDishes();
-addToCart();
 getOrders();
