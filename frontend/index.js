@@ -31,6 +31,9 @@ const sendOrder = () => {
 
   const xhr = new XMLHttpRequest();
   xhr.open("POST", "http://localhost:8080/api/v1/orders");
+  let email = "cherni@example.ru";
+  let pass = "password";
+  xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = () => {
     if (xhr.readyState !== 4 || xhr.status !== 200) {
@@ -78,6 +81,9 @@ const getOrders = () => {
 const getDishes = () => {
   const xhr = new XMLHttpRequest();
   xhr.open("GET", "http://localhost:8080/api/v1/dishes");
+  let email = "cherni@example.ru";
+  let pass = "password";
+  xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
   xhr.onreadystatechange = () => {
     if (xhr.readyState !== 4 || xhr.status !== 200) {
       return;
@@ -122,6 +128,9 @@ const authSendRequest = (authForm) => {
       authForm.id === "authorization-form" ? "" : "/reg"
     }`
   );
+  let email = "cherni@example.ru";
+  let pass = "password";
+  xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
   xhr.setRequestHeader("Content-Type", "application/json");
   xhr.onreadystatechange = () => {
     if (xhr.readyState !== 4 || xhr.status !== 200) {
@@ -318,6 +327,6 @@ document
       .querySelector("input").value = value.value;
   });
 
-// getDishes();
-// addToCart();
+getDishes();
+addToCart();
 getOrders();
