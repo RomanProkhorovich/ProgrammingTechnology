@@ -14,7 +14,6 @@ import java.util.List;
 @Builder
 public class CreateOrderDto {
     private List<IdAndCount> dishes;
-    private LocalDateTime deliveryTime;
     private String address;
     private Long restaurantId;
     private String receivingTypeDto;

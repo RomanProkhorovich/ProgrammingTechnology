@@ -3,6 +3,7 @@ package com.example.ProgrammingTechnology.config;
 import com.example.ProgrammingTechnology.model.ReceivingType;
 import com.example.ProgrammingTechnology.model.Role;
 import com.example.ProgrammingTechnology.service.KitchenTypeService;
+import com.example.ProgrammingTechnology.service.OrderStatusService;
 import com.example.ProgrammingTechnology.service.ReceivingTypeService;
 import com.example.ProgrammingTechnology.service.RoleService;
 import lombok.RequiredArgsConstructor;
@@ -29,7 +30,7 @@ public class DBConfig {
     @Bean
     public int createRecType(){
         receivingTypeService.createReceivingType(new ReceivingType("Самовывоз"));
-        receivingTypeService.createReceivingType(new ReceivingType("Курьер на дом"));
+        receivingTypeService.createReceivingType(new ReceivingType("Курьер"));
         receivingTypeService.createReceivingType(new ReceivingType("В ресторане"));
         return 1;
     }

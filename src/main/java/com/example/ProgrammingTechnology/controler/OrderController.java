@@ -38,9 +38,6 @@ public class OrderController {
             order.setClient(userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()));
         } else order.setClient(userService.findUserById(dto.getClientId()));
 
-        order.setDeliveryTime(dto.getDeliveryTime() == null ?
-                LocalDateTime.now() :
-                dto.getDeliveryTime());
         if (!dto.getAddress().isBlank())
             order.setAddress(dto.getAddress());
         else order.setAddress(order.getClient().getAddress());
