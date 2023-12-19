@@ -14,7 +14,7 @@ public class ReceivingTypeService {
 
     //создание способа получения заказа
     public ReceivingType createReceivingType(ReceivingType newReceivingType) {
-        if (receivingTypeRepository.findById(newReceivingType.getId()).isEmpty()) {
+        if (receivingTypeRepository.findByName(newReceivingType.getName()).isEmpty()) {
             return receivingTypeRepository.save(newReceivingType);
         }
         throw new IllegalArgumentException();

@@ -43,7 +43,7 @@ const sendOrder = () => {
     JSON.stringify({
       dishes: dishes,
       address: "hui",
-      deliveryTime: new Date().getDate(),
+      deliveryTime: new Date(),
     })
   );
 };
@@ -317,7 +317,7 @@ document
       .querySelector(`[data-menu-id="${id}"]`)
       .querySelector("input").value = value.value;
   });
-
+/*
 getDishes();
-addToCart();
+addToCart();*/
 getOrders();

@@ -7,11 +7,13 @@ import com.example.ProgrammingTechnology.repository.OrderRepository;
 import com.example.ProgrammingTechnology.security.SecurityHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
+@CrossOrigin(origins = "http://localhost:63342", maxAge = 3600)
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
@@ -24,7 +26,7 @@ public class OrderService {
     //TODO: адрес по дефолту это адрес у клиента
     //создание заказа
     public Order createOrder(Order newOrder) {
-        if (orderRepository.findById(newOrder.getId()).isPresent()) {
+        if (newOrder.getId()!=null && orderRepository.findById(newOrder.getId()).isPresent()) {
             throw new IllegalArgumentException();
         }
         if (newOrder.getAddress() != null)

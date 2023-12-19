@@ -17,6 +17,7 @@ import java.util.Set;
 @Table(name = "app_order")
 public class Order {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 
