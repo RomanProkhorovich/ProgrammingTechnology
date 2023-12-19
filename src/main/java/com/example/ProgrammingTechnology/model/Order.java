@@ -2,6 +2,7 @@ package com.example.ProgrammingTechnology.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
@@ -54,7 +55,7 @@ public class Order {
 
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
-
+    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     private Set<CartItem> cartItems = new LinkedHashSet<>();
 
     @Override
