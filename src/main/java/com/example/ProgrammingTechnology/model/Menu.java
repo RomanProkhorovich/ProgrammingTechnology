@@ -16,6 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class Menu {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 

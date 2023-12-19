@@ -18,6 +18,9 @@ public class User {
     @Column(name = "id")
     private Long id;
 
+
+    private String phone;
+
     @Column(nullable = false)
     private String firstname;
 

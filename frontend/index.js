@@ -43,7 +43,7 @@ const sendOrder = () => {
     JSON.stringify({
       dishes: dishes,
       address: "hui",
-      deliveryTime: new Date().getDate(),
+      deliveryTime: new Date(),
     })
   );
 };

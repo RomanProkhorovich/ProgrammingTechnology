@@ -16,10 +16,10 @@ public class CartItemService {
 
     //создание заказанного блюда
     public CartItem createOrderDish(CartItem newOrderDish) {
-        if (cartItemRepository.findById(newOrderDish.getId()).isEmpty()) {
+        //if (cartItemRepository.findById(newOrderDish.getId()).isEmpty()) {
             return cartItemRepository.save(newOrderDish);
-        }
-        throw new IllegalArgumentException();
+        //}
+        //throw new IllegalArgumentException();
     }
 
     //поиск заказанного блюда по id

@@ -16,6 +16,7 @@ import java.util.Set;
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"name", "address"}))
 public class Restaurant {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
     private Long id;
 

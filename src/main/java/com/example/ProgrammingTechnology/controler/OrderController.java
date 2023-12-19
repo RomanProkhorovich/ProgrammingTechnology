@@ -25,15 +25,11 @@ public class OrderController {
     private final RestaurantService restaurantService;
     private final UserService userService;
     private final DishService dishService;
-    private final UserMapper userMapper;
     private final ReceivingTypeService receivingTypeService;
 
 
     @PostMapping
     public OrderDto create(@RequestBody CreateOrderDto dto) {
-
-
-        //TODO id client
         Order order = new Order();
         order.setCartItems(dto.getDishes().stream()
                 .map(x-> new CartItem(dishService.findDishById(x.getId()), x.getCount()))
@@ -44,19 +40,22 @@ public class OrderController {
         else order.setClient(userService.findUserById(dto.getClientId()));
 
         order.setDeliveryTime(dto.getDeliveryTime());
-        if (dto.getAddress() != null)
+        if (!dto.getAddress().isBlank())
             order.setAddress(dto.getAddress());
         else order.setAddress(order.getClient().getAddress());
         order.setRestaurant(restaurantService.findRestaurantById(dto.getRestaurantId()));
         order.setReceivingType(receivingTypeService.findReceivingTypeByName(dto.getReceivingTypeDto()));
 
+        service.createOrder(order);
         //TODO: отослать в ресторан
 
         return mapper.toDto(order);
     }
 
     @GetMapping
-    public List<OrderDto> findAllByUser(@PathParam("user_id") Long id) {
+    public List<OrderDto> findAllByUser(@PathParam(value = "user_id") Long id) {
+        if (id==null)
+            id =userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
         return mapper.toDtoList(service.findOrdersByUser(id));
     }
 
