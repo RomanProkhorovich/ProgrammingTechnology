@@ -3,7 +3,6 @@ package com.example.ProgrammingTechnology.controler;
 import com.example.ProgrammingTechnology.dto.CreateOrderDto;
 import com.example.ProgrammingTechnology.dto.OrderDto;
 import com.example.ProgrammingTechnology.mapper.OrderMapper;
-import com.example.ProgrammingTechnology.mapper.UserMapper;
 import com.example.ProgrammingTechnology.model.CartItem;
 import com.example.ProgrammingTechnology.model.Order;
 import com.example.ProgrammingTechnology.security.SecurityHelper;
@@ -12,6 +11,7 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,20 +32,20 @@ public class OrderController {
     public OrderDto create(@RequestBody CreateOrderDto dto) {
         Order order = new Order();
         order.setCartItems(dto.getDishes().stream()
-                .map(x-> new CartItem(dishService.findDishById(x.getId()), x.getCount()))
+                .map(x -> new CartItem(dishService.findDishById(x.getId()), x.getCount()))
                 .collect(Collectors.toSet()));
-        if (dto.getClientId()==null){
+        if (dto.getClientId() == null) {
             order.setClient(userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()));
-        }
-        else order.setClient(userService.findUserById(dto.getClientId()));
+        } else order.setClient(userService.findUserById(dto.getClientId()));
 
-        order.setDeliveryTime(dto.getDeliveryTime());
         if (!dto.getAddress().isBlank())
             order.setAddress(dto.getAddress());
         else order.setAddress(order.getClient().getAddress());
-        order.setRestaurant(restaurantService.findRestaurantById(dto.getRestaurantId()));
-        order.setReceivingType(receivingTypeService.findReceivingTypeByName(dto.getReceivingTypeDto()));
-
+        Long restaurantId = dto.getRestaurantId();
+        order.setRestaurant(restaurantId==null?null:restaurantService.findRestaurantById(restaurantId));
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName(dto.getReceivingType()));
+        //TODO:
+        order.setOrderStatus(null);
         service.createOrder(order);
         //TODO: отослать в ресторан
 
@@ -54,8 +54,8 @@ public class OrderController {
 
     @GetMapping
     public List<OrderDto> findAllByUser(@PathParam(value = "user_id") Long id) {
-        if (id==null)
-            id =userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
+        if (id == null)
+            id = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
         List<Order> ordersByUser = service.findOrdersByUser(id);
         return mapper.toDtoList(ordersByUser);
     }

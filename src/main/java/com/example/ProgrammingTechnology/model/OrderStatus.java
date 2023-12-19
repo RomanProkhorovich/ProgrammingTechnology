@@ -17,6 +17,7 @@ public class OrderStatus {
     @Column(name = "id")
     private Long id;
 
+    @Column(nullable = false, unique = true)
     private String name;
 
     public OrderStatus(String name) {
