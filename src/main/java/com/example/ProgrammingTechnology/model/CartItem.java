@@ -17,7 +17,7 @@ public class CartItem {
     private Long id;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "dish_id")
+    @JoinColumn(name = "dish_id", nullable = false)
     private Dish dish;
 
     @Column(nullable = false)
