@@ -43,7 +43,7 @@ public class OrderController {
         else order.setAddress(order.getClient().getAddress());
         Long restaurantId = dto.getRestaurantId();
         order.setRestaurant(restaurantId==null?null:restaurantService.findRestaurantById(restaurantId));
-        order.setReceivingType(receivingTypeService.findReceivingTypeByName(dto.getReceivingTypeDto()));
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName(dto.getReceivingType()));
         //TODO:
         order.setOrderStatus(null);
         service.createOrder(order);

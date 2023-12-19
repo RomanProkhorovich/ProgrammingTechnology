@@ -32,7 +32,6 @@ public class User {
     //TODO: сделать по дефолту клиента
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
-    @Builder.Default
     private Role role;
 
     @Column(nullable = false, unique = true)

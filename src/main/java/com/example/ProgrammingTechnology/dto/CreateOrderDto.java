@@ -16,7 +16,7 @@ public class CreateOrderDto {
     private List<IdAndCount> dishes;
     private String address;
     private Long restaurantId;
-    private String receivingTypeDto;
+    private String receivingType;
     private Long clientId;
 
     @Getter

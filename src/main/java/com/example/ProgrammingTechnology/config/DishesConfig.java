@@ -35,9 +35,9 @@ public class DishesConfig {
         dish.setCalories(130f);
         dish.setDescription("СОСИХУЙ");
         dish.setWeight(300f);
-        File fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\pizza.jpg");
-        byte[] fileContent = Files.readAllBytes(fi.toPath());
-        dish.setPhoto(fileContent);
+        //File fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\pizza.jpg");
+        //byte[] fileContent = Files.readAllBytes(fi.toPath());
+        //dish.setPhoto(fileContent);
         service.createDish(dish);
 
         Dish cake = new Dish();
@@ -46,9 +46,9 @@ public class DishesConfig {
         cake.setWeight(200f);
         cake.setPrice(500f);
         cake.setCalories(350f);
-        fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\тьорт.jpg");
-        fileContent = Files.readAllBytes(fi.toPath());
-        cake.setPhoto(fileContent);
+        //fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\тьорт.jpg");
+        //fileContent = Files.readAllBytes(fi.toPath());
+        //cake.setPhoto(fileContent);
         service.createDish(cake);
 
         Dish fish = new Dish();
@@ -57,9 +57,9 @@ public class DishesConfig {
         fish.setName("Риба на пару");
         fish.setWeight(450f);
         fish.setCalories(150f);
-        fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\риба.jpg");
-        fileContent = Files.readAllBytes(fi.toPath());
-        fish.setPhoto(fileContent);
+        //fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\риба.jpg");
+        //fileContent = Files.readAllBytes(fi.toPath());
+        //fish.setPhoto(fileContent);
         service.createDish(fish);
 
         Dish kakleti = new Dish();
@@ -68,9 +68,9 @@ public class DishesConfig {
         kakleti.setName("как каклети");
         kakleti.setWeight(350f);
         kakleti.setCalories(250f);
-        fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\каклети.jpg");
-        fileContent = Files.readAllBytes(fi.toPath());
-        kakleti.setPhoto(fileContent);
+        //fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\каклети.jpg");
+        //fileContent = Files.readAllBytes(fi.toPath());
+        //kakleti.setPhoto(fileContent);
         service.createDish(kakleti);
         return 1;
     }
