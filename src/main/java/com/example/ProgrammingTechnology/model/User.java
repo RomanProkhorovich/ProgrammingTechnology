@@ -1,6 +1,7 @@
 package com.example.ProgrammingTechnology.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,8 +29,10 @@ public class User {
     private String lastname;
     private String surname;
 
+    //TODO: сделать по дефолту клиента
     @ManyToOne
-    @JoinColumn(name = "role_id")
+    @JoinColumn(name = "role_id", nullable = false)
+    @Builder.Default
     private Role role;
 
     @Column(nullable = false, unique = true)

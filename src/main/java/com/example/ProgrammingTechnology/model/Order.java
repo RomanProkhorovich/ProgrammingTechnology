@@ -25,6 +25,7 @@ public class Order {
     @Builder.Default
     private LocalDateTime orderTime = LocalDateTime.now();
 
+    //TODO: сделать обязательным, сделать значение по дефолту???
     @ManyToOne
     @JoinColumn(name = "status_id")
     private OrderStatus orderStatus;
@@ -40,21 +41,22 @@ public class Order {
     @Column(nullable = false)
     private String address;
 
+    //TODO: Рома проверь
     @ManyToOne
     @JoinColumn(name = "restaurant_id")
     private Restaurant restaurant;
 
     @ManyToOne
-    @JoinColumn(name = "receiving_type")
+    @JoinColumn(name = "receiving_type", nullable = false)
     private ReceivingType receivingType;
 
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client_id", nullable = false)
     private User client;
 
+    //TODO: хз
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_id")
-
     private Set<CartItem> cartItems = new LinkedHashSet<>();
 
     @Override
