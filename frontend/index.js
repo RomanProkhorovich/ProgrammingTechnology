@@ -318,6 +318,6 @@ document
       .querySelector("input").value = value.value;
   });
 
-// getDishes();
-// addToCart();
+getDishes();
+addToCart();
 getOrders();
