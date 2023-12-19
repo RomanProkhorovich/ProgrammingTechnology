@@ -71,7 +71,7 @@ const getOrders = () => {
       ordersContainer.insertAdjacentHTML("beforeend", ``);
     });
   };
-  xhr.send({ user_id: 1 });
+  xhr.send();
 };
 
 // DISHES RENDERING XHR
@@ -317,7 +317,7 @@ document
       .querySelector(`[data-menu-id="${id}"]`)
       .querySelector("input").value = value.value;
   });
-/*
-getDishes();
-addToCart();*/
+
+// getDishes();
+// addToCart();
 getOrders();
