@@ -54,9 +54,6 @@ class Header {
         authForm.id === "authorization-form" ? "" : "/reg"
       }`
     );
-    let email = "cherni@example.ru";
-    let pass = "password";
-    xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
