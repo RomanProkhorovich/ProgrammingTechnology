@@ -1,3 +1,6 @@
+const tabOrders = document.querySelector("#tab-orders");
+const tabData = document.querySelector("#tab-data");
+
 // EDIT USER FIELD
 const editUserField = () => {
   xhr = new XMLHttpRequest();
@@ -36,3 +39,22 @@ const getOrders = () => {
   };
   xhr.send();
 };
+
+tabOrders.addEventListener("click", (e) => {
+  document.querySelector(".content-cabinet-data").classList.add("display-none");
+  document
+    .querySelector(".content-cabinet-orders")
+    .classList.remove("display-none");
+  tabOrders.classList.add("content-cabinet-tab-active");
+  tabData.classList.remove("content-cabinet-tab-active");
+});
+tabData.addEventListener("click", (e) => {
+  document
+    .querySelector(".content-cabinet-data")
+    .classList.remove("display-none");
+  document
+    .querySelector(".content-cabinet-orders")
+    .classList.add("display-none");
+  tabOrders.classList.remove("content-cabinet-tab-active");
+  tabData.classList.add("content-cabinet-tab-active");
+});
