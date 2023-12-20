@@ -11,6 +11,7 @@ class Header {
       this.cartDishes = JSON.parse(localStorage.getItem("Cart"));
     }
 
+    this.renderCart();
     this.registerEvents();
   }
 
@@ -37,6 +38,35 @@ class Header {
     }, 0);
 
     localStorage.setItem("Cart", JSON.stringify(arr));
+  }
+
+  renderCart() {
+    const dishes = JSON.parse(localStorage.getItem("Cart"));
+
+    dishes.forEach((dish) => {
+      const curDish = Array.from(JSON.parse(localStorage.getItem("Menu"))).find(
+        (item) => {
+          return item.id === dish.id;
+        }
+      );
+      document.querySelector("#cart-to-order").insertAdjacentHTML(
+        "beforebegin",
+        `<div class="header-cart-content-dish" data-cart-id="${dish.id}">
+  <img class="header-cart-content-dish-photo" src="data:image/png;base64,${curDish.photo}" alt="${curDish.name}">
+  <div class="header-cart-content-dish-info">
+      <h1>${curDish.name}</h1>
+      <p class="header-cart-content-dish-info-quantity">
+        <div class="quantity">
+          <span class="quantity-control minus">-</span><input class="quantity-value"
+          value="${dish.quantity}"></input><span class="quantity-control plus">+</span>
+        </div>
+      </p>
+      <p class="header-cart-content-dish-info-price"><span
+          class="content-menu-dish-cart-price-value">${dish.price}</span>р.</p>
+  </div>
+</div>`
+      );
+    });
   }
 
   // REG/AUTH DATA SEND XHR
