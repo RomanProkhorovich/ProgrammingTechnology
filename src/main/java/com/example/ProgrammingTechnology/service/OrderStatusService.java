@@ -14,7 +14,7 @@ public class OrderStatusService {
 
     //создание статуса
     public OrderStatus createOrderStatus(OrderStatus newOrderStatus) {
-        if (orderStatusRepository.findById(newOrderStatus.getId()).isEmpty()) {
+        if (orderStatusRepository.findByName(newOrderStatus.getName()).isEmpty()) {
             return orderStatusRepository.save(newOrderStatus);
         }
         throw new IllegalArgumentException();

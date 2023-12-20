@@ -30,47 +30,47 @@ public class DishesConfig {
     @Bean
     int addData() throws IOException {
         Dish dish = new Dish();
-        dish.setName("Кур очка");
+        dish.setName("Пицца");
         dish.setPrice(300f);
         dish.setCalories(130f);
-        dish.setDescription("СОСИХУЙ");
+        dish.setDescription("Вкусная пицца как у бабули");
         dish.setWeight(300f);
-        //File fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\pizza.jpg");
-        //byte[] fileContent = Files.readAllBytes(fi.toPath());
-        //dish.setPhoto(fileContent);
+        File fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\pizza.jpg");
+        byte[] fileContent = Files.readAllBytes(fi.toPath());
+        dish.setPhoto(fileContent);
         service.createDish(dish);
 
         Dish cake = new Dish();
-        cake.setDescription("Cake is a lie");
-        cake.setName("Тортик");
+        cake.setDescription("Блинчики с ягодами(вроде)");
+        cake.setName("Блинчики");
         cake.setWeight(200f);
         cake.setPrice(500f);
         cake.setCalories(350f);
-        //fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\тьорт.jpg");
-        //fileContent = Files.readAllBytes(fi.toPath());
-        //cake.setPhoto(fileContent);
+        fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\тьорт.jpg");
+        fileContent = Files.readAllBytes(fi.toPath());
+        cake.setPhoto(fileContent);
         service.createDish(cake);
 
         Dish fish = new Dish();
         fish.setPrice(440f);
-        fish.setDescription("fish`ka");
+        fish.setDescription("Рыба");
         fish.setName("Риба на пару");
         fish.setWeight(450f);
         fish.setCalories(150f);
-        //fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\риба.jpg");
-        //fileContent = Files.readAllBytes(fi.toPath());
-        //fish.setPhoto(fileContent);
+        fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\риба.jpg");
+        fileContent = Files.readAllBytes(fi.toPath());
+        fish.setPhoto(fileContent);
         service.createDish(fish);
 
         Dish kakleti = new Dish();
         kakleti.setPrice(330f);
-        kakleti.setDescription("как лети");
-        kakleti.setName("как каклети");
+        kakleti.setDescription("Мясные каклети с мясом из мяса мяса(свинина и говядина и может быть немного домашних питомцев, надо спросить у повара)");
+        kakleti.setName("Котлеты");
         kakleti.setWeight(350f);
         kakleti.setCalories(250f);
-        //fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\каклети.jpg");
-        //fileContent = Files.readAllBytes(fi.toPath());
-        //kakleti.setPhoto(fileContent);
+        fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\каклети.jpg");
+        fileContent = Files.readAllBytes(fi.toPath());
+        kakleti.setPhoto(fileContent);
         service.createDish(kakleti);
         return 1;
     }
@@ -102,7 +102,7 @@ public class DishesConfig {
         order = new Order();
         order.setAddress(user.getAddress());
         order.setClient(user);
-        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Курьер на дом"));
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Курьер"));
         order.setDeliveryTime(LocalDateTime.now());
         CartItem item2 = new CartItem(service.findDishById(2L), (byte) 1);
         item2 = cartItemService.createOrderDish(item2);

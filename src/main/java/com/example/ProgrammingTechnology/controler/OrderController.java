@@ -25,6 +25,7 @@ public class OrderController {
     private final RestaurantService restaurantService;
     private final UserService userService;
     private final DishService dishService;
+    private final OrderStatusService orderStatusService;
     private final ReceivingTypeService receivingTypeService;
 
 
@@ -45,7 +46,7 @@ public class OrderController {
         order.setRestaurant(restaurantId==null?null:restaurantService.findRestaurantById(restaurantId));
         order.setReceivingType(receivingTypeService.findReceivingTypeByName(dto.getReceivingType()));
         //TODO:
-        order.setOrderStatus(null);
+        order.setOrderStatus(orderStatusService.findOrderStatusByName("В обработке"));
         service.createOrder(order);
         //TODO: отослать в ресторан
 
