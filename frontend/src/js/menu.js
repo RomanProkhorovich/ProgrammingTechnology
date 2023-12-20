@@ -1,9 +1,9 @@
 class Menu {
   constructor() {
     this.cartSum = document.querySelector(".header-cart-sum-value");
+    this.dishes = [];
 
     this.getDishes();
-    this.addToCart();
   }
   // DISHES RENDERING XHR
   getDishes() {
@@ -23,21 +23,24 @@ class Menu {
       const dishesContainer = document.querySelector(".content-menu");
 
       dishes.forEach((item) => {
+        this.dishes.push(item);
         dishesContainer.insertAdjacentHTML(
           "beforeend",
           `<div class="content-menu-dish" data-menu-id="${item.id}">
-        <img class="content-menu-dish-photo" src="data:image/png;base64,${item.photo}" alt="${item.name}">
-        <h1>${item.name}</h1>
-        <p class="content-menu-dish-description">${item.description}</p>
-        <div class="content-menu-dish-cart">
-            <p class="content-menu-dish-cart-price"><span
-            class="content-menu-dish-cart-price-value">${item.price}</span>р.</p>
-            <button class="content-menu-dish-cart-button">В корзину</button>
-        </div>
-    </div>`
+          <img class="content-menu-dish-photo" src="${item.photo}" alt="">
+          <h1>Name1</h1>
+          <p class="content-menu-dish-description">${item.description}</p>
+          <p class="content-menu-dish-cart-price">
+            <span class="content-menu-dish-cart-price-value">${item.price}</span>р.
+          </p>
+          <div class="content-menu-dish-cart-quantity">
+              <button class="content-menu-dish-cart-button">В корзину</button>
+          </div>
+      </div>`
         );
       });
-      addToCart();
+      localStorage.setItem("dishes", JSON.stringify(dishes));
+      this.addToCart();
     };
     xhr.send();
   }
