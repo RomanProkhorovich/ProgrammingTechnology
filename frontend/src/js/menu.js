@@ -23,12 +23,11 @@ class Menu {
       const dishesContainer = document.querySelector(".content-menu");
 
       dishes.forEach((item) => {
-        this.dishes.push(item);
         dishesContainer.insertAdjacentHTML(
           "beforeend",
           `<div class="content-menu-dish" data-menu-id="${item.id}">
-          <img class="content-menu-dish-photo" src="${item.photo}" alt="">
-          <h1>Name1</h1>
+          <img class="content-menu-dish-photo" src="data:image/png;base64,${item.photo}" alt="${item.name}">
+          <h1>${item.name}</h1>
           <p class="content-menu-dish-description">${item.description}</p>
           <p class="content-menu-dish-cart-price">
             <span class="content-menu-dish-cart-price-value">${item.price}</span>р.
