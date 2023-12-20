@@ -1,5 +1,6 @@
 class Summary {
   constructor() {
+    this.container = document.querySelector(".content-summary");
     this.dropdown = document.querySelectorAll(".content-summary-dropdown");
     this.dropdownOptions = document.querySelectorAll(
       ".content-summary-dropdown-options"
@@ -41,6 +42,33 @@ class Summary {
         deliveryTime: new Date(),
       })
     );
+  }
+
+  insertDish(name, quantity, description, photo, price) {
+    this.container.insertAdjacentHTML(
+      "beforeend",
+      `<div class="content-summary-dish">
+    <img src="${photo}" alt="${name}">
+    <div class="content-summary-dish-info">
+        <h1 class="content-summary-dish-name">${name}</h1>
+        <div class="quantity">
+            <span class="quantity-control minus">-</span><input class="quantity-value"
+                value="${quantity}"></input><span class="quantity-control plus">+</span>
+        </div>
+        <p class="content-summary-dish-description">${description}</p>
+        <p class="content-summary-dish-price">
+            <span class="content-summary-dish-price-value">${price}</span>р.
+        </p>
+    </div>
+</div>
+`
+    );
+  }
+
+  renderDishes() {
+    const cartDishes = JSON.parse(localStorage.getItem("Cart"));
+    const dishes = JSON.parse(localStorage.getItem("Menu"));
+    cartDishes.forEach((item) => {});
   }
 
   registerEvents() {

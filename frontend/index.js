@@ -59,6 +59,7 @@ class Header {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
       }
+      localStorage.setItem("Auth", 1);
       console.log(JSON.parse(xhr.responseText));
     };
     xhr.send(JSON.stringify(params));
@@ -131,7 +132,7 @@ class Header {
     });
     // ACCOUNT LISTENER
     this.accountButton.addEventListener("click", () => {
-      if (!localStorage.getItem("user")) this.popupAuthForm();
+      if (!localStorage.getItem("Auth")) this.popupAuthForm();
       else {
         window.location.href = "./src/html/cabinet.html";
       }
