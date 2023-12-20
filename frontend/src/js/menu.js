@@ -4,6 +4,7 @@ class Menu {
     this.dishes = [];
 
     this.getDishes();
+    this.addToCart();
   }
   // DISHES RENDERING XHR
   getDishes() {
@@ -23,6 +24,7 @@ class Menu {
       const dishesContainer = document.querySelector(".content-menu");
 
       dishes.forEach((item) => {
+        this.dishes.push(item);
         dishesContainer.insertAdjacentHTML(
           "beforeend",
           `<div class="content-menu-dish" data-menu-id="${item.id}">
@@ -38,7 +40,7 @@ class Menu {
       </div>`
         );
       });
-      localStorage.setItem("dishes", JSON.stringify(dishes));
+      localStorage.setItem("Menu", JSON.stringify(this.dishes));
       this.addToCart();
     };
     xhr.send();

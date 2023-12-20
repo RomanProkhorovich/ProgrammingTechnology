@@ -5,8 +5,38 @@ class Header {
     this.cartSum = document.querySelector(".header-cart-sum-value");
     this.cartContent = document.querySelector(".header-cart-content");
     this.cartSummary = document.querySelector("#cart-to-order");
+    this.cartDishes = [];
+
+    if (localStorage.getItem("Cart")) {
+      this.cartDishes = JSON.parse(localStorage.getItem("Cart"));
+    }
 
     this.registerEvents();
+  }
+
+  // CART CALC
+  calcCart() {
+    let arr = [];
+    this.cartContent
+      .querySelectorAll(".header-cart-content-dish")
+      .forEach((item) => {
+        arr.push({
+          id: item.dataset.cartId,
+          quantity: +item.querySelector(".quantity-value").value,
+          price: +item.querySelector(".content-menu-dish-cart-price-value")
+            .textContent,
+          // price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find(
+          //   (item) => {
+          //     item.id === item.dataset.cartId;
+          //   }
+          // ).price,
+        });
+      });
+    this.cartSum.textContent = arr.reduce((sum, current) => {
+      return sum + current.price * current.quantity;
+    }, 0);
+
+    localStorage.setItem("Cart", JSON.stringify(arr));
   }
 
   // REG/AUTH DATA SEND XHR
@@ -136,12 +166,14 @@ class Header {
         document
           .querySelector(`[data-menu-id="${id}"]`)
           .querySelector("input").value = value.value;
+        this.calcCart();
         return;
       }
       value.value--;
       document
         .querySelector(`[data-menu-id="${id}"]`)
         .querySelector("input").value = value.value;
+      this.calcCart();
     });
     // TO SUMMARY PAGE
     this.cartSummary.addEventListener("click", () => {
