@@ -14,6 +14,12 @@ h1 {
   font-weight: 600;
 }
 
+a,
+a:hover {
+  text-decoration: none;
+  color: var(--main-dark);
+}
+
 br {
   display: block;
   height: 1px;
@@ -44,6 +50,7 @@ header {
 }
 
 .header-wrapper {
+  position: relative;
   width: 100%;
   max-width: 1400px;
   height: 80px;
@@ -55,11 +62,13 @@ header {
 }
 
 .header-logo {
-  width: 10%;
+  width: 20%;
+  box-sizing: border-box;
+  padding: 1em;
 }
 
 .header-logo img {
-  width: 100%;
+  max-width: 100%;
 }
 
 .header-menu {
@@ -69,7 +78,8 @@ header {
 }
 
 .header-menu li {
-  padding: 1em;
+  flex-grow: 1;
+  padding: 1em 0;
   border-radius: 1em;
   cursor: pointer;
   text-align: center;
@@ -95,6 +105,7 @@ header {
   padding: 0.5em;
   border-radius: 1em;
   transition: 0.2s ease-out;
+
   -webkit-transition: 0.2s;
   -moz-transition: 0.2s;
   -ms-transition: 0.2s;
@@ -112,13 +123,14 @@ header {
 }
 
 .header-cart-content {
+  width: 40vw;
+  min-width: 350px;
   position: absolute;
   display: flex;
   flex-wrap: wrap;
   padding-top: 1em;
   gap: 1em;
   border-radius: 1em;
-  width: 30vw;
   min-height: 200px;
   right: 0;
   box-sizing: border-box;
@@ -183,28 +195,43 @@ header {
   width: 100%;
 }
 
-.header-cart-content-dish-info-quantity-value {
+.header-cart-content-dish-info-price {
+  flex-grow: 1;
+  text-align: right;
+}
+
+.quantity {
+  max-width: 10em;
+  flex-grow: 1;
+  height: 35px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+.quantity-value {
+  flex-grow: 1;
+  width: 1em;
   font-size: 20px;
-  display: inline-block;
-  width: 3em;
   text-align: center;
   background-color: transparent;
 }
 
-.header-cart-content-dish-info-quantity-control {
+.quantity-control {
+  cursor: pointer;
   user-select: none;
-  display: inline-block;
+  font-size: 32px;
   width: 1em;
   height: 1em;
   box-sizing: border-box;
   border-radius: 0.25em;
   background-color: var(--main-dark);
   font-family: "Raleway", sans-serif;
-  font-size: 32px;
   text-align: center;
-  border: none;
   color: white;
   transition: 0.2s ease-out;
+
   -webkit-transition: 0.2s ease-out;
   -moz-transition: 0.2s ease-out;
   -ms-transition: 0.2s ease-out;
@@ -215,7 +242,7 @@ header {
   -o-border-radius: 0.25em;
 }
 
-.header-cart-content-dish-info-quantity-control:hover {
+.quantity-control:hover {
   opacity: 0.8;
 }
 
@@ -268,6 +295,7 @@ footer {
   height: 200px;
   bottom: 0;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
 }
@@ -306,6 +334,7 @@ footer {
 
 .content {
   box-sizing: border-box;
+  min-height: calc(100vh - 80px);
   margin: 0 auto;
   padding: 20px;
   padding-bottom: 220px;
@@ -345,17 +374,25 @@ footer {
 
 .content-menu-dish {
   position: relative;
-  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   text-align: center;
   color: var(--main-dark);
   box-sizing: border-box;
-  border-radius: 1em;
   padding: 1em;
+  gap: 1em;
   transition: 0.2s ease-out;
+  border-radius: 1em;
+
   -webkit-transition: 0.2s ease-out;
   -moz-transition: 0.2s ease-out;
   -ms-transition: 0.2s ease-out;
   -o-transition: 0.2s ease-out;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
 }
 
 .content-menu-dish:hover {
@@ -366,6 +403,12 @@ footer {
   width: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
+  border-radius: 1em;
+
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
 }
 
 .content-menu-dish-description {
@@ -373,33 +416,29 @@ footer {
   font-size: 14px;
   height: 100px;
   overflow-y: auto;
-  margin: 5% 0;
-}
-
-.content-menu-dish-cart {
-  display: flex;
-  justify-content: space-between;
-  font-size: 20px;
-  font-weight: 600;
 }
 
 .content-menu-dish-cart-price {
-  display: inline-block;
-  width: 40%;
+  flex-grow: 1;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.content-menu-dish-cart-quantity {
+  flex-grow: 1;
 }
 
 .content-menu-dish-cart-button {
+  width: 100%;
   font-weight: 600;
   font-family: "Raleway", sans-serif;
-  display: inline-block;
-  border: none;
   border-radius: 0.5em;
-  width: 50%;
   background: var(--main-dark);
   padding: 0.5em;
   color: white;
   font-size: 16px;
   transition: 0.2s ease-out;
+
   -webkit-transition: 0.2s ease-out;
   -moz-transition: 0.2s ease-out;
   -ms-transition: 0.2s ease-out;
@@ -450,7 +489,7 @@ footer {
   display: flex;
   width: 100%;
   background-color: #fff;
-  border: solid 1px var(--main-dark);
+  border: solid 2px var(--main-dark);
   border-radius: 1em;
   overflow: hidden;
   margin: 0.5em 0;
@@ -534,7 +573,7 @@ footer {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1em;
-  border-bottom: solid 1px var(--main-dark);
+  border-bottom: solid 2px var(--main-dark);
 }
 
 .content-cabinet-order-description-dish-name {
@@ -638,7 +677,7 @@ footer {
   font-size: 16px;
   padding: 1em;
   text-align: left;
-  border: solid 1px var(--main-dark);
+  border: solid 2px var(--main-dark);
   border-radius: 1em;
 
   -webkit-border-radius: 1em;
@@ -653,7 +692,7 @@ footer {
   padding-top: 1em;
   z-index: 1;
   top: 35px;
-  border: solid 1px var(--main-dark);
+  border: solid 2px var(--main-dark);
   width: 100%;
   display: none;
   border-radius: 0 0 1em 1em;
@@ -715,21 +754,17 @@ footer {
   -ms-border-radius: 1em;
   -o-border-radius: 1em;
 }
-/* Content end */
 
-/* Popup */
-
-.button-group {
-  position: relative;
+/* About */
+.content-about{
   display: flex;
-  width: 100%;
-  justify-content: space-between;
+  flex-direction: column;
   gap: 1em;
 }
 
-.button-group button {
-  width: 100%;
-}
+/* Content end */
+
+/* Popup */
 
 .popup {
   position: fixed;
@@ -739,7 +774,7 @@ footer {
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #35353577;
+  background-color: #00000035;
   z-index: 100;
   transition: 0.2s ease-out;
 
@@ -758,9 +793,8 @@ footer {
   width: 100%;
   max-width: 600px;
   border-radius: 1em;
+  box-shadow: var(--main-shadow);
   background-color: white;
-  justify-content: center;
-  align-items: flex-start;
   transition: 0.2s ease-out;
 
   -webkit-transition: 0.2s ease-out;
@@ -777,18 +811,27 @@ footer {
   font-size: 20px;
   border-radius: 1em;
   border: solid 2px var(--main-dark);
-  outline: none;
+
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
 }
 
 .popup form button {
-  padding: 1em;
+  flex-grow: 1;
+  padding: 1em 0;
   background-color: var(--main-dark);
   color: white;
   font-weight: 600;
   font-size: 20px;
-  border: none;
   border-radius: 1em;
   transition: 0.2s ease-out;
+
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
   -webkit-transition: 0.2s ease-out;
   -moz-transition: 0.2s ease-out;
   -ms-transition: 0.2s ease-out;
@@ -816,14 +859,14 @@ footer {
   width: 100%;
   top: -6em;
   height: 6em;
-  transition: .2s ease-out;
-  -webkit-transition: .2s ease-out;
-  -moz-transition: .2s ease-out;
-  -ms-transition: .2s ease-out;
-  -o-transition: .2s ease-out;
+  transition: 0.2s ease-out;
+  -webkit-transition: 0.2s ease-out;
+  -moz-transition: 0.2s ease-out;
+  -ms-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
 }
 
-.alert-show{
+.alert-show {
   transform: translateY(6em);
   -webkit-transform: translateY(6em);
   -moz-transform: translateY(6em);
@@ -832,6 +875,8 @@ footer {
 }
 
 .alert-body {
+  max-width: 1400px;
+  box-sizing: border-box;
   box-shadow: var(--main-shadow);
   margin: auto;
   margin-top: 1em;
@@ -848,7 +893,7 @@ footer {
   -o-border-radius: 1em;
 }
 
-.alert-body span {
+.alert-close {
   float: right;
   cursor: pointer;
   border-radius: 100%;
