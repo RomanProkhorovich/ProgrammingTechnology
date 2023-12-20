@@ -15,7 +15,7 @@ public class AuthDto {
 
     //TODO: свериться с постановкой задачи по поводу авторизации и регистрации
 
-    @JsonAlias("phone-Email")
+    @JsonAlias("phone-email")
     private String email;
     private String password;
 }

@@ -14,7 +14,7 @@ public class KitchenTypeService {
 
     //создание вида кухни
     public KitchenType createKitchenType(KitchenType newKitchenType) {
-        if (kitchenTypeRepository.findById(newKitchenType.getId()).isEmpty()) {
+        if (kitchenTypeRepository.findByName(newKitchenType.getName()).isEmpty()) {
             return kitchenTypeRepository.save(newKitchenType);
         }
         throw new IllegalArgumentException();

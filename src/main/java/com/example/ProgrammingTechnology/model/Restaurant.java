@@ -27,7 +27,7 @@ public class Restaurant {
     private String address;
 
     @OneToMany(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "cuisine_type_id", nullable = false)
+    @JoinColumn(name = "cuisine_type_id")
     private Set<KitchenType> kitchenTypes = new LinkedHashSet<>();
 
     @OneToOne
