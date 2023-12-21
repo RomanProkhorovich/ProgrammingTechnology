@@ -1,5 +1,3 @@
-import header from "./main.js";
-
 export default class Menu {
   constructor() {
     this.cartContent = document.querySelector(".header-cart-content");
@@ -35,7 +33,7 @@ export default class Menu {
   getDishes() {
     if (!document.querySelector(".content-menu")) return;
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/api/v1/dishes");
+    xhr.open("GET", "http://localhost:8080/api/v1/menus/actual");
     let email = "cherni@example.ru";
     let pass = "password";
     xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
@@ -70,39 +68,34 @@ export default class Menu {
     };
     xhr.send();
   }
-  toCartButton(elem) {
-    const parent = elem.parentElement;
 
-    elem.outerHTML =
-      '<button class="content-menu-dish-cart-button">В корзину</button>';
-    parent.querySelector(".content-menu-dish-cart-button").addEventListener();
-  }
   // SWITCH TO QUANTITY CONTROL
   toQuantity(elem, id, quantity) {
     const parent = elem.parentElement;
 
-    elem.outerHTML = `<div class="quantity" data-quantity-id="${id}">
+    elem.classList.add("display-none");
+    elem.insertAdjacentHTML(
+      "afterend",
+      `<div class="quantity" data-quantity-id="${id}">
               <span class="quantity-control minus">-</span><input class="quantity-value"
                   value="${quantity}"></input><span class="quantity-control plus">+</span>
-          </div>`;
-
+          </div>`
+    );
+    const cartQuantity = this.cartContent.querySelector(
+      `[data-quantity-id="${id}"] input`
+    );
+    cartQuantity.dispatchEvent(new Event("change", { bubbles: true }));
     const plus = parent.querySelector(".plus");
     const minus = parent.querySelector(".minus");
 
     plus.addEventListener("click", (e) => {
-      const value = this.cartContent.querySelector(
-        `[data-quantity-id="${id}"] input`
-      );
-      value.value++;
-      value.dispatchEvent(new Event("change", { bubbles: true }));
+      cartQuantity.value++;
+      cartQuantity.dispatchEvent(new Event("change", { bubbles: true }));
     });
 
     minus.addEventListener("click", (e) => {
-      const value = this.cartContent.querySelector(
-        `[data-quantity-id="${id}"] input`
-      );
-      value.value--;
-      value.dispatchEvent(new Event("change", { bubbles: true }));
+      cartQuantity.value--;
+      cartQuantity.dispatchEvent(new Event("change", { bubbles: true }));
     });
   }
   // ADD DISH TO CART LISTENER

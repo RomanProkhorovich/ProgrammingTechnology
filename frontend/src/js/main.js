@@ -1,5 +1,3 @@
-import menu from "./menu.js";
-
 export default class Header {
   constructor() {
     this.accountButton = document.querySelector(".header-account");
@@ -170,7 +168,6 @@ export default class Header {
         }, 200);
       }
       if (!e.target.closest(".header-cart")) {
-        console.log("entered");
         this.cartContent.classList.add("hidden");
         setTimeout(() => {
           this.cartContent.classList.add("display-none");
@@ -181,7 +178,7 @@ export default class Header {
     this.accountButton.addEventListener("click", () => {
       if (!localStorage.getItem("Auth")) this.popupAuthForm();
       else {
-        window.location.href = "./src/html/cabinet.html";
+        window.location.href = "/frontend/src/html/cabinet.html";
       }
     });
     // SHOW/HIDE CART
@@ -223,12 +220,19 @@ export default class Header {
         });
       if (quantity < 1) {
         e.target.closest(".header-cart-content-dish").remove();
+        const remaining = document.querySelector(`[data-quantity-id="${id}"]`);
+        if (remaining) {
+          remaining.parentElement
+            .querySelector(".content-menu-dish-cart-button")
+            .classList.remove("display-none");
+          remaining.remove();
+        }
       }
       this.calcCart();
     });
     // TO SUMMARY PAGE
     this.cartSummary.addEventListener("click", () => {
-      window.location.href = "./src/html/summary.html";
+      window.location.href = "/frontend/src/html/summary.html";
     });
     this.renderCart();
   }

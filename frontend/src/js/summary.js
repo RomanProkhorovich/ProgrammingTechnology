@@ -76,6 +76,7 @@ class Summary {
     this.dropdown.forEach((item) => {
       item.addEventListener("click", (e) => {
         const container = e.target.closest(".content-summary-dropdown");
+        container.classList.toggle("on-top");
         container
           .querySelector(".content-summary-dropdown-options")
           .classList.toggle("dropdown-show");

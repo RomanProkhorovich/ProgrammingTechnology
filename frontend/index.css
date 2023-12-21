@@ -665,6 +665,7 @@ footer {
 }
 
 .content-summary-dropdown {
+  position: relative;
   margin: 1em 0;
   position: relative;
   width: 100%;
@@ -851,6 +852,10 @@ footer {
 
 .display-none {
   display: none;
+}
+
+.on-top{
+  z-index: 99;
 }
 
 .alert {
