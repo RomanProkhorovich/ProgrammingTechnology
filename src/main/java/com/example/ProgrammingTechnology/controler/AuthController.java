@@ -52,6 +52,7 @@ public class AuthController {
     @PostMapping("/reg")
     public ResponseEntity<?> registration(@RequestBody RegistrationDto reg) {
         User user = mapper.toModel(reg);
+        user.setPhone(reg.getPhone());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole(roleService.findRoleByName("Client"));
         userService.createUser(user);

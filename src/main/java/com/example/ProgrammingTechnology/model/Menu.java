@@ -1,6 +1,7 @@
 package com.example.ProgrammingTechnology.model;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,6 +24,8 @@ public class Menu {
     @Column(nullable = false)
     private LocalDateTime approval;
 
+    @Column
+    private boolean actual=false;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "Menu_Dish",
             joinColumns = @JoinColumn(name = "id"),

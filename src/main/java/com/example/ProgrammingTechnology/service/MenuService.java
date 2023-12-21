@@ -18,12 +18,19 @@ public class MenuService {
 
     //создание меню
     public Menu createMenu(Menu newMenu) {
-        if (menuRepository.findById(newMenu.getId()).isEmpty()) {
+        if (newMenu.getId()==null||menuRepository.findById(newMenu.getId()).isEmpty()) {
+            var actual=getActual();
+            actual.setActual(false);
+            menuRepository.save(actual);
+            newMenu.setActual(true);
             return menuRepository.save(newMenu);
         }
         throw new IllegalArgumentException();
     }
 
+    public Menu getActual(){
+        return menuRepository.findAllByActual(true).get(0);
+    }
     //поиск меню по id
     public Menu findMenuById(Long id) {
         return menuRepository.findById(id).orElseThrow();

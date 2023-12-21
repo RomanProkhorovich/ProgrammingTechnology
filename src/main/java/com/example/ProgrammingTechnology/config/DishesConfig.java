@@ -1,9 +1,6 @@
 package com.example.ProgrammingTechnology.config;
 
-import com.example.ProgrammingTechnology.model.CartItem;
-import com.example.ProgrammingTechnology.model.Dish;
-import com.example.ProgrammingTechnology.model.Order;
-import com.example.ProgrammingTechnology.model.User;
+import com.example.ProgrammingTechnology.model.*;
 import com.example.ProgrammingTechnology.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -26,6 +23,7 @@ public class DishesConfig {
     private final ReceivingTypeService receivingTypeService;
     private final PasswordEncoder passwordEncoder;
     private final CartItemService cartItemService;
+    private final MenuService menuService;
 
     @Bean
     int addData() throws IOException {
@@ -72,6 +70,12 @@ public class DishesConfig {
         fileContent = Files.readAllBytes(fi.toPath());
         kakleti.setPhoto(fileContent);
         service.createDish(kakleti);
+
+        Menu menu = new Menu();
+        menu.setDishes(Set.of(kakleti,fish,cake,dish));
+        menu.setApproval(LocalDateTime.now());
+        menu.setActual(true);
+        menuService.createMenu(menu);
         return 1;
     }
 
