@@ -42,7 +42,7 @@ export default class Menu {
         return;
       }
 
-      const dishes = JSON.parse(xhr.responseText);
+      const dishes = JSON.parse(xhr.responseText).dishes;
 
       const dishesContainer = document.querySelector(".content-menu");
 
