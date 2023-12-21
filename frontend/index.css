@@ -307,7 +307,8 @@ footer {
 
 .footer-info img {
   height: 80px;
-  padding-bottom: 1em;
+  box-sizing: border-box;
+  padding: 1em;
   border-bottom: solid white 1px;
   margin-bottom: 1em;
 }

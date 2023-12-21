@@ -161,12 +161,19 @@ export default class Header {
   }
 
   registerEvents() {
-    // HIDE POPUP
+    // HIDE POPUP/CART
     document.body.addEventListener("click", (e) => {
       if (e.target.classList.contains("popup")) {
         e.target.classList.add("hidden");
         setTimeout(() => {
           e.target.remove();
+        }, 200);
+      }
+      if (!e.target.closest(".header-cart")) {
+        console.log("entered");
+        this.cartContent.classList.add("hidden");
+        setTimeout(() => {
+          this.cartContent.classList.add("display-none");
         }, 200);
       }
     });
@@ -179,16 +186,15 @@ export default class Header {
     });
     // SHOW/HIDE CART
     this.cartButton.addEventListener("click", () => {
-      const cartContent = document.querySelector(".header-cart-content");
-      if (cartContent.classList.contains("display-none")) {
-        cartContent.classList.toggle("display-none");
+      if (this.cartContent.classList.contains("display-none")) {
+        this.cartContent.classList.toggle("display-none");
         setTimeout(() => {
-          cartContent.classList.toggle("hidden");
+          this.cartContent.classList.toggle("hidden");
         }, 0);
       } else {
-        cartContent.classList.toggle("hidden");
+        this.cartContent.classList.toggle("hidden");
         setTimeout(() => {
-          cartContent.classList.toggle("display-none");
+          this.cartContent.classList.toggle("display-none");
         }, 200);
       }
     });

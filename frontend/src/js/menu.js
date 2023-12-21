@@ -5,7 +5,7 @@ export default class Menu {
     this.cartContent = document.querySelector(".header-cart-content");
     this.dishes = [];
 
-    this.getDishesLS();
+    this.getDishes();
   }
 
   getDishesLS() {
