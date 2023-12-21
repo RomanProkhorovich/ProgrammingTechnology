@@ -756,7 +756,7 @@ footer {
 }
 
 /* About */
-.content-about{
+.content-about {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -905,4 +905,8 @@ footer {
 
 .error {
   background-color: #ff4444;
+}
+
+.success {
+  background-color: #44ff44;
 }
