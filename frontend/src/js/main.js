@@ -21,7 +21,7 @@ export default class Header {
       .querySelectorAll(".header-cart-content-dish")
       .forEach((item) => {
         arr.push({
-          id: item.dataset.cartId,
+          id: +item.dataset.cartId,
           quantity: +item.querySelector(".quantity-value").value,
           price: +item.querySelector(".content-menu-dish-cart-price-value")
             .textContent,
