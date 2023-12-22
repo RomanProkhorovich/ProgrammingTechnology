@@ -25,12 +25,13 @@ export default class Summary {
 
     params.dishes = Array.from(JSON.parse(localStorage.getItem("Cart"))).map(
       (item) => {
-        return { id: item.id, quantity: item.quantity };
+        return { id: item.id, count: item.quantity };
       }
     );
     console.log(params.dishes);
     params.address = document.querySelector("#order-address").textContent;
-    params.receivingType = document.querySelector("#order-delivery");
+    params.receivingType =
+      document.querySelector("#order-delivery").textContent;
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:8080/api/v1/orders");
