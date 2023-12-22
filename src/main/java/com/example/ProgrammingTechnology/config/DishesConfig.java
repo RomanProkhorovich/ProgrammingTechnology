@@ -33,7 +33,7 @@ public class DishesConfig {
         dish.setCalories(130f);
         dish.setDescription("Вкусная пицца как у бабули");
         dish.setWeight(300f);
-        File fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\pizza.jpg");
+        File fi = new File("src//main//resources//еда//pizza.jpg");
         byte[] fileContent = Files.readAllBytes(fi.toPath());
         dish.setPhoto(fileContent);
         service.createDish(dish);
@@ -44,7 +44,7 @@ public class DishesConfig {
         cake.setWeight(200f);
         cake.setPrice(500f);
         cake.setCalories(350f);
-        fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\тьорт.jpg");
+        fi = new File("src//main//resources//еда//тьорт.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         cake.setPhoto(fileContent);
         service.createDish(cake);
@@ -55,7 +55,7 @@ public class DishesConfig {
         fish.setName("Риба на пару");
         fish.setWeight(450f);
         fish.setCalories(150f);
-        fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\риба.jpg");
+        fi = new File("src//main//resources//еда//риба.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         fish.setPhoto(fileContent);
         service.createDish(fish);
@@ -66,7 +66,7 @@ public class DishesConfig {
         kakleti.setName("Котлеты");
         kakleti.setWeight(350f);
         kakleti.setCalories(250f);
-        fi = new File("C:\\Users\\admin\\OneDrive\\Рабочий стол\\еда\\каклети.jpg");
+        fi = new File("src//main//resources//еда//каклети.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         kakleti.setPhoto(fileContent);
         service.createDish(kakleti);
@@ -75,7 +75,7 @@ public class DishesConfig {
         menu.setDishes(Set.of(kakleti,fish,cake,dish));
         menu.setApproval(LocalDateTime.now());
         menu.setActual(true);
-        menuService.createMenu(menu);
+        menu=menuService.createMenu(menu);
         return 1;
     }
 
