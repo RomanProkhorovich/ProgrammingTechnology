@@ -26,8 +26,8 @@ export default class Header {
           price: +item.querySelector(".content-menu-dish-cart-price-value")
             .textContent,
           // price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find(
-          //   (item) => {
-          //     item.id === item.dataset.cartId;
+          //   (dish) => {
+          //     dish.id === item.dataset.cartId;
           //   }
           // ).price,
         });
@@ -46,6 +46,7 @@ export default class Header {
     );
   }
 
+  // RENDER CART
   renderCart() {
     if (!this.cartDishes) return;
 
@@ -178,7 +179,11 @@ export default class Header {
     this.accountButton.addEventListener("click", () => {
       if (!localStorage.getItem("Auth")) this.popupAuthForm();
       else {
-        window.location.href = "/frontend/src/html/cabinet.html";
+        window.location.href =
+          location.protocol +
+          "//" +
+          location.host +
+          "/frontend/src/html/cabinet.html";
       }
     });
     // SHOW/HIDE CART
@@ -232,8 +237,14 @@ export default class Header {
     });
     // TO SUMMARY PAGE
     this.cartSummary.addEventListener("click", () => {
-      window.location.href = "/frontend/src/html/summary.html";
+      window.location.href =
+        location.protocol +
+        "//" +
+        location.host +
+        "/frontend/src/html/summary.html";
     });
     this.renderCart();
   }
 }
+
+console.log("header script loaded");

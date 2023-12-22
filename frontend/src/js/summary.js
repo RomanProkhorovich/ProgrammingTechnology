@@ -1,26 +1,23 @@
-class Summary {
+export default class Summary {
   constructor() {
     this.container = document.querySelector(".content-summary");
+    this.orderButton = document.querySelector(
+      ".content-summary-paymethods-button"
+    );
     this.dropdown = document.querySelectorAll(".content-summary-dropdown");
     this.dropdownOptions = document.querySelectorAll(
       ".content-summary-dropdown-options"
     );
 
+    this.renderDishes();
     this.registerEvents();
   }
 
   // SEND ORDER
   sendOrder() {
-    const dishes = [];
+    const params = {};
 
-    document.querySelectorAll(".header-cart-content-dish").forEach((item) => {
-      dishes.push({
-        id: item.dataset.cartId,
-        quantity: item.querySelector(
-          ".header-cart-content-dish-info-quantity-value"
-        ).value,
-      });
-    });
+    params[dishes] = Array.from(JSON.parse(localStorage.getItem("Cart")));
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:8080/api/v1/orders");
@@ -44,31 +41,40 @@ class Summary {
     );
   }
 
-  insertDish(name, quantity, description, photo, price) {
+  insertDish(id, name, quantity, description, photo, price) {
     this.container.insertAdjacentHTML(
       "beforeend",
       `<div class="content-summary-dish">
-    <img src="${photo}" alt="${name}">
-    <div class="content-summary-dish-info">
-        <h1 class="content-summary-dish-name">${name}</h1>
-        <div class="quantity">
-            <span class="quantity-control minus">-</span><input class="quantity-value"
-                value="${quantity}"></input><span class="quantity-control plus">+</span>
-        </div>
-        <p class="content-summary-dish-description">${description}</p>
-        <p class="content-summary-dish-price">
-            <span class="content-summary-dish-price-value">${price}</span>р.
-        </p>
-    </div>
-</div>
-`
+      <img src="data:image/png;base64,${photo}" alt="${name}">
+      <div class="content-summary-dish-info">
+          <h1 class="content-summary-dish-name">${name}</h1>
+          <div class="quantity" data-quantity-id="${id}">
+              <span class="quantity-control minus">-</span><input class="quantity-value"
+                  value="${quantity}"></input><span class="quantity-control plus">+</span>
+          </div>
+          <p class="content-summary-dish-description">${description}</p>
+          <p class="content-summary-dish-price">
+              <span class="content-summary-dish-price-value">${price}</span>р.
+          </p>
+      </div>
+  </div>`
     );
   }
 
   renderDishes() {
     const cartDishes = JSON.parse(localStorage.getItem("Cart"));
     const dishes = JSON.parse(localStorage.getItem("Menu"));
-    cartDishes.forEach((item) => {});
+    cartDishes.forEach((item) => {
+      const curDish = dishes.find((dish) => dish.id === item.id);
+      this.insertDish(
+        item.id,
+        curDish.name,
+        item.quantity,
+        curDish.description,
+        curDish.photo,
+        curDish.price
+      );
+    });
   }
 
   registerEvents() {
@@ -93,9 +99,8 @@ class Summary {
           e.target.textContent;
       });
     });
+    //
   }
 }
-
-new Summary();
 
 console.log("summary script loaded");

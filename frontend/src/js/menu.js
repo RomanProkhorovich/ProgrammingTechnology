@@ -152,3 +152,5 @@ export default class Menu {
       });
   }
 }
+
+console.log("menu script loaded");

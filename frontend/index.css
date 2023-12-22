@@ -647,6 +647,30 @@ footer {
   padding: 2em 0;
 }
 
+.content-summary-paymethods-button {
+  color: #fff;
+  background-color: var(--main-dark);
+  font-size: 16px;
+  font-weight: 600;
+  padding: 1em;
+  width: 100%;
+  border-radius: 1em;
+  transition: 0.2s ease-out;
+
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
+  -webkit-transition: 0.2s ease-out;
+  -moz-transition: 0.2s ease-out;
+  -ms-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
+}
+
+.content-summary-paymethods-button:hover {
+  opacity: 80%;
+}
+
 .dropdown-arrow {
   float: right;
   transition: 0.2s ease-out;
@@ -719,6 +743,12 @@ footer {
   text-decoration: none;
   padding: 1em;
   text-align: left;
+  transition: 0.2s ease-out;
+
+  -webkit-transition: 0.2s ease-out;
+  -moz-transition: 0.2s ease-out;
+  -ms-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
 }
 
 .content-summary-dropdown-options a:hover {
@@ -726,6 +756,7 @@ footer {
 }
 
 .content-summary-dish {
+  min-height: 200px;
   background-color: #fff;
   box-shadow: var(--main-shadow);
   padding: 1em;
@@ -742,9 +773,20 @@ footer {
 .content-summary-dish-info {
   display: flex;
   flex-wrap: wrap;
+  flex-grow: 1;
   padding: 1em;
   justify-content: space-between;
   align-items: start;
+}
+
+.content-summary-dish-description{
+  width: 100%;
+}
+
+.content-summary-dish-price{
+  font-size: 20px;
+  font-weight: 600;
+  align-self: flex-end;
 }
 
 .content-summary-dish img {
@@ -854,7 +896,7 @@ footer {
   display: none;
 }
 
-.on-top{
+.on-top {
   z-index: 99;
 }
 
