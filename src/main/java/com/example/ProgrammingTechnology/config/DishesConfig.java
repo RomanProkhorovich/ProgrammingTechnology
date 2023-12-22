@@ -103,6 +103,41 @@ public class DishesConfig {
         order.setOrderTime(LocalDateTime.now());
         orderService.createOrder(order);
 
+        order.setAddress("адрес1");
+        order.setId(null);
+        order.setClient(user);
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Самовывоз"));
+        order.setDeliveryTime(LocalDateTime.now());
+        //CartItem item = new CartItem(service.findDishById(1l), (byte) 4);
+        item = cartItemService.createOrderDish(item);
+        order.setCartItems(Set.of(item));
+        order.setOrderTime(LocalDateTime.now());
+        orderService.createOrder(order);
+
+
+        order.setAddress("адрес2");
+        order.setId(null);
+        order.setClient(user);
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Самовывоз"));
+        order.setDeliveryTime(LocalDateTime.now());
+        //CartItem item = new CartItem(service.findDishById(1l), (byte) 4);
+        item = cartItemService.createOrderDish(item);
+        order.setCartItems(Set.of(item));
+        order.setOrderTime(LocalDateTime.now());
+        orderService.createOrder(order);
+
+
+        order.setAddress("адрес4");
+        order.setId(null);
+        order.setClient(user);
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Самовывоз"));
+        order.setDeliveryTime(LocalDateTime.now());
+        //CartItem item = new CartItem(service.findDishById(1l), (byte) 4);
+        item = cartItemService.createOrderDish(item);
+        order.setCartItems(Set.of(item));
+        order.setOrderTime(LocalDateTime.now());
+        orderService.createOrder(order);
+
         order = new Order();
         order.setAddress(user.getAddress());
         order.setClient(user);
