@@ -9,7 +9,7 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
+@Entity(name = "app_order")
 @Getter
 @Setter
 @NoArgsConstructor
