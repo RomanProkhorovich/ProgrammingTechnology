@@ -54,12 +54,15 @@ public class OrderController {
     }
 
     @GetMapping
-    public List<OrderDto> findAllByUser(@PathParam(value = "user_id") Long id) {
+    public List<OrderDto> findAllByUser(@PathParam(value = "user_id") Long id,
+                                        @PathParam(value = "actual") boolean actual) {
         if (id == null)
             id = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
-        List<Order> ordersByUser = service.findOrdersByUser(id);
+        List<Order> ordersByUser = service.findOrdersByUser(id,actual);
         return mapper.toDtoList(ordersByUser);
     }
+
+
 
     @GetMapping("/{id}")
     public OrderDto findById(@PathVariable Long id) {
