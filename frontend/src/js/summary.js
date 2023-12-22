@@ -179,7 +179,8 @@ export default class Summary {
           e.target.textContent;
       });
     });
-    //
+    //ORDER
+    this.orderButton.addEventListener("click", this.sendOrder);
   }
 }
 
