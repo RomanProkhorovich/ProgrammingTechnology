@@ -94,7 +94,20 @@ export default class Summary {
       if (xhrDelivery.readyState !== 4 || xhrDelivery.status !== 200) {
         return;
       }
-      console.log(xhrDelivery.responseText);
+      const response = xhrDelivery.responseText;
+      const value = document.querySelector("#order-delivery");
+      const curDropdown = value.closest(".content-summary-dropdown");
+      const options = curDropdown.querySelector(
+        ".content-summary-dropdown-options"
+      );
+      curDropdown.querySelector(".dropdown-value").textContent =
+        response[0].name;
+      response.forEach((item) => {
+        options.insertAdjacentHTML(
+          "beforeend",
+          `<a href="#" data-delivery-id="${item.id}">${item.name}</a>`
+        );
+      });
     };
     xhrDelivery.send();
 
@@ -105,7 +118,17 @@ export default class Summary {
       if (xhrAddresses.readyState !== 4 || xhrAddresses.status !== 200) {
         return;
       }
-      console.log(xhrAddresses.responseText);
+      const response = xhrAddresses.responseText;
+      const value = document.querySelector("#order-address");
+      const curDropdown = value.closest(".content-summary-dropdown");
+      const options = curDropdown.querySelector(
+        ".content-summary-dropdown-options"
+      );
+      curDropdown.querySelector(".dropdown-value").textContent =
+        response[0].name;
+      response.forEach((item) => {
+        options.insertAdjacentHTML("beforeend", `<a href="#">${item.name}</a>`);
+      });
     };
     xhrAddresses.send();
   }
