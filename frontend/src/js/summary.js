@@ -127,7 +127,7 @@ export default class Summary {
       curDropdown.querySelector(".dropdown-value").textContent =
         response[0].name;
       response.forEach((item) => {
-        options.insertAdjacentHTML("beforeend", `<a href="#">${item.name}</a>`);
+        options.insertAdjacentHTML("beforeend", `<a href="#">${item}</a>`);
       });
     };
     xhrAddresses.send();
