@@ -227,24 +227,66 @@ export default class Header {
         e.target.closest(".header-cart-content-dish").remove();
         const remaining = document.querySelector(`[data-quantity-id="${id}"]`);
         if (remaining) {
-          remaining.parentElement
-            .querySelector(".content-menu-dish-cart-button")
-            .classList.remove("display-none");
-          remaining.remove();
+          const parent = remaining.parentElement;
+          if (parent.classList.contains("content-menu-dish-cart-quantity")) {
+            parent
+              .querySelector(".content-menu-dish-cart-button")
+              .classList.remove("display-none");
+            remaining.remove();
+          }
+          if (parent.classList.contains("content-summary-dish-info")) {
+            remaining.closest(".content-summary-dish").remove();
+          }
         }
       }
       this.calcCart();
     });
-    // TO SUMMARY PAGE
-    this.cartSummary.addEventListener("click", () => {
-      window.location.href =
-        location.protocol +
-        "//" +
-        location.host +
-        "/frontend/src/html/summary.html";
-    });
     this.renderCart();
   }
 }
+
+// CART EXAMPLE
+
+// [
+//   {
+//     id: 1,
+//     quantity: 4,
+//     price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find((item) => {
+//       return item.id === 1;
+//     }).price,
+//   },
+//   {
+//     id: 2,
+//     quantity: 6,
+//     price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find((item) => {
+//       return item.id === 2;
+//     }).price,
+//   },
+// ];
+
+// MENU EXAMPLE
+
+// [
+//   {
+//     id: 1,
+//     name: "pitsa",
+//     price: 920,
+//     calories: 300,
+//     weight: 1200,
+//     description:
+//       "vkusnaya pitsa vkusnaya pitsa vkusnaya pitsa vkusnaya pitsa vkusnaya pitsa vkusnaya pitsa",
+//     photo: "",
+//   },
+//   {
+//     id: 2,
+//     name: "rolli",
+//     price: 321,
+//     calories: 200,
+//     weight: 900,
+//     description:
+//       "rolli rolli rolli rolli rolli rolli rolli rolli rolli rolli rolli rolli rolli rolli",
+//     photo: "",
+//   },
+// ];
 
 console.log("header script loaded");
