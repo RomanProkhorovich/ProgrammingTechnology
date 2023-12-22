@@ -180,11 +180,11 @@ header {
   max-height: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
-  border-radius: .5em;
-  -webkit-border-radius: .5em;
-  -moz-border-radius: .5em;
-  -ms-border-radius: .5em;
-  -o-border-radius: .5em;
+  border-radius: 0.5em;
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  -ms-border-radius: 0.5em;
+  -o-border-radius: 0.5em;
 }
 
 .header-cart-content-dish-info {
@@ -656,6 +656,7 @@ footer {
 
 .content-summary-paymethods-total {
   font-size: 17px;
+  font-weight: 600;
   padding: 2em 0;
 }
 

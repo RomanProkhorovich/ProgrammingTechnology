@@ -4,7 +4,9 @@ export default class Header {
     this.cartButton = document.querySelector(".header-cart-logo");
     this.cartSum = document.querySelector(".header-cart-sum-value");
     this.cartContent = document.querySelector(".header-cart-content");
-    this.cartSummary = document.querySelector("#cart-to-order");
+    this.summary = document.querySelector(
+      ".content-summary-paymethods-total-value"
+    );
     this.cartDishes;
 
     if (localStorage.getItem("Cart")) {
@@ -35,6 +37,10 @@ export default class Header {
     this.cartSum.textContent = arr.reduce((sum, current) => {
       return sum + current.price * current.quantity;
     }, 0);
+
+    if (this.summary) {
+      this.summary.textContent = this.cartSum.textContent;
+    }
 
     localStorage.setItem(
       "Cart",
@@ -247,22 +253,22 @@ export default class Header {
 
 // CART EXAMPLE
 
-// [
-//   {
-//     id: 1,
-//     quantity: 4,
-//     price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find((item) => {
-//       return item.id === 1;
-//     }).price,
-//   },
-//   {
-//     id: 2,
-//     quantity: 6,
-//     price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find((item) => {
-//       return item.id === 2;
-//     }).price,
-//   },
-// ];
+[
+  {
+    id: 1,
+    quantity: 4,
+    price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find((item) => {
+      return item.id === 1;
+    }).price,
+  },
+  {
+    id: 2,
+    quantity: 6,
+    price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find((item) => {
+      return item.id === 2;
+    }).price,
+  },
+];
 
 // MENU EXAMPLE
 
