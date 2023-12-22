@@ -3,7 +3,7 @@ export default class Menu {
     this.cartContent = document.querySelector(".header-cart-content");
     this.dishes = [];
 
-    this.getDishes();
+    this.getDishesLS();
   }
 
   getDishesLS() {
@@ -84,7 +84,6 @@ export default class Menu {
     const cartQuantity = this.cartContent.querySelector(
       `[data-quantity-id="${id}"] input`
     );
-    cartQuantity.dispatchEvent(new Event("change", { bubbles: true }));
     const plus = parent.querySelector(".plus");
     const minus = parent.querySelector(".minus");
 

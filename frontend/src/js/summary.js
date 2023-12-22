@@ -1,6 +1,12 @@
 export default class Summary {
   constructor() {
+    this.getDropdownContent();
+    this.cartContent = document.querySelector(".header-cart-content");
     this.container = document.querySelector(".content-summary");
+    this.cartSum = document.querySelector(".header-cart-sum-value");
+    this.sum = document.querySelector(
+      ".content-summary-paymethods-total-value"
+    );
     this.orderButton = document.querySelector(
       ".content-summary-paymethods-button"
     );
@@ -17,7 +23,12 @@ export default class Summary {
   sendOrder() {
     const params = {};
 
-    params[dishes] = Array.from(JSON.parse(localStorage.getItem("Cart")));
+    params.dishes = Array.from(JSON.parse(localStorage.getItem("Cart"))).map(
+      (item) => {
+        return { id: item.id, quantity: item.quantity };
+      }
+    );
+    params.address = document.querySelector("#order-address").textContent;
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:8080/api/v1/orders");
@@ -31,14 +42,8 @@ export default class Summary {
       }
       console.log(JSON.parse(xhr.responseText));
     };
-    console.log(dishes);
-    xhr.send(
-      JSON.stringify({
-        dishes: dishes,
-        address: "hui",
-        deliveryTime: new Date(),
-      })
-    );
+    console.log(params);
+    xhr.send(JSON.stringify(params));
   }
 
   insertDish(id, name, quantity, description, photo, price) {
@@ -77,11 +82,61 @@ export default class Summary {
     });
   }
 
+  getDropdownContent() {
+    const email = "cherni@example.ru";
+    const pass = "password";
+    const authHeader = "Basic " + btoa(`${email}:${pass}`);
+
+    const xhrDelivery = new XMLHttpRequest();
+    xhrDelivery.open("GET", "http://localhost:8080/api/v1/receiving");
+    xhrDelivery.setRequestHeader("Authorization", authHeader);
+    xhrDelivery.onreadystatechange = () => {
+      if (xhrDelivery.readyState !== 4 || xhrDelivery.status !== 200) {
+        return;
+      }
+      console.log(xhrDelivery.responseText());
+    };
+    xhrDelivery.send();
+
+    const xhrAddresses = new XMLHttpRequest();
+    xhrAddresses.open("GET", "http://localhost:8080/api/v1/orders/addresses");
+    xhrAddresses.setRequestHeader("Authorization", authHeader);
+    xhrAddresses.onreadystatechange = () => {
+      if (xhrAddresses.readyState !== 4 || xhrAddresses.status !== 200) {
+        return;
+      }
+      console.log(xhrAddresses.responseText());
+    };
+    xhrAddresses.send();
+  }
+
   registerEvents() {
+    // QUANTITY CONTROL
+    this.container.querySelectorAll(".quantity").forEach((item) => {
+      const id = item.dataset.quantityId;
+      const plus = item.querySelector(".plus");
+      const minus = item.querySelector(".minus");
+      const cartQuantity = this.cartContent.querySelector(
+        `[data-quantity-id="${id}"] input`
+      );
+
+      plus.addEventListener("click", () => {
+        cartQuantity.value++;
+        cartQuantity.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+
+      minus.addEventListener("click", (e) => {
+        cartQuantity.value--;
+        cartQuantity.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+    });
     // EXPAND DROPDOWNS
     this.dropdown.forEach((item) => {
       item.addEventListener("click", (e) => {
         const container = e.target.closest(".content-summary-dropdown");
+        if (!container.classList.contains("on-top")) {
+          container.classList.remove("on-top");
+        }
         container.classList.toggle("on-top");
         container
           .querySelector(".content-summary-dropdown-options")
@@ -90,6 +145,7 @@ export default class Summary {
           .querySelector(".dropdown-arrow")
           .classList.toggle("dropdown-arrow-collapsed");
       });
+      this.sum.textContent = this.cartSum.textContent;
     });
     // DROPDOWNS OPTION
     this.dropdownOptions.forEach((item) => {
