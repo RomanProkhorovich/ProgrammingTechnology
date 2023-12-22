@@ -94,7 +94,7 @@ export default class Summary {
       if (xhrDelivery.readyState !== 4 || xhrDelivery.status !== 200) {
         return;
       }
-      console.log(xhrDelivery.responseText());
+      console.log(xhrDelivery.responseText);
     };
     xhrDelivery.send();
 
@@ -105,7 +105,7 @@ export default class Summary {
       if (xhrAddresses.readyState !== 4 || xhrAddresses.status !== 200) {
         return;
       }
-      console.log(xhrAddresses.responseText());
+      console.log(xhrAddresses.responseText);
     };
     xhrAddresses.send();
   }
