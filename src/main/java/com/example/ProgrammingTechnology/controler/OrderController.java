@@ -9,9 +9,9 @@ import com.example.ProgrammingTechnology.security.SecurityHelper;
 import com.example.ProgrammingTechnology.service.*;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,6 +28,12 @@ public class OrderController {
     private final OrderStatusService orderStatusService;
     private final ReceivingTypeService receivingTypeService;
 
+    @GetMapping("/addresses")
+    public ResponseEntity<List<String>> findAllAddresses(@RequestParam(name = "id") Long id) {
+        if (id == null)
+            id = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
+        return ResponseEntity.ok(service.findAllAddressesByUserId(id));
+    }
 
     @PostMapping
     public OrderDto create(@RequestBody CreateOrderDto dto) {
@@ -43,7 +49,7 @@ public class OrderController {
             order.setAddress(dto.getAddress());
         else order.setAddress(order.getClient().getAddress());
         Long restaurantId = dto.getRestaurantId();
-        order.setRestaurant(restaurantId==null?null:restaurantService.findRestaurantById(restaurantId));
+        order.setRestaurant(restaurantId == null ? null : restaurantService.findRestaurantById(restaurantId));
         order.setReceivingType(receivingTypeService.findReceivingTypeByName(dto.getReceivingType()));
         //TODO:
         order.setOrderStatus(orderStatusService.findOrderStatusByName("В обработке"));
@@ -58,10 +64,9 @@ public class OrderController {
                                         @PathParam(value = "actual") boolean actual) {
         if (id == null)
             id = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
-        List<Order> ordersByUser = service.findOrdersByUser(id,actual);
+        List<Order> ordersByUser = service.findOrdersByUser(id, actual);
         return mapper.toDtoList(ordersByUser);
     }
-
 
 
     @GetMapping("/{id}")

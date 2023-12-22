@@ -5,6 +5,7 @@ import com.example.ProgrammingTechnology.dto.MenuDto;
 import com.example.ProgrammingTechnology.mapper.DishMapper;
 import com.example.ProgrammingTechnology.mapper.MenuMapper;
 import com.example.ProgrammingTechnology.service.MenuService;
+import jakarta.transaction.Transactional;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@Transactional
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/menus")
 public class MenuController {
@@ -31,6 +33,7 @@ public class MenuController {
     }
 
     @GetMapping("/actual")
+
     public ResponseEntity<MenuDto> getActual(){
         return ResponseEntity.ok(mapper.toDto(service.getActual()));
     }
