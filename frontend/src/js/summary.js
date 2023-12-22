@@ -28,7 +28,9 @@ export default class Summary {
         return { id: item.id, quantity: item.quantity };
       }
     );
+    console.log(params.dishes);
     params.address = document.querySelector("#order-address").textContent;
+    params.receivingType = document.querySelector("#order-delivery");
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:8080/api/v1/orders");
@@ -124,8 +126,7 @@ export default class Summary {
       const options = curDropdown.querySelector(
         ".content-summary-dropdown-options"
       );
-      curDropdown.querySelector(".dropdown-value").textContent =
-        response[0].name;
+      curDropdown.querySelector(".dropdown-value").textContent = response[0];
       response.forEach((item) => {
         options.insertAdjacentHTML("beforeend", `<a href="#">${item}</a>`);
       });
