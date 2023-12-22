@@ -1,6 +1,5 @@
 package com.example.ProgrammingTechnology.service;
 
-import com.example.ProgrammingTechnology.dto.CreateOrderDto;
 import com.example.ProgrammingTechnology.model.Order;
 import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.repository.OrderRepository;
@@ -12,6 +11,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @CrossOrigin(origins = "http://localhost:63342", maxAge = 3600)
@@ -27,7 +28,7 @@ public class OrderService {
     //TODO: адрес по дефолту это адрес у клиента
     //создание заказа
     public Order createOrder(Order newOrder) {
-        if (newOrder.getId()!=null && orderRepository.findById(newOrder.getId()).isPresent()) {
+        if (newOrder.getId() != null && orderRepository.findById(newOrder.getId()).isPresent()) {
             throw new IllegalArgumentException();
         }
         if (newOrder.getAddress() != null)
@@ -36,7 +37,7 @@ public class OrderService {
             newOrder.setClient(userService
                     .findUserByEmail(SecurityHelper.getCurrentUser().getUsername()));
 
-        if ( newOrder.getClient().getAddress() != null)
+        if (newOrder.getClient().getAddress() != null)
             newOrder.setAddress(newOrder.getClient().getAddress());
 
         return orderRepository.save(newOrder);
@@ -50,8 +51,14 @@ public class OrderService {
     //TODO: сделать разные контроллеры для клиента и курьера
     //поиск заказов по курьеру
     @Transactional
-    public List<Order> findOrdersByUser(Long userId) {
-        return orderRepository.findAllByClient(userService.findUserById(userId));
+    public List<Order> findOrdersByUser(Long userId, Boolean actual) {
+        List<Order> allByClient = orderRepository.findAllByClient(userService.findUserById(userId));
+        if (actual != null && actual)
+            allByClient = allByClient.stream()
+                    .filter(x -> !Objects.equals(x.getOrderStatus().getName(), "Завершен") &&
+                            !Objects.equals(x.getOrderStatus().getName(), "Доставлен"))
+                    .collect(Collectors.toList());
+        return allByClient;
     }
 
     //поиск заказов по статусу
