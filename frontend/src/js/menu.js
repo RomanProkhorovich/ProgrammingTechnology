@@ -7,7 +7,7 @@ export default class Menu {
   }
 
   getDishesLS() {
-    const dishes = JSON.parse(localStorage.getItem("Menu"));
+    const dishes = JSON.parse(sessionStorage.getItem("Menu"));
 
     const dishesContainer = document.querySelector(".content-menu");
 
@@ -63,7 +63,7 @@ export default class Menu {
       </div>`
         );
       });
-      localStorage.setItem("Menu", JSON.stringify(this.dishes));
+      sessionStorage.setItem("Menu", JSON.stringify(this.dishes));
       this.addToCart();
     };
     xhr.send();

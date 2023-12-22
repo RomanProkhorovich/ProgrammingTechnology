@@ -57,7 +57,7 @@ export default class Header {
     if (!this.cartDishes) return;
 
     this.cartDishes.forEach((dish) => {
-      const curDish = Array.from(JSON.parse(localStorage.getItem("Menu"))).find(
+      const curDish = Array.from(JSON.parse(sessionStorage.getItem("Menu"))).find(
         (item) => {
           return item.id === dish.id;
         }
@@ -257,14 +257,14 @@ export default class Header {
   {
     id: 1,
     quantity: 4,
-    price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find((item) => {
+    price: Array.from(JSON.parse(sessionStorage.getItem("Menu"))).find((item) => {
       return item.id === 1;
     }).price,
   },
   {
     id: 2,
     quantity: 6,
-    price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find((item) => {
+    price: Array.from(JSON.parse(sessionStorage.getItem("Menu"))).find((item) => {
       return item.id === 2;
     }).price,
   },
