@@ -94,7 +94,7 @@ export default class Summary {
       if (xhrDelivery.readyState !== 4 || xhrDelivery.status !== 200) {
         return;
       }
-      const response = xhrDelivery.responseText;
+      const response = Array.from(xhrDelivery.responseText);
       const value = document.querySelector("#order-delivery");
       const curDropdown = value.closest(".content-summary-dropdown");
       const options = curDropdown.querySelector(
@@ -118,7 +118,7 @@ export default class Summary {
       if (xhrAddresses.readyState !== 4 || xhrAddresses.status !== 200) {
         return;
       }
-      const response = xhrAddresses.responseText;
+      const response = Array.from(xhrAddresses.responseText);
       const value = document.querySelector("#order-address");
       const curDropdown = value.closest(".content-summary-dropdown");
       const options = curDropdown.querySelector(
