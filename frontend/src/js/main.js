@@ -54,14 +54,14 @@ export default class Header {
 
   // RENDER CART
   renderCart() {
-    if (!this.cartDishes) return;
+    if (!this.cartDishes || this.cartDishes.length === 0) return;
 
     this.cartDishes.forEach((dish) => {
-      const curDish = Array.from(JSON.parse(sessionStorage.getItem("Menu"))).find(
-        (item) => {
-          return item.id === dish.id;
-        }
-      );
+      const curDish = Array.from(
+        JSON.parse(sessionStorage.getItem("Menu"))
+      ).find((item) => {
+        return item.id === dish.id;
+      });
 
       document.querySelector("#cart-to-order").insertAdjacentHTML(
         "beforebegin",
