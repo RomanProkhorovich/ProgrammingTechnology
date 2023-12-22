@@ -253,22 +253,22 @@ export default class Header {
 
 // CART EXAMPLE
 
-[
-  {
-    id: 1,
-    quantity: 4,
-    price: Array.from(JSON.parse(sessionStorage.getItem("Menu"))).find((item) => {
-      return item.id === 1;
-    }).price,
-  },
-  {
-    id: 2,
-    quantity: 6,
-    price: Array.from(JSON.parse(sessionStorage.getItem("Menu"))).find((item) => {
-      return item.id === 2;
-    }).price,
-  },
-];
+// [
+//   {
+//     id: 1,
+//     quantity: 4,
+//     price: Array.from(JSON.parse(sessionStorage.getItem("Menu"))).find((item) => {
+//       return item.id === 1;
+//     }).price,
+//   },
+//   {
+//     id: 2,
+//     quantity: 6,
+//     price: Array.from(JSON.parse(sessionStorage.getItem("Menu"))).find((item) => {
+//       return item.id === 2;
+//     }).price,
+//   },
+// ];
 
 // MENU EXAMPLE
 
