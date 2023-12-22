@@ -109,7 +109,7 @@ export default class Menu {
         try {
           const fromCart = JSON.parse(localStorage.getItem("Cart")).find(
             (item) => {
-              return item.id === id;
+              return item.id === +id;
             }
           );
           if (fromCart) {
