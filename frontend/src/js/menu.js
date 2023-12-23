@@ -169,7 +169,7 @@ export default class Menu {
             <img src="data:image/png;base64,${dish.photo}" alt="${dish.name}">
             <div class="popup-dish-info">
                 <h1>${dish.name}</h1>
-                <p>
+                <p class="popup-dish-info-description">
                   ${dish.description}
                 </p>
                 <p>Ккал. на порцию: <span>${dish.calories}</span> ккал.</p>
