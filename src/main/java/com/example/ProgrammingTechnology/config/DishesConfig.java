@@ -101,7 +101,8 @@ public class DishesConfig {
         item = cartItemService.createOrderDish(item);
         order.setCartItems(Set.of(item));
         order.setOrderTime(LocalDateTime.now());
-        orderService.createOrder(order);
+
+        var a = orderService.createOrder(order);
 
         order.setAddress("адрес1");
         order.setId(null);
@@ -109,10 +110,11 @@ public class DishesConfig {
         order.setReceivingType(receivingTypeService.findReceivingTypeByName("Самовывоз"));
         order.setDeliveryTime(LocalDateTime.now());
         //CartItem item = new CartItem(service.findDishById(1l), (byte) 4);
+        item.setId(null);
         item = cartItemService.createOrderDish(item);
         order.setCartItems(Set.of(item));
         order.setOrderTime(LocalDateTime.now());
-        orderService.createOrder(order);
+        a = orderService.createOrder(order);
 
 
         order.setAddress("адрес2");
@@ -121,10 +123,11 @@ public class DishesConfig {
         order.setReceivingType(receivingTypeService.findReceivingTypeByName("Самовывоз"));
         order.setDeliveryTime(LocalDateTime.now());
         //CartItem item = new CartItem(service.findDishById(1l), (byte) 4);
+        item.setId(null);
         item = cartItemService.createOrderDish(item);
         order.setCartItems(Set.of(item));
         order.setOrderTime(LocalDateTime.now());
-        orderService.createOrder(order);
+        a=orderService.createOrder(order);
 
 
         order.setAddress("адрес4");
@@ -133,10 +136,11 @@ public class DishesConfig {
         order.setReceivingType(receivingTypeService.findReceivingTypeByName("Самовывоз"));
         order.setDeliveryTime(LocalDateTime.now());
         //CartItem item = new CartItem(service.findDishById(1l), (byte) 4);
+        item.setId(null);
         item = cartItemService.createOrderDish(item);
         order.setCartItems(Set.of(item));
         order.setOrderTime(LocalDateTime.now());
-        orderService.createOrder(order);
+        a=orderService.createOrder(order);
 
         order = new Order();
         order.setAddress(user.getAddress());
@@ -147,7 +151,7 @@ public class DishesConfig {
         item2 = cartItemService.createOrderDish(item2);
         order.setCartItems(Set.of(item2));
         order.setOrderTime(LocalDateTime.now());
-        orderService.createOrder(order);
+        a=orderService.createOrder(order);
         return 1;
     }
 }

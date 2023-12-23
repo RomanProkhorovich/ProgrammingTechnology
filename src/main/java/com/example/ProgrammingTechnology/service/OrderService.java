@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -48,7 +47,8 @@ public class OrderService {
     public List<String> findAllAddressesByUserId(Long id){
         if (id==null)
             return Collections.emptyList();
-        return orderRepository.getAllAddressesByUserId(id);
+        List<String> allAddressesByUserId = orderRepository.getAllAddressesByUserId(id);
+        return allAddressesByUserId;
     }
     public List<String> findAllAddressesByUser(User user){
         return findAllAddressesByUserId(user.getId());
@@ -63,6 +63,8 @@ public class OrderService {
     //поиск заказов по курьеру
     @Transactional
     public List<Order> findOrdersByUser(Long userId, Boolean actual) {
+        if (userId == null)
+            userId = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
         List<Order> allByClient = orderRepository.findAllByClient(userService.findUserById(userId));
         if (actual != null && actual)
             allByClient = allByClient.stream()

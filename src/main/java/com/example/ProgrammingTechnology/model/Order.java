@@ -32,7 +32,7 @@ public class Order {
     private OrderStatus orderStatus;
 
 
-    @Column(nullable = false, name = "delivery_time")
+    @Column(name = "delivery_time")
     private LocalDateTime deliveryTime;
 
     @ManyToOne

@@ -29,14 +29,14 @@ public class OrderController {
     private final ReceivingTypeService receivingTypeService;
 
     @GetMapping("/addresses")
-    public ResponseEntity<List<String>> findAllAddresses(@RequestParam(name = "id") Long id) {
+    public ResponseEntity<List<String>> findAllAddresses(@RequestParam(name = "id", required = false) Long id) {
         if (id == null)
             id = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
         return ResponseEntity.ok(service.findAllAddressesByUserId(id));
     }
 
     @PostMapping
-    public OrderDto create(@RequestBody CreateOrderDto dto) {
+    public ResponseEntity<OrderDto> create(@RequestBody CreateOrderDto dto) {
         Order order = new Order();
         order.setCartItems(dto.getDishes().stream()
                 .map(x -> new CartItem(dishService.findDishById(x.getId()), x.getCount()))
@@ -56,15 +56,14 @@ public class OrderController {
         service.createOrder(order);
         //TODO: отослать в ресторан
 
-        return mapper.toDto(order);
+        OrderDto orderDto = mapper.toDto(order);
+        return ResponseEntity.ok(orderDto);
     }
 
     @GetMapping
     public List<OrderDto> findAllByUser(@PathParam(value = "user_id") Long id,
                                         @PathParam(value = "actual") boolean actual) {
-        if (id == null)
-            id = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
-        List<Order> ordersByUser = service.findOrdersByUser(id, actual);
+      List<Order> ordersByUser = service.findOrdersByUser(id, actual);
         return mapper.toDtoList(ordersByUser);
     }
 
