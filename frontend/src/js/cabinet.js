@@ -68,7 +68,7 @@ export default class Cabinet {
               : "0" + orderTime.getMinutes()
           }</p>
           <div class="content-cabinet-order-description-dishes">
-              ${getDishesHTML(item.cartItems)}
+              ${this.getDishesHTML(item.cartItems)}
           </div>
           <div class="content-cabinet-order-description-data">
               <h1>Способ получения:</h1>
