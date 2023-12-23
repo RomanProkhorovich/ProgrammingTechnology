@@ -135,7 +135,7 @@ export default class Menu {
       </div>
   </div>`
       );
-      this.toQuantity(elem, id, 1);
+      this.toQuantity(elem, dish.id, 1);
     });
   }
 
@@ -158,9 +158,9 @@ export default class Menu {
       item.addEventListener("click", (e) => {
         if (e.target.closest(".content-menu-dish-cart-quantity")) return;
         const id = e.target.closest(".content-menu-dish").dataset.menuId;
-        const dish = JSON.parse(sessionStorage.getItem("Menu")).find((item) => {
-          return +item.id === +id;
-        });
+        const dish = JSON.parse(sessionStorage.getItem("Menu")).find(
+          (item) => +item.id === +id
+        );
 
         if (
           JSON.parse(localStorage.getItem("Cart")).find(
@@ -194,7 +194,7 @@ export default class Menu {
         );
 
         this.cartButtonHandler(
-          document.querySelector(".popup ontent-menu-dish-cart-button"),
+          document.querySelector(".popup .content-menu-dish-cart-button"),
           dish
         );
       });
