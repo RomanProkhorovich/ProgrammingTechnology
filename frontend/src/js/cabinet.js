@@ -62,8 +62,12 @@ export default class Cabinet {
           "beforeend",
           `<div class="content-cabinet-order">
           <p class="content-cabinet-order-info">Заказ №${item.id} от ${
-            orderTime.getDate() + orderTime.getMonth() + orderTime.getFullYear()
-          }} в ${
+            orderTime.getDate() +
+            "." +
+            orderTime.getMonth() +
+            "." +
+            orderTime.getFullYear()
+          } в ${
             orderTime.getHours() + ":" + orderTime.getMinutes > 9
               ? orderTime.getMinutes()
               : "0" + orderTime.getMinutes()
