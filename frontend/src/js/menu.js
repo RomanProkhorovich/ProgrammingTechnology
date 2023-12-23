@@ -160,13 +160,13 @@ export default class Menu {
         if (e.target.closest(".content-menu-dish-cart-quantity")) return;
         const id = e.target.closest(".content-menu-dish").dataset.menuId;
         const dish = JSON.parse(sessionStorage.getItem("Menu")).find((item) => {
-          return item.id === id;
+          return +item.id === +id;
         });
         document.body.insertAdjacentHTML(
           "afterbegin",
           `<div class="popup">
         <div class="popup-dish">
-            <img src="data:image/png;base64,${dish.photo}" alt="${dish.photo}">
+            <img src="data:image/png;base64,${dish.photo}" alt="${dish.name}">
             <div class="popup-dish-info">
                 <h1>${dish.name}</h1>
                 <p>
