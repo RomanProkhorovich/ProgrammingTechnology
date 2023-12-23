@@ -24,7 +24,7 @@ export default class Cabinet {
 
   // DISHES FROM ORDER TO HTML
   getDishesHTML(dishes) {
-    const html = "";
+    let html = "";
     dishes.forEach((item) => {
       html += `<div class="content-cabinet-order-description-dish">
       <h1 class="content-cabinet-order-description-dish-name">
@@ -35,6 +35,7 @@ export default class Cabinet {
       </p>
   </div>`;
     });
+    return html;
   }
 
   // ORDERS RENDERING XHR
@@ -69,6 +70,14 @@ export default class Cabinet {
           }</p>
           <div class="content-cabinet-order-description-dishes">
               ${this.getDishesHTML(item.cartItems)}
+              <div class="content-cabinet-order-description-sum">
+              <h1>
+                  Итого
+              </h1>
+              <p class="content-cabinet-order-description-dish-price">
+                  <span>${item.sum}</span>р.
+              </p>
+              </div>
           </div>
           <div class="content-cabinet-order-description-data">
               <h1>Способ получения:</h1>
