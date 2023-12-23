@@ -17,23 +17,23 @@
 
     <!-- <div class="popup">
         <div class="popup-dish">
-            <img src="https://placehold.co/400" alt="">
+            <div class="popup-dish-photo">
+                <img src="https://img.goodfon.ru/original/3840x2160/0/18/spiderman-into-the-spiderverse-miles-morales-spiderman-marve.jpg"
+                    alt="${dish.name}">
+            </div>
             <div class="popup-dish-info">
-                <h1>Name</h1>
+                <h1>${dish.name}</h1>
                 <p class="popup-dish-info-description">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis dicta praesentium assumenda fuga
-                    eveniet accusantium ad eum esse quaerat unde quae alias odit, autem veniam dolores, voluptates
-                    nostrum commodi aliquam?
+                    ${dish.name}
                 </p>
-                <p>Ккал. на порцию: <span>999</span> ккал.</p>
-                <p>Вес: <span>888</span> г.</p>
+                <p>Ккал. на порцию: <span>${dish.calories}</span> ккал.</p>
+                <p>Вес: <span>${dish.weight}</span> г.</p>
                 <div class="popup-dish-footer">
                     <h1 class="popup-dish-info-price">
-                        <span class="popup-dish-info-price-value">999</span> р.
+                        <span class="popup-dish-info-price-value">${dish.price}</span> р.
                     </h1>
-                    <div class="quantity" data-quantity-id="${id}">
-                        <span class="quantity-control minus">-</span><input class="quantity-value"
-                            value="1"></input><span class="quantity-control plus">+</span>
+                    <div class="content-menu-dish-cart-quantity">
+                        <button class="content-menu-dish-cart-button">В корзину</button>
                     </div>
                 </div>
             </div>

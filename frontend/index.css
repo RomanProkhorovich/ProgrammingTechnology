@@ -910,7 +910,9 @@ footer {
 .popup form button:hover {
   opacity: 0.8;
 }
+
 /* Dish */
+
 .popup-dish {
   position: relative;
   display: flex;
@@ -930,11 +932,14 @@ footer {
   -o-border-radius: 2em;
 }
 
-.popup-dish img {
+.popup-dish-photo {
   flex-basis: 200px;
-  width: 100%;
   flex-grow: 1;
+}
+
+.popup-dish img {
   aspect-ratio: 1/1;
+  width: 100%;
   object-fit: cover;
   border-radius: 2em;
 
@@ -955,12 +960,17 @@ footer {
   gap: 1em;
 }
 
-.popup-dish-footer{
+.popup-dish-footer {
   display: flex;
   flex-wrap: wrap;
   align-self: end;
   justify-content: space-between;
   width: 100%;
+}
+
+.popup-dish-footer * {
+  flex-basis: 100px;
+  flex-grow: 1;
 }
 
 .popup-dish-info-description {
