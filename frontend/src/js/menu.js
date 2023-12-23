@@ -4,6 +4,7 @@ export default class Menu {
     this.dishes = [];
 
     this.getDishes();
+    this.popupDish();
   }
 
   getDishesLS() {
@@ -86,6 +87,8 @@ export default class Menu {
     );
     const plus = parent.querySelector(".plus");
     const minus = parent.querySelector(".minus");
+
+    cartQuantity.dispatchEvent(new Event("change", { bubbles: true }))
 
     plus.addEventListener("click", (e) => {
       cartQuantity.value++;
