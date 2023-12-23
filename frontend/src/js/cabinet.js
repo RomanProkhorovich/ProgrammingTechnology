@@ -4,6 +4,7 @@ export default class Cabinet {
     this.tabData = document.querySelector("#tab-data");
     this.tabAbout = document.querySelector("#tab-about");
 
+    this.getUser();
     this.getOrders();
     this.registerEvents();
   }
@@ -22,22 +23,7 @@ export default class Cabinet {
     xhr.send();
   }
 
-  // DISHES FROM ORDER TO HTML
-  getDishesHTML(dishes) {
-    let html = "";
-    dishes.forEach((item) => {
-      html += `<div class="content-cabinet-order-description-dish">
-      <h1 class="content-cabinet-order-description-dish-name">
-          ${item.dish.name}
-      </h1>
-      <p class="content-cabinet-order-description-dish-price">
-          <span>${item.dish.price}</span>р. <span>${item.count}</span>шт.
-      </p>
-  </div>`;
-    });
-    return html;
-  }
-
+  // GET CURRENT USER DATA
   getUser() {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost:8080/api/v1/users");
@@ -52,6 +38,22 @@ export default class Cabinet {
       console.log(xhr.responseText);
     };
     xhr.send();
+  }
+
+  // DISHES FROM ORDER TO HTML
+  getDishesHTML(dishes) {
+    let html = "";
+    dishes.forEach((item) => {
+      html += `<div class="content-cabinet-order-description-dish">
+      <h1 class="content-cabinet-order-description-dish-name">
+          ${item.dish.name}
+      </h1>
+      <p class="content-cabinet-order-description-dish-price">
+          <span>${item.dish.price}</span>р. <span>${item.count}</span>шт.
+      </p>
+  </div>`;
+    });
+    return html;
   }
 
   // ORDERS RENDERING XHR

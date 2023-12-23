@@ -509,7 +509,7 @@ footer {
   border-radius: 1em;
   overflow: hidden;
   margin: 0.5em 0;
-  
+
   -webkit-border-radius: 1em;
   -moz-border-radius: 1em;
   -ms-border-radius: 1em;
@@ -847,6 +847,8 @@ footer {
   -o-transition: 0.2s ease-out;
 }
 
+/* Form */
+
 .popup form {
   display: flex;
   flex-wrap: wrap;
@@ -904,7 +906,24 @@ footer {
 .popup form button:hover {
   opacity: 0.8;
 }
+/* Dish */
+.popup-dish {
+  max-width: 1200px;
+  width: 90%;
+  background-color: #fff;
+  padding: 2em;
+  box-sizing: border-box;
+  border-radius: 2em;
 
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  -ms-border-radius: 2em;
+  -o-border-radius: 2em;
+}
+
+.popup-dish img {
+  float: left;
+}
 /* Some things */
 
 .hidden {
