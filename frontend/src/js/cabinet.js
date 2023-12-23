@@ -4,6 +4,13 @@ export default class Cabinet {
     this.tabData = document.querySelector("#tab-data");
     this.tabAbout = document.querySelector("#tab-about");
 
+    this.firstname = document.querySelector(`[name="firstname"]`);
+    this.lastname = document.querySelector(`[name="lastname"]`);
+    this.surname = document.querySelector(`[name="surname"]`);
+    this.email = document.querySelector(`[name="email"]`);
+    this.phone = document.querySelector(`[name="phone"]`);
+    this.password = document.querySelector(`[name="password"]`);
+
     this.getUser();
     this.getOrders();
     this.registerEvents();
@@ -35,7 +42,13 @@ export default class Cabinet {
         return;
       }
 
-      console.log(xhr.responseText);
+      const user = JSON.parse(xhr.responseText);
+
+      this.firstname.value = user.firstname;
+      this.lastname.value = user.lastname;
+      this.surname.value = user.surname;
+      this.email.value = user.email;
+      this.phone.value = user.phone;
     };
     xhr.send();
   }

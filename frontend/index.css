@@ -908,6 +908,7 @@ footer {
 }
 /* Dish */
 .popup-dish {
+  position: relative;
   max-width: 1200px;
   width: 90%;
   background-color: #fff;
@@ -922,8 +923,25 @@ footer {
 }
 
 .popup-dish img {
+  margin-right: 1em;
   float: left;
+  border-radius: 2em;
+
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  -ms-border-radius: 2em;
+  -o-border-radius: 2em;
 }
+
+.popup-dish-info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 1em;
+  align-items: center;
+  min-height: 100%;
+}
+
 /* Some things */
 
 .hidden {
