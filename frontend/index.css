@@ -428,7 +428,7 @@ footer {
   width: 100%;
   font-size: 14px;
   height: 100px;
-  overflow-y: auto;
+  overflow: hidden;
 }
 
 .content-menu-dish-cart-price {
@@ -540,7 +540,7 @@ footer {
   opacity: 80%;
 }
 
-.content-cabinet-data-field button:disabled{
+.content-cabinet-data-field button:disabled {
   opacity: 50%;
 }
 
@@ -913,6 +913,9 @@ footer {
 /* Dish */
 .popup-dish {
   position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1em;
   max-width: 1200px;
   width: 90%;
   background-color: #fff;
@@ -927,10 +930,11 @@ footer {
 }
 
 .popup-dish img {
-  max-width: 400px;
+  flex-basis: 0px;
+  flex-grow: 1;
+  max-width: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
-  margin-right: 1em;
   float: left;
   border-radius: 2em;
 
@@ -941,12 +945,16 @@ footer {
 }
 
 .popup-dish-info {
+  flex-grow: 1;
+  width: 200px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   gap: 1em;
-  align-items: center;
-  min-height: 100%;
+}
+
+.popup-dish-info-description {
+  width: 100%;
 }
 
 /* Some things */
