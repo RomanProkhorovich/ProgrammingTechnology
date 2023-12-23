@@ -100,57 +100,56 @@ export default class Menu {
       cartQuantity.dispatchEvent(new Event("change", { bubbles: true }));
     });
   }
-  // ADD DISH TO CART LISTENER
-  addToCart() {
-    document
-      .querySelectorAll(".content-menu-dish-cart-button")
-      .forEach((item) => {
-        const dish = item.closest(".content-menu-dish");
-        const id = dish.dataset.menuId;
-        // already in cart
-        try {
-          const fromCart = JSON.parse(localStorage.getItem("Cart")).find(
-            (item) => {
-              return item.id === +id;
-            }
-          );
-          if (fromCart) {
-            this.toQuantity(item, id, fromCart.quantity);
-            return;
-          }
-        } catch (E) {
-          console.log("cart is empty");
-        }
-        // not in cart
-        item.addEventListener("click", (e) => {
-          e.preventDefault();
 
-          const src = dish.querySelector(".content-menu-dish-photo").src;
-          const alt = dish.querySelector(".content-menu-dish-photo").alt;
-          const name = dish.querySelector("h1").textContent;
-          const price = dish.querySelector(
-            ".content-menu-dish-cart-price-value"
-          ).textContent;
+  cartButtonHandler(elem, dish) {
+    // already in cart
+    try {
+      const fromCart = JSON.parse(localStorage.getItem("Cart")).find((item) => {
+        return +item.id === +dish.id;
+      });
+      if (fromCart) {
+        this.toQuantity(elem, id, fromCart.quantity);
+        return;
+      }
+    } catch (E) {
+      console.log("cart is empty");
+    }
+    // not in cart
+    elem.addEventListener("click", (e) => {
+      e.preventDefault();
 
-          document.querySelector("#cart-to-order").insertAdjacentHTML(
-            "beforebegin",
-            `<div class="header-cart-content-dish" data-cart-id="${id}">
-      <img class="header-cart-content-dish-photo" src="${src}" alt="${alt}">
+      document.querySelector("#cart-to-order").insertAdjacentHTML(
+        "beforebegin",
+        `<div class="header-cart-content-dish" data-cart-id="${dish.id}">
+      <img class="header-cart-content-dish-photo" src="data:image/png;base64,${dish.photo}" alt="${dish.name}">
       <div class="header-cart-content-dish-info">
-          <h1>${name}</h1>
+          <h1>${dish.name}</h1>
           <p class="header-cart-content-dish-info-quantity">
-            <div class="quantity" data-quantity-id="${id}">
+            <div class="quantity" data-quantity-id="${dish.id}">
               <span class="quantity-control minus">-</span><input class="quantity-value"
               value="1"></input><span class="quantity-control plus">+</span>
             </div>
           </p>
           <p class="header-cart-content-dish-info-price"><span
-              class="content-menu-dish-cart-price-value">${price}</span>р.</p>
+              class="content-menu-dish-cart-price-value">${dish.price}</span>р.</p>
       </div>
   </div>`
-          );
-          this.toQuantity(item, id, 1);
-        });
+      );
+      this.toQuantity(elem, id, 1);
+    });
+  }
+
+  // ADD DISH TO CART LISTENER
+  addToCart() {
+    document
+      .querySelectorAll(".content-menu-dish-cart-button")
+      .forEach((item) => {
+        const id = item.closest(".content-menu-dish").dataset.menuId;
+        const dish = JSON.parse(sessionStorage.getItem("Menu")).find(
+          (item) => +item.id === +id
+        );
+
+        this.cartButtonHandler(item, dish);
       });
   }
 
@@ -162,21 +161,41 @@ export default class Menu {
         const dish = JSON.parse(sessionStorage.getItem("Menu")).find((item) => {
           return +item.id === +id;
         });
+
+        if (
+          JSON.parse(localStorage.getItem("Cart")).find(
+            (item) => +item.id === +id
+          )
+        ) {
+        }
         document.body.insertAdjacentHTML(
           "afterbegin",
           `<div class="popup">
-        <div class="popup-dish">
-            <img src="data:image/png;base64,${dish.photo}" alt="${dish.name}">
-            <div class="popup-dish-info">
-                <h1>${dish.name}</h1>
-                <p class="popup-dish-info-description">
-                  ${dish.description}
-                </p>
-                <p>Ккал. на порцию: <span>${dish.calories}</span> ккал.</p>
-                <p>Вес: <span>${dish.weight}</span> г.</p>
-            </div>
-        </div>
-    </div>`
+          <div class="popup-dish">
+              <img src="data:image/png;base64,${dish.photo}" alt="${dish.name}">
+              <div class="popup-dish-info">
+                  <h1>${dish.name}</h1>
+                  <p class="popup-dish-info-description">
+                  ${dish.name}
+                  </p>
+                  <p>Ккал. на порцию: <span>${dish.calories}</span> ккал.</p>
+                  <p>Вес: <span>${dish.weight}</span> г.</p>
+                  <div class="popup-dish-footer">
+                      <h1 class="popup-dish-info-price">
+                          <span class="popup-dish-info-price-value">${dish.price}</span> р.
+                      </h1>
+                      <div class="content-menu-dish-cart-quantity">
+                        <button class="content-menu-dish-cart-button">В корзину</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>`
+        );
+
+        this.cartButtonHandler(
+          document.querySelector(".popup ontent-menu-dish-cart-button"),
+          dish
         );
       });
     });

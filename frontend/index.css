@@ -918,6 +918,7 @@ footer {
   gap: 1em;
   max-width: 1200px;
   width: 90%;
+  box-sizing: border-box;
   background-color: #fff;
   padding: 2em;
   box-sizing: border-box;
@@ -930,12 +931,11 @@ footer {
 }
 
 .popup-dish img {
-  flex-basis: 0px;
+  flex-basis: 200px;
+  width: 100%;
   flex-grow: 1;
-  max-width: 400px;
   aspect-ratio: 1/1;
   object-fit: cover;
-  float: left;
   border-radius: 2em;
 
   -webkit-border-radius: 2em;
@@ -945,12 +945,22 @@ footer {
 }
 
 .popup-dish-info {
-  flex-grow: 1;
+  flex-grow: 4;
   width: 200px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  align-items: center;
+  align-content: start;
   gap: 1em;
+}
+
+.popup-dish-footer{
+  display: flex;
+  flex-wrap: wrap;
+  align-self: end;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .popup-dish-info-description {
