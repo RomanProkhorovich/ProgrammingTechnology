@@ -38,6 +38,22 @@ export default class Cabinet {
     return html;
   }
 
+  getUser() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:8080/api/v1/users");
+    let email = "cherni@example.ru";
+    let pass = "password";
+    xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== 4 || xhr.status !== 200) {
+        return;
+      }
+
+      console.log(xhr.responseText);
+    };
+    xhr.send();
+  }
+
   // ORDERS RENDERING XHR
   getOrders() {
     const xhr = new XMLHttpRequest();
@@ -57,21 +73,12 @@ export default class Cabinet {
       const ordersContainer = document.querySelector(".content-cabinet-orders");
 
       orders.forEach((item) => {
-        const orderTime = new Date(item.orderTime);
-        ordersContainer.insertAdjacentHTML(
+        const orderTime = ordersContainer.insertAdjacentHTML(
           "beforeend",
           `<div class="content-cabinet-order">
-          <p class="content-cabinet-order-info">Заказ №${item.id} от ${
-            orderTime.getDate() +
-            "." +
-            orderTime.getMonth() +
-            "." +
-            orderTime.getFullYear()
-          } в ${
-            orderTime.getHours() + ":" + orderTime.getMinutes > 9
-              ? orderTime.getMinutes()
-              : "0" + orderTime.getMinutes()
-          }</p>
+          <p class="content-cabinet-order-info">Заказ №${item.id} от ${new Date(
+            item.orderTime
+          ).toLocaleString()}</p>
           <div class="content-cabinet-order-description-dishes">
               ${this.getDishesHTML(item.cartItems)}
               <div class="content-cabinet-order-description-sum">
