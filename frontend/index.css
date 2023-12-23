@@ -932,7 +932,7 @@ footer {
 .popup-dish img {
   flex-basis: 0px;
   flex-grow: 1;
-  max-width: 100%;
+  max-width: 400px;
   aspect-ratio: 1/1;
   object-fit: cover;
   float: left;
