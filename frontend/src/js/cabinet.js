@@ -11,6 +11,10 @@ export default class Cabinet {
     this.phone = document.querySelector(`[name="phone"]`);
     this.password = document.querySelector(`[name="password"]`);
 
+    this.cabinetButtons = document.querySelectorAll(
+      ".content-cabinet-data-label button"
+    );
+
     this.getUser();
     this.getOrders();
     this.registerEvents();
@@ -173,6 +177,20 @@ export default class Cabinet {
       this.tabData.classList.remove("content-cabinet-tab-active");
       this.tabAbout.classList.add("content-cabinet-tab-active");
     });
-    // LISTENER
+    // INPUT CHANGED LISTENER
+    [
+      this.firstname,
+      this.lastname,
+      this.surname,
+      this.email,
+      this.phone,
+      this.password,
+    ].forEach((item) => {
+      item.addEventListener("input", (e) => {
+        e.target
+          .closest(".content-cabinet-data-field")
+          .querySelector("button").disabled = false;
+      });
+    });
   }
 }

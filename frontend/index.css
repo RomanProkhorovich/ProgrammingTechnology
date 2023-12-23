@@ -540,6 +540,10 @@ footer {
   opacity: 80%;
 }
 
+.content-cabinet-data-field button:disabled{
+  opacity: 50%;
+}
+
 /* Orders */
 .content-cabinet-orders {
   display: flex;
@@ -923,6 +927,9 @@ footer {
 }
 
 .popup-dish img {
+  max-width: 400px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
   margin-right: 1em;
   float: left;
   border-radius: 2em;
