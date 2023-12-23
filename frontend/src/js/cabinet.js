@@ -28,10 +28,10 @@ export default class Cabinet {
     dishes.forEach((item) => {
       html += `<div class="content-cabinet-order-description-dish">
       <h1 class="content-cabinet-order-description-dish-name">
-          ${item.name}
+          ${item.dish.name}
       </h1>
       <p class="content-cabinet-order-description-dish-price">
-          <span>${item.price}</span>р. <span>${item.count}</span>шт.
+          <span>${item.dish.price}</span>р. <span>${item.count}</span>шт.
       </p>
   </div>`;
     });
