@@ -171,26 +171,28 @@ export default class Menu {
         document.body.insertAdjacentHTML(
           "afterbegin",
           `<div class="popup">
-          <div class="popup-dish">
-              <img src="data:image/png;base64,${dish.photo}" alt="${dish.name}">
-              <div class="popup-dish-info">
-                  <h1>${dish.name}</h1>
-                  <p class="popup-dish-info-description">
-                  ${dish.name}
-                  </p>
-                  <p>Ккал. на порцию: <span>${dish.calories}</span> ккал.</p>
-                  <p>Вес: <span>${dish.weight}</span> г.</p>
-                  <div class="popup-dish-footer">
-                      <h1 class="popup-dish-info-price">
-                          <span class="popup-dish-info-price-value">${dish.price}</span> р.
-                      </h1>
-                      <div class="content-menu-dish-cart-quantity">
+        <div class="popup-dish">
+            <div class="popup-dish-photo">
+                <img src="data:image/png;base64,${dish.photo}" alt="${dish.name}">
+            </div>
+            <div class="popup-dish-info">
+                <h1>${dish.name}</h1>
+                <p class="popup-dish-info-description">
+                    ${dish.name}
+                </p>
+                <p>Ккал. на порцию: <span>${dish.calories}</span> ккал.</p>
+                <p>Вес: <span>${dish.weight}</span> г.</p>
+                <div class="popup-dish-footer">
+                    <h1 class="popup-dish-info-price">
+                        <span class="popup-dish-info-price-value">${dish.price}</span> р.
+                    </h1>
+                    <div class="content-menu-dish-cart-quantity">
                         <button class="content-menu-dish-cart-button">В корзину</button>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>`
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>`
         );
 
         this.cartButtonHandler(
