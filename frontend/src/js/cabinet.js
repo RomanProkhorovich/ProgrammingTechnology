@@ -44,7 +44,7 @@ export default class Cabinet {
         ordersContainer.insertAdjacentHTML(
           "beforeend",
           `<div class="content-cabinet-order">
-          <p class="content-cabinet-order-info">Заказ №${затычка} от ${затычка} в ${затычка}</p>
+          <p class="content-cabinet-order-info">Заказ №${"затычка"} от ${"затычка"} в ${"затычка"}</p>
           <div class="content-cabinet-order-description-dishes">
               <div class="content-cabinet-order-description-dish">
                   <h1 class="content-cabinet-order-description-dish-name">
@@ -57,11 +57,11 @@ export default class Cabinet {
           </div>
           <div class="content-cabinet-order-description-data">
               <h1>Способ получения:</h1>
-              <p>${затычка}</p>
+              <p>${"затычка"}</p>
               <h1>Способ оплаты:</h1>
-              <p>${затычка}</p>
+              <p>${"затычка"}</p>
               <h1>Адрес:</h1>
-              <p>${затычка}</p>
+              <p>${"затычка"}</p>
           </div>
       </div>`
         );
