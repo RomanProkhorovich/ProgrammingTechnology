@@ -4,6 +4,7 @@ export default class Cabinet {
     this.tabData = document.querySelector("#tab-data");
     this.tabAbout = document.querySelector("#tab-about");
 
+    this.getOrders();
     this.registerEvents();
   }
 
