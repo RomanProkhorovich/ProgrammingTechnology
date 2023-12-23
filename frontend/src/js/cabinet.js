@@ -56,7 +56,7 @@ export default class Cabinet {
       const ordersContainer = document.querySelector(".content-cabinet-orders");
 
       orders.forEach((item) => {
-        orderTime = new Date(item.orderTime);
+        const orderTime = new Date(item.orderTime);
         ordersContainer.insertAdjacentHTML(
           "beforeend",
           `<div class="content-cabinet-order">
