@@ -81,7 +81,7 @@ export default class Cabinet {
           </div>
           <div class="content-cabinet-order-description-data">
               <h1>Способ получения:</h1>
-              <p>${item.receivingType}</p>
+              <p>${item.receivingType.name}</p>
               <h1>Способ оплаты:</h1>
               <p>${"затычка"}</p>
               <h1>Адрес:</h1>
