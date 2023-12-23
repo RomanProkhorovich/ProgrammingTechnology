@@ -183,7 +183,8 @@ export default class Header {
     });
     // ACCOUNT LISTENER
     this.accountButton.addEventListener("click", () => {
-      if (!localStorage.getItem("Auth")) this.popupAuthForm();
+      if (!localStorage.getItem("Auth") || localStorage.getItem("Auth") !== 1)
+        this.popupAuthForm();
       else {
         window.location.href =
           location.protocol +

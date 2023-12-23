@@ -70,6 +70,7 @@ export default class Cabinet {
   }
 
   registerEvents() {
+    // TAB LISTENERS
     this.tabOrders.addEventListener("click", () => {
       document
         .querySelector(".content-cabinet-data")
@@ -87,7 +88,6 @@ export default class Cabinet {
       this.tabData.classList.remove("content-cabinet-tab-active");
       this.tabAbout.classList.remove("content-cabinet-tab-active");
     });
-
     this.tabData.addEventListener("click", () => {
       document
         .querySelector(".content-cabinet-data")
@@ -105,7 +105,6 @@ export default class Cabinet {
       this.tabData.classList.add("content-cabinet-tab-active");
       this.tabAbout.classList.remove("content-cabinet-tab-active");
     });
-
     this.tabAbout.addEventListener("click", () => {
       document
         .querySelector(".content-cabinet-data")
@@ -123,5 +122,6 @@ export default class Cabinet {
       this.tabData.classList.remove("content-cabinet-tab-active");
       this.tabAbout.classList.add("content-cabinet-tab-active");
     });
+    // LISTENER
   }
 }
