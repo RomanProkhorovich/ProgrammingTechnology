@@ -4,7 +4,6 @@ export default class Menu {
     this.dishes = [];
 
     this.getDishes();
-    this.popupDish();
   }
 
   getDishesLS() {
@@ -66,6 +65,7 @@ export default class Menu {
       });
       sessionStorage.setItem("Menu", JSON.stringify(this.dishes));
       this.addToCart();
+      this.popupDish();
     };
     xhr.send();
   }
@@ -88,7 +88,7 @@ export default class Menu {
     const plus = parent.querySelector(".plus");
     const minus = parent.querySelector(".minus");
 
-    cartQuantity.dispatchEvent(new Event("change", { bubbles: true }))
+    cartQuantity.dispatchEvent(new Event("change", { bubbles: true }));
 
     plus.addEventListener("click", (e) => {
       cartQuantity.value++;
