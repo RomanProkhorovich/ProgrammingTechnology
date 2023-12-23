@@ -150,6 +150,34 @@ export default class Menu {
         });
       });
   }
+
+  popupDish() {
+    document.querySelectorAll("content-menu-dish").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        if (e.target.closest(".content-menu-dish-cart-quantity")) return;
+        const id = e.target.closest(".content-menu-dish").dataset.menuId;
+        const dish = JSON.parse(sessionStorage.getItem("Menu")).find((item) => {
+          return item.id === id;
+        });
+        document.body.insertAdjacentHTML(
+          "afterbegin",
+          `<div class="popup">
+        <div class="popup-dish">
+            <img src="data:image/png;base64,${dish.photo}" alt="${dish.photo}">
+            <div class="popup-dish-info">
+                <h1>${dish.name}</h1>
+                <p>
+                  ${dish.description}
+                </p>
+                <p>Ккал. на порцию: <span>${dish.calories}</span> ккал.</p>
+                <p>Вес: <span>${dish.weight}</span> г.</p>
+            </div>
+        </div>
+    </div>`
+        );
+      });
+    });
+  }
 }
 
 console.log("menu script loaded");
