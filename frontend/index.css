@@ -466,10 +466,13 @@ footer {
 
 /* Data */
 .content-cabinet-tabs {
+  display: flex;
+  flex-wrap: wrap;
   margin-bottom: 1em;
 }
 
 .content-cabinet-tab {
+  flex-grow: 1;
   font-weight: 600;
   padding: 0.5em 1em;
   margin-right: 1em;
@@ -506,6 +509,7 @@ footer {
   border-radius: 1em;
   overflow: hidden;
   margin: 0.5em 0;
+  
   -webkit-border-radius: 1em;
   -moz-border-radius: 1em;
   -ms-border-radius: 1em;
@@ -513,16 +517,17 @@ footer {
 }
 
 .content-cabinet-data-field input {
-  flex-grow: 1;
+  flex-grow: 10;
+  width: 1em;
   font-size: 16px;
 }
 .content-cabinet-data-field button {
+  flex-grow: 1;
   background-color: var(--main-dark);
   font-size: 16px;
   color: #fff;
   padding: 1em 0;
   font-weight: 600;
-  width: 10%;
   transition: 0.2s ease-out;
 
   -webkit-transition: 0.2s ease-out;

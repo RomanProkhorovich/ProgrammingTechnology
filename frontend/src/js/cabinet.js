@@ -22,6 +22,21 @@ export default class Cabinet {
     xhr.send();
   }
 
+  // DISHES FROM ORDER TO HTML
+  getDishesHTML(dishes) {
+    const html = "";
+    dishes.forEach((item) => {
+      html += `<div class="content-cabinet-order-description-dish">
+      <h1 class="content-cabinet-order-description-dish-name">
+          ${item.name}
+      </h1>
+      <p class="content-cabinet-order-description-dish-price">
+          <span>${item.price}</span>р. <span>${item.count}</span>шт.
+      </p>
+  </div>`;
+    });
+  }
+
   // ORDERS RENDERING XHR
   getOrders() {
     const xhr = new XMLHttpRequest();
@@ -41,27 +56,27 @@ export default class Cabinet {
       const ordersContainer = document.querySelector(".content-cabinet-orders");
 
       orders.forEach((item) => {
+        orderTime = new Date(item.orderTime);
         ordersContainer.insertAdjacentHTML(
           "beforeend",
           `<div class="content-cabinet-order">
-          <p class="content-cabinet-order-info">Заказ №${"затычка"} от ${"затычка"} в ${"затычка"}</p>
+          <p class="content-cabinet-order-info">Заказ №${item.id} от ${
+            orderTime.getDate() + orderTime.getMonth() + orderTime.getFullYear()
+          }} в ${
+            orderTime.getHours() + ":" + orderTime.getMinutes > 9
+              ? orderTime.getMinutes()
+              : "0" + orderTime.getMinutes()
+          }</p>
           <div class="content-cabinet-order-description-dishes">
-              <div class="content-cabinet-order-description-dish">
-                  <h1 class="content-cabinet-order-description-dish-name">
-                      name
-                  </h1>
-                  <p class="content-cabinet-order-description-dish-price">
-                      <span>9999</span>р.
-                  </p>
-              </div>
+              ${getDishesHTML(item.cartItems)}
           </div>
           <div class="content-cabinet-order-description-data">
               <h1>Способ получения:</h1>
-              <p>${"затычка"}</p>
+              <p>${item.receivingType}</p>
               <h1>Способ оплаты:</h1>
               <p>${"затычка"}</p>
               <h1>Адрес:</h1>
-              <p>${"затычка"}</p>
+              <p>${item.address}</p>
           </div>
       </div>`
         );
