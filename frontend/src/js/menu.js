@@ -155,7 +155,7 @@ export default class Menu {
   }
 
   popupDish() {
-    document.querySelectorAll("content-menu-dish").forEach((item) => {
+    document.querySelectorAll(".content-menu-dish").forEach((item) => {
       item.addEventListener("click", (e) => {
         if (e.target.closest(".content-menu-dish-cart-quantity")) return;
         const id = e.target.closest(".content-menu-dish").dataset.menuId;
