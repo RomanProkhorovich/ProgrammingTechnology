@@ -28,6 +28,13 @@ public class OrderDto {
     private ReceivingTypeDto receivingType;
     private UserDto client;
 
+    public Float getSum(){
+        return cartItems
+                .stream()
+                .map(x->x.getCount()*x.getDish().getPrice())
+                .reduce(0f, Float::sum);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
