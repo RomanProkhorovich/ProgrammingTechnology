@@ -56,9 +56,8 @@ public class Order {
     private User client;
 
     //TODO: хз
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE})
     @JoinColumn(name = "order_id")
-    @Cascade(org.hibernate.annotations.CascadeType.MERGE)
     private Set<CartItem> cartItems = new LinkedHashSet<>();
 
     @Override

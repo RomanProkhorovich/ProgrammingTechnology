@@ -12,7 +12,6 @@ import java.util.List;
 public class CartItemService {
     private final CartItemRepository cartItemRepository;
     private final DishService dishService;
-    private final OrderService orderService;
 
 
     //TODO: соединить методы create  update
