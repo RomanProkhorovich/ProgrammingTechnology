@@ -210,7 +210,7 @@ header {
   flex-grow: 1;
   height: 35px;
   display: flex;
-  
+
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
@@ -1055,4 +1055,37 @@ footer {
 
 .success {
   background-color: #44ff44;
+}
+
+@media screen and (min-width: 1200px) {
+  .content-menu {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .content-menu {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .content-menu {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .header-menu {
+    display: none;
+  }
+  .header-logo {
+    order: 0;
+  }
+  .header-cart {
+    order: -1;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .content-menu {
+    grid-template-columns: repeat(1, 1fr);
+  }
 }
