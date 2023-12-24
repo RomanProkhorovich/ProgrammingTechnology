@@ -7,7 +7,8 @@ export default class Menu {
   }
 
   getDishesLS() {
-    const dishes = JSON.parse(sessionStorage.getItem("Menu"));
+    const dishes = JSON.parse(localStorage.getItem("Menu"));
+    sessionStorage.setItem("Menu", JSON.stringify(dishes));
 
     const dishesContainer = document.querySelector(".content-menu");
 
@@ -28,6 +29,7 @@ export default class Menu {
       );
     });
     this.addToCart();
+    this.popupDish();
   }
   // DISHES RENDERING XHR
   getDishes() {
@@ -108,11 +110,11 @@ export default class Menu {
         return +item.id === +dish.id;
       });
       if (fromCart) {
-        this.toQuantity(elem, id, fromCart.quantity);
+        this.toQuantity(elem, dish.id, fromCart.quantity);
         return;
       }
     } catch (E) {
-      console.log("cart is empty");
+      console.log(E);
     }
     // not in cart
     elem.addEventListener("click", (e) => {
@@ -186,7 +188,7 @@ export default class Menu {
                     <h1 class="popup-dish-info-price">
                         <span class="popup-dish-info-price-value">${dish.price}</span> р.
                     </h1>
-                    <div class="content-menu-dish-cart-quantity">
+                    <div class="popup-dish-quantity">
                         <button class="content-menu-dish-cart-button">В корзину</button>
                     </div>
                 </div>

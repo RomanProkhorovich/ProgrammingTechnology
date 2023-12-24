@@ -206,10 +206,11 @@ header {
 }
 
 .quantity {
-  max-width: 10em;
+  max-width: 200px;
   flex-grow: 1;
   height: 35px;
   display: flex;
+  
   justify-content: space-between;
   align-items: center;
   flex-wrap: nowrap;
@@ -227,8 +228,9 @@ header {
   cursor: pointer;
   user-select: none;
   font-size: 32px;
-  width: 1em;
   height: 1em;
+  width: 1em;
+  max-width: 1em;
   box-sizing: border-box;
   border-radius: 0.25em;
   background-color: var(--main-dark);
@@ -938,8 +940,8 @@ footer {
 }
 
 .popup-dish img {
-  aspect-ratio: 1/1;
   width: 100%;
+  aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 2em;
 

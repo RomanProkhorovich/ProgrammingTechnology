@@ -232,18 +232,25 @@ export default class Header {
         });
       if (quantity < 1) {
         e.target.closest(".header-cart-content-dish").remove();
-        const remaining = document.querySelector(`[data-quantity-id="${id}"]`);
+        const remaining = document.querySelectorAll(
+          `[data-quantity-id="${id}"]`
+        );
         if (remaining) {
-          const parent = remaining.parentElement;
-          if (parent.classList.contains("content-menu-dish-cart-quantity")) {
-            parent
-              .querySelector(".content-menu-dish-cart-button")
-              .classList.remove("display-none");
-            remaining.remove();
-          }
-          if (parent.classList.contains("content-summary-dish-info")) {
-            remaining.closest(".content-summary-dish").remove();
-          }
+          remaining.forEach((item) => {
+            const parent = item.parentElement;
+            if (
+              parent.classList.contains("content-menu-dish-cart-quantity") ||
+              parent.classList.contains("popup-dish-quantity")
+            ) {
+              parent
+                .querySelector(".content-menu-dish-cart-button")
+                .classList.remove("display-none");
+              item.remove();
+            }
+            if (parent.classList.contains("content-summary-dish-info")) {
+              item.closest(".content-summary-dish").remove();
+            }
+          });
         }
       }
       this.calcCart();
