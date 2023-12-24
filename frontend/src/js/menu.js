@@ -107,19 +107,17 @@ export default class Menu {
     // already in cart
     try {
       const fromCart = JSON.parse(localStorage.getItem("Cart")).find((item) => {
+        console.log(+item.id + "and" + +dish.id);
         return +item.id === +dish.id;
       });
       if (fromCart) {
         this.toQuantity(elem, dish.id, fromCart.quantity);
-        return;
       }
     } catch (E) {
       console.log(E);
     }
     // not in cart
     elem.addEventListener("click", (e) => {
-      e.preventDefault();
-
       document.querySelector("#cart-to-order").insertAdjacentHTML(
         "beforebegin",
         `<div class="header-cart-content-dish" data-cart-id="${dish.id}">
@@ -138,6 +136,13 @@ export default class Menu {
   </div>`
       );
       this.toQuantity(elem, dish.id, 1);
+      if (elem.closest(".popup")) {
+        this.toQuantity(
+          document.querySelector(`[data-menu-id="${dish.id}"] button`),
+          dish.id,
+          1
+        );
+      }
     });
   }
 
@@ -158,18 +163,16 @@ export default class Menu {
   popupDish() {
     document.querySelectorAll(".content-menu-dish").forEach((item) => {
       item.addEventListener("click", (e) => {
-        if (e.target.closest(".content-menu-dish-cart-quantity")) return;
-        const id = e.target.closest(".content-menu-dish").dataset.menuId;
+        if (
+          e.target.closest(".content-menu-dish-cart-quantity") ||
+          e.target.classList.contains("quantity-control")
+        )
+          return;
+        const id = item.dataset.menuId;
         const dish = JSON.parse(sessionStorage.getItem("Menu")).find(
           (item) => +item.id === +id
         );
 
-        if (
-          JSON.parse(localStorage.getItem("Cart")).find(
-            (item) => +item.id === +id
-          )
-        ) {
-        }
         document.body.insertAdjacentHTML(
           "afterbegin",
           `<div class="popup">
