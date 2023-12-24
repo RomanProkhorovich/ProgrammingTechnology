@@ -31,8 +31,8 @@ public class OrderController {
     private final OrderStatusService orderStatusService;
     private final ReceivingTypeService receivingTypeService;
     private final AppMailSender mailSender;
-    @Value("mail.admin")
-    private final String adminMail;
+    @Value("${mail.admin}")
+    private String adminMail;
 
     @GetMapping("/addresses")
     public ResponseEntity<List<String>> findAllAddresses(@RequestParam(name = "id", required = false) Long id) {
@@ -60,12 +60,11 @@ public class OrderController {
         Long restaurantId = dto.getRestaurantId();
         order.setRestaurant(restaurantId == null ? null : restaurantService.findRestaurantById(restaurantId));
         order.setReceivingType(receivingTypeService.findReceivingTypeByName(dto.getReceivingType()));
-        //TODO:
         order.setOrderStatus(orderStatusService.findOrderStatusByName("В обработке"));
         service.createOrder(order);
         //TODO: отослать в ресторан
-
         mailSender.sendMessage(user.getEmail(), "Заказ", "Ваш заказ от" + new Date() + " Успешно оформлен ");
+
         mailSender.sendMessage(adminMail, "Заказ", "Оформлен новый заказ ");
 
         OrderDto orderDto = mapper.toDto(order);

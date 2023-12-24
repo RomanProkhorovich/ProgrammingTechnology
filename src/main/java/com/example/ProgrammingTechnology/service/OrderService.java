@@ -24,7 +24,7 @@ public class OrderService {
     private final UserService userService;
     private final OrderStatusService orderStatusService;
     private final ReceivingTypeService receivingTypeService;
-    private final AppMailSender mailSender;
+    private final CartItemService cartItemService;
 
     //TODO: сделать проверку на количество мест, если заказали в зале
     //TODO: адрес по дефолту это адрес у клиента
@@ -33,15 +33,16 @@ public class OrderService {
         if (newOrder.getId() != null && orderRepository.findById(newOrder.getId()).isPresent()) {
             throw new IllegalArgumentException();
         }
-        if (newOrder.getAddress() != null)
-            return orderRepository.save(newOrder);
         if (newOrder.getClient() == null)
             newOrder.setClient(userService
                     .findUserByEmail(SecurityHelper.getCurrentUser().getUsername()));
 
-        if (newOrder.getClient().getAddress() != null)
+        newOrder.setCartItems(newOrder.getCartItems()
+                .stream()
+                .map(cartItemService::createOrderDish)
+                .collect(Collectors.toSet()));
+        if (newOrder.getAddress() == null && newOrder.getClient().getAddress() != null)
             newOrder.setAddress(newOrder.getClient().getAddress());
-
         return orderRepository.save(newOrder);
 
     }
@@ -68,6 +69,8 @@ public class OrderService {
         if (userId == null)
             userId = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
         List<Order> allByClient = orderRepository.findAllByClient(userService.findUserById(userId));
+
+        //TODO
         if (actual != null && actual)
             allByClient = allByClient.stream()
                     .filter(x -> !Objects.equals(x.getOrderStatus().getName(), "Завершен") &&

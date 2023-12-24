@@ -16,6 +16,11 @@ public class AppMailSender {
         message.setSubject(subject);
         message.setText(text);
         message.setTo(to);
-        mailSender.send(message);
+        try {
+            mailSender.send(message);
+        }
+        catch (Exception e){
+            System.out.println("Exc");
+        }
     }
 }
