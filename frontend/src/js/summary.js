@@ -71,6 +71,7 @@ export default class Summary {
 
   renderDishes() {
     const cartDishes = JSON.parse(localStorage.getItem("Cart"));
+    if (!cartDishes) return;
     const dishes = JSON.parse(sessionStorage.getItem("Menu"));
     cartDishes.forEach((item) => {
       const curDish = dishes.find((dish) => dish.id === item.id);

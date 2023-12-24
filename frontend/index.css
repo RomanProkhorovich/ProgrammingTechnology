@@ -589,6 +589,7 @@ footer {
 }
 
 .content-cabinet-order-description-dishes {
+  flex-basis: 40%;
   flex-grow: 1;
   padding: 1em;
 }
@@ -617,6 +618,7 @@ footer {
 }
 
 .content-cabinet-order-description-data {
+  flex-basis: 40%;
   flex-grow: 1;
   padding: 1em;
 }
@@ -640,7 +642,8 @@ footer {
 }
 
 .content-summary-delivery {
-  flex-grow: 4;
+  flex-basis: 60%;
+  flex-grow: 1;
   background-color: #fff;
   border-radius: 1em;
   padding: 1em;
@@ -653,6 +656,7 @@ footer {
 }
 
 .content-summary-paymethods {
+  flex-basis: 20%;
   flex-grow: 1;
   background-color: #fff;
   border-radius: 1em;
