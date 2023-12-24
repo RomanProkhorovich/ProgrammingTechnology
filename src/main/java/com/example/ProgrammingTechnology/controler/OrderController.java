@@ -5,13 +5,16 @@ import com.example.ProgrammingTechnology.dto.OrderDto;
 import com.example.ProgrammingTechnology.mapper.OrderMapper;
 import com.example.ProgrammingTechnology.model.CartItem;
 import com.example.ProgrammingTechnology.model.Order;
+import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.security.SecurityHelper;
 import com.example.ProgrammingTechnology.service.*;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,6 +30,9 @@ public class OrderController {
     private final DishService dishService;
     private final OrderStatusService orderStatusService;
     private final ReceivingTypeService receivingTypeService;
+    private final AppMailSender mailSender;
+    @Value("mail.admin")
+    private final String adminMail;
 
     @GetMapping("/addresses")
     public ResponseEntity<List<String>> findAllAddresses(@RequestParam(name = "id", required = false) Long id) {
@@ -41,9 +47,12 @@ public class OrderController {
         order.setCartItems(dto.getDishes().stream()
                 .map(x -> new CartItem(dishService.findDishById(x.getId()), x.getCount()))
                 .collect(Collectors.toSet()));
+
+        User user;
         if (dto.getClientId() == null) {
-            order.setClient(userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()));
-        } else order.setClient(userService.findUserById(dto.getClientId()));
+            user = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername());
+        } else user = userService.findUserById(dto.getClientId());
+        order.setClient(user);
 
         if (!dto.getAddress().isBlank())
             order.setAddress(dto.getAddress());
@@ -56,6 +65,9 @@ public class OrderController {
         service.createOrder(order);
         //TODO: отослать в ресторан
 
+        mailSender.sendMessage(user.getEmail(), "Заказ", "Ваш заказ от" + new Date() + " Успешно оформлен ");
+        mailSender.sendMessage(adminMail, "Заказ", "Оформлен новый заказ ");
+
         OrderDto orderDto = mapper.toDto(order);
         return ResponseEntity.ok(orderDto);
     }
@@ -63,7 +75,7 @@ public class OrderController {
     @GetMapping
     public List<OrderDto> findAllByUser(@PathParam(value = "user_id") Long id,
                                         @PathParam(value = "actual") boolean actual) {
-      List<Order> ordersByUser = service.findOrdersByUser(id, actual);
+        List<Order> ordersByUser = service.findOrdersByUser(id, actual);
         return mapper.toDtoList(ordersByUser);
     }
 

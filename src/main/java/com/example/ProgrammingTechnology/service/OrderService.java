@@ -24,6 +24,7 @@ public class OrderService {
     private final UserService userService;
     private final OrderStatusService orderStatusService;
     private final ReceivingTypeService receivingTypeService;
+    private final AppMailSender mailSender;
 
     //TODO: сделать проверку на количество мест, если заказали в зале
     //TODO: адрес по дефолту это адрес у клиента
@@ -42,6 +43,7 @@ public class OrderService {
             newOrder.setAddress(newOrder.getClient().getAddress());
 
         return orderRepository.save(newOrder);
+
     }
 
     public List<String> findAllAddressesByUserId(Long id){

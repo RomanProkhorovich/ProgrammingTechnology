@@ -4,6 +4,7 @@ package com.example.ProgrammingTechnology.controler;
 import com.example.ProgrammingTechnology.dto.UserDto;
 import com.example.ProgrammingTechnology.mapper.UserMapper;
 import com.example.ProgrammingTechnology.model.Role;
+import com.example.ProgrammingTechnology.security.SecurityHelper;
 import com.example.ProgrammingTechnology.service.UserService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,11 @@ public class UserController {
     private final UserService service;
     private final UserMapper mapper;
 
-    @GetMapping("/{id}")
-    public UserDto findById(@PathVariable Long id) {
+    @GetMapping()
+    public UserDto findById(@RequestParam(name = "id",required = false) Long id) {
+        if (id == null)
+            id = service.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
+
         return mapper.toDto(service.findUserById(id));
     }
 
@@ -66,7 +70,7 @@ public class UserController {
         return mapper.toDtoList(service.findUsersByRole(roleId));
     }
 
-    @GetMapping
+    @GetMapping("/all")
     public List<UserDto> findAll() {
         return mapper.toDtoList(service.findUsers());
     }
