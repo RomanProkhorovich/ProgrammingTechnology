@@ -1,5 +1,6 @@
 package com.example.ProgrammingTechnology.service;
 
+import com.example.ProgrammingTechnology.exception.AttributeException;
 import com.example.ProgrammingTechnology.model.CartItem;
 import com.example.ProgrammingTechnology.model.Dish;
 import com.example.ProgrammingTechnology.repository.CartItemRepository;
@@ -19,24 +20,23 @@ public class CartItemService {
     //создание заказанного блюда
     public CartItem createOrderDish(CartItem newOrderDish) {
         //if (cartItemRepository.findById(newOrderDish.getId()).isEmpty()) {
-            return cartItemRepository.save(newOrderDish);
+        return cartItemRepository.save(newOrderDish);
         //}
         //throw new IllegalArgumentException();
     }
 
     //TODO: на проверку
     public CartItem createOrUpdate(CartItem cartItem) {
-        if(cartItem.getId()==null) {
+        if (cartItem.getId() == null) {
             return createOrderDish(cartItem);
         }
         return updateCartItem(cartItem);
     }
 
-    //TODO: на проверку
     public CartItem updateCartItem(CartItem upCartItem) {
-        CartItem cartItem = cartItemRepository.findById(upCartItem.getId()).orElseThrow();
+        CartItem cartItem = cartItemRepository.findById(upCartItem.getId()).orElseThrow(() -> new AttributeException("", "id", upCartItem.getId()));
         Dish dish = dishService.findDishById(upCartItem.getId());
-        if(upCartItem.getCount()>=0 && dish!=null) {
+        if (upCartItem.getCount() >= 0 && dish != null) {
             return cartItemRepository.save(upCartItem);
         }
         throw new IllegalArgumentException();

@@ -34,7 +34,7 @@ export default class Admin {
       let theadHTML = "";
 
       for (let i = 0; i < keys.length; i++) {
-        if (keys[i] === "id") continue;
+        if (keys[i] === "id" || keys[i] === "password") continue;
         theadHTML += `<th>${
           keys[i].charAt(0).toUpperCase() + keys[i].slice(1)
         }</th>`;
@@ -48,7 +48,7 @@ export default class Admin {
         let row = "";
 
         for (let i = 0; i < keys.length; i++) {
-          if (keys[i] === "id") continue;
+          if (keys[i] === "id" || keys[i] === "password") continue;
           if (keys[i] === "photo") {
             row += `<td><img src="data:image/png;base64,${
               item[keys[i]]

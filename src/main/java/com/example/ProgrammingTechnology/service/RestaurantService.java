@@ -38,11 +38,10 @@ public class RestaurantService {
         Menu menu = menuService.findMenuById(restaurant.getMenu().getId());
         User manager = userService.findUserById(restaurant.getManager().getId());
         if(restaurant.getName().isBlank()
-                || restaurant.getName().isEmpty()
-                || restaurant.getAddress().isEmpty()
                 || restaurant.getAddress().isBlank()
-                || !manager.getRole().equals("Manager")
-                || restaurant.getPeopleCount()<0) {
+                || !manager.getRole().getName().equals("Manager")
+                || restaurant.getPeopleCount()<0
+                || !menu.isActual()) {
             throw new IllegalArgumentException();
         }
         if(restaurant.getId()==null) {
