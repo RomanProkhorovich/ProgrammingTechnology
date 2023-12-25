@@ -38,7 +38,7 @@ export default class Admin {
         keys.forEach((key) => {
           if (key === "id") return;
           const value = item[key];
-          if (typeof value !== "object") {
+          if (typeof value !== "object" || value === null) {
             row += `<td>${value}</td>`;
             return;
           }
