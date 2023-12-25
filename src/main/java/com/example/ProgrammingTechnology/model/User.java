@@ -29,7 +29,7 @@ public class User {
     private String surname;
 
     //TODO: сделать по дефолту клиента
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 

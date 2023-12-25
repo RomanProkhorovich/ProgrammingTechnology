@@ -88,7 +88,7 @@ public class DishesConfig {
     @Bean
     int addUsers() {
         User user = new User();
-        user.setRole(roleService.findRoleByName("Admin"));
+        user.setRole(roleService.findRoleByName("Client"));
         user.setPassword(passwordEncoder.encode("password"));
         user.setLastname("Чернов");
         user.setFirstname("Даниил");
@@ -102,7 +102,7 @@ public class DishesConfig {
                 .firstname("Абуля")
                 .surname("Иванович")
                 .lastname("Курьеров")
-                .role(new Role("Courier"))
+                .role(roleService.findRoleByName("Courier"))
                 .email("abul.nadel@example.ru")
                 .password("hehe")
                 .build();
@@ -113,7 +113,7 @@ public class DishesConfig {
                 .firstname("Олег")
                 .surname("Челикович")
                 .lastname("Анимов")
-                .role(new Role("Admin"))
+                .role(roleService.findRoleByName("Admin"))
                 .email("adik.tripa@example.ru")
                 .password("loski")
                 .build();
@@ -124,7 +124,7 @@ public class DishesConfig {
                 .firstname("Кузя")
                 .surname("Михайлович")
                 .lastname("Мужыков")
-                .role(new Role("Manager"))
+                .role(roleService.findRoleByName("Manager"))
                 .email("kyza.misha@example.ru")
                 .password("vrotee")
                 .build();
