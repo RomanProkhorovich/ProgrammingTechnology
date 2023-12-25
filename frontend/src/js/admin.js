@@ -18,7 +18,7 @@ export default class Admin {
         return;
       }
 
-      const response = JSON.parse(xhr.responseText());
+      const response = JSON.parse(xhr.responseText);
       const keys = Object.keys(response[0]);
 
       // thead HTML
