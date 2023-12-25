@@ -31,10 +31,6 @@ export default class Admin {
         }</th>`;
       }
 
-      // keys.forEach((item) => {
-      //   theadHTML += `<th>${item.charAt(0).toUpperCase() + item.slice(1)}</th>`;
-      // });
-
       // tbody HTML
 
       let tbodyHTML = "";
@@ -43,35 +39,21 @@ export default class Admin {
         let row = "";
 
         for (let i = 0; i < keys.length; i++) {
-          if (keys[i] === "id") return;
+          if (keys[i] === "id") continue;
           const value = item[keys[i]];
           if (typeof value !== "object" || value === null) {
             let date = new Date(value);
             if (isNaN(date)) row += `<td>${value}</td>`;
             else row += `<td>${date.toLocaleString()}</td>`
-            return;
+            continue;
           }
           if (!Array.isArray(value)) {
             row += `<td>${value.id}</td>`;
-            return;
+            continue;
           }
           console.log(value.map((item) => item.id).join(", "));
           row += `<td>${value.map((item) => item.id).join(", ")}</td>`;
         }
-
-        // keys.forEach((key) => {
-        //   if (key === "id") return;
-        //   const value = item[key];
-        //   if (typeof value !== "object" || value === null) {
-        //     row += `<td>${value}</td>`;
-        //     return;
-        //   }
-        //   if (!Array.isArray(value)) {
-        //     row += `<td>${value.id}</td>`;
-        //     return;
-        //   }
-        //   row += `<td>${value.map((item) => item.id).join(", ")}</td>`;
-        // });
 
         tbodyHTML += `<tr data-id=${item.id}>${row}</tr>`;
       });
