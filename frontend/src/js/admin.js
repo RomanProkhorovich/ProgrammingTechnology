@@ -53,6 +53,7 @@ export default class Admin {
             row += `<td>${value.id}</td>`;
             continue;
           }
+          console.log(value.map((item) => item.id).join(", "));
           row += `<td>${value.map((item) => item.id).join(", ")}</td>`;
         }
 
