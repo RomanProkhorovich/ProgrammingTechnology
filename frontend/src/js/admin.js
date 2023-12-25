@@ -25,6 +25,7 @@ export default class Admin {
       let theadHTML = "";
 
       for (let i = 0; i < keys.length; i++) {
+        if (keys[i] === "id") continue;
         theadHTML += `<th>${
           keys[i].charAt(0).toUpperCase() + keys[i].slice(1)
         }</th>`;
