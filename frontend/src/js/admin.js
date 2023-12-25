@@ -6,6 +6,7 @@ export default class Admin {
     dropdownHandler();
     this.table = document.querySelector("#content-admin-table");
     this.options = document.querySelector(".dropdown-options");
+    this.inputListener();
     this.endpoint = "users/all";
     this.getTable(this.endpoint);
 
@@ -30,6 +31,19 @@ export default class Admin {
       `<a href="#" data-endpoint="users/all">Пользователи</a>
     <a href="#" data-endpoint="orders/all">Заказы</a>`
     );
+  }
+
+  inputListener() {
+    const inputs = document.querySelectorAll("#content-admin-table input");
+    console.log(inputs);
+    inputs.forEach((item) => {
+      item.addEventListener("change", (e) => {
+        console.log(e.target.closest("td"));
+        e.target.closest("td").style.backgroundColor = "#00ff0020";
+        e.target.closest("tr").style.backgroundColor = "#00ff0020";
+        e.target.closest("tr").classList.add("changed");
+      });
+    });
   }
 
   getTable(tableName) {
@@ -111,6 +125,8 @@ export default class Admin {
       <tbody>
           ${tbodyHTML}
       </tbody>`;
+
+      this.inputListener();
     };
     xhr.send();
   }

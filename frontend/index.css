@@ -891,6 +891,12 @@ footer {
   object-fit: cover;
 }
 
+#content-admin-table input{
+  background-color: transparent;
+  font-size: 16px;
+  width: 100%;
+}
+
 #content-admin-table td,
 th {
   vertical-align: top;

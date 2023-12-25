@@ -21,6 +21,7 @@ export const dropdownHandler = () => {
   // DROPDOWNS OPTION
   dropdownOptions.forEach((item) => {
     item.addEventListener("click", (e) => {
+      if (e.target.textContent === "Добавить адрес") return;
       const container = e.target.closest(".dropdown");
       container.querySelector(".dropdown-value").textContent =
         e.target.textContent;

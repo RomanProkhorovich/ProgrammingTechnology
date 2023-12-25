@@ -14,6 +14,7 @@ export default class Summary {
     );
     this.dropdown = document.querySelectorAll(".dropdown");
     this.dropdownOptions = document.querySelectorAll(".dropdown-options");
+    this.addressButton = document.querySelector("#add-address");
 
     this.renderDishes();
     this.registerEvents();
@@ -125,10 +126,12 @@ export default class Summary {
       const response = JSON.parse(xhrAddresses.responseText);
       const value = document.querySelector("#order-address");
       const curDropdown = value.closest(".dropdown");
-      const options = curDropdown.querySelector(".dropdown-options");
-      curDropdown.querySelector(".dropdown-value").textContent = response[0];
+      const options = curDropdown.querySelector(".dropdown-options a");
+      curDropdown.querySelector(".dropdown-value").textContent = response[0]
+        ? response[0]
+        : "Вы ещё не добавили адрес";
       response.forEach((item) => {
-        options.insertAdjacentHTML("beforeend", `<a href="#">${item}</a>`);
+        options.insertAdjacentHTML("beforebegin", `<a href="#">${item}</a>`);
       });
     };
     xhrAddresses.send();
@@ -161,6 +164,52 @@ export default class Summary {
 
     //ORDER
     this.orderButton.addEventListener("click", this.sendOrder);
+
+    this.addressButton.addEventListener("click", () => {
+      document.body.insertAdjacentHTML(
+        "afterbegin",
+        `<div class="popup hidden">
+        <form id="address-form">
+            <h1>
+                Добавление адреса
+            </h1>
+            <input type="text" placeholder="Адрес" name="address" value="">
+            <button id="confirm-button" type="button">Добавить</button>
+        </form>
+    </div>`
+      );
+      const popup = document.querySelector(".popup");
+      setTimeout(() => {
+        popup.classList.remove("hidden");
+      }, 0);
+      popup.querySelector("#confirm-button").addEventListener("click", () => {
+        const newAddress = popup.querySelector("input").value;
+        document.querySelector("#order-address").textContent = newAddress;
+        document
+          .querySelector("#add-address")
+          .insertAdjacentHTML("beforebegin", `<a href="#">${newAddress}</a>`);
+
+        const xhr = new XMLHttpRequest();
+        xhr.open("POST", "http://localhost:8080/api/v1/orders/addresses");
+        const user = JSON.parse(localStorage.getItem("User"));
+        const email = user.username;
+        const pass = user.password;
+        xhr.setRequestHeader(
+          "Authorization",
+          "Basic " + btoa(`${email}:${pass}`)
+        );
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = () => {
+          if (xhr.readyState !== 4 || xhr.status !== 200) {
+            return;
+          }
+          console.log(JSON.parse(xhr.responseText));
+        };
+        xhr.send();
+
+        popup.remove();
+      });
+    });
   }
 }
 
