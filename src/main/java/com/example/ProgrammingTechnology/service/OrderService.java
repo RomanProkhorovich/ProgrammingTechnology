@@ -52,12 +52,22 @@ public class OrderService {
     public Order createOrUpdate(Order order) {
         OrderStatus orderStatus = orderStatusService.findOrderStatusById(order.getOrderStatus().getId());
         ReceivingType receivingType = receivingTypeService.findReceivingTypeById(order.getReceivingType().getId());
+
+        if(!receivingType.getName().equals("Курьер")) {
+            order.setCourier(null);
+        }
+        if(receivingType.getName().equals("Курьер") && order.getCourier()!=null && !order.getCourier().getRole().getName().equals("Courier")) {
+            throw new IllegalArgumentException();
+        }
+        if(receivingType.getName().equals("Курьер")
+                && orderStatus.getName().equals("Передан курьеру")
+                && order.getCourier()==null) {
+            throw new IllegalArgumentException();
+        }
+
         User courier = userService.findUserById(order.getCourier().getId());
-        User client = userService.findUserById(order.getClient().getId());
         if(!courier.getRole().getName().equals("Courier")
-                || order.getAddress().isEmpty()
-                || order.getAddress().isBlank()
-                || !client.getRole().getName().equals("Client")) {
+                || order.getAddress().isBlank()) {
             throw new IllegalArgumentException();
         }
         if(order.getId()==null) {
