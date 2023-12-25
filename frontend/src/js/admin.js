@@ -43,6 +43,7 @@ export default class Admin {
           const value = item[keys[i]];
           if (value === null) {
             row += `<td>-</td>`;
+            continue;
           }
           if (typeof value !== "object") {
             let date = new Date(value);
