@@ -63,6 +63,13 @@ public class UserService {
         return userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException(""));
     }
 
+    public User findUserByEmailOrPhone(String arg) {
+        if (arg.contains("@"))
+            return userRepository.findByEmail(arg).orElseThrow(() -> new UsernameNotFoundException(""));
+        else
+            return userRepository.findByPhone(arg).orElseThrow(() -> new UsernameNotFoundException(""));
+    }
+
     public User findUserByPhone(String phone) {
         return userRepository.findByPhone(phone).orElseThrow();
     }

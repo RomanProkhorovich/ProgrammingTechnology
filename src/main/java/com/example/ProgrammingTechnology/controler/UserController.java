@@ -23,7 +23,7 @@ public class UserController {
     @GetMapping()
     public UserDto findById(@RequestParam(name = "id",required = false) Long id) {
         if (id == null)
-            id = service.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
+            id = service.findUserByEmailOrPhone(SecurityHelper.getCurrentUser().getUsername()).getId();
 
         return mapper.toDto(service.findUserById(id));
     }
@@ -74,6 +74,13 @@ public class UserController {
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('Admin','Manager')")
     public List<UserDto> findAll() {
-        return mapper.toDtoList(service.findUsers());
+        if (SecurityHelper.getCurrentUserAuthority().equals("Admin"))
+            return mapper.toDtoList(service.findUsers());
+        else{
+            var couriers = service.findUsersByRole(2l);
+            var clients = service.findUsersByRole(1l);
+            clients.addAll(couriers);
+            return mapper.toDtoList(clients);
+        }
     }
 }
