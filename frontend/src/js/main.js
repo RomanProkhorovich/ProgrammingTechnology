@@ -176,6 +176,53 @@ export default class Header {
   }
 
   registerEvents() {
+    // BUTTON FOR ROLE
+    if (localStorage.getItem("User")) {
+      role = JSON.parse(localStorage.getItem("User")).role;
+      const i = new Image();
+      i.onerror = () => {
+        i.src = "../svg/admin-svgrepo-com.svg";
+      };
+      i.src = "./src/svg/admin-svgrepo-com.svg";
+      switch (role) {
+        case "Courier":
+          this.accountButton.insertAdjacentHTML(
+            "beforebegin",
+            `<div class="header-account">
+                <a href="./src/html/admin.html">
+                    <img class="header-account-logo" src="${i.src}" alt="">
+                </a>
+            </div>`
+          );
+
+          break;
+        case "Admin":
+          this.accountButton.insertAdjacentHTML(
+            "beforebegin",
+            `<div class="header-account">
+                <a href="./src/html/admin.html">
+                    <img class="header-account-logo" src="${i.src}" alt="">
+                </a>
+            </div>`
+          );
+
+          break;
+        case "Manager":
+          this.accountButton.insertAdjacentHTML(
+            "beforebegin",
+            `<div class="header-account">
+                <a href="./src/html/admin.html">
+                    <img class="header-account-logo" src="${i.src}" alt="">
+                </a>
+            </div>`
+          );
+
+          break;
+
+        default:
+          break;
+      }
+    }
     // HIDE POPUP/CART
     document.body.addEventListener("click", (e) => {
       if (e.target.classList.contains("popup")) {
