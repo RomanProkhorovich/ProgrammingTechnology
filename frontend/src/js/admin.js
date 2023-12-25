@@ -41,10 +41,13 @@ export default class Admin {
         for (let i = 0; i < keys.length; i++) {
           if (keys[i] === "id") continue;
           const value = item[keys[i]];
-          if (typeof value !== "object" || value === null) {
+          if (value === null) {
+            row += `<td>-</td>`;
+          }
+          if (typeof value !== "object") {
             let date = new Date(value);
             if (isNaN(date)) row += `<td>${value}</td>`;
-            else row += `<td>${date.toLocaleString()}</td>`
+            else row += `<td>${date.toLocaleString()}</td>`;
             continue;
           }
           if (!Array.isArray(value)) {
