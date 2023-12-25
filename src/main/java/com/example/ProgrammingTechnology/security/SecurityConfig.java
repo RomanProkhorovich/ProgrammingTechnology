@@ -63,6 +63,7 @@ public class SecurityConfig {
                 .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("api/v1/menus/actual").permitAll()
                         .anyRequest().authenticated())
                 .build();
     }

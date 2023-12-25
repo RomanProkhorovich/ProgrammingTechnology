@@ -12,6 +12,8 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
@@ -71,6 +73,11 @@ public class OrderController {
         return ResponseEntity.ok(orderDto);
     }
 
+    @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('Admin','Manager')")
+    public ResponseEntity<List<OrderDto>> fundAll(){
+        return ResponseEntity.ok(mapper.toDtoList(service.findAll()));
+    }
     @GetMapping
     public List<OrderDto> findAllByUser(@PathParam(value = "user_id") Long id,
                                         @PathParam(value = "actual") boolean actual) {

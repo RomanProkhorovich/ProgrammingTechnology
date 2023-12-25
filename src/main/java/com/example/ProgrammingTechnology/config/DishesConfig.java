@@ -88,7 +88,7 @@ public class DishesConfig {
     @Bean
     int addUsers() {
         User user = new User();
-        user.setRole(roleService.findRoleByName("Client"));
+        user.setRole(roleService.findRoleByName("Admin"));
         user.setPassword(passwordEncoder.encode("password"));
         user.setLastname("Чернов");
         user.setFirstname("Даниил");
