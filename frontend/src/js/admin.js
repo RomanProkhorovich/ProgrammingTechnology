@@ -43,15 +43,17 @@ export default class Admin {
         let row = "";
 
         for (let i = 0; i < keys.length; i++) {
-          if (keys[i] === "id") continue;
+          if (keys[i] === "id") return;
           const value = item[keys[i]];
           if (typeof value !== "object" || value === null) {
-            row += `<td>${value}</td>`;
-            continue;
+            let date = new Date(value);
+            if (isNaN(date)) row += `<td>${value}</td>`;
+            else row += `<td>${date.toLocaleString()}</td>`
+            return;
           }
           if (!Array.isArray(value)) {
             row += `<td>${value.id}</td>`;
-            continue;
+            return;
           }
           console.log(value.map((item) => item.id).join(", "));
           row += `<td>${value.map((item) => item.id).join(", ")}</td>`;
