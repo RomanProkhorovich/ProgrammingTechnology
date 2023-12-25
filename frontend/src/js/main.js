@@ -106,10 +106,10 @@ export default class Header {
       }
       localStorage.setItem("Auth", 1);
       console.log(JSON.parse(xhr.responseText));
+
+      authForm.closest(".popup").remove();
     };
     xhr.send(JSON.stringify(params));
-
-    authForm.closest(".popup").remove();
   }
 
   // SWITCH TO REGISTRATION
