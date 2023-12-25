@@ -97,6 +97,38 @@ public class DishesConfig {
         user.setAddress("г. Самара, ул. Мичурина, д. 375, кв. 19");
         user.setPhone("89095492710");
         user = userService.createUser(user);
+        User cur = User.builder()
+                .phone("89274810058")
+                .firstname("Абуля")
+                .surname("Иванович")
+                .lastname("Курьеров")
+                .role(new Role("Courier"))
+                .email("abul.nadel@example.ru")
+                .password("hehe")
+                .build();
+        cur = userService.createUser(cur);
+
+        User admin = User.builder()
+                .phone("89871029411")
+                .firstname("Олег")
+                .surname("Челикович")
+                .lastname("Анимов")
+                .role(new Role("Admin"))
+                .email("adik.tripa@example.ru")
+                .password("loski")
+                .build();
+        admin = userService.createUser(admin);
+
+        User manager = User.builder()
+                .phone("89991105928")
+                .firstname("Кузя")
+                .surname("Михайлович")
+                .lastname("Мужыков")
+                .role(new Role("Manager"))
+                .email("kyza.misha@example.ru")
+                .password("vrotee")
+                .build();
+
 
        /* user.setId(null);
         userService.createUser(user);*/
