@@ -39,7 +39,7 @@ public class OrderController {
     @GetMapping("/addresses")
     public ResponseEntity<List<String>> findAllAddresses(@RequestParam(name = "id", required = false) Long id) {
         if (id == null)
-            id = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
+            id = userService.findUserByEmailOrPhone(SecurityHelper.getCurrentUser().getUsername()).getId();
         return ResponseEntity.ok(service.findAllAddressesByUserId(id));
     }
 
@@ -52,7 +52,7 @@ public class OrderController {
 
         User user;
         if (dto.getClientId() == null) {
-            user = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername());
+            user = userService.findUserByEmailOrPhone(SecurityHelper.getCurrentUser().getUsername());
         } else user = userService.findUserById(dto.getClientId());
         order.setClient(user);
 

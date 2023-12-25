@@ -22,10 +22,10 @@ public class DBConfig {
 
     @Bean
     public int createRoles(){
-        roleService.createRole(new Role("Client"));
-        roleService.createRole(new Role("Courier"));
-        roleService.createRole(new Role("Admin"));
-        roleService.createRole(new Role("Manager"));
+        roleService.createRole(new Role(1l,"Client"));
+        roleService.createRole(new Role(2l,"Courier"));
+        roleService.createRole(new Role(3l,"Admin"));
+        roleService.createRole(new Role(4l,"Manager"));
         return 1;
     }
 
