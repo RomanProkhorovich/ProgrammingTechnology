@@ -892,6 +892,8 @@ footer {
 
 #content-admin-table td,
 th {
+  vertical-align: top;
+  text-align: left;
   padding: 0.5em;
   border: solid 1px var(--main-dark);
   border-collapse: collapse;
