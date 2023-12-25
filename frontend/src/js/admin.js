@@ -23,6 +23,10 @@ export default class Admin {
       }
 
       const response = JSON.parse(xhr.responseText);
+      if (!response[0]) {
+        this.table.innerHTML = "Таблица пуста";
+        return;
+      }
       const keys = Object.keys(response[0]);
 
       // thead HTML
@@ -44,6 +48,9 @@ export default class Admin {
 
         for (let i = 0; i < keys.length; i++) {
           if (keys[i] === "id") continue;
+          if (keys[i] === "photo") {
+            row += `<td><img src="data:image/png;base64,${photo}"></td>`;
+          }
           const value = item[keys[i]];
           if (value === null) {
             row += `<td>-</td>`;
