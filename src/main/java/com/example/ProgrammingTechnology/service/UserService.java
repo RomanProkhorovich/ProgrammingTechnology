@@ -31,9 +31,7 @@ public class UserService {
     public User createOrUpdate(User user) {
         Role role = roleRepository.findById(user.getRole().getId()).orElseThrow();
         if(user.getFirstname().isBlank()
-                || user.getFirstname().isEmpty()
-                || user.getLastname().isBlank()
-                || user.getLastname().isEmpty()) {
+                || user.getLastname().isBlank()) {
             throw new IllegalArgumentException();
         }
         if(user.getId()==null) {
