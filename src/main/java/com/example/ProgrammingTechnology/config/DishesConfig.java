@@ -110,7 +110,6 @@ public class DishesConfig {
         item = cartItemService.createOrderDish(item);
         order.setCartItems(Set.of(item));
         order.setOrderTime(LocalDateTime.now());
-
         var a = orderService.createOrder(order);
 
         order.setAddress("адрес1");

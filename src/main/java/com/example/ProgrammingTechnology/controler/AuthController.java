@@ -2,25 +2,22 @@ package com.example.ProgrammingTechnology.controler;
 
 import com.example.ProgrammingTechnology.dto.AuthDto;
 import com.example.ProgrammingTechnology.dto.RegistrationDto;
-import com.example.ProgrammingTechnology.dto.UserDto;
 import com.example.ProgrammingTechnology.mapper.UserMapper;
 import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.service.RoleService;
 import com.example.ProgrammingTechnology.service.UserService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequiredArgsConstructor
@@ -43,8 +40,7 @@ public class AuthController {
             var a = manager.authenticate(token);
             return ResponseEntity.ok(service.loadUserByUsername(authDto.getEmail()));
 
-        }
-        catch (AuthenticationException e){
+        } catch (AuthenticationException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User doesnt exists");
         }
     }

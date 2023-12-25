@@ -16,11 +16,9 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-@CrossOrigin(origins = "http://localhost:63342", maxAge = 3600)
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final RestaurantService restaurantService;
     private final UserService userService;
     private final OrderStatusService orderStatusService;
     private final ReceivingTypeService receivingTypeService;
@@ -41,6 +39,7 @@ public class OrderService {
                 .stream()
                 .map(cartItemService::createOrderDish)
                 .collect(Collectors.toSet()));
+        newOrder.setOrderStatus(orderStatusService.findOrderStatusByName("В обработке"));
         if (newOrder.getAddress() == null && newOrder.getClient().getAddress() != null)
             newOrder.setAddress(newOrder.getClient().getAddress());
         return orderRepository.save(newOrder);
