@@ -42,15 +42,15 @@ export default class Admin {
         let row = "";
 
         for (let i = 0; i < keys.length; i++) {
-          if (keys[i] === "id") return;
+          if (keys[i] === "id") continue;
           const value = item[keys[i]];
           if (typeof value !== "object" || value === null) {
             row += `<td>${value}</td>`;
-            return;
+            continue;
           }
           if (!Array.isArray(value)) {
             row += `<td>${value.id}</td>`;
-            return;
+            continue;
           }
           row += `<td>${value.map((item) => item.id).join(", ")}</td>`;
         }
