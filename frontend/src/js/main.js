@@ -178,7 +178,7 @@ export default class Header {
   registerEvents() {
     // BUTTON FOR ROLE
     if (localStorage.getItem("User")) {
-      role = JSON.parse(localStorage.getItem("User")).role;
+      const role = JSON.parse(localStorage.getItem("User")).role;
       const i = new Image();
       i.onerror = () => {
         i.src = "../svg/admin-svgrepo-com.svg";
