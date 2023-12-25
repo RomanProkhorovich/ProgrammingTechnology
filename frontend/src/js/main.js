@@ -179,45 +179,49 @@ export default class Header {
     // BUTTON FOR ROLE
     if (localStorage.getItem("User")) {
       const role = JSON.parse(localStorage.getItem("User")).role;
-      const i = new Image();
-      i.onerror = () => {
-        i.src = "../svg/admin-svgrepo-com.svg";
-      };
-      i.src = "./src/svg/admin-svgrepo-com.svg";
+      const href = window.location.href.includes("src/")
+        ? "../html/"
+        : "./src/html/";
+      const src = window.location.href.includes("src/")
+        ? "../svg/"
+        : "./src/svg/";
       switch (role) {
         case "Courier":
-          console.log(i.src);
           this.accountButton.insertAdjacentHTML(
             "beforebegin",
             `<div class="header-account">
-                <a href="./src/html/admin.html">
-                    <img class="header-account-logo" src="${i.src}" alt="">
-                </a>
-            </div>`
+                  <a href="${href}">
+                      <img class="header-account-logo" src="${
+                        src + "delivery-svgrepo-com.svg"
+                      }" alt="">
+                  </a>
+              </div>`
           );
 
           break;
         case "Admin":
-          console.log(i.src);
           this.accountButton.insertAdjacentHTML(
             "beforebegin",
             `<div class="header-account">
-                <a href="./src/html/admin.html">
-                    <img class="header-account-logo" src="${i.src}" alt="">
-                </a>
-            </div>`
+                  <a href="${href + "admin.html"}">
+                      <img class="header-account-logo" src="${
+                        src + "admin-svgrepo-com.svg"
+                      }" alt="">
+                  </a>
+              </div>`
           );
 
           break;
         case "Manager":
-          console.log(i.src);
           this.accountButton.insertAdjacentHTML(
             "beforebegin",
             `<div class="header-account">
-                <a href="./src/html/admin.html">
-                    <img class="header-account-logo" src="${i.src}" alt="">
-                </a>
-            </div>`
+                  <a href="${href + "admin.html"}">
+                      <img class="header-account-logo" src="${
+                        src + "admin-svgrepo-com.svg"
+                      }" alt="">
+                  </a>
+              </div>`
           );
 
           break;
