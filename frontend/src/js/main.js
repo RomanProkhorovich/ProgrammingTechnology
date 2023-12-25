@@ -179,18 +179,25 @@ export default class Header {
     // BUTTON FOR ROLE
     if (localStorage.getItem("User")) {
       const role = JSON.parse(localStorage.getItem("User")).role;
-      const href = window.location.href.includes("src/")
-        ? "../html/"
-        : "./src/html/";
-      const src = window.location.href.includes("src/")
-        ? "../svg/"
-        : "./src/svg/";
+      let href, src;
+      if (
+        document
+          .querySelector(".header-account a")
+          .getAttribute("href")
+          .includes("src/")
+      ) {
+        src = "./src/svg/";
+        href = "./src/html/";
+      } else {
+        src = "../svg/";
+        href = "../html/";
+      }
       switch (role) {
         case "Courier":
           this.accountButton.insertAdjacentHTML(
             "beforebegin",
             `<div class="header-account">
-                  <a href="${href}">
+                  <a href="${href + "courier.html"}">
                       <img class="header-account-logo" src="${
                         src + "delivery-svgrepo-com.svg"
                       }" alt="">
