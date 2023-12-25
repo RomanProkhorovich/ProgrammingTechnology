@@ -45,7 +45,9 @@ export default class Admin {
             row += `<td>-</td>`;
             continue;
           }
-          if (typeof value==='number')
+          if (typeof value === "number") {
+            row += `<td>${value}</td>`;
+          }
           if (typeof value !== "object") {
             let date = new Date(value);
             if (isNaN(date)) row += `<td>${value}</td>`;
