@@ -191,16 +191,11 @@ export default class Header {
       }
     });
     // ACCOUNT LISTENER
-    this.accountButton.addEventListener("click", () => {
-      if (!localStorage.getItem("Auth") || +localStorage.getItem("Auth") !== +1)
-        this.popupAuthForm();
-      else {
-        window.location.href =
-          location.protocol +
-          "//" +
-          location.host +
-          "/frontend/src/html/cabinet.html";
-      }
+    this.accountButton.addEventListener("click", (e) => {
+      if (localStorage.getItem("Auth") && +localStorage.getItem("Auth") === +1)
+        return;
+      e.preventDefault();
+      this.popupAuthForm();
     });
     // SHOW/HIDE CART
     this.cartButton.addEventListener("click", () => {
