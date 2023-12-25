@@ -49,7 +49,10 @@ export default class Admin {
         for (let i = 0; i < keys.length; i++) {
           if (keys[i] === "id") continue;
           if (keys[i] === "photo") {
-            row += `<td><img src="data:image/png;base64,${item[keys[i]]}"></td>`;
+            row += `<td><img src="data:image/png;base64,${
+              item[keys[i]]
+            }"></td>`;
+            continue;
           }
           const value = item[keys[i]];
           if (value === null) {
