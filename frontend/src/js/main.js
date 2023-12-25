@@ -105,6 +105,7 @@ export default class Header {
         return;
       }
       localStorage.setItem("Auth", 1);
+      localStorage.setItem("User", );
       console.log(JSON.parse(xhr.responseText));
 
       authForm.closest(".popup").remove();
@@ -183,7 +184,7 @@ export default class Header {
     });
     // ACCOUNT LISTENER
     this.accountButton.addEventListener("click", () => {
-      if (!localStorage.getItem("Auth") || localStorage.getItem("Auth") !== 1)
+      if (!localStorage.getItem("Auth") || +localStorage.getItem("Auth") !== +1)
         this.popupAuthForm();
       else {
         window.location.href =
