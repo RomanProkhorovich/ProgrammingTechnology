@@ -60,7 +60,7 @@ export default class Admin {
             continue;
           }
           if (!Array.isArray(value)) {
-            row += `<td>${value.id}</td>`;
+            row += `<td>${value.name ? value.name : value.id}</td>`;
             continue;
           }
           console.log(value.map((item) => item.id).join(", "));
