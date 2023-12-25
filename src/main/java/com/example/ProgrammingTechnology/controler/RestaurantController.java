@@ -7,6 +7,7 @@ import com.example.ProgrammingTechnology.service.RestaurantService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,7 +25,8 @@ public class RestaurantController {
         return ResponseEntity.ok(mapper.toDtoList(service.saveAll(mapper.toModelList(restaurantDtoList))));
     }
 
-    @GetMapping
+    @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('Admin','Manager')")
     public List<RestaurantDto> findAll() {
         return mapper.toDtoList(service.findRestaurants());
     }

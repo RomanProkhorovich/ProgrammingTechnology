@@ -8,6 +8,7 @@ import com.example.ProgrammingTechnology.security.SecurityHelper;
 import com.example.ProgrammingTechnology.service.UserService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -71,6 +72,7 @@ public class UserController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('Admin','Manager')")
     public List<UserDto> findAll() {
         return mapper.toDtoList(service.findUsers());
     }

@@ -78,6 +78,10 @@ public class OrderService {
         return allByClient;
     }
 
+    public List<Order> findAll(){
+        return orderRepository.findAll();
+    }
+
     //поиск заказов по статусу
     public List<Order> findOrderByOrderStatus(Long orderStatusId) {
         return orderRepository.findAllByOrderStatus(orderStatusService.findOrderStatusById(orderStatusId));

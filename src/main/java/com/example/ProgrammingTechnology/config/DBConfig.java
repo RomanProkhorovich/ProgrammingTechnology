@@ -24,7 +24,7 @@ public class DBConfig {
     public int createRoles(){
         roleService.createRole(new Role("Client"));
         roleService.createRole(new Role("Courier"));
-        roleService.createRole(new Role("Administration"));
+        roleService.createRole(new Role("Admin"));
         roleService.createRole(new Role("Manager"));
         return 1;
     }

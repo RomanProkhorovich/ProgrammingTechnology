@@ -4,6 +4,7 @@ import com.example.ProgrammingTechnology.dto.DishDto;
 import com.example.ProgrammingTechnology.mapper.DishMapper;
 import com.example.ProgrammingTechnology.service.DishService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -22,7 +23,8 @@ public class DishController {
         return mapper.toDto(service.findDishById(id));
     }
 
-    @GetMapping
+    @GetMapping("/all")
+    @PreAuthorize("hasAnyAuthority('Admin','Manager')")
     public List<DishDto> findAll() {
         return mapper.toDtoList(service.findDishes());
     }
@@ -41,7 +43,6 @@ public class DishController {
     public DishDto changeName(@RequestParam Long id, @RequestParam String name) {
         return mapper.toDto(service.updateName(id, name));
     }
-
 
     @PutMapping("/price")
     public DishDto changePrice(@RequestParam Long id, @RequestParam Float price) {
