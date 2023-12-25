@@ -35,8 +35,9 @@ export default class Summary {
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:8080/api/v1/orders");
-    let email = "cherni@example.ru";
-    let pass = "password";
+    const user = JSON.parse(localStorage.getItem("User"));
+    const email = user.username;
+    const pass = user.password;
     xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = () => {
@@ -87,8 +88,9 @@ export default class Summary {
   }
 
   getDropdownContent() {
-    const email = "cherni@example.ru";
-    const pass = "password";
+    const user = JSON.parse(localStorage.getItem("User"));
+    const email = user.username;
+    const pass = user.password;
     const authHeader = "Basic " + btoa(`${email}:${pass}`);
 
     const xhrDelivery = new XMLHttpRequest();

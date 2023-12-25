@@ -104,9 +104,17 @@ export default class Header {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
       }
+      const user = JSON.parse(xhr.responseText);
+
       localStorage.setItem("Auth", 1);
-      localStorage.setItem("User", );
-      console.log(JSON.parse(xhr.responseText));
+      localStorage.setItem(
+        "User",
+        JSON.stringify({
+          username: user.username,
+          password: user.password,
+          role: user.authorities[0].authority,
+        })
+      );
 
       authForm.closest(".popup").remove();
     };

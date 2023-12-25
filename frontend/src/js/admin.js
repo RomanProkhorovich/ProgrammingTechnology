@@ -14,8 +14,9 @@ export default class Admin {
   getTable(tableName) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `http://localhost:8080/api/v1/${tableName}`);
-    let email = "cherni@example.ru";
-    let pass = "password";
+    const user = JSON.parse(localStorage.getItem("User"));
+    const email = user.username;
+    const pass = user.password;
     xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
