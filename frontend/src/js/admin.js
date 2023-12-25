@@ -2,6 +2,7 @@ import { dropdownHandler } from "./dropdown.js";
 
 export default class Admin {
   constructor() {
+    this.getOptions();
     dropdownHandler();
     this.table = document.querySelector("#content-admin-table");
     this.options = document.querySelector(".dropdown-options");
@@ -9,6 +10,26 @@ export default class Admin {
     this.getTable(this.endpoint);
 
     this.registerEvents();
+  }
+
+  getOptions() {
+    const container = document.querySelector(".dropdown-options");
+    const role = JSON.parse(localStorage.getItem("User")).role;
+    if (role === "Admin") {
+      container.insertAdjacentHTML(
+        "beforeend",
+        `<a href="#" data-endpoint="users/all">Пользователи</a>
+      <a href="#" data-endpoint="restaurants/all">Рестораны</a>
+      <a href="#" data-endpoint="dishes/all">Блюда</a>
+      <a href="#" data-endpoint="orders/all">Заказы</a>`
+      );
+      return;
+    }
+    container.insertAdjacentHTML(
+      "beforeend",
+      `<a href="#" data-endpoint="users/all">Пользователи</a>
+    <a href="#" data-endpoint="orders/all">Заказы</a>`
+    );
   }
 
   getTable(tableName) {
