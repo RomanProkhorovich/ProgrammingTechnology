@@ -43,7 +43,7 @@ export default class Admin {
 
         for (let i = 0; i < keys.length; i++) {
           if (keys[i] === "id") return;
-          const value = item.keys[i];
+          const value = item[keys[i]];
           if (typeof value !== "object" || value === null) {
             row += `<td>${value}</td>`;
             return;
@@ -55,19 +55,19 @@ export default class Admin {
           row += `<td>${value.map((item) => item.id).join(", ")}</td>`;
         }
 
-        keys.forEach((key) => {
-          if (key === "id") return;
-          const value = item[key];
-          if (typeof value !== "object" || value === null) {
-            row += `<td>${value}</td>`;
-            return;
-          }
-          if (!Array.isArray(value)) {
-            row += `<td>${value.id}</td>`;
-            return;
-          }
-          row += `<td>${value.map((item) => item.id).join(", ")}</td>`;
-        });
+        // keys.forEach((key) => {
+        //   if (key === "id") return;
+        //   const value = item[key];
+        //   if (typeof value !== "object" || value === null) {
+        //     row += `<td>${value}</td>`;
+        //     return;
+        //   }
+        //   if (!Array.isArray(value)) {
+        //     row += `<td>${value.id}</td>`;
+        //     return;
+        //   }
+        //   row += `<td>${value.map((item) => item.id).join(", ")}</td>`;
+        // });
 
         tbodyHTML += `<tr data-id=${item.id}>${row}</tr>`;
       });
