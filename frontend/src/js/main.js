@@ -186,6 +186,7 @@ export default class Header {
       i.src = "./src/svg/admin-svgrepo-com.svg";
       switch (role) {
         case "Courier":
+          console.log(i.src);
           this.accountButton.insertAdjacentHTML(
             "beforebegin",
             `<div class="header-account">
@@ -197,6 +198,7 @@ export default class Header {
 
           break;
         case "Admin":
+          console.log(i.src);
           this.accountButton.insertAdjacentHTML(
             "beforebegin",
             `<div class="header-account">
@@ -208,6 +210,7 @@ export default class Header {
 
           break;
         case "Manager":
+          console.log(i.src);
           this.accountButton.insertAdjacentHTML(
             "beforebegin",
             `<div class="header-account">
