@@ -1,6 +1,7 @@
 package com.example.ProgrammingTechnology.service;
 
 import com.example.ProgrammingTechnology.model.CartItem;
+import com.example.ProgrammingTechnology.model.Dish;
 import com.example.ProgrammingTechnology.repository.CartItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,24 @@ public class CartItemService {
             return cartItemRepository.save(newOrderDish);
         //}
         //throw new IllegalArgumentException();
+    }
+
+    //TODO: на проверку
+    public CartItem createOrUpdate(CartItem cartItem) {
+        if(cartItem.getId()==null) {
+            return createOrderDish(cartItem);
+        }
+        return updateCartItem(cartItem);
+    }
+
+    //TODO: на проверку
+    public CartItem updateCartItem(CartItem upCartItem) {
+        CartItem cartItem = cartItemRepository.findById(upCartItem.getId()).orElseThrow();
+        Dish dish = dishService.findDishById(upCartItem.getId());
+        if(upCartItem.getCount()>=0 && dish!=null) {
+            return cartItemRepository.save(upCartItem);
+        }
+        throw new IllegalArgumentException();
     }
 
     //поиск заказанного блюда по id
