@@ -16,6 +16,7 @@ import java.util.Set;
 @Configuration
 @RequiredArgsConstructor
 public class DishesConfig {
+    private final RestaurantService restaurantService;
     private final DishService service;
     private final OrderService orderService;
     private final UserService userService;
@@ -76,6 +77,11 @@ public class DishesConfig {
         menu.setApproval(LocalDateTime.now());
         menu.setActual(true);
         menu=menuService.createMenu(menu);
+
+        Restaurant rest = new Restaurant();
+        rest.setName("Пизда кузи миши");
+        rest.setAddress("г. Самара, ул. Черемшанская 111");
+        restaurantService.createRestaurant(rest);
         return 1;
     }
 
@@ -91,6 +97,9 @@ public class DishesConfig {
         user.setAddress("г. Самара, ул. Мичурина, д. 375, кв. 19");
         user.setPhone("89095492710");
         user = userService.createUser(user);
+
+        user.setId(null);
+        userService.createUser(user);
 
         Order order = new Order();
         order.setAddress(user.getAddress());

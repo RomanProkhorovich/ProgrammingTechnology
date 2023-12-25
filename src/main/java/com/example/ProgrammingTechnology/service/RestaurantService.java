@@ -1,13 +1,17 @@
 package com.example.ProgrammingTechnology.service;
 
+import com.example.ProgrammingTechnology.exception.AttributeException;
 import com.example.ProgrammingTechnology.model.KitchenType;
 import com.example.ProgrammingTechnology.model.Restaurant;
+import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -19,9 +23,12 @@ public class RestaurantService {
 
     //создание ресторана
     public Restaurant createRestaurant(Restaurant newRestaurant) {
-        if (restaurantRepository.findById(newRestaurant.getId()).isEmpty()) {
+        if (!Objects.equals(newRestaurant.getManager().getRole().getName(), "Manager"))
+            throw new AttributeException("Челик не манагер", "manager", null);
+        if (newRestaurant.getId() == null || restaurantRepository.findById(newRestaurant.getId()).isEmpty()) {
             return restaurantRepository.save(newRestaurant);
         }
+
         throw new IllegalArgumentException();
     }
 
@@ -32,10 +39,14 @@ public class RestaurantService {
         return restaurantRepository.findById(id).orElseThrow();
     }
 
+    public List<Restaurant> saveAll(List<Restaurant> list) {
+        return list.stream().map(restaurantRepository::save).collect(Collectors.toList());
+    }
+
     //поиск ресторанов по виду кухни
     public List<Restaurant> findRestaurantsByKitchenType(String name) {
-         KitchenType kitchenType = kitchenTypeService.findKitchenTypeByName(name);
-         return restaurantRepository.findAllByKitchenTypesContains(kitchenType);
+        KitchenType kitchenType = kitchenTypeService.findKitchenTypeByName(name);
+        return restaurantRepository.findAllByKitchenTypesContains(kitchenType);
     }
 
     //поиск ресторанов по названию
@@ -55,7 +66,7 @@ public class RestaurantService {
             restaurant.setName(name);
             return restaurantRepository.save(restaurant);
         }
-        throw new IllegalArgumentException();
+        throw new AttributeException("","name",id);
     }
 
     //изменение адреса ресторана
@@ -65,7 +76,7 @@ public class RestaurantService {
             restaurant.setAddress(address);
             return restaurantRepository.save(restaurant);
         }
-        throw new IllegalArgumentException();
+        throw new AttributeException("","address",id);
     }
 
     //изменение видов кухни ресторана
@@ -75,13 +86,17 @@ public class RestaurantService {
             restaurant.setKitchenTypes(kitchenTypeSet);
             return restaurantRepository.save(restaurant);
         }
-        throw new IllegalArgumentException();
+        throw new AttributeException("","kitchenType",id);
     }
 
     //изменение менеджера ресторана
     public Restaurant updateManager(Long id, Long managerId) {
-        Restaurant restaurant = restaurantRepository.findById(id).orElseThrow();
-        restaurant.setManager(userService.findUserById(managerId));
+        Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(()->
+         new AttributeException("","id",id));
+        User userById = userService.findUserById(managerId);
+        if (!Objects.equals(userById.getRole().getName(), "Manager"))
+            throw new AttributeException("","manager",id);
+        restaurant.setManager(userById);
         return restaurantRepository.save(restaurant);
     }
 
@@ -92,12 +107,13 @@ public class RestaurantService {
             restaurant.setPeopleCount(peopleCount);
             return restaurantRepository.save(restaurant);
         }
-        throw new IllegalArgumentException();
+        throw new AttributeException("","peopleCount",id);
     }
 
     //изменение меню ресторана
     public Restaurant updateMenu(Long id, Long menuId) {
-        Restaurant restaurant = restaurantRepository.findById(id).orElseThrow();
+        Restaurant restaurant = restaurantRepository.findById(id).orElseThrow(()->
+                new AttributeException("","id",id));
         restaurant.setMenu(menuService.findMenuById(menuId));
         return restaurantRepository.save(restaurant);
     }
