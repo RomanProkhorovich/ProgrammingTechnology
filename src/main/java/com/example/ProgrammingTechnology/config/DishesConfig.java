@@ -77,11 +77,11 @@ public class DishesConfig {
         menu.setApproval(LocalDateTime.now());
         menu.setActual(true);
         menu=menuService.createMenu(menu);
-
+/*
         Restaurant rest = new Restaurant();
         rest.setName("Пизда кузи миши");
         rest.setAddress("г. Самара, ул. Черемшанская 111");
-        restaurantService.createRestaurant(rest);
+        restaurantService.createRestaurant(rest);*/
         return 1;
     }
 
@@ -98,8 +98,8 @@ public class DishesConfig {
         user.setPhone("89095492710");
         user = userService.createUser(user);
 
-        user.setId(null);
-        userService.createUser(user);
+       /* user.setId(null);
+        userService.createUser(user);*/
 
         Order order = new Order();
         order.setAddress(user.getAddress());

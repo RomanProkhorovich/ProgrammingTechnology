@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,6 +24,9 @@ public class DishService {
     //поиск блюда по id
     public Dish findDishById(Long id) {
         return dishRepository.findById(id).orElseThrow();
+    }
+    public List<Dish> saveAll(List<Dish> dishes){
+        return dishes.stream().map(dishRepository::save).collect(Collectors.toList());
     }
 
     //поиск всех блюд
