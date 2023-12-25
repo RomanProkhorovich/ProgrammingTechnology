@@ -4,7 +4,11 @@ export default class Admin {
   constructor() {
     dropdownHandler();
     this.table = document.querySelector("#content-admin-table");
-    this.getTable("orders/all");
+    this.options = document.querySelector(".dropdown-options");
+    this.endpoint = "users/all";
+    this.getTable(this.endpoint);
+
+    this.registerEvents();
   }
 
   getTable(tableName) {
@@ -77,5 +81,14 @@ export default class Admin {
       </tbody>`;
     };
     xhr.send();
+  }
+
+  registerEvents() {
+    this.options.addEventListener("click", (e) => {
+      this.endpoint = e.target.dataset.endpoint;
+      setTimeout(() => {
+        this.getTable(this.endpoint);
+      }, 0);
+    });
   }
 }
