@@ -359,6 +359,26 @@ footer {
   background: rgb(250, 250, 250);
 }
 
+/* Delivery */
+
+.content-delivery h1 {
+  padding: 1em 0;
+}
+
+.content-delivery p {
+  padding: 1em 0;
+}
+
+.content-delivery-map{
+  box-shadow: var(--main-shadow);
+  border-radius: 1em;
+
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
+}
+
 /* Status */
 
 .content-status {
@@ -716,14 +736,14 @@ footer {
   -o-transform: rotate(180deg);
 }
 
-.content-summary-dropdown {
+.dropdown {
   position: relative;
   margin: 1em 0;
   position: relative;
   width: 100%;
 }
 
-.content-summary-dropdown button {
+.dropdown button {
   position: relative;
   z-index: 2;
   width: 100%;
@@ -740,7 +760,7 @@ footer {
   -o-border-radius: 1em;
 }
 
-.content-summary-dropdown-options {
+.dropdown-options {
   position: absolute;
   background-color: #fff;
   padding-top: 1em;
@@ -763,7 +783,7 @@ footer {
   display: block;
 }
 
-.content-summary-dropdown-options a {
+.dropdown-options a {
   display: block;
   width: 100%;
   font-size: 16px;
@@ -779,7 +799,7 @@ footer {
   -o-transition: 0.2s ease-out;
 }
 
-.content-summary-dropdown-options a:hover {
+.dropdown-options a:hover {
   background-color: #00000010;
 }
 
@@ -833,6 +853,49 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 1em;
+}
+
+/* Admin */
+.content-admin{
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.content-admin .dropdown{
+  margin: 0;
+}
+
+.content-admin-table{
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+  border: solid 2px var(--main-dark);
+  overflow: hidden;
+}
+
+.content-admin-table td,th{
+  padding: .5em;
+  border: solid 1px var(--main-dark);
+}
+
+.content-admin-table th{
+  font-weight: 600;
+  background-color: #00000010;
+}
+
+#content-admin-save{
+  width: 100%;
+  padding: 1em;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: var(--main-dark);
+  color: #fff;
+  border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
 }
 
 /* Content end */
@@ -984,7 +1047,7 @@ footer {
   width: 100%;
 }
 
-/* Some things */
+/* Other */
 
 .hidden {
   opacity: 0;
@@ -1057,6 +1120,8 @@ footer {
   background-color: #44ff44;
 }
 
+/* Media queries */
+
 @media screen and (min-width: 1200px) {
   .content-menu {
     grid-template-columns: repeat(4, 1fr);
@@ -1081,6 +1146,10 @@ footer {
   }
   .header-cart {
     order: -1;
+  }
+  .header-cart-content{
+    left: 0;
+    width: 100vw;
   }
 }
 

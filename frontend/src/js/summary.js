@@ -1,3 +1,5 @@
+import { dropdownHandler } from "./dropdown.js";
+
 export default class Summary {
   constructor() {
     this.getDropdownContent();
@@ -10,10 +12,8 @@ export default class Summary {
     this.orderButton = document.querySelector(
       ".content-summary-paymethods-button"
     );
-    this.dropdown = document.querySelectorAll(".content-summary-dropdown");
-    this.dropdownOptions = document.querySelectorAll(
-      ".content-summary-dropdown-options"
-    );
+    this.dropdown = document.querySelectorAll(".dropdown");
+    this.dropdownOptions = document.querySelectorAll(".dropdown-options");
 
     this.renderDishes();
     this.registerEvents();
@@ -100,10 +100,8 @@ export default class Summary {
       }
       const response = JSON.parse(xhrDelivery.responseText);
       const value = document.querySelector("#order-delivery");
-      const curDropdown = value.closest(".content-summary-dropdown");
-      const options = curDropdown.querySelector(
-        ".content-summary-dropdown-options"
-      );
+      const curDropdown = value.closest(".dropdown");
+      const options = curDropdown.querySelector(".dropdown-options");
       curDropdown.querySelector(".dropdown-value").textContent =
         response[0].name;
       response.forEach((item) => {
@@ -124,10 +122,8 @@ export default class Summary {
       }
       const response = JSON.parse(xhrAddresses.responseText);
       const value = document.querySelector("#order-address");
-      const curDropdown = value.closest(".content-summary-dropdown");
-      const options = curDropdown.querySelector(
-        ".content-summary-dropdown-options"
-      );
+      const curDropdown = value.closest(".dropdown");
+      const options = curDropdown.querySelector(".dropdown-options");
       curDropdown.querySelector(".dropdown-value").textContent = response[0];
       response.forEach((item) => {
         options.insertAdjacentHTML("beforeend", `<a href="#">${item}</a>`);
@@ -156,31 +152,11 @@ export default class Summary {
         cartQuantity.dispatchEvent(new Event("change", { bubbles: true }));
       });
     });
-    // EXPAND DROPDOWNS
-    this.dropdown.forEach((item) => {
-      item.addEventListener("click", (e) => {
-        const container = e.target.closest(".content-summary-dropdown");
-        if (!container.classList.contains("on-top")) {
-          container.classList.remove("on-top");
-        }
-        container.classList.toggle("on-top");
-        container
-          .querySelector(".content-summary-dropdown-options")
-          .classList.toggle("dropdown-show");
-        container
-          .querySelector(".dropdown-arrow")
-          .classList.toggle("dropdown-arrow-collapsed");
-      });
-      this.sum.textContent = this.cartSum.textContent;
-    });
-    // DROPDOWNS OPTION
-    this.dropdownOptions.forEach((item) => {
-      item.addEventListener("click", (e) => {
-        const container = e.target.closest(".content-summary-dropdown");
-        container.querySelector(".dropdown-value").textContent =
-          e.target.textContent;
-      });
-    });
+
+    dropdownHandler();
+
+    this.sum.textContent = this.cartSum.textContent;
+
     //ORDER
     this.orderButton.addEventListener("click", this.sendOrder);
   }
