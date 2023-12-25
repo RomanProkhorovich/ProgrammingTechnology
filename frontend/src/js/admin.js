@@ -4,7 +4,7 @@ export default class Admin {
   constructor() {
     dropdownHandler();
     this.table = document.querySelector("#content-admin-table");
-    this.getTable("orders");
+    this.getTable("orders/all");
   }
 
   getTable(tableName) {
@@ -45,6 +45,7 @@ export default class Admin {
             row += `<td>-</td>`;
             continue;
           }
+          if (typeof value==='number')
           if (typeof value !== "object") {
             let date = new Date(value);
             if (isNaN(date)) row += `<td>${value}</td>`;
