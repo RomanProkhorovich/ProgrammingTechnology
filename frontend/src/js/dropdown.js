@@ -24,6 +24,7 @@ export const dropdownHandler = () => {
       const container = e.target.closest(".dropdown");
       container.querySelector(".dropdown-value").textContent =
         e.target.textContent;
+      container.querySelector(".dropdown-value").dataset = e.target.dataset;
     });
   });
 };

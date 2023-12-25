@@ -47,6 +47,7 @@ export default class Admin {
           }
           if (typeof value === "number") {
             row += `<td>${value}</td>`;
+            continue;
           }
           if (typeof value !== "object") {
             let date = new Date(value);
