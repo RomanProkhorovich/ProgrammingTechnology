@@ -4,6 +4,7 @@ export default class Header {
     this.cartButton = document.querySelector(".header-cart-logo");
     this.cartSum = document.querySelector(".header-cart-sum-value");
     this.cartContent = document.querySelector(".header-cart-content");
+    this.toSummarize = document.querySelector("#cart-to-order");
     this.summary = document.querySelector(
       ".content-summary-paymethods-total-value"
     );
@@ -111,7 +112,7 @@ export default class Header {
         "User",
         JSON.stringify({
           username: user.username,
-          password: user.password,
+          password: params.password,
           role: user.authorities[0].authority,
         })
       );
@@ -210,6 +211,13 @@ export default class Header {
           this.cartContent.classList.toggle("display-none");
         }, 200);
       }
+    });
+    // TO SUMMARIZE
+    this.toSummarize.addEventListener("click", (e) => {
+      if (localStorage.getItem("Auth") && +localStorage.getItem("Auth") === +1)
+        return;
+      e.preventDefault();
+      this.popupAuthForm();
     });
     // CART QUANTITY LISTENER
     this.cartContent.addEventListener("click", (e) => {
