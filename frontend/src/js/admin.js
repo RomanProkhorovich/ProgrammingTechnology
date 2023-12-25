@@ -43,10 +43,10 @@ export default class Admin {
             return;
           }
           if (!Array.isArray(value)) {
-            row += `<td>${value[id]}</td>`;
+            row += `<td>${value.id}</td>`;
             return;
           }
-          row += `<td>${value.map((item) => item[id]).join(", ")}</td>`;
+          row += `<td>${value.map((item) => item.id).join(", ")}</td>`;
         });
 
         tbodyHTML += `<tr data-id=${item.id}>${row}</tr>`;
