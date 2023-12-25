@@ -874,9 +874,10 @@ footer {
   overflow: hidden;
 }
 
-.content-admin-table td,th{
+#content-admin-table td,th{
   padding: .5em;
   border: solid 1px var(--main-dark);
+  border-collapse: collapse;
 }
 
 .content-admin-table th{

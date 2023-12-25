@@ -24,9 +24,15 @@ export default class Admin {
       // thead HTML
       let theadHTML = "";
 
-      keys.forEach((item) => {
-        theadHTML += `<th>${item.charAt(0).toUpperCase() + item.slice(1)}</th>`;
-      });
+      for (let i = 0; i < keys.length; i++) {
+        theadHTML += `<th>${
+          keys[i].charAt(0).toUpperCase() + keys[i].slice(1)
+        }</th>`;
+      }
+
+      // keys.forEach((item) => {
+      //   theadHTML += `<th>${item.charAt(0).toUpperCase() + item.slice(1)}</th>`;
+      // });
 
       // tbody HTML
 
@@ -34,6 +40,20 @@ export default class Admin {
 
       response.forEach((item) => {
         let row = "";
+
+        for (let i = 0; i < keys.length; i++) {
+          if (keys[i] === "id") return;
+          const value = item.keys[i];
+          if (typeof value !== "object" || value === null) {
+            row += `<td>${value}</td>`;
+            return;
+          }
+          if (!Array.isArray(value)) {
+            row += `<td>${value.id}</td>`;
+            return;
+          }
+          row += `<td>${value.map((item) => item.id).join(", ")}</td>`;
+        }
 
         keys.forEach((key) => {
           if (key === "id") return;
