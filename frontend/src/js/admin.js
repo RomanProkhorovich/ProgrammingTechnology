@@ -4,7 +4,7 @@ export default class Admin {
   constructor() {
     dropdownHandler();
     this.table = document.querySelector("#content-admin-table");
-    this.getTable('orders')
+    this.getTable("orders");
   }
 
   getTable(tableName) {
@@ -52,5 +52,6 @@ export default class Admin {
           ${tbodyHTML}
       </tbody>`;
     };
+    xhr.send();
   }
 }
