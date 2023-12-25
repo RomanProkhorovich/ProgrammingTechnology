@@ -6,6 +6,7 @@ import com.example.ProgrammingTechnology.mapper.RestaurantMapper;
 import com.example.ProgrammingTechnology.service.RestaurantService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +17,12 @@ import java.util.List;
 public class RestaurantController {
     private final RestaurantMapper mapper;
     private final RestaurantService service;
+
+
+    @PostMapping("/all")
+    public ResponseEntity<List<RestaurantDto>> saveAll(List<RestaurantDto> restaurantDtoList) {
+        return ResponseEntity.ok(mapper.toDtoList(service.saveAll(mapper.toModelList(restaurantDtoList))));
+    }
 
     @GetMapping
     public List<RestaurantDto> findAll() {
