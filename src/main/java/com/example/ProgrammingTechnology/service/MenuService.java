@@ -32,7 +32,7 @@ public class MenuService {
         return menuRepository.save(newMenu);
     }
     public Menu createOrUpdate(Menu menu){
-        if (menu.getId()!=null)
+        if (menu.getId()==null)
             return createMenu(menu);
         else return updateMenu(menu);
     }

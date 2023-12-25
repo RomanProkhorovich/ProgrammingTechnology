@@ -21,6 +21,34 @@ public class DishService {
         throw new IllegalArgumentException();
     }
 
+    //TODO: на проверку
+    public Dish createOrUpdate(Dish dish) {
+        if(dish.getName().isEmpty()
+                || dish.getName().isBlank()
+                || dish.getPrice()<0
+                || dish.getCalories()<0
+                || dish.getWeight()<=0) {
+            throw new IllegalArgumentException();
+        }
+        if(dish.getId()==null) {
+            return createDish(dish);
+        }
+        return updateDish(dish);
+    }
+
+    //TODO: на проверку
+    public Dish updateDish(Dish upDish) {
+        Dish dish = dishRepository.findById(upDish.getId()).orElseThrow();
+        if(upDish.getName().isEmpty()
+                || upDish.getName().isBlank()
+                || upDish.getPrice()<0
+                || upDish.getCalories()<0
+                || upDish.getWeight()<=0) {
+            throw new IllegalArgumentException();
+        }
+        return dishRepository.save(upDish);
+    }
+
     //поиск блюда по id
     public Dish findDishById(Long id) {
         return dishRepository.findById(id).orElseThrow();

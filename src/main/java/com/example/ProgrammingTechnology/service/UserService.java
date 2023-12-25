@@ -27,6 +27,34 @@ public class UserService {
         throw new IllegalArgumentException();
     }
 
+    //TODO: на проверку, проверку на номер телефона, проверку на email и на пароль
+    public User createOrUpdate(User user) {
+        Role role = roleRepository.findById(user.getRole().getId()).orElseThrow();
+        if(user.getFirstname().isBlank()
+                || user.getFirstname().isEmpty()
+                || user.getLastname().isBlank()
+                || user.getLastname().isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        if(user.getId()==null) {
+            return createUser(user);
+        }
+        return updateUser(user);
+    }
+    
+    //TODO: на проверку, те же вопроси что и в createOrUpdate
+    public User updateUser(User upUser) {
+        User user = userRepository.findById(upUser.getId()).orElseThrow();
+        Role role = roleRepository.findById(upUser.getRole().getId()).orElseThrow();
+        if(upUser.getFirstname().isBlank()
+                || upUser.getFirstname().isEmpty()
+                || upUser.getLastname().isBlank()
+                || upUser.getLastname().isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+        return userRepository.save(upUser);
+    }
+
     //поиск пользователя по id
     public User findUserById(Long id) {
         return userRepository.findById(id).orElseThrow();

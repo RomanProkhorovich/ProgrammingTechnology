@@ -1,6 +1,8 @@
 package com.example.ProgrammingTechnology.service;
 
 import com.example.ProgrammingTechnology.model.Order;
+import com.example.ProgrammingTechnology.model.OrderStatus;
+import com.example.ProgrammingTechnology.model.ReceivingType;
 import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.repository.OrderRepository;
 import com.example.ProgrammingTechnology.security.SecurityHelper;
@@ -44,6 +46,40 @@ public class OrderService {
             newOrder.setAddress(newOrder.getClient().getAddress());
         return orderRepository.save(newOrder);
 
+    }
+
+    //TODO: на проверку, сделать проверку на даты и адреса
+    public Order createOrUpdate(Order order) {
+        OrderStatus orderStatus = orderStatusService.findOrderStatusById(order.getOrderStatus().getId());
+        ReceivingType receivingType = receivingTypeService.findReceivingTypeById(order.getReceivingType().getId());
+        User courier = userService.findUserById(order.getCourier().getId());
+        User client = userService.findUserById(order.getClient().getId());
+        if(!courier.getRole().getName().equals("Courier")
+                || order.getAddress().isEmpty()
+                || order.getAddress().isBlank()
+                || !client.getRole().getName().equals("Client")) {
+            throw new IllegalArgumentException();
+        }
+        if(order.getId()==null) {
+            return createOrder(order);
+        }
+        return updateOrder(order);
+    }
+
+    //TODO: на проверку, сделать проверку на даты и адреса
+    public Order updateOrder(Order upOrder) {
+        Order order = orderRepository.findById(upOrder.getId()).orElseThrow();
+        OrderStatus orderStatus = orderStatusService.findOrderStatusById(upOrder.getOrderStatus().getId());
+        ReceivingType receivingType = receivingTypeService.findReceivingTypeById(upOrder.getReceivingType().getId());
+        User courier = userService.findUserById(upOrder.getCourier().getId());
+        User client = userService.findUserById(upOrder.getClient().getId());
+        if(!courier.getRole().getName().equals("Courier")
+                || upOrder.getAddress().isEmpty()
+                || upOrder.getAddress().isBlank()
+                || !client.getRole().getName().equals("Client")) {
+            throw new IllegalArgumentException();
+        }
+        return orderRepository.save(upOrder);
     }
 
     public List<String> findAllAddressesByUserId(Long id){

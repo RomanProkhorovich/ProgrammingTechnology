@@ -2,6 +2,7 @@ package com.example.ProgrammingTechnology.service;
 
 import com.example.ProgrammingTechnology.exception.AttributeException;
 import com.example.ProgrammingTechnology.model.KitchenType;
+import com.example.ProgrammingTechnology.model.Menu;
 import com.example.ProgrammingTechnology.model.Restaurant;
 import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.repository.RestaurantRepository;
@@ -30,6 +31,40 @@ public class RestaurantService {
         }
 
         throw new IllegalArgumentException();
+    }
+
+    //TODO: на проверку, надо ли проверять типы кухонь?
+    public Restaurant createOrUpdate(Restaurant restaurant) {
+        Menu menu = menuService.findMenuById(restaurant.getMenu().getId());
+        User manager = userService.findUserById(restaurant.getManager().getId());
+        if(restaurant.getName().isBlank()
+                || restaurant.getName().isEmpty()
+                || restaurant.getAddress().isEmpty()
+                || restaurant.getAddress().isBlank()
+                || !manager.getRole().equals("Manager")
+                || restaurant.getPeopleCount()<0) {
+            throw new IllegalArgumentException();
+        }
+        if(restaurant.getId()==null) {
+            return createRestaurant(restaurant);
+        }
+        return updateRestaurant(restaurant);
+    }
+
+    //TODO: на проверку, те же вопроси что и в createOrUpdate
+    public Restaurant updateRestaurant(Restaurant upRestaurant) {
+        Restaurant restaurant = restaurantRepository.findById(upRestaurant.getId()).orElseThrow();
+        Menu menu = menuService.findMenuById(upRestaurant.getMenu().getId());
+        User manager = userService.findUserById(upRestaurant.getManager().getId());
+        if(upRestaurant.getName().isBlank()
+                || upRestaurant.getName().isEmpty()
+                || upRestaurant.getAddress().isEmpty()
+                || upRestaurant.getAddress().isBlank()
+                || !manager.getRole().equals("Manager")
+                || upRestaurant.getPeopleCount()<0) {
+            throw new IllegalArgumentException();
+        }
+        return restaurantRepository.save(upRestaurant);
     }
 
     //поиск ресторана по id
