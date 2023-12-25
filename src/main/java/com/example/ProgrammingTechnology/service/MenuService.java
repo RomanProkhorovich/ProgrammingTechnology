@@ -3,6 +3,7 @@ package com.example.ProgrammingTechnology.service;
 import com.example.ProgrammingTechnology.model.Dish;
 import com.example.ProgrammingTechnology.model.Menu;
 import com.example.ProgrammingTechnology.repository.MenuRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class MenuService {
     private final MenuRepository menuRepository;
@@ -28,6 +30,15 @@ public class MenuService {
             newMenu.setActual(true);
         }
         return menuRepository.save(newMenu);
+    }
+    public Menu createOrUpdate(Menu menu){
+        if (menu.getId()!=null)
+            return createMenu(menu);
+        else return updateMenu(menu);
+    }
+
+    public List<Menu> saveAll(List<Menu> menus){
+        return menus.stream().map(x->createOrUpdate(x)).collect(Collectors.toList());
     }
 
     public Menu getActual() {
@@ -51,6 +62,11 @@ public class MenuService {
     public Menu updateMenu(Menu upMenu) {
         //TODO: fix
         Menu menu = menuRepository.findById(upMenu.getId()).orElseThrow();
+        if (upMenu.isActual()){
+            var actual=getActual();
+            actual.setActual(false);
+            menuRepository.save(actual);
+        }
         return menuRepository.save(upMenu);
     }
 
