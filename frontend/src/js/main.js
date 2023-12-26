@@ -310,7 +310,7 @@ export default class Header {
       e.preventDefault();
       this.popupAuthForm();
     });
-    // CART QUANTITY LISTENER
+    // CART QUANTITY LISTENER CLICK
     this.cartContent.addEventListener("click", (e) => {
       if (!e.target.classList.contains("quantity-control")) return;
 
@@ -324,6 +324,7 @@ export default class Header {
       value.value--;
       value.dispatchEvent(new Event("change", { bubbles: true }));
     });
+    // CART QUANTITY LISTENER CHANGE
     this.cartContent.addEventListener("change", (e) => {
       const quantity = e.target.value;
       const id = e.target.closest(".quantity").dataset.quantityId;
@@ -358,6 +359,7 @@ export default class Header {
       }
       this.calcCart();
     });
+    // CART FINAL RENDER
     this.renderCart();
   }
 }

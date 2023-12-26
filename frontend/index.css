@@ -1303,11 +1303,11 @@ th {
 }
 
 .error {
-  background-color: #ac4444;
+  background-color: #cc4444;
 }
 
 .success {
-  background-color: #44ac44;
+  background-color: #44cc44;
 }
 
 /* Media queries */

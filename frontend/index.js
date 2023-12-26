@@ -20,6 +20,8 @@ if (document.querySelector(".content-admin")) {
 if (document.querySelector(".content-courier")) {
   new courier();
 }
-new header();
+setTimeout(() => {
+  new header();
+}, 0);
 
 console.log("index script loaded");
