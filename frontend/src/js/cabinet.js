@@ -3,6 +3,7 @@ export default class Cabinet {
     this.tabOrders = document.querySelector("#tab-orders");
     this.tabData = document.querySelector("#tab-data");
     this.tabAbout = document.querySelector("#tab-about");
+    this.saveData = document.querySelector("#content-cabinet-data-form-button");
 
     this.firstname = document.querySelector(`[name="firstname"]`);
     this.lastname = document.querySelector(`[name="lastname"]`);
@@ -88,8 +89,6 @@ export default class Cabinet {
       }
 
       const orders = JSON.parse(xhr.responseText);
-
-      console.log(orders);
 
       const ordersContainer = document.querySelector(".content-cabinet-orders");
 
@@ -179,20 +178,32 @@ export default class Cabinet {
       this.tabData.classList.remove("content-cabinet-tab-active");
       this.tabAbout.classList.add("content-cabinet-tab-active");
     });
-    // INPUT CHANGED LISTENER
-    [
-      this.firstname,
-      this.lastname,
-      this.surname,
-      this.email,
-      this.phone,
-      this.password,
-    ].forEach((item) => {
-      item.addEventListener("input", (e) => {
-        e.target
-          .closest(".content-cabinet-data-field")
-          .querySelector("button").disabled = false;
-      });
+    // SAVE USER DATA LISTENER
+    this.saveData.addEventListener("click", () => {
+      let params = {};
+
+      Array.from(document.forms[0].getElementsByTagName("input")).map(
+        (item) => {
+          params[item.name] = item.value;
+        }
+      );
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("PUT", "http://localhost:8080/api/v1/users");
+      const user = JSON.parse(localStorage.getItem("User"));
+      const email = user.username;
+      const pass = user.password;
+      xhr.setRequestHeader(
+        "Authorization",
+        "Basic " + btoa(`${email}:${pass}`)
+      );
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== 4 || xhr.status !== 200) {
+          return;
+        }
+      };
+      xhr.send(JSON.stringify(params));
     });
   }
 }
