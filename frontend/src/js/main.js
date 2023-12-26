@@ -298,6 +298,12 @@ export default class Header {
           this.cartContent.classList.add("display-none");
         }, 200);
       }
+      if (!e.target.closest(".header-account")) {
+        this.accountMenu.classList.add("hidden");
+        setTimeout(() => {
+          this.accountMenu.classList.add("display-none");
+        }, 200);
+      }
     });
     // ACCOUNT LISTENERS
     this.accountButton.addEventListener("click", (e) => {

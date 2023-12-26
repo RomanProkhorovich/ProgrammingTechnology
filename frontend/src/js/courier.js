@@ -27,33 +27,7 @@ export default class Courier {
       const ordersContainer = document.querySelector(".content-cabinet-orders");
 
       orders.forEach((item) => {
-        ordersContainer.insertAdjacentHTML(
-          "beforeend",
-          `<div class="content-cabinet-order">
-          <p class="content-cabinet-order-info">Заказ №${item.id} от ${new Date(
-            item.orderTime
-          ).toLocaleString()}</p>
-          <div class="content-cabinet-order-description-dishes">
-              ${this.getDishesHTML(item.cartItems)}
-              <div class="content-cabinet-order-description-sum">
-              <h1>
-                  Итого
-              </h1>
-              <p class="content-cabinet-order-description-dish-price">
-                  <span>${item.sum}</span> р.
-              </p>
-              </div>
-          </div>
-          <div class="content-cabinet-order-description-data">
-              <h1>Способ получения:</h1>
-              <p>${item.receivingType.name}</p>
-              <h1>Способ оплаты:</h1>
-              <p>${"Картой курьеру"}</p>
-              <h1>Адрес:</h1>
-              <p>${item.address}</p>
-          </div>
-      </div>`
-        );
+        ordersContainer.insertAdjacentHTML("beforeend", ``);
       });
     };
     xhr.send();
