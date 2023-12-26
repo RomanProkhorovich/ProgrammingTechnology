@@ -16,6 +16,7 @@ import java.util.List;
 public class UserService {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final RoleService roleService;
 
     //TODO: сделать проверку почты при создании пользователя и при изменении почты
     //TODO: проверка по номеру телефона
@@ -43,7 +44,9 @@ public class UserService {
     public User updateUser(User upUser) {
         User user = userRepository.findByEmail(upUser.getEmail()).orElseThrow();
         //User user = userRepository.findById(upUser.getId()).orElseThrow();
-        Role role = roleRepository.findById(upUser.getRole().getId()).orElseThrow();
+        //Role role = roleRepository.findById(upUser.getRole().getId()).orElseThrow();
+        upUser.setRole(user.getRole());
+        //upUser.setRole(roleService.findRoleById(upUser.getId()));
         if(upUser.getFirstname().isBlank()
                 || upUser.getFirstname().isEmpty()
                 || upUser.getLastname().isBlank()
