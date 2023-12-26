@@ -191,26 +191,10 @@ export default class Summary {
       popup.querySelector("#confirm-button").addEventListener("click", () => {
         const newAddress = popup.querySelector("input").value;
 
-        const xhr = new XMLHttpRequest();
-        xhr.open("POST", "http://localhost:8080/api/v1/orders/addresses");
-        const user = JSON.parse(localStorage.getItem("User"));
-        const email = user.username;
-        const pass = user.password;
-        xhr.setRequestHeader(
-          "Authorization",
-          "Basic " + btoa(`${email}:${pass}`)
-        );
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = () => {
-          if (xhr.readyState !== 4 || xhr.status !== 200) {
-            return;
-          }
-          document.querySelector("#order-address").textContent = newAddress;
-          document
-            .querySelector("#add-address")
-            .insertAdjacentHTML("beforebegin", `<a href="#">${newAddress}</a>`);
-        };
-        xhr.send();
+        document.querySelector("#order-address").textContent = newAddress;
+        document
+          .querySelector("#add-address")
+          .insertAdjacentHTML("beforebegin", `<a href="#">${newAddress}</a>`);
 
         popup.remove();
       });
