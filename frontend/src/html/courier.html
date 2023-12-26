@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../../index.css">
+    <link rel="shortcut icon" href="#">
+    <title>Ресторан Roman`s</title>
+</head>
+
+<body>
+
+    <header>
+        <div class="header-wrapper">
+            <div class="header-logo">
+                <a href="../../index.html">
+                    <img src="../img/logo.png" alt="">
+                </a>
+            </div>
+            <ul class="header-menu">
+                <li><a href="../../index.html">Меню</a></li>
+                <li><a href="./delivery.html">Доставка и оплата</a></li>
+                <li><a href="./restaurants.html">Рестораны</a></li>
+                <li><a href="../../about.html">Справка</a></li>
+            </ul>
+            <div class="header-cart">
+                <img class="header-cart-logo" src="../svg/cart-shopping-svgrepo-com.svg" alt="">
+                <p class="header-cart-sum"><span class="header-cart-sum-value">0</span> р.</p>
+                <div class="header-cart-content display-none hidden">
+
+                    <button id="cart-to-order" class="header-cart-content-button">
+                        <a href="./summary.html">
+                            Перейти к оформлению
+                        </a>
+                    </button>
+
+                </div>
+            </div>
+            <div class="header-account">
+                <a href="../html/cabinet.html">
+                    <img class="header-account-logo" src="../svg/user-svgrepo-com.svg" alt="">
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="alert">
+        <div class="alert-body error">
+            Ошибка<span>x</span>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="content-status">
+            <p>У вас нет активных заказов</p>
+        </div>
+
+        <div class="content-courier">
+            <div class="content-cabinet-tabs">
+                <button id="tab-waiting" class="content-cabinet-tab content-cabinet-tab-active" type="button">Ожидают
+                    доставку</button>
+                <button id="tab-active" class="content-cabinet-tab" type="button">Активные заказы</button>
+            </div>
+
+            <div class="content-courier-waiting">
+
+                <div class="content-courier-order">
+                    <div class="content-courier-order-header">
+                        <p class="content-courier-order-info">
+                            Заказ №111 от Date
+                        </p>
+                        <button class="content-courier-order-button">
+                            Взять в работу
+                        </button>
+                    </div>
+                    <div class="content-courier-order-description-dishes">
+                        ${this.getDishesHTML(item.cartItems)}
+                        <div class="content-courier-order-description-sum">
+                            <h1>
+                                Итого
+                            </h1>
+                            <p class="content-courier-order-description-dish-price">
+                                <span>${item.sum}</span> р.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="content-courier-order-description-data">
+                        <h1>Способ оплаты:</h1>
+                        <p>${"Картой курьеру"}</p>
+                        <h1>Адрес:</h1>
+                        <p>${item.address}</p>
+                        <h1>Адрес ресторана:</h1>
+                        <p>${item.receivingType.name}</p>
+                    </div>
+                </div>
+
+                <div class="content-courier-order">
+                    <div class="content-courier-order-header">
+                        <p class="content-courier-order-info">
+                            Заказ №111 от Date
+                        </p>
+                        <button class="content-courier-order-button">
+                            Взять в работу
+                        </button>
+                    </div>
+                    <div class="content-courier-order-description-dishes">
+                        ${this.getDishesHTML(item.cartItems)}
+                        <div class="content-courier-order-description-sum">
+                            <h1>
+                                Итого
+                            </h1>
+                            <p class="content-courier-order-description-dish-price">
+                                <span>${item.sum}</span> р.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="content-courier-order-description-data">
+                        <h1>Способ оплаты:</h1>
+                        <p>${"Картой курьеру"}</p>
+                        <h1>Адрес:</h1>
+                        <p>${item.address}</p>
+                        <h1>Адрес ресторана:</h1>
+                        <p>${item.receivingType.name}</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="content-courier-active display-none">
+
+                <div class="content-courier-order">
+                    <div class="content-courier-order-header">
+                        <p class="content-courier-order-info">
+                            Заказ №111 от Date
+                        </p>
+                        <button class="content-courier-order-button">
+                            Сменить статус
+                        </button>
+                    </div>
+                    <div class="content-courier-order-description-dishes">
+                        ${this.getDishesHTML(item.cartItems)}
+                        <div class="content-courier-order-description-sum">
+                            <h1>
+                                Итого
+                            </h1>
+                            <p class="content-courier-order-description-dish-price">
+                                <span>${item.sum}</span> р.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="content-courier-order-description-data">
+                        <h1>Способ оплаты:</h1>
+                        <p>${"Картой курьеру"}</p>
+                        <h1>Адрес:</h1>
+                        <p>${item.address}</p>
+                        <h1>Адрес ресторана:</h1>
+                        <p>${item.receivingType.name}</p>
+                    </div>
+                </div>
+
+                <div class="content-courier-order">
+                    <div class="content-courier-order-header">
+                        <p class="content-courier-order-info">
+                            Заказ №111 от Date
+                        </p>
+                        <button class="content-courier-order-button">
+                            Сменить статус
+                        </button>
+                    </div>
+                    <div class="content-courier-order-description-dishes">
+                        ${this.getDishesHTML(item.cartItems)}
+                        <div class="content-courier-order-description-sum">
+                            <h1>
+                                Итого
+                            </h1>
+                            <p class="content-courier-order-description-dish-price">
+                                <span>${item.sum}</span> р.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="content-courier-order-description-data">
+                        <h1>Способ оплаты:</h1>
+                        <p>${"Картой курьеру"}</p>
+                        <h1>Адрес:</h1>
+                        <p>${item.address}</p>
+                        <h1>Адрес ресторана:</h1>
+                        <p>${item.receivingType.name}</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-info">
+            <img src="../img/logo-white.png" alt="">
+            <br>
+            <p>Roman's™ All rights reserved.</p>
+        </div>
+        <div class="footer-contact">
+            <a href="https://vk.com/gzdeww" target="_blank">
+                <img src="../svg/vk-svgrepo-com.svg">
+            </a>
+            <a href="https://t.me/PomaProho" target="_blank">
+                <img src="../svg/telegram-svgrepo-com.svg">
+            </a>
+        </div>
+    </footer>
+</body>
+
+<script type="module" src="../../index.js"></script>
+
+</html>

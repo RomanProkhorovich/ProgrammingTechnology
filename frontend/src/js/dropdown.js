@@ -6,8 +6,15 @@ export const dropdownHandler = () => {
   dropdown.forEach((item) => {
     item.addEventListener("click", (e) => {
       const container = e.target.closest(".dropdown");
-      if (!container.classList.contains("on-top")) {
-        container.classList.remove("on-top");
+      const opened = document.querySelector(".on-top");
+      if (!container.classList.contains("on-top") && opened) {
+        opened.classList.toggle("on-top");
+        opened
+          .querySelector(".dropdown-options")
+          .classList.toggle("dropdown-show");
+        opened
+          .querySelector(".dropdown-arrow")
+          .classList.toggle("dropdown-arrow-collapsed");
       }
       container.classList.toggle("on-top");
       container

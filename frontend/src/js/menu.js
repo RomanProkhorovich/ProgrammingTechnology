@@ -20,7 +20,7 @@ export default class Menu {
         <h1>${item.name}</h1>
         <p class="content-menu-dish-description">${item.description}</p>
         <p class="content-menu-dish-cart-price">
-          <span class="content-menu-dish-cart-price-value">${item.price}</span>р.
+          <span class="content-menu-dish-cart-price-value">${item.price}</span> р.
         </p>
         <div class="content-menu-dish-cart-quantity">
             <button class="content-menu-dish-cart-button">В корзину</button>
@@ -54,7 +54,7 @@ export default class Menu {
           <h1>${item.name}</h1>
           <p class="content-menu-dish-description">${item.description}</p>
           <p class="content-menu-dish-cart-price">
-            <span class="content-menu-dish-cart-price-value">${item.price}</span>р.
+            <span class="content-menu-dish-cart-price-value">${item.price}</span> р.
           </p>
           <div class="content-menu-dish-cart-quantity">
               <button class="content-menu-dish-cart-button">В корзину</button>
@@ -104,7 +104,6 @@ export default class Menu {
     // already in cart
     try {
       const fromCart = JSON.parse(localStorage.getItem("Cart")).find((item) => {
-        console.log(+item.id + "and" + +dish.id);
         return +item.id === +dish.id;
       });
       if (fromCart) {
@@ -128,7 +127,7 @@ export default class Menu {
             </div>
           </p>
           <p class="header-cart-content-dish-info-price"><span
-              class="content-menu-dish-cart-price-value">${dish.price}</span>р.</p>
+              class="content-menu-dish-cart-price-value">${dish.price}</span> р.</p>
       </div>
   </div>`
       );
