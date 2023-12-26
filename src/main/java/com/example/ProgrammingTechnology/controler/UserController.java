@@ -4,10 +4,12 @@ package com.example.ProgrammingTechnology.controler;
 import com.example.ProgrammingTechnology.dto.UserDto;
 import com.example.ProgrammingTechnology.mapper.UserMapper;
 import com.example.ProgrammingTechnology.model.Role;
+import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.security.SecurityHelper;
 import com.example.ProgrammingTechnology.service.UserService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -82,5 +84,10 @@ public class UserController {
             clients.addAll(couriers);
             return mapper.toDtoList(clients);
         }
+    }
+
+    @PutMapping
+    public ResponseEntity<UserDto> update(@RequestBody UserDto user){
+        return ResponseEntity.ok(mapper.toDto(service.createOrUpdate(mapper.toModel(user))));
     }
 }
