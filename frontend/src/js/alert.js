@@ -1,10 +1,10 @@
 export default class Alert {
   constructor(type, message, timeout, href) {
-    document.querySelector(".content").insertAdjacentHTML(
+    document.body.insertAdjacentHTML(
       "afterbegin",
       `<div class="alert">
         <div class="alert-body ${type}">
-            ${message}<span class="alert-close">x</span>
+            ${message}<span class="alert-close">✕</span>
         </div>
     </div>`
     );
