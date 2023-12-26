@@ -115,9 +115,11 @@ export default class Header {
         return item.id === dish.id;
       });
 
-      this.cartContentSum.insertAdjacentHTML(
-        "beforebegin",
-        `<div class="header-cart-content-dish" data-cart-id="${dish.id}">
+      this.cartContentSum
+        .closest(".header-cart-content-sum")
+        .insertAdjacentHTML(
+          "beforebegin",
+          `<div class="header-cart-content-dish" data-cart-id="${dish.id}">
     <img class="header-cart-content-dish-photo" src="data:image/png;base64,${curDish.photo}" alt="${curDish.name}">
     <div class="header-cart-content-dish-info">
         <h1>${curDish.name}</h1>
@@ -131,7 +133,7 @@ export default class Header {
             class="content-menu-dish-cart-price-value">${dish.price}</span> р.</p>
     </div>
   </div>`
-      );
+        );
       this.calcCart();
     });
   }
