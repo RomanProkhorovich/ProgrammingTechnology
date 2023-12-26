@@ -32,10 +32,7 @@ public class OrderService {
             id=userService.findUserByEmailOrPhone(SecurityHelper.getCurrentUser().getUsername()).getId();
         if (actual)
             return findActualOrders(id);
-        return orderRepository.getAllByCourierId(id).stream()
-                .filter(x->x.getOrderStatus().getName().equals("Доставлен")||
-                        x.getOrderStatus().getName().equals("Завершен"))
-                .toList();
+        return findNotActualOrders(id);
     }
 
     public List<Order> findActualOrders(Long id) {
