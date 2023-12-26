@@ -16,8 +16,7 @@ import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -86,7 +85,11 @@ public class OrderController {
     public List<OrderDto> findAllByUser(@PathParam(value = "user_id") Long id,
                                         @PathParam(value = "actual") boolean actual) {
         List<Order> ordersByUser = service.findOrdersByUser(id, actual);
-        return mapper.toDtoList(ordersByUser);
+        List<OrderDto> list = new ArrayList<>(mapper.toDtoList(ordersByUser).stream()
+                .sorted(Comparator.comparing(OrderDto::getOrderTime))
+                .toList());
+        Collections.reverse(list);
+        return list;
     }
 
 
