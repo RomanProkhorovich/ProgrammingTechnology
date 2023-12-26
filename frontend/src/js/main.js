@@ -15,6 +15,7 @@ export default class Header {
     }
 
     this.registerEvents();
+    this.getActiveOrder();
   }
 
   // GET ACTIVE ORDER
@@ -35,11 +36,13 @@ export default class Header {
       document.querySelector(".content").insertAdjacentHTML(
         "afterbegin",
         `<div class="content-status">
-          <p>Ваш заказ №${order.id} от ${new Date(order.orderTime).toLocaleString()} на данный момент ${order.status}</p>
+          <p>Ваш заказ №${order.id} от ${new Date(
+          order.orderTime
+        ).toLocaleString()} на данный момент ${order.status}</p>
         </div>`
       );
     };
-    xhr.send();
+    xhr.send(JSON.stringify({ actual: true }));
   }
 
   // CART CALC

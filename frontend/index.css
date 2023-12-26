@@ -1029,14 +1029,63 @@ th {
 .content-restaurants-card {
   display: flex;
   width: 100%;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding: 2em;
+  border-radius: 2em;
+  box-sizing: border-box;
+  box-shadow: var(--main-shadow);
+  margin-bottom: 1em;
+
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  -ms-border-radius: 2em;
+  -o-border-radius: 2em;
 }
 
-.content-restaurants-card-img{
-  
+.content-restaurants-card-img {
+  max-width: 300px;
+  flex-grow: 1;
+  flex-basis: 10%;
 }
 
-.c
+.content-restaurants-card-img img {
+  aspect-ratio: 1/1;
+  width: 100%;
+  border-radius: 1em;
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
+}
+
+.content-restaurants-card-info {
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  flex-basis: 50%;
+}
+
+.content-restaurants-card-info * {
+  align-self: flex-start;
+}
+
+.content-restaurants-card-info button {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 1em;
+  color: #fff;
+  background-color: var(--main-dark);
+  border-radius: 1em;
+  align-self: flex-end;
+
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
+}
 
 /* Content end */
 
