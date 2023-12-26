@@ -67,7 +67,7 @@ export default class Cabinet {
           ${item.dish.name}
       </h1>
       <p class="content-cabinet-order-description-dish-price">
-          <span>${item.dish.price}</span>р. <span>${item.count}</span>шт.
+          <span>${item.dish.price}</span> р. <span>${item.count}</span>шт.
       </p>
   </div>`;
     });
@@ -94,7 +94,7 @@ export default class Cabinet {
       const ordersContainer = document.querySelector(".content-cabinet-orders");
 
       orders.forEach((item) => {
-        const orderTime = ordersContainer.insertAdjacentHTML(
+        ordersContainer.insertAdjacentHTML(
           "beforeend",
           `<div class="content-cabinet-order">
           <p class="content-cabinet-order-info">Заказ №${item.id} от ${new Date(
@@ -107,7 +107,7 @@ export default class Cabinet {
                   Итого
               </h1>
               <p class="content-cabinet-order-description-dish-price">
-                  <span>${item.sum}</span>р.
+                  <span>${item.sum}</span> р.
               </p>
               </div>
           </div>
@@ -115,7 +115,7 @@ export default class Cabinet {
               <h1>Способ получения:</h1>
               <p>${item.receivingType.name}</p>
               <h1>Способ оплаты:</h1>
-              <p>${"затычка"}</p>
+              <p>${"Картой курьеру"}</p>
               <h1>Адрес:</h1>
               <p>${item.address}</p>
           </div>

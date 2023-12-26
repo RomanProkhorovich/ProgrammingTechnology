@@ -29,7 +29,6 @@ export default class Summary {
         return { id: item.id, count: item.quantity };
       }
     );
-    console.log(params.dishes);
     params.address = document.querySelector("#order-address").textContent;
     params.receivingType =
       document.querySelector("#order-delivery").textContent;
@@ -45,9 +44,7 @@ export default class Summary {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
       }
-      console.log(JSON.parse(xhr.responseText));
     };
-    console.log(params);
     xhr.send(JSON.stringify(params));
   }
 
@@ -64,7 +61,7 @@ export default class Summary {
           </div>
           <p class="content-summary-dish-description">${description}</p>
           <p class="content-summary-dish-price">
-              <span class="content-summary-dish-price-value">${price}</span>р.
+              <span class="content-summary-dish-price-value">${price}</span> р.
           </p>
       </div>
   </div>`
@@ -184,10 +181,6 @@ export default class Summary {
       }, 0);
       popup.querySelector("#confirm-button").addEventListener("click", () => {
         const newAddress = popup.querySelector("input").value;
-        document.querySelector("#order-address").textContent = newAddress;
-        document
-          .querySelector("#add-address")
-          .insertAdjacentHTML("beforebegin", `<a href="#">${newAddress}</a>`);
 
         const xhr = new XMLHttpRequest();
         xhr.open("POST", "http://localhost:8080/api/v1/orders/addresses");
@@ -203,7 +196,10 @@ export default class Summary {
           if (xhr.readyState !== 4 || xhr.status !== 200) {
             return;
           }
-          console.log(JSON.parse(xhr.responseText));
+          document.querySelector("#order-address").textContent = newAddress;
+          document
+            .querySelector("#add-address")
+            .insertAdjacentHTML("beforebegin", `<a href="#">${newAddress}</a>`);
         };
         xhr.send();
 

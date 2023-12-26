@@ -17,6 +17,31 @@ export default class Header {
     this.registerEvents();
   }
 
+  // GET ACTIVE ORDER
+  getActiveOrder() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:8080/api/v1/orders");
+    const user = JSON.parse(localStorage.getItem("User"));
+    const email = user.username;
+    const pass = user.password;
+    xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== 4 || xhr.status !== 200) {
+        return;
+      }
+
+      const order = JSON.parse(xhr.responseText);
+
+      document.querySelector(".content").insertAdjacentHTML(
+        "afterbegin",
+        `<div class="content-status">
+          <p>Ваш заказ №${order.id} от ${new Date(order.orderTime).toLocaleString()} на данный момент ${order.status}</p>
+        </div>`
+      );
+    };
+    xhr.send();
+  }
+
   // CART CALC
   calcCart() {
     let arr = [];
@@ -77,7 +102,7 @@ export default class Header {
           </div>
         </p>
         <p class="header-cart-content-dish-info-price"><span
-            class="content-menu-dish-cart-price-value">${dish.price}</span>р.</p>
+            class="content-menu-dish-cart-price-value">${dish.price}</span> р.</p>
     </div>
   </div>`
       );

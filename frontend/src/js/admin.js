@@ -35,10 +35,8 @@ export default class Admin {
 
   inputListener() {
     const inputs = document.querySelectorAll("#content-admin-table input");
-    console.log(inputs);
     inputs.forEach((item) => {
       item.addEventListener("change", (e) => {
-        console.log(e.target.closest("td"));
         e.target.closest("td").style.backgroundColor = "#00ff0020";
         e.target.closest("tr").style.backgroundColor = "#00ff0020";
         e.target.closest("tr").classList.add("changed");
