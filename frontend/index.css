@@ -335,6 +335,7 @@ header {
 }
 
 .header-account-menu p {
+  cursor: pointer;
   padding: 1em;
   transition: 0.2s ease-out;
   -webkit-transition: 0.2s ease-out;
@@ -773,6 +774,10 @@ h2 {
 
 .content-summary-paymethods-button:hover {
   opacity: 80%;
+}
+
+.content-summary-paymethods-button:disabled {
+  opacity: 40%;
 }
 
 .dropdown-arrow {

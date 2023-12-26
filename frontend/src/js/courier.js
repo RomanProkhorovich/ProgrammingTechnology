@@ -11,9 +11,7 @@ export default class Courier {
 
   check() {
     const user = localStorage.getItem("User");
-    if (!user) return;
-    const role = JSON.parse(user).role;
-    if ((role !== "Admin" && role !== "Manager") || !role)
+    if (!user || !role || role !== "Courier")
       window.location.href = document.querySelector(".header-logo a").href;
   }
   // ORDERS RENDERING XHR
