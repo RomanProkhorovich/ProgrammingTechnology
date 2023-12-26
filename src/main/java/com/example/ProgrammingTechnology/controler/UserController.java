@@ -11,6 +11,7 @@ import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.List;
 public class UserController {
     private final UserService service;
     private final UserMapper mapper;
+    private final PasswordEncoder encoder;
 
     @GetMapping()
     public UserDto findById(@RequestParam(name = "id",required = false) Long id) {
@@ -88,6 +90,8 @@ public class UserController {
 
     @PutMapping
     public ResponseEntity<UserDto> update(@RequestBody UserDto user){
-        return ResponseEntity.ok(mapper.toDto(service.createOrUpdate(mapper.toModel(user))));
+        User model = mapper.toModel(user);
+        model.setPassword(encoder.encode(user.getPassword()));
+        return ResponseEntity.ok(mapper.toDto(service.createOrUpdate(model)));
     }
 }
