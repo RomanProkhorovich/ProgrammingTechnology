@@ -1,6 +1,7 @@
 export default class Header {
   constructor() {
     this.accountButton = document.querySelector(".header-account");
+    this.accountMenu = document.querySelector(".header-account-menu");
     this.cartButton = document.querySelector(".header-cart-logo");
     this.cartSum = document.querySelector(".header-cart-sum-value");
     this.cartContent = document.querySelector(".header-cart-content");
@@ -9,6 +10,9 @@ export default class Header {
       ".content-summary-paymethods-total-value"
     );
     this.cartDishes = [];
+
+    this.accountCabinet = document.querySelector("#header-account-menu-logout");
+    this.accountLogout = document.querySelector("#header-account-menu-logout");
 
     if (localStorage.getItem("Cart")) {
       this.cartDishes = JSON.parse(localStorage.getItem("Cart"));
@@ -293,12 +297,35 @@ export default class Header {
         }, 200);
       }
     });
-    // ACCOUNT LISTENER
+    // ACCOUNT LISTENERS
     this.accountButton.addEventListener("click", (e) => {
-      if (localStorage.getItem("Auth") && +localStorage.getItem("Auth") === +1)
+      if (
+        localStorage.getItem("Auth") &&
+        +localStorage.getItem("Auth") === +1
+      ) {
+        if (this.accountMenu.classList.contains("display-none")) {
+          this.accountMenu.classList.toggle("display-none");
+          setTimeout(() => {
+            this.accountMenu.classList.toggle("hidden");
+          }, 0);
+        } else {
+          this.accountMenu.classList.toggle("hidden");
+          setTimeout(() => {
+            this.accountMenu.classList.toggle("display-none");
+          }, 200);
+        }
         return;
+      }
       e.preventDefault();
       this.popupAuthForm();
+    });
+
+    this.accountLogout.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      localStorage.removeItem("Auth");
+      localStorage.removeItem("User");
+      window.location.reload();
     });
     // SHOW/HIDE CART
     this.cartButton.addEventListener("click", () => {
