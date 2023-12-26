@@ -694,6 +694,12 @@ footer {
   padding: 0.5em 0;
 }
 
+.content-cabinet-about h1,
+h2 {
+  font-weight: 600;
+  padding: 1em 0;
+}
+
 /* Summary */
 .content-summary {
   display: flex;
