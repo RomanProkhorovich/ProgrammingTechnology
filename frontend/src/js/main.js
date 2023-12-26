@@ -66,9 +66,16 @@ export default class Header {
         `<div class="content-status">
           <p>Ваш заказ №${order.id} от ${new Date(
           order.orderTime
-        ).toLocaleString()} на данный момент ${order.orderStatus.name}</p>
+        ).toLocaleString()} на данный момент ${
+          order.orderStatus.name
+        }<span class="content-status-close">✕</span></p>
         </div>`
       );
+      document
+        .querySelector(".content-status-close")
+        .addEventListener("click", (e) => {
+          e.target.closest(".content-status").remove();
+        });
     };
     xhr.send(JSON.stringify({ actual: true }));
   }
@@ -367,7 +374,11 @@ export default class Header {
     });
     // TO SUMMARIZE
     this.toSummarize.addEventListener("click", (e) => {
-      
+      this.cartContent.classList.toggle("hidden");
+      setTimeout(() => {
+        this.cartContent.classList.toggle("display-none");
+      }, 200);
+
       if (localStorage.getItem("Auth") && +localStorage.getItem("Auth") === +1)
         return;
       if (
