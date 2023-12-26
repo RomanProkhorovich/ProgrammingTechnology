@@ -6,6 +6,9 @@ export default class Header {
     this.accountMenu = document.querySelector(".header-account-menu");
     this.cartButton = document.querySelector(".header-cart-logo");
     this.cartSum = document.querySelector(".header-cart-sum-value");
+    this.cartContentSum = document.querySelector(
+      ".header-cart-content-sum-value"
+    );
     this.cartContent = document.querySelector(".header-cart-content");
     this.toSummarize = document.querySelector("#cart-to-order");
     this.summary = document.querySelector(
@@ -55,7 +58,8 @@ export default class Header {
         return;
       }
 
-      const order = JSON.parse(xhr.responseText)[0];
+      const order = JSON.parse(xhr.responseText);
+      order = order[order.length - 1];
 
       if (!order) return;
       document.querySelector(".content").insertAdjacentHTML(
@@ -86,6 +90,7 @@ export default class Header {
     this.cartSum.textContent = arr.reduce((sum, current) => {
       return sum + current.price * current.quantity;
     }, 0);
+    this.cartContentSum.textContent = this.cartSum.textContent;
 
     if (this.summary) {
       this.summary.textContent = this.cartSum.textContent;
