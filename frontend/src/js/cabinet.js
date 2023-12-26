@@ -21,20 +21,6 @@ export default class Cabinet {
     this.registerEvents();
   }
 
-  // EDIT USER FIELD
-  editUserField() {
-    xhr = new XMLHttpRequest();
-    xhr.open("POST", "http://localhost:8080/api/v1/orders");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState !== 4 || xhr.status !== 200) {
-        return;
-      }
-      console.log(JSON.parse(xhr.responseText));
-    };
-    xhr.send();
-  }
-
   // GET CURRENT USER DATA
   getUser() {
     const xhr = new XMLHttpRequest();
@@ -56,7 +42,7 @@ export default class Cabinet {
       this.surname.value = user.surname;
       this.email.value = user.email;
       this.phone.value = user.phone;
-      this.password.value = user.password;
+      this.password.value = pass;
     };
     xhr.send();
   }

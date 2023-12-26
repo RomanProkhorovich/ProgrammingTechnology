@@ -989,8 +989,8 @@ th {
 }
 
 /* Courier */
-.content-courier-waiting,
-.content-courier-active {
+.content-courier-active,
+.content-courier-finished {
   display: flex;
   flex-direction: column;
   gap: 1em;
@@ -1041,7 +1041,9 @@ th {
 }
 
 .content-courier-order-button {
+  line-height: 1em;
   flex-basis: 10%;
+  min-width: 10em;
   flex-grow: 1;
   color: #fff;
   background-color: var(--main-dark);

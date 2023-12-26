@@ -60,12 +60,6 @@
         </div>
     </header>
 
-    <div class="alert">
-        <div class="alert-body error">
-            Ошибка<span>x</span>
-        </div>
-    </div>
-
     <div class="content">
         <div class="content-status">
             <p>У вас нет активных заказов</p>
@@ -73,12 +67,12 @@
 
         <div class="content-courier">
             <div class="content-cabinet-tabs">
-                <button id="tab-waiting" class="content-cabinet-tab content-cabinet-tab-active" type="button">Ожидают
-                    доставку</button>
-                <button id="tab-active" class="content-cabinet-tab" type="button">Активные заказы</button>
+                <button id="tab-active" class="content-cabinet-tab content-cabinet-tab-active" type="button">Активные
+                    заказы</button>
+                <button id="tab-finished" class="content-cabinet-tab" type="button">Завершенные заказы</button>
             </div>
 
-            <div class="content-courier-waiting">
+            <div class="content-courier-active">
 
                 <div class="content-courier-order">
                     <div class="content-courier-order-header">
@@ -142,16 +136,13 @@
 
             </div>
 
-            <div class="content-courier-active display-none">
+            <div class="content-courier-finished display-none">
 
                 <div class="content-courier-order">
                     <div class="content-courier-order-header">
                         <p class="content-courier-order-info">
                             Заказ №111 от Date
                         </p>
-                        <button class="content-courier-order-button">
-                            Сменить статус
-                        </button>
                     </div>
                     <div class="content-courier-order-description-dishes">
                         ${this.getDishesHTML(item.cartItems)}
@@ -179,9 +170,6 @@
                         <p class="content-courier-order-info">
                             Заказ №111 от Date
                         </p>
-                        <button class="content-courier-order-button">
-                            Сменить статус
-                        </button>
                     </div>
                     <div class="content-courier-order-description-dishes">
                         ${this.getDishesHTML(item.cartItems)}
