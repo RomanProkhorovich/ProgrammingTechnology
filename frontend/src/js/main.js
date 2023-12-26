@@ -58,8 +58,7 @@ export default class Header {
         return;
       }
 
-      const order = JSON.parse(xhr.responseText);
-      order = order[order.length - 1];
+      const order = JSON.parse(xhr.responseText)[0];
 
       if (!order) return;
       document.querySelector(".content").insertAdjacentHTML(
