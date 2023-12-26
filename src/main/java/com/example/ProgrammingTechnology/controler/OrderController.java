@@ -64,9 +64,16 @@ public class OrderController {
         order.setOrderStatus(orderStatusService.findOrderStatusByName("В обработке"));
         service.createOrder(order);
         //TODO: отослать в ресторан
-        mailSender.sendMessage(user.getEmail(), "Заказ", "Ваш заказ от" + new Date() + " Успешно оформлен ");
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                mailSender.sendMessage(user.getEmail(), "Заказ", "Ваш заказ от" + new Date() + " Успешно оформлен ");
+                mailSender.sendMessage(adminMail, "Заказ", "Оформлен новый заказ ");
+            }
+        });
+        thread.start();
 
-        mailSender.sendMessage(adminMail, "Заказ", "Оформлен новый заказ ");
+
 
         OrderDto orderDto = mapper.toDto(order);
         return ResponseEntity.ok(orderDto);
