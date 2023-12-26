@@ -408,4 +408,4 @@ export default class Header {
 //   },
 // ];
 
-console.log("header script loaded");
+console.log(JSON.parse(sessionStorage.getItem('Menu')));

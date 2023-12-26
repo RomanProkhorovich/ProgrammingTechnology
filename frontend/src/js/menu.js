@@ -205,4 +205,5 @@ export default class Menu {
   }
 }
 
+console.log(JSON.parse(localStorage.getItem("Cart")));
 console.log("menu script loaded");
