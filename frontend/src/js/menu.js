@@ -112,7 +112,7 @@ export default class Menu {
     }
     // not in cart
     elem.addEventListener("click", (e) => {
-      document.querySelector("#cart-to-order").insertAdjacentHTML(
+      document.querySelector(".header-cart-content-sum").insertAdjacentHTML(
         "beforebegin",
         `<div class="header-cart-content-dish" data-cart-id="${dish.id}">
       <img class="header-cart-content-dish-photo" src="data:image/png;base64,${dish.photo}" alt="${dish.name}">
