@@ -383,6 +383,7 @@ export default class Header {
           value.value = quantity;
         });
       if (quantity < 1) {
+        e.preventDefault();
         e.target.closest(".header-cart-content-dish").remove();
         const remaining = document.querySelectorAll(
           `[data-quantity-id="${id}"]`

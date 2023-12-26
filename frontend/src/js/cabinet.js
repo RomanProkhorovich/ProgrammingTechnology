@@ -94,7 +94,7 @@ export default class Cabinet {
 
       orders.forEach((item) => {
         ordersContainer.insertAdjacentHTML(
-          "beforeend",
+          "afterbegin",
           `<div class="content-cabinet-order">
           <p class="content-cabinet-order-info">Заказ №${item.id} от ${new Date(
             item.orderTime
