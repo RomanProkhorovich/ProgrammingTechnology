@@ -1,7 +1,6 @@
 export default class Menu {
   constructor() {
     this.cartContent = document.querySelector(".header-cart-content");
-    this.dishes = [];
 
     this.getDishes();
   }
@@ -46,7 +45,6 @@ export default class Menu {
       const dishesContainer = document.querySelector(".content-menu");
 
       dishes.forEach((item) => {
-        this.dishes.push(item);
         dishesContainer.insertAdjacentHTML(
           "beforeend",
           `<div class="content-menu-dish" data-menu-id="${item.id}">
@@ -62,7 +60,7 @@ export default class Menu {
       </div>`
         );
       });
-      sessionStorage.setItem("Menu", JSON.stringify(this.dishes));
+      sessionStorage.setItem("Menu", JSON.stringify(dishes));
       this.addToCart();
       this.popupDish();
     };
@@ -205,5 +203,4 @@ export default class Menu {
   }
 }
 
-console.log(JSON.parse(localStorage.getItem("Cart")));
 console.log("menu script loaded");

@@ -18,6 +18,25 @@ export default class Header {
     this.getActiveOrder();
   }
 
+  // GET DISHES
+  getDishes() {
+    if (!document.querySelector(".content-menu")) return;
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:8080/api/v1/menus/actual");
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== 4 || xhr.status !== 200) {
+        return;
+      }
+
+      const dishes = JSON.parse(xhr.responseText).dishes;
+
+      sessionStorage.setItem("Menu", JSON.stringify(dishes));
+      this.addToCart();
+      this.popupDish();
+    };
+    xhr.send();
+  }
+
   // GET ACTIVE ORDER
   getActiveOrder() {
     const xhr = new XMLHttpRequest();
@@ -58,11 +77,6 @@ export default class Header {
           quantity: +item.querySelector(".quantity-value").value,
           price: +item.querySelector(".content-menu-dish-cart-price-value")
             .textContent,
-          // price: Array.from(JSON.parse(localStorage.getItem("Menu"))).find(
-          //   (dish) => {
-          //     dish.id === item.dataset.cartId;
-          //   }
-          // ).price,
         });
       });
     this.cartSum.textContent = arr.reduce((sum, current) => {
@@ -86,11 +100,10 @@ export default class Header {
   // RENDER CART
   renderCart() {
     if (!this.cartDishes || this.cartDishes.length === 0) return;
-
+    const dishes = JSON.parse(sessionStorage.getItem("Menu"));
+    if (!dishes) this.getDishes();
     this.cartDishes.forEach((dish) => {
-      const curDish = Array.from(
-        JSON.parse(sessionStorage.getItem("Menu"))
-      ).find((item) => {
+      const curDish = dishes.find((item) => {
         return item.id === dish.id;
       });
 
@@ -407,5 +420,3 @@ export default class Header {
 //     photo: "",
 //   },
 // ];
-
-console.log(JSON.parse(sessionStorage.getItem('Menu')));

@@ -5,6 +5,7 @@ import cabinet from "./src/js/cabinet.js";
 import admin from "./src/js/admin.js";
 import courier from "./src/js/courier.js";
 
+new header();
 if (document.querySelector(".content-menu")) {
   new menu();
 }
@@ -20,8 +21,5 @@ if (document.querySelector(".content-admin")) {
 if (document.querySelector(".content-courier")) {
   new courier();
 }
-setTimeout(() => {
-  new header();
-}, 0);
 
 console.log("index script loaded");
