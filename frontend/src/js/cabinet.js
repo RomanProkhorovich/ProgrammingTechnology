@@ -197,6 +197,8 @@ export default class Cabinet {
       params["id"] = user.id;
       params["role"] = user.role;
 
+      console.log(params);
+
       const xhr = new XMLHttpRequest();
       xhr.open("PUT", "http://localhost:8080/api/v1/users");
       xhr.setRequestHeader(

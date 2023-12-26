@@ -23,6 +23,7 @@ export default class Summary {
 
   // SEND ORDER
   sendOrder() {
+    this.orderButton.disabled = true;
     const params = {};
 
     params.dishes = Array.from(JSON.parse(localStorage.getItem("Cart"))).map(
@@ -55,6 +56,9 @@ export default class Summary {
       );
     };
     xhr.send(JSON.stringify(params));
+    setTimeout(() => {
+      this.orderButton.disabled = false;
+    }, 4000);
   }
 
   insertDish(id, name, quantity, description, photo, price) {
@@ -169,7 +173,7 @@ export default class Summary {
     this.sum.textContent = this.cartSum.textContent;
 
     //ORDER
-    this.orderButton.addEventListener("click", this.sendOrder);
+    this.orderButton.addEventListener("click", () => this.sendOrder);
 
     this.addressButton.addEventListener("click", () => {
       document.body.insertAdjacentHTML(
