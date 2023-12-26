@@ -177,7 +177,7 @@ export default class Menu {
             <div class="popup-dish-info">
                 <h1>${dish.name}</h1>
                 <p class="popup-dish-info-description">
-                    ${dish.name}
+                    ${dish.description}
                 </p>
                 <p>Ккал. на порцию: <span>${dish.calories}</span> ккал.</p>
                 <p>Вес: <span>${dish.weight}</span> г.</p>

@@ -5,7 +5,16 @@ export default class Courier {
     this.contentWaiting = document.querySelector(".content-courier-waiting");
     this.contentActive = document.querySelector(".content-courier-active");
 
+    this.check();
     this.registerEvents();
+  }
+
+  check() {
+    const user = localStorage.getItem("User");
+    if (!user) return;
+    const role = JSON.parse(user).role;
+    if ((role !== "Admin" && role !== "Manager") || !role)
+      window.location.href = document.querySelector(".header-logo a").href;
   }
   // ORDERS RENDERING XHR
   getOrders() {

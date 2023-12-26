@@ -14,8 +14,10 @@ export default class Admin {
   }
 
   getOptions() {
-    const container = document.querySelector(".dropdown-options");
     const role = JSON.parse(localStorage.getItem("User")).role;
+    if ((role !== "Admin" && role !== "Manager") || !role)
+      window.location.href = document.querySelector(".header-logo a").href;
+    const container = document.querySelector(".dropdown-options");
     if (role === "Admin") {
       container.insertAdjacentHTML(
         "beforeend",

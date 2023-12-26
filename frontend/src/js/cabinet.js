@@ -40,6 +40,7 @@ export default class Cabinet {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost:8080/api/v1/users");
     const user = JSON.parse(localStorage.getItem("User"));
+    if (!user) return;
     const email = user.username;
     const pass = user.password;
     xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
@@ -80,6 +81,7 @@ export default class Cabinet {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost:8080/api/v1/orders");
     const user = JSON.parse(localStorage.getItem("User"));
+    if (!user) return;
     const email = user.username;
     const pass = user.password;
     xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
