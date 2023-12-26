@@ -16,7 +16,7 @@ export default class Alert {
         if (href) window.location.href = href;
       }, 200);
     });
-    console.log(alert);
+
     setTimeout(() => {
       alert.classList.add("alert-show");
     }, 0);

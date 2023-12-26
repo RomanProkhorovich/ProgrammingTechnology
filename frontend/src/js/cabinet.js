@@ -56,6 +56,7 @@ export default class Cabinet {
       this.surname.value = user.surname;
       this.email.value = user.email;
       this.phone.value = user.phone;
+      this.password.value = user.password;
     };
     xhr.send();
   }
@@ -197,7 +198,7 @@ export default class Cabinet {
       params["id"] = user.id;
       params["role"] = user.role;
 
-      console.log(params);
+      console.log(JSON.stringify(params));
 
       const xhr = new XMLHttpRequest();
       xhr.open("PUT", "http://localhost:8080/api/v1/users");
@@ -211,7 +212,6 @@ export default class Cabinet {
           return;
         }
       };
-      console.log(JSON.stringify(params));
       xhr.send(JSON.stringify(params));
     });
   }
