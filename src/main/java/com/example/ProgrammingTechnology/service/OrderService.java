@@ -81,7 +81,8 @@ public class OrderService {
                 .stream()
                 .map(cartItemService::createOrderDish)
                 .collect(Collectors.toSet()));
-        newOrder.setOrderStatus(orderStatusService.findOrderStatusByName("В обработке"));
+        if(newOrder.getOrderStatus()==null)
+            newOrder.setOrderStatus(orderStatusService.findOrderStatusByName("В обработке"));
         if (newOrder.getAddress() == null && newOrder.getClient().getAddress() != null)
             newOrder.setAddress(newOrder.getClient().getAddress());
         return orderRepository.save(newOrder);
