@@ -30,8 +30,7 @@ public class UserService {
     //TODO: на проверку, проверку на номер телефона, проверку на email и на пароль
     public User createOrUpdate(User user) {
         Role role = roleRepository.findById(user.getRole().getId()).orElseThrow();
-        if(user.getFirstname().isBlank()
-                || user.getLastname().isBlank()) {
+        if(user.getFirstname().isBlank() || user.getLastname().isBlank()) {
             throw new IllegalArgumentException();
         }
         if(user.getId()==null) {
@@ -42,7 +41,8 @@ public class UserService {
     
     //TODO: на проверку, те же вопроси что и в createOrUpdate
     public User updateUser(User upUser) {
-        User user = userRepository.findById(upUser.getId()).orElseThrow();
+        User user = userRepository.findByEmail(upUser.getEmail()).orElseThrow();
+        //User user = userRepository.findById(upUser.getId()).orElseThrow();
         Role role = roleRepository.findById(upUser.getRole().getId()).orElseThrow();
         if(upUser.getFirstname().isBlank()
                 || upUser.getFirstname().isEmpty()
