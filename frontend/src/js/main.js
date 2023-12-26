@@ -317,7 +317,7 @@ export default class Header {
         return;
       }
       e.preventDefault();
-      this.popupAuthForm();
+      if (e.target === this.accountButton) this.popupAuthForm();
     });
 
     this.accountLogout.addEventListener("click", (e) => {
@@ -325,6 +325,7 @@ export default class Header {
 
       localStorage.removeItem("Auth");
       localStorage.removeItem("User");
+      localStorage.removeItem("Cart");
       window.location.reload();
     });
     // SHOW/HIDE CART
