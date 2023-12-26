@@ -44,6 +44,15 @@ export default class Summary {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
       }
+
+      sessionStorage.removeItem("Cart");
+      document.querySelector(
+        "content"
+      ).innerHTML = `<h1>Заказ успешно оформлен</h1>
+      <p>Возвращение на главную страницу...</p>`;
+      setTimeout(() => {
+        document.querySelector("header-logo a").dispatchEvent("click");
+      }, 3000);
     };
     xhr.send(JSON.stringify(params));
   }

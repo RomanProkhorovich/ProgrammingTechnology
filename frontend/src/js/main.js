@@ -32,8 +32,8 @@ export default class Header {
       }
 
       const order = JSON.parse(xhr.responseText)[0];
-      console.log(order);
 
+      if (!order) return;
       document.querySelector(".content").insertAdjacentHTML(
         "afterbegin",
         `<div class="content-status">
