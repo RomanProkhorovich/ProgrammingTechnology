@@ -73,36 +73,33 @@
             </div>
 
             <div class="content-cabinet-data">
-                <label class="content-cabinet-data-label" for="surname">Фамилия</label>
-                <div class="content-cabinet-data-field">
-                    <input type="text" name="lastname">
-                    <button type="button" disabled>Сменить</button>
-                </div>
-                <label class="content-cabinet-data-label" for="name">Имя</label>
-                <div class="content-cabinet-data-field">
-                    <input type="text" name="firstname">
-                    <button type="button" disabled>Сменить</button>
-                </div>
-                <label class="content-cabinet-data-label" for="patronymic">Отчество</label>
-                <div class="content-cabinet-data-field">
-                    <input type="text" name="surname">
-                    <button type="button" disabled>Сменить</button>
-                </div>
-                <label class="content-cabinet-data-label" for="email">E-mail</label>
-                <div class="content-cabinet-data-field">
-                    <input type="email" name="email">
-                    <button type="button" disabled>Сменить</button>
-                </div>
-                <label class="content-cabinet-data-label" for="number">Номер телефона</label>
-                <div class="content-cabinet-data-field">
-                    <input type="tel" name="phone">
-                    <button type="button" disabled>Сменить</button>
-                </div>
-                <label class="content-cabinet-data-label" for="password">Пароль</label>
-                <div class="content-cabinet-data-field">
-                    <input type="password" name="password">
-                    <button type="button" disabled>Сменить</button>
-                </div>
+                <form id="content-cabinet-data-form">
+                    <label class="content-cabinet-data-label" for="lastname">Фамилия</label>
+                    <div class="content-cabinet-data-field">
+                        <input type="text" name="lastname">
+                    </div>
+                    <label class="content-cabinet-data-label" for="firstname">Имя</label>
+                    <div class="content-cabinet-data-field">
+                        <input type="text" name="firstname">
+                    </div>
+                    <label class="content-cabinet-data-label" for="surname">Отчество</label>
+                    <div class="content-cabinet-data-field">
+                        <input type="text" name="surname">
+                    </div>
+                    <label class="content-cabinet-data-label" for="email">E-mail</label>
+                    <div class="content-cabinet-data-field">
+                        <input type="email" name="email">
+                    </div>
+                    <label class="content-cabinet-data-label" for="phone">Номер телефона</label>
+                    <div class="content-cabinet-data-field">
+                        <input type="tel" name="phone">
+                    </div>
+                    <label class="content-cabinet-data-label" for="password">Пароль</label>
+                    <div class="content-cabinet-data-field">
+                        <input type="password" name="password">
+                    </div>
+                    <button id="content-cabinet-data-form-button">Сохранить изменения</button>
+                </form>
             </div>
 
             <div class="content-cabinet-orders display-none">

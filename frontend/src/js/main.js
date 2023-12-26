@@ -162,6 +162,8 @@ export default class Header {
         })
       );
 
+      window.location.reload();
+
       authForm.closest(".popup").remove();
     };
     xhr.send(JSON.stringify(params));
@@ -317,7 +319,8 @@ export default class Header {
         return;
       }
       e.preventDefault();
-      if (e.target === this.accountButton) this.popupAuthForm();
+      if (e.target === this.accountButton.querySelector(".header-account-logo"))
+        this.popupAuthForm();
     });
 
     this.accountLogout.addEventListener("click", (e) => {

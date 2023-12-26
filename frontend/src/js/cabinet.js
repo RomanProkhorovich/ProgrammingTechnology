@@ -3,6 +3,7 @@ export default class Cabinet {
     this.tabOrders = document.querySelector("#tab-orders");
     this.tabData = document.querySelector("#tab-data");
     this.tabAbout = document.querySelector("#tab-about");
+    this.saveData = document.querySelector("#content-cabinet-data-form-button");
 
     this.firstname = document.querySelector(`[name="firstname"]`);
     this.lastname = document.querySelector(`[name="lastname"]`);
