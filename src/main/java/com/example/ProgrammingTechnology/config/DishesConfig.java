@@ -79,7 +79,7 @@ public class DishesConfig {
         olive.setName("Оливье");
         olive.setWeight(160f);
         olive.setCalories(300f);
-        fi = new File("src//main//recources//еда//оливье.jpg");
+        fi = new File("src//main//resources//еда//оливье.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         olive.setPhoto(fileContent);
         service.createDish(olive);
@@ -90,7 +90,7 @@ public class DishesConfig {
         grib.setName("Грибной суп");
         grib.setWeight(250f);
         grib.setCalories(200f);
-        fi = new File("src//main//recources//еда//грибной_суп.jpg");
+        fi = new File("src//main//resources//еда//грибной_суп.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         grib.setPhoto(fileContent);
         service.createDish(grib);
@@ -101,7 +101,7 @@ public class DishesConfig {
         skumb.setName("Скумбрия на гриле");
         skumb.setWeight(290f);
         skumb.setCalories(500f);
-        fi = new File("src//main//recources//еда//скумбрия_на_гриле.jpeg");
+        fi = new File("src//main//resources//еда//скумбрия_на_гриле.jpeg");
         fileContent = Files.readAllBytes(fi.toPath());
         skumb.setPhoto(fileContent);
         service.createDish(skumb);
@@ -112,9 +112,10 @@ public class DishesConfig {
         sir.setName("Сырный суп");
         sir.setWeight(245f);
         sir.setCalories(150f);
-        fi = new File("src//main//recources//еда//сырный_суп.jpeg");
+        fi = new File("src//main//resources//еда//сырный_суп.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         sir.setPhoto(fileContent);
+        service.createDish(sir);
 
         Dish sirniki = new Dish();
         sirniki.setPrice(330f);
@@ -122,9 +123,10 @@ public class DishesConfig {
         sirniki.setName("Сырники");
         sirniki.setWeight(185f);
         sirniki.setCalories(400f);
-        fi = new File("src//main//recources//еда//сырники.jpg");
+        fi = new File("src//main//resources//еда//сырники.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         sirniki.setPhoto(fileContent);
+        service.createDish(sirniki);
 
         Dish brus = new Dish();
         brus.setPrice(600f);
@@ -132,9 +134,10 @@ public class DishesConfig {
         brus.setName("Брускетты");
         brus.setWeight(200f);
         brus.setCalories(200f);
-        fi = new File("src//main//recources//еда//брускетты.jpg");
+        fi = new File("src//main//resources//еда//брускетты.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         brus.setPhoto(fileContent);
+        service.createDish(brus);
 
         Dish cezar = new Dish();
         cezar.setPrice(480f);
@@ -142,9 +145,10 @@ public class DishesConfig {
         cezar.setName("Цезарь");
         cezar.setWeight(230f);
         cezar.setCalories(310f);
-        fi = new File("src//main//recources//еда//цезарь.jpg");
+        fi = new File("src//main//resources//еда//цезарь.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         cezar.setPhoto(fileContent);
+        service.createDish(cezar);
 
         Dish borsch = new Dish();
         borsch.setPrice(295f);
@@ -152,9 +156,10 @@ public class DishesConfig {
         borsch.setName("Борщ");
         borsch.setWeight(330f);
         borsch.setCalories(230f);
-        fi = new File("src//main//recources//еда//борщ.jpg");
+        fi = new File("src//main//resources//еда//борщ.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         borsch.setPhoto(fileContent);
+        service.createDish(borsch);
 
         Dish lazan = new Dish();
         lazan.setPrice(340f);
@@ -162,9 +167,10 @@ public class DishesConfig {
         lazan.setName("Лазанья");
         lazan.setWeight(220f);
         lazan.setCalories(500f);
-        fi = new File("src//main//recources//еда//лазанья.jpg");
+        fi = new File("src//main//resources//еда//лазанья.jpg");
         fileContent = Files.readAllBytes(fi.toPath());
         lazan.setPhoto(fileContent);
+        service.createDish(lazan);
 
         Dish palki = new Dish();
         palki.setPrice(380f);
@@ -172,9 +178,10 @@ public class DishesConfig {
         palki.setName("Сырные палочки");
         palki.setWeight(260f);
         palki.setCalories(600f);
-        fi = new File("src//main//recources//еда//сырные_палочки.jpeg");
+        fi = new File("src//main//resources//еда//сырные_палочки.jpeg");
         fileContent = Files.readAllBytes(fi.toPath());
         palki.setPhoto(fileContent);
+        service.createDish(palki);
 
 
 
