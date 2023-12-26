@@ -12,6 +12,7 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
     List<Order> findAllByClient(User user);
+    //List<Order> findAllByCourier(User user);
 
     @Query("SELECT distinct address FROM app_order where client.id = ?1")
     List<String> getAllAddressesByUserId(Long id);
