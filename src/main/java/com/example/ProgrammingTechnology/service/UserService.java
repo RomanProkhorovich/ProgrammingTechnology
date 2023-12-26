@@ -18,6 +18,9 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final RoleService roleService;
 
+    public Long getIdByEmailOrPhone(String phoneOrEmail){
+        return userRepository.findIdByPhoneOrEmail(phoneOrEmail).orElseThrow(()->new UsernameNotFoundException(""));
+    }
     //TODO: сделать проверку почты при создании пользователя и при изменении почты
     //TODO: проверка по номеру телефона
     //создание пользователя
@@ -37,6 +40,7 @@ public class UserService {
         if(user.getId()==null) {
             return createUser(user);
         }
+
         return updateUser(user);
     }
     

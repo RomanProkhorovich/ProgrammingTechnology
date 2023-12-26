@@ -208,6 +208,7 @@ export default class Cabinet {
           return;
         }
       };
+      console.log(JSON.stringify(params));
       xhr.send(JSON.stringify(params));
     });
   }
