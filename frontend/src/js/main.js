@@ -361,7 +361,6 @@ export default class Header {
     });
     // TO SUMMARIZE
     this.toSummarize.addEventListener("click", (e) => {
-      e.preventDefault();
       if (localStorage.getItem("Auth") && +localStorage.getItem("Auth") === +1)
         return;
       if (
