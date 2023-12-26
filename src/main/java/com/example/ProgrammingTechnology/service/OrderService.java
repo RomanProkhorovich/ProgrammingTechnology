@@ -27,8 +27,15 @@ public class OrderService {
     private final CartItemService cartItemService;
 
 
-    public List<Order> findAllByCourier(Long id){
-        return orderRepository.getAllByCourierId(id);
+    public List<Order> findAllByCourier(Long id, Boolean actual){
+        if (id==null)
+            id=userService.findUserByEmailOrPhone(SecurityHelper.getCurrentUser().getUsername()).getId();
+        if (actual)
+            return findActualOrders(id);
+        return orderRepository.getAllByCourierId(id).stream()
+                .filter(x->x.getOrderStatus().getName().equals("Доставлен")||
+                        x.getOrderStatus().getName().equals("Завершен"))
+                .toList();
     }
 
     public List<Order> findActualOrders(Long id) {
