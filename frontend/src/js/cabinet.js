@@ -90,8 +90,6 @@ export default class Cabinet {
 
       const orders = JSON.parse(xhr.responseText);
 
-      console.log(orders);
-
       const ordersContainer = document.querySelector(".content-cabinet-orders");
 
       orders.forEach((item) => {
@@ -198,7 +196,6 @@ export default class Cabinet {
           return;
         }
 
-        window.location.reload();
       };
       xhr.send(JSON.stringify(params));
     });
