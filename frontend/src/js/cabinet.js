@@ -180,19 +180,22 @@ export default class Cabinet {
     });
     // SAVE USER DATA LISTENER
     this.saveData.addEventListener("click", () => {
+      const user = JSON.parse(localStorage.getItem("User"));
+      const email = user.username;
+      const pass = user.password;
+
       let params = {};
 
-      Array.from(document.forms[0].getElementsByTagName("input")).map(
+      Array.from(document.forms[0].getElementsByTagName("input")).forEach(
         (item) => {
           params[item.name] = item.value;
         }
       );
 
+      params["role"] = user.role;
+
       const xhr = new XMLHttpRequest();
       xhr.open("PUT", "http://localhost:8080/api/v1/users");
-      const user = JSON.parse(localStorage.getItem("User"));
-      const email = user.username;
-      const pass = user.password;
       xhr.setRequestHeader(
         "Authorization",
         "Basic " + btoa(`${email}:${pass}`)
