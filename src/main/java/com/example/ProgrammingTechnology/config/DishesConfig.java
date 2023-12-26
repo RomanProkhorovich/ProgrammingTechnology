@@ -28,6 +28,67 @@ public class DishesConfig {
 
     @Bean
     int addData() throws IOException {
+
+        return 1;
+    }
+
+    @Bean
+    int addUsers() throws IOException {
+        User user = new User();
+        user.setRole(roleService.findRoleByName("Client"));
+        user.setPassword(passwordEncoder.encode("password"));
+        user.setLastname("Чернов");
+        user.setFirstname("Даниил");
+        user.setSurname("Иванович");
+        user.setEmail("cherni@example.ru");
+        user.setAddress("г. Самара, ул. Мичурина, д. 375, кв. 19");
+        user.setPhone("89095492710");
+        user = userService.createUser(user);
+        User cur = User.builder()
+                .phone("89274810058")
+                .firstname("Абуля")
+                .surname("Иванович")
+                .lastname("Курьеров")
+                .role(roleService.findRoleByName("Courier"))
+                .email("abul.nadel@example.ru")
+                .password(passwordEncoder.encode("hehe"))
+                .build();
+        cur = userService.createUser(cur);
+
+        User admin = User.builder()
+                .phone("89871029411")
+                .firstname("Олег")
+                .surname("Челикович")
+                .lastname("Анимов")
+                .role(roleService.findRoleByName("Admin"))
+                .email("adik.tripa@example.ru")
+                .password(passwordEncoder.encode("loski"))
+                .build();
+        admin = userService.createUser(admin);
+
+        User manager = User.builder()
+                .phone("89991105928")
+                .firstname("Кузя")
+                .surname("Михайлович")
+                .lastname("Мужыков")
+                .role(roleService.findRoleByName("Manager"))
+                .email("kyza.misha@example.ru")
+                .password(passwordEncoder.encode("vrotee"))
+                .build();
+        userService.createOrUpdate(manager);
+
+        User manager2 = User.builder()
+                .phone("89271049262")
+                .firstname("Арина")
+                .surname("Николаевна")
+                .lastname("Пономарева")
+                .role(roleService.findRoleByName("Manager"))
+                .email("arina.pon@example.ru")
+                .password(passwordEncoder.encode("ponarin"))
+                .build();
+        userService.createOrUpdate(manager2);
+
+
         Dish dish = new Dish();
         dish.setName("Пицца");
         dish.setPrice(300f);
@@ -86,7 +147,7 @@ public class DishesConfig {
 
         Dish grib = new Dish();
         grib.setPrice(160f);
-        grib.setDescription("Идеально подходит для диетического питания");
+        grib.setDescription("Вкуснейший грибной крем-суп из шампиньонов и картофеля, с нежной текстурой. Идеально подходит для диетического питания");
         grib.setName("Грибной суп");
         grib.setWeight(250f);
         grib.setCalories(200f);
@@ -97,7 +158,7 @@ public class DishesConfig {
 
         Dish skumb = new Dish();
         skumb.setPrice(310f);
-        skumb.setDescription("С пастой казаречче");
+        skumb.setDescription("Скумбрия на гриле представляет собой восхитительное и питательное блюдо, идеально подходящее для тех, кто предпочитает здоровую пищу. Этот деликатес приготовлен из свежей, высококачественной скумбрии, которая тщательно очищена от костей и кожи, а затем замаринована в смеси ароматных специй и трав. Подается с пастой казаречче");
         skumb.setName("Скумбрия на гриле");
         skumb.setWeight(290f);
         skumb.setCalories(500f);
@@ -141,7 +202,7 @@ public class DishesConfig {
 
         Dish cezar = new Dish();
         cezar.setPrice(480f);
-        cezar.setDescription("С цыпленком");
+        cezar.setDescription("В его основе - свежие листья салата романо, которые придают салату свежесть и легкость. Гренки из белого хлеба, пропитанные чесночным маслом, добавляют в салат хрустящую текстуру и приятный аромат. Нежнейшее куриное филе, обжаренное до золотистой корочки, делает салат сытным и питательным. А изюминкой салата является соус “Цезарь”, приготовленный по особому рецепту с добавлением анчоусов и вустерширского соуса. Все ингредиенты аккуратно перемешиваются и выкладываются на тарелку, а сверху посыпаются тертым сыром пармезан. Салат “Цезарь” выглядит очень красиво и аппетитно");
         cezar.setName("Цезарь");
         cezar.setWeight(230f);
         cezar.setCalories(310f);
@@ -195,55 +256,22 @@ public class DishesConfig {
         rest.setName("Пизда кузи миши");
         rest.setAddress("г. Самара, ул. Черемшанская 111");
         restaurantService.createRestaurant(rest);*/
-        return 1;
-    }
 
-    @Bean
-    int addUsers() {
-        User user = new User();
-        user.setRole(roleService.findRoleByName("Client"));
-        user.setPassword(passwordEncoder.encode("password"));
-        user.setLastname("Чернов");
-        user.setFirstname("Даниил");
-        user.setSurname("Иванович");
-        user.setEmail("cherni@example.ru");
-        user.setAddress("г. Самара, ул. Мичурина, д. 375, кв. 19");
-        user.setPhone("89095492710");
-        user = userService.createUser(user);
-        User cur = User.builder()
-                .phone("89274810058")
-                .firstname("Абуля")
-                .surname("Иванович")
-                .lastname("Курьеров")
-                .role(roleService.findRoleByName("Courier"))
-                .email("abul.nadel@example.ru")
-                .password(passwordEncoder.encode("hehe"))
-                .build();
-        cur = userService.createUser(cur);
+        Restaurant rest1 = new Restaurant();
+        rest1.setName("Roman's на Калужской");
+        rest1.setAddress("г. Самара, ул. Калужская, 11");
+        rest1.setPeopleCount((byte) 60);
+        rest1.setMenu(menu);
+        rest1.setManager(userService.findUserByEmail("kyza.misha@example.ru"));
+        restaurantService.createRestaurant(rest1);
 
-        User admin = User.builder()
-                .phone("89871029411")
-                .firstname("Олег")
-                .surname("Челикович")
-                .lastname("Анимов")
-                .role(roleService.findRoleByName("Admin"))
-                .email("adik.tripa@example.ru")
-                .password(passwordEncoder.encode("loski"))
-                .build();
-        admin = userService.createUser(admin);
-
-        User manager = User.builder()
-                .phone("89991105928")
-                .firstname("Кузя")
-                .surname("Михайлович")
-                .lastname("Мужыков")
-                .role(roleService.findRoleByName("Manager"))
-                .email("kyza.misha@example.ru")
-                .password(passwordEncoder.encode("vrotee"))
-                .build();
-        userService.createOrUpdate(manager);
-
-
+        Restaurant rest2 = new Restaurant();
+        rest2.setName("Roman's на Мичурина");
+        rest2.setAddress("г. Самара, ул. Мичурина, 148");
+        rest2.setPeopleCount((byte) 33);
+        rest2.setMenu(menu);
+        rest2.setManager(userService.findUserByEmail("arina.pon@example.ru"));
+        restaurantService.createRestaurant(rest2);
        /* user.setId(null);
         userService.createUser(user);*/
 
