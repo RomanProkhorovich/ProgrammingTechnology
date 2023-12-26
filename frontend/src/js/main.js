@@ -31,8 +31,6 @@ export default class Header {
       const dishes = JSON.parse(xhr.responseText).dishes;
 
       sessionStorage.setItem("Menu", JSON.stringify(dishes));
-      this.addToCart();
-      this.popupDish();
     };
     xhr.send();
   }
@@ -100,8 +98,8 @@ export default class Header {
   // RENDER CART
   renderCart() {
     if (!this.cartDishes || this.cartDishes.length === 0) return;
+    if (!sessionStorage.getItem("Menu")) this.getDishes();
     const dishes = JSON.parse(sessionStorage.getItem("Menu"));
-    if (!dishes) this.getDishes();
     this.cartDishes.forEach((dish) => {
       const curDish = dishes.find((item) => {
         return item.id === dish.id;
