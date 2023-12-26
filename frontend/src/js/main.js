@@ -39,7 +39,7 @@ export default class Header {
         `<div class="content-status">
           <p>Ваш заказ №${order.id} от ${new Date(
           order.orderTime
-        ).toLocaleString()} на данный момент ${order.status}</p>
+        ).toLocaleString()} на данный момент ${order.orderStatus.name}</p>
         </div>`
       );
     };
