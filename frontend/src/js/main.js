@@ -32,6 +32,7 @@ export default class Header {
       }
 
       const order = JSON.parse(xhr.responseText);
+      console.log(order);
 
       document.querySelector(".content").insertAdjacentHTML(
         "afterbegin",
