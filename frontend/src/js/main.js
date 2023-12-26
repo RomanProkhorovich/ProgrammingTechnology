@@ -159,9 +159,10 @@ export default class Header {
       localStorage.setItem(
         "User",
         JSON.stringify({
-          username: user.username,
+          id: user.id,
+          username: params.username ? params.username : params.email,
           password: params.password,
-          role: user.authorities[0].authority,
+          role: user.role.name,
         })
       );
 
@@ -204,7 +205,7 @@ export default class Header {
           <h1>
               Войдите, чтобы сделать заказ
           </h1>
-          <input type="text" placeholder="Номер телефона или E-Mail" name="phone-email" value="">
+          <input type="text" placeholder="Номер телефона или E-Mail" name="username" value="">
           <input type="password" placeholder="Пароль" name="password" value="">
           <button id="registration-button" type="button">Зарегистрироваться</button>
           <button id="authorization-button" type="button">Войти</button>
@@ -356,17 +357,21 @@ export default class Header {
     });
     // TO SUMMARIZE
     this.toSummarize.addEventListener("click", (e) => {
+      e.preventDefault();
       if (localStorage.getItem("Auth") && +localStorage.getItem("Auth") === +1)
         return;
       if (
         !localStorage.getItem("Cart") ||
         JSON.parse(localStorage.getItem("Cart")).length === 0
-      )
+      ) {
+        e.preventDefault();
         new Alert(
           "error",
           "Оформление заказа недоступно. Корзина пуста.",
           5000
         );
+        return;
+      }
       e.preventDefault();
       this.popupAuthForm();
     });

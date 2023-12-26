@@ -13,7 +13,7 @@ export default class Alert {
       alert.classList.remove("alert-show");
       setTimeout(() => {
         alert.remove();
-        window.location.href = href;
+        if (href) window.location.href = href;
       }, 200);
     });
     console.log(alert);

@@ -194,6 +194,7 @@ export default class Cabinet {
         }
       );
 
+      params["id"] = user.id;
       params["role"] = user.role;
 
       const xhr = new XMLHttpRequest();
