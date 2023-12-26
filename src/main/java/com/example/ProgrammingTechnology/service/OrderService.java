@@ -112,7 +112,7 @@ public class OrderService {
     @Transactional
     public List<Order> findOrdersByUser(Long userId, Boolean actual) {
         if (userId == null)
-            userId = userService.findUserByEmail(SecurityHelper.getCurrentUser().getUsername()).getId();
+            userId = userService.findUserByEmailOrPhone(SecurityHelper.getCurrentUser().getUsername()).getId();
         List<Order> allByClient = orderRepository.findAllByClient(userService.findUserById(userId));
 
         //TODO

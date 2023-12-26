@@ -63,7 +63,8 @@ public class DishesConfig {
 
         Dish kakleti = new Dish();
         kakleti.setPrice(330f);
-        kakleti.setDescription("Мясные каклети с мясом из мяса мяса(свинина и говядина и может быть немного домашних питомцев, надо спросить у повара)");
+        kakleti.setDescription("Мясные каклети с мясом из мяса мяса(свинина и говядина " +
+                "и может быть немного домашних питомцев, надо спросить у повара), это какой то обычный текст, чтобы набить длину и я не знаю шо такое тут такое это");
         kakleti.setName("Котлеты");
         kakleti.setWeight(350f);
         kakleti.setCalories(250f);
@@ -104,7 +105,7 @@ public class DishesConfig {
                 .lastname("Курьеров")
                 .role(roleService.findRoleByName("Courier"))
                 .email("abul.nadel@example.ru")
-                .password("hehe")
+                .password(passwordEncoder.encode("hehe"))
                 .build();
         cur = userService.createUser(cur);
 
@@ -115,7 +116,7 @@ public class DishesConfig {
                 .lastname("Анимов")
                 .role(roleService.findRoleByName("Admin"))
                 .email("adik.tripa@example.ru")
-                .password("loski")
+                .password(passwordEncoder.encode("loski"))
                 .build();
         admin = userService.createUser(admin);
 
@@ -126,8 +127,9 @@ public class DishesConfig {
                 .lastname("Мужыков")
                 .role(roleService.findRoleByName("Manager"))
                 .email("kyza.misha@example.ru")
-                .password("vrotee")
+                .password(passwordEncoder.encode("vrotee"))
                 .build();
+        userService.createOrUpdate(manager);
 
 
        /* user.setId(null);
