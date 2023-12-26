@@ -349,6 +349,10 @@ export default class Header {
     });
     // SHOW/HIDE CART
     this.cartButton.addEventListener("click", () => {
+      if (!document.querySelector(".header-cart-content-dish")) {
+        new Alert("error", "Корзина пуста", 3000);
+        return;
+      }
       if (this.cartContent.classList.contains("display-none")) {
         this.cartContent.classList.toggle("display-none");
         setTimeout(() => {
