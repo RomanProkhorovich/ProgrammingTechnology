@@ -31,7 +31,7 @@ export default class Header {
         return;
       }
 
-      const order = JSON.parse(xhr.responseText);
+      const order = JSON.parse(xhr.responseText)[0];
       console.log(order);
 
       document.querySelector(".content").insertAdjacentHTML(
