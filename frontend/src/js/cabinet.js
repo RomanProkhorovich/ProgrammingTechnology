@@ -180,20 +180,27 @@ export default class Cabinet {
       this.tabData.classList.remove("content-cabinet-tab-active");
       this.tabAbout.classList.add("content-cabinet-tab-active");
     });
-    // INPUT CHANGED LISTENER
-    [
-      this.firstname,
-      this.lastname,
-      this.surname,
-      this.email,
-      this.phone,
-      this.password,
-    ].forEach((item) => {
-      item.addEventListener("input", (e) => {
-        e.target
-          .closest(".content-cabinet-data-field")
-          .querySelector("button").disabled = false;
-      });
+    // SAVE USER DATA LISTENER
+    this.saveData.addEventListener("click", () => {
+      let params = {};
+
+      Array.from(document.forms[0].getElementsByTagName("input")).map(
+        (item) => {
+          params[item.name] = item.value;
+        }
+      );
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("PUT", "http://localhost:8080/api/v1/users");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState !== 4 || xhr.status !== 200) {
+          return;
+        }
+
+        window.location.reload();
+      };
+      xhr.send(JSON.stringify(params));
     });
   }
 }
