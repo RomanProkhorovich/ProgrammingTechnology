@@ -56,6 +56,7 @@ export default class Cabinet {
       this.surname.value = user.surname;
       this.email.value = user.email;
       this.phone.value = user.phone;
+      this.password.value = user.password;
     };
     xhr.send();
   }
