@@ -1258,6 +1258,7 @@ th {
   top: -6em;
   height: 6em;
   transition: 0.2s ease-out;
+  
   -webkit-transition: 0.2s ease-out;
   -moz-transition: 0.2s ease-out;
   -ms-transition: 0.2s ease-out;
@@ -1302,11 +1303,11 @@ th {
 }
 
 .error {
-  background-color: #ff4444;
+  background-color: #ac4444;
 }
 
 .success {
-  background-color: #44ff44;
+  background-color: #44ac44;
 }
 
 /* Media queries */

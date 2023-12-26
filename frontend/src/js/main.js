@@ -8,7 +8,7 @@ export default class Header {
     this.summary = document.querySelector(
       ".content-summary-paymethods-total-value"
     );
-    this.cartDishes;
+    this.cartDishes = [];
 
     if (localStorage.getItem("Cart")) {
       this.cartDishes = JSON.parse(localStorage.getItem("Cart"));

@@ -1,4 +1,5 @@
 import { dropdownHandler } from "./dropdown.js";
+import Alert from "./alert.js";
 
 export default class Summary {
   constructor() {
@@ -45,14 +46,13 @@ export default class Summary {
         return;
       }
 
-      sessionStorage.removeItem("Cart");
-      document.querySelector(
-        "content"
-      ).innerHTML = `<h1>Заказ успешно оформлен</h1>
-      <p>Возвращение на главную страницу...</p>`;
-      setTimeout(() => {
-        document.querySelector("header-logo a").dispatchEvent("click");
-      }, 3000);
+      localStorage.setItem("Cart", JSON.stringify([]));
+      new Alert(
+        "success",
+        "Заказ оформлен успешно. Перенаправление на главную страницу...",
+        3000,
+        document.querySelector(".header-logo a").href
+      );
     };
     xhr.send(JSON.stringify(params));
   }
