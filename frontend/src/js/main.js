@@ -1,3 +1,5 @@
+import Alert from "./alert.js";
+
 export default class Header {
   constructor() {
     this.accountButton = document.querySelector(".header-account");
@@ -151,6 +153,7 @@ export default class Header {
         return;
       }
       const user = JSON.parse(xhr.responseText);
+      console.log(user);
 
       localStorage.setItem("Auth", 1);
       localStorage.setItem(
@@ -355,6 +358,15 @@ export default class Header {
     this.toSummarize.addEventListener("click", (e) => {
       if (localStorage.getItem("Auth") && +localStorage.getItem("Auth") === +1)
         return;
+      if (
+        !localStorage.getItem("Cart") ||
+        JSON.parse(localStorage.getItem("Cart")).length === 0
+      )
+        new Alert(
+          "error",
+          "Оформление заказа недоступно. Корзина пуста.",
+          5000
+        );
       e.preventDefault();
       this.popupAuthForm();
     });

@@ -25,7 +25,7 @@ export default class Alert {
     }, timeout);
     setTimeout(() => {
       alert.remove();
-      window.location.href = href;
+      if (href) window.location.href = href;
     }, timeout + 200);
   }
 }
