@@ -12,7 +12,8 @@ import java.util.List;
         UserMapper.class,
         RestaurantMapper.class,
         ReceivingTypeMapper.class,
-        OrderStatusMapper.class
+        OrderStatusMapper.class,
+        PayMethodMapper.class
 })
 public interface OrderMapper {
 

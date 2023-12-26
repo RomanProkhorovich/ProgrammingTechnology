@@ -17,6 +17,11 @@ import java.util.Set;
 @Builder
 @Table(name = "app_order")
 public class Order {
+
+    @ManyToOne
+    @JoinColumn(name = "pay_method_id")
+    private PayMethod payMethod;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
