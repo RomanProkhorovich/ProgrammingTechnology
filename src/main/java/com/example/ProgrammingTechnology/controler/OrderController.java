@@ -73,6 +73,10 @@ public class OrderController {
         return ResponseEntity.ok(orderDto);
     }
 
+    @GetMapping("/courier")
+    public ResponseEntity<List<OrderDto>> findForCourier(@RequestParam(name="id",required = true) Long id){
+        return ResponseEntity.ok(mapper.toDtoList(service.findAllByCourier(id)));
+    }
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('Admin','Manager')")
     public ResponseEntity<List<OrderDto>> fundAll(){

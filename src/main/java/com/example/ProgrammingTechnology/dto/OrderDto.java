@@ -28,6 +28,8 @@ public class OrderDto {
     private ReceivingTypeDto receivingType;
     private UserDto client;
 
+    private PayMethodDto payMethod;
+
     public Float getSum(){
         return cartItems
                 .stream()

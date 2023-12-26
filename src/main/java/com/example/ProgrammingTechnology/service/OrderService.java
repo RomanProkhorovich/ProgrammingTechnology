@@ -9,7 +9,6 @@ import com.example.ProgrammingTechnology.security.SecurityHelper;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -25,6 +24,11 @@ public class OrderService {
     private final OrderStatusService orderStatusService;
     private final ReceivingTypeService receivingTypeService;
     private final CartItemService cartItemService;
+
+
+    public List<Order> findAllByCourier(Long id){
+        return orderRepository.getAllByCourierId(id);
+    }
 
     //TODO: сделать проверку на количество мест, если заказали в зале
     //TODO: адрес по дефолту это адрес у клиента
