@@ -9,7 +9,6 @@ export default class Admin {
     this.tableDropdown = document.querySelector("#content-admin-dropdown");
     this.tableOptions = this.tableDropdown.querySelector(".dropdown-options");
     this.getOptions();
-    dropdownHandler();
     this.table = document.querySelector("#content-admin-table");
     this.inputListener();
     this.endpoint = "users/all";
@@ -262,5 +261,6 @@ export default class Admin {
         this.getTable(this.endpoint);
       }, 0);
     });
+    dropdownHandler();
   }
 }
