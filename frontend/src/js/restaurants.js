@@ -91,7 +91,8 @@ export default class Restaurant {
 
         new Alert(
           "success",
-          `Забронирован столик на ${params.count} человек в ${params.dateTime}.`
+          `Забронирован столик на ${params.count} человек в ${params.dateTime}.`,
+          3000
         );
       };
       xhr.send(JSON.stringify(params));

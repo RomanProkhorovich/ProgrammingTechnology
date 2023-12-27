@@ -2,11 +2,11 @@ import { dropdownHandler } from "./dropdown.js";
 
 export default class Admin {
   constructor() {
+    this.tableDropdown = document.querySelector("#content-admin-dropdown");
+    this.tableOptions = this.tableDropdown.querySelector(".dropdown-options");
     this.getOptions();
     dropdownHandler();
     this.table = document.querySelector("#content-admin-table");
-    this.tableDropdown = document.querySelector("#content-admin-dropdown");
-    this.tableOptions = this.tableDropdown.querySelector(".dropdown-options");
     this.inputListener();
     this.endpoint = "users/all";
     this.getTable(this.endpoint);
@@ -28,13 +28,6 @@ export default class Admin {
       );
       return;
     }
-    document.querySelector("content").insertAdjacentHTML(
-      "afterbegin",
-      `<div class="tabs">
-          <button id="tab-couriers" class="tab tab-active" type="button">Назначение курьеров</button>
-          <button id="tab-database" class="tab" type="button">База данных</button>
-      </div>`
-    );
     this.tableOptions.insertAdjacentHTML(
       "beforeend",
       `<a href="#" data-endpoint="users/all">Пользователи</a>

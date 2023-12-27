@@ -62,7 +62,12 @@
 
     <div class="content">
 
-        <div class="content-manager">
+        <div class="tabs display-none">
+            <button id="tab-couriers" class="tab tab-active" type="button">Назначение курьеров</button>
+            <button id="tab-database" class="tab" type="button">База данных</button>
+        </div>
+
+        <div class="content-manager display-none">
             <div class="order" data-order-id="${item.id}">
                 <div class="order-header">
                     <p class="order-info">
