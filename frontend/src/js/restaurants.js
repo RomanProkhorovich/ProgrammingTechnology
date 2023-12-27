@@ -26,7 +26,7 @@ export default class Restaurant {
       response.forEach((item) => {
         this.cardContainer.insertAdjacentHTML(
           "beforeend",
-          `<div class="content-restaurants-card" data-restaurant-id="${item.address}">
+          `<div class="content-restaurants-card" data-restaurant-id="${item.id}">
               <div class="content-restaurants-card-img">
                   <img src="https://pgdv.ru/images/blog/restorany-michelin-moskva/michelin-moskva-7-min.jpg" alt="">
               </div>
