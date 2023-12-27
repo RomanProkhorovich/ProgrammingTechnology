@@ -87,7 +87,7 @@ export default class Restaurant {
       let params = {};
 
       params["userId"] = JSON.parse(localStorage.getItem("User")).id;
-      params["dateTime"] = formData.date + ", " + formData.time;
+      params["dateTime"] = new Date(formData.date + ", " + formData.time);
       params["restId"] = id;
       params["count"] = formData.count;
 
