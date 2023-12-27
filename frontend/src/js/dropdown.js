@@ -1,7 +1,7 @@
-const dropdown = document.querySelectorAll(".dropdown");
-const dropdownOptions = document.querySelectorAll(".dropdown-options");
-
 export const dropdownHandler = () => {
+  const dropdown = document.querySelectorAll(".dropdown");
+  const dropdownOptions = document.querySelectorAll(".dropdown-options");
+
   // EXPAND DROPDOWNS
   dropdown.forEach((item) => {
     item.addEventListener("click", (e) => {
@@ -35,9 +35,8 @@ export const dropdownHandler = () => {
         e.target.textContent;
     });
   });
-  document.body.addEventListener('click',(e)=>{
-    if(!e.target.closest('.dropdown')){
-      
+  document.body.addEventListener("click", (e) => {
+    if (!e.target.closest(".dropdown")) {
     }
-  })
+  });
 };
