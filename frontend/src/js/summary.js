@@ -23,7 +23,6 @@ export default class Summary {
 
   // SEND ORDER
   sendOrder() {
-    this.orderButton.disabled = true;
     const params = {};
 
     params.dishes = Array.from(JSON.parse(localStorage.getItem("Cart"))).map(
