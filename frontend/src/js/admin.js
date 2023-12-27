@@ -46,6 +46,25 @@ export default class Admin {
     });
   }
 
+  getOrders() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:8080/api/v1/orders");
+    const user = JSON.parse(localStorage.getItem("User"));
+    if (!user) return;
+    const username = user.username;
+    const password = user.password;
+    xhr.setRequestHeader(
+      "Authorization",
+      "Basic " + btoa(`${username}:${password}`)
+    );
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== 4 || xhr.status !== 200) {
+        return;
+      }
+    };
+    xhr.send({ actual: true });
+  }
+
   getTable(tableName) {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `http://localhost:8080/api/v1/${tableName}`);
