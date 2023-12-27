@@ -20,7 +20,7 @@ export default class Admin {
 
   getCouriers() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/api/v1/couriers");
+    xhr.open("GET", "http://localhost:8080/api/v1/users/couriers");
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
     const username = user.username;
