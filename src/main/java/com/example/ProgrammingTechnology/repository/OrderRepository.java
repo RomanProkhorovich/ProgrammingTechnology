@@ -17,7 +17,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("SELECT distinct address FROM app_order where client.id = ?1")
     List<String> getAllAddressesByUserId(Long id);
 
-    @Query("SELECT order FROM app_order order where courier.id = ?1")
+    @Query("SELECT distinct order FROM app_order order where courier.id = ?1")
     List<Order> getAllByCourierId(Long id);
     List<Order> findAllByOrderStatus(OrderStatus orderStatus);
 }

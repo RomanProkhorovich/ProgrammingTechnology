@@ -4,6 +4,7 @@ package com.example.ProgrammingTechnology.controler;
 import com.example.ProgrammingTechnology.dto.RestaurantDto;
 import com.example.ProgrammingTechnology.mapper.RestaurantMapper;
 import com.example.ProgrammingTechnology.service.RestaurantService;
+import jakarta.transaction.Transactional;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ public class RestaurantController {
     }
 
     @GetMapping("/all")
+    @Transactional
     @PreAuthorize("hasAnyAuthority('Admin','Manager')")
     public List<RestaurantDto> findAll() {
         return mapper.toDtoList(service.findRestaurants());
