@@ -7,7 +7,6 @@ export default class Restaurant {
     this.bookButtons = document.querySelectorAll(
       ".content-restaurants-card-button"
     );
-    console.log(this.bookButtons);
 
     this.registerEvents();
   }
@@ -33,7 +32,7 @@ export default class Restaurant {
               </div>
               <div class="content-restaurants-card-info">
                   <h1>${item.name}</h1>
-                  <p>${item.description}</p>
+                  <p>${item.address}</p>
                   <button class="content-restaurants-card-button">Забронировать столик</button>
               </div>
           </div>`
@@ -42,6 +41,13 @@ export default class Restaurant {
       this.bookButtons = document.querySelectorAll(
         ".content-restaurants-card-button"
       );
+      this.bookButtons.forEach((item) => {
+        item.addEventListener("click", (e) => {
+          this.popupBooking(
+            e.target.closest(".content-restaurants-card").dataset.restaurantId
+          );
+        });
+      });
     };
     xhr.send();
   }
@@ -115,13 +121,5 @@ export default class Restaurant {
     });
   }
 
-  registerEvents() {
-    this.bookButtons.forEach((item) => {
-      item.addEventListener("click", (e) => {
-        this.popupBooking(
-          e.target.closest(".content-restaurants-card").dataset.restaurantId
-        );
-      });
-    });
-  }
+  registerEvents() {}
 }
