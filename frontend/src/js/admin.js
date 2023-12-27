@@ -19,6 +19,7 @@ export default class Admin {
     if ((role !== "Admin" && role !== "Manager") || !role)
       window.location.href = document.querySelector(".header-logo a").href;
     if (role === "Admin") {
+      document.querySelector('.content-admin').classList.remove('display-none')
       this.tableOptions.insertAdjacentHTML(
         "beforeend",
         `<a href="#" data-endpoint="users/all">Пользователи</a>
@@ -28,6 +29,8 @@ export default class Admin {
       );
       return;
     }
+    document.querySelector('.content-manager').classList.remove('display-none')
+    document.querySelector('.tabs').classList.remove('display-none')
     this.tableOptions.insertAdjacentHTML(
       "beforeend",
       `<a href="#" data-endpoint="users/all">Пользователи</a>
