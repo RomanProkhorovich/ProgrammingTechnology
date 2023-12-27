@@ -34,11 +34,15 @@ export default class Admin {
       }
       const response = JSON.parse(xhr.responseText);
 
+      console.log(response);
+
       let mapped = response.map((item) => {
         return `<a href="#" data-courier-id="${
           item.id
         }">${`${item.lastname} ${item.firstname} ${item.surname}`}</a>`;
       });
+
+      console.log(mapped);
 
       this.couriersHTML = `<div class="dropdown" style="margin: 1em;">
           <button type="button">
@@ -50,6 +54,8 @@ export default class Admin {
               ${mapped.join(" ")}
           </div>
       </div>`;
+
+      console.log(this.couriersHTML);
     };
     xhr.send();
   }
@@ -182,7 +188,6 @@ export default class Admin {
       }
 
       const response = JSON.parse(xhr.responseText);
-      console.log(response);
 
       if (!response[0]) {
         this.table.innerHTML = "Таблица пуста";
