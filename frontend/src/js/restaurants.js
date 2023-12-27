@@ -113,7 +113,7 @@ export default class Restaurant {
 
         new Alert(
           "success",
-          `Забронирован столик на ${params.count} человек в ${params.dateTime}.`,
+          `Забронирован столик на ${params.count} человек в ${params.dateTime.toLocaleString()}.`,
           3000
         );
       };

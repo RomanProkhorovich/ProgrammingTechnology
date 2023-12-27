@@ -166,6 +166,7 @@ export default class Admin {
     </div>`
         );
       });
+      courierButtonHandler();
       dropdownHandler();
     };
     xhr.send();
