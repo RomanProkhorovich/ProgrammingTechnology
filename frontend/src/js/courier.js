@@ -85,26 +85,26 @@ export default class Courier {
       orders.forEach((item) => {
         ordersContainer.insertAdjacentHTML(
           "afterbegin",
-          `<div class="content-courier-order" data-order-id="${item.id}">
-        <div class="content-courier-order-header">
-            <p class="content-courier-order-info">
+          `<div class="order" data-order-id="${item.id}">
+        <div class="order-header">
+            <p class="order-info">
                 Заказ №${item.id} от ${new Date(
             item.orderTime
           ).toLocaleString()}
             </p>
         </div>
-        <div class="content-courier-order-description-dishes">
+        <div class="order-description-dishes">
             ${this.getDishesHTML(item.cartItems)}
-            <div class="content-courier-order-description-sum">
+            <div class="order-description-sum">
                 <h1>
                     Итого
                 </h1>
-                <p class="content-courier-order-description-dish-price">
+                <p class="order-description-dish-price">
                     <span>${item.sum}</span> р.
                 </p>
             </div>
         </div>
-        <div class="content-courier-order-description-data">
+        <div class="order-description-data">
             <h1>Способ оплаты:</h1>
             <p>${"Картой курьеру"}</p>
             <h1>Адрес:</h1>
@@ -147,29 +147,29 @@ export default class Courier {
         else caption = "Заказ получен";
         ordersContainer.insertAdjacentHTML(
           "afterbegin",
-          `<div class="content-courier-order" data-order-id="${item.id}">
-        <div class="content-courier-order-header">
-            <p class="content-courier-order-info">
+          `<div class="order" data-order-id="${item.id}">
+        <div class="order-header">
+            <p class="order-info">
                 Заказ №${item.id} от ${new Date(
             item.orderTime
           ).toLocaleString()}
             </p>
-            <button class="content-courier-order-button">
+            <button class="order-button">
                 ${caption}
             </button>
         </div>
-        <div class="content-courier-order-description-dishes">
+        <div class="order-description-dishes">
             ${this.getDishesHTML(item.cartItems)}
-            <div class="content-courier-order-description-sum">
+            <div class="order-description-sum">
                 <h1>
                     Итого
                 </h1>
-                <p class="content-courier-order-description-dish-price">
+                <p class="order-description-dish-price">
                     <span>${item.sum}</span> р.
                 </p>
             </div>
         </div>
-        <div class="content-courier-order-description-data">
+        <div class="order-description-data">
             <h1>Способ оплаты:</h1>
             <p>${"Картой курьеру"}</p>
             <h1>Адрес:</h1>
@@ -198,18 +198,16 @@ export default class Courier {
       this.contentFinished.classList.remove("display-none");
     });
     // CHANGE STATUS
-    document
-      .querySelectorAll(".content-courier-order-button")
-      .forEach((item) => {
-        item.addEventListener("click", (e) => {
-          const order = e.target.closest(".content-courier-order");
-          this.changeOrderStatus(order.dataset.orderId);
-          if (e.target.textContent === "Заказ получен") {
-            e.target.textContent = "Заказ доставлен";
-            return;
-          }
-          order.remove();
-        });
+    document.querySelectorAll(".order-button").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        const order = e.target.closest(".order");
+        this.changeOrderStatus(order.dataset.orderId);
+        if (e.target.textContent === "Заказ получен") {
+          e.target.textContent = "Заказ доставлен";
+          return;
+        }
+        order.remove();
       });
+    });
   }
 }

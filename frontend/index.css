@@ -635,7 +635,7 @@ footer {
   gap: 1em;
 }
 
-.content-cabinet-order {
+.order {
   background-color: #00000020;
   color: var(--main-dark);
   display: flex;
@@ -656,60 +656,86 @@ footer {
   -o-transition: 0.2s ease-out;
 }
 
-.content-cabinet-order-info {
+.order-header {
   width: 100%;
   color: var(--main-dark);
   background-color: white;
   font-weight: 600;
-  padding: 1em;
+  overflow: hidden;
   border-radius: 1em;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 
   -webkit-border-radius: 1em;
   -moz-border-radius: 1em;
   -ms-border-radius: 1em;
   -o-border-radius: 1em;
 }
+.order-button {
+  line-height: 1em;
+  flex-basis: 10%;
+  min-width: 10em;
+  flex-grow: 1;
+  color: #fff;
+  background-color: var(--main-dark);
+  font-size: 16px;
+  font-weight: 600;
+  box-sizing: border-box;
+  padding: 1em;
+  transition: 0.2s ease-out;
 
-.content-cabinet-order-description-dishes {
+  -webkit-transition: 0.2s ease-out;
+  -moz-transition: 0.2s ease-out;
+  -ms-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
+}
+
+.order-button:hover {
+  opacity: 80%;
+}
+
+.order-info {
+  padding: 1em;
+  flex-basis: 50%;
+  flex-grow: 1;
+}
+
+.order-description-dishes,
+.order-description-data {
   flex-basis: 40%;
   flex-grow: 1;
   padding: 1em;
 }
 
-.content-cabinet-order-description-dish {
+.order-description-dish {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1em;
   border-bottom: solid 2px var(--main-dark);
 }
 
-.content-cabinet-order-description-dish-name {
+.order-description-dish-name {
   font-size: 16px;
 }
 
-.content-cabinet-order-description-sum {
+.order-description-sum {
   font-weight: 600;
 }
 
-.content-cabinet-order-description-sum h1 {
+.order-description-sum h1 {
   float: left;
 }
 
-.content-cabinet-order-description-sum p {
+.order-description-sum p {
   float: right;
 }
 
-.content-cabinet-order-description-data {
-  flex-basis: 40%;
-  flex-grow: 1;
-  padding: 1em;
-}
-
-.content-cabinet-order-description-data h1 {
+.order-description-data h1 {
   font-size: 16px;
 }
 
-.content-cabinet-order-description-data p {
+.order-description-data p {
   font-size: 16px;
   padding: 0.5em 0;
 }
@@ -994,97 +1020,6 @@ th {
   display: flex;
   flex-direction: column;
   gap: 1em;
-}
-
-.content-courier-order {
-  background-color: #00000020;
-  color: var(--main-dark);
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  border-radius: 1em;
-  overflow: hidden;
-  box-shadow: var(--main-shadow);
-  transition: 0.2s ease-out;
-
-  -webkit-border-radius: 1em;
-  -moz-border-radius: 1em;
-  -ms-border-radius: 1em;
-  -o-border-radius: 1em;
-  -webkit-transition: 0.2s ease-out;
-  -moz-transition: 0.2s ease-out;
-  -ms-transition: 0.2s ease-out;
-  -o-transition: 0.2s ease-out;
-}
-
-.content-courier-order-header {
-  width: 100%;
-  color: var(--main-dark);
-  background-color: white;
-  font-weight: 600;
-  overflow: hidden;
-  border-radius: 1em;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-
-  -webkit-border-radius: 1em;
-  -moz-border-radius: 1em;
-  -ms-border-radius: 1em;
-  -o-border-radius: 1em;
-}
-
-.content-courier-order-info {
-  padding: 1em;
-  flex-basis: 50%;
-  flex-grow: 1;
-}
-
-.content-courier-order-button {
-  line-height: 1em;
-  flex-basis: 10%;
-  min-width: 10em;
-  flex-grow: 1;
-  color: #fff;
-  background-color: var(--main-dark);
-  font-size: 16px;
-  font-weight: 600;
-  box-sizing: border-box;
-  padding: 1em;
-  transition: 0.2s ease-out;
-
-  -webkit-transition: 0.2s ease-out;
-  -moz-transition: 0.2s ease-out;
-  -ms-transition: 0.2s ease-out;
-  -o-transition: 0.2s ease-out;
-}
-
-.content-courier-order-button:hover {
-  opacity: 80%;
-}
-
-.content-courier-order-description-dishes,
-.content-courier-order-description-data {
-  flex-basis: 40%;
-  flex-grow: 1;
-  padding: 1em;
-}
-
-.content-courier-order-description-sum h1 {
-  float: left;
-}
-
-.content-courier-order-description-sum p {
-  float: right;
-  font-weight: 600;
-}
-
-.content-courier-order-description-data h1 {
-  font-size: 16px;
-}
-
-.content-courier-order-description-data p {
-  padding: 0.5em 0;
 }
 
 /* Restaurants */

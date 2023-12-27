@@ -54,11 +54,11 @@ export default class Cabinet {
   getDishesHTML(dishes) {
     let html = "";
     dishes.forEach((item) => {
-      html += `<div class="content-cabinet-order-description-dish">
-      <h1 class="content-cabinet-order-description-dish-name">
+      html += `<div class="order-description-dish">
+      <h1 class="order-description-dish-name">
           ${item.dish.name}
       </h1>
-      <p class="content-cabinet-order-description-dish-price">
+      <p class="order-description-dish-price">
           <span>${item.dish.price}</span> р. <span>${item.count}</span>шт.
       </p>
   </div>`;
@@ -90,30 +90,32 @@ export default class Cabinet {
       orders.forEach((item) => {
         ordersContainer.insertAdjacentHTML(
           "afterbegin",
-          `<div class="content-cabinet-order">
-          <p class="content-cabinet-order-info">Заказ №${item.id} от ${new Date(
-            item.orderTime
-          ).toLocaleString()}</p>
-          <div class="content-cabinet-order-description-dishes">
-              ${this.getDishesHTML(item.cartItems)}
-              <div class="content-cabinet-order-description-sum">
-              <h1>
-                  Итого
-              </h1>
-              <p class="content-cabinet-order-description-dish-price">
-                  <span>${item.sum}</span> р.
-              </p>
+          `<div class="order">
+              <div class="order-header">
+                  <p class="order-info">
+                      Заказ №${item.id} от ${new Date(item.orderTime).toLocaleString()}
+                  </p>
               </div>
-          </div>
-          <div class="content-cabinet-order-description-data">
-              <h1>Способ получения:</h1>
-              <p>${item.receivingType.name}</p>
-              <h1>Способ оплаты:</h1>
-              <p>${"Картой курьеру"}</p>
-              <h1>Адрес:</h1>
-              <p>${item.address}</p>
-          </div>
-      </div>`
+              <div class="order-description-dishes">
+                    ${this.getDishesHTML(item.cartItems)}
+                    <div class="order-description-sum">
+                        <h1>
+                            Итого
+                        </h1>
+                        <p class="order-description-dish-price">
+                            <span>${item.sum}</span> р.
+                        </p>
+                    </div>
+                </div>
+                <div class="order-description-data">
+                    <h1>Способ получения:</h1>
+                    <p>${item.receivingType.name}</p>
+                    <h1>Способ оплаты:</h1>
+                    <p>${"Картой курьеру"}</p>
+                    <h1>Адрес:</h1>
+                    <p>${item.address}</p>
+                </div>
+            </div>`
         );
       });
     };
