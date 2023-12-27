@@ -25,6 +25,7 @@ public class DishesConfig {
     private final PasswordEncoder passwordEncoder;
     private final CartItemService cartItemService;
     private final MenuService menuService;
+    private final OrderStatusService orderStatusService;
 
     @Bean
     int addData() throws IOException {
@@ -334,6 +335,98 @@ public class DishesConfig {
         order.setCartItems(Set.of(item2));
         order.setOrderTime(LocalDateTime.now());
         a=orderService.createOrder(order);
+
+        order = new Order();
+        order.setAddress(user.getAddress());
+        order.setClient(user);
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Курьер"));
+        order.setDeliveryTime(LocalDateTime.now());
+        CartItem item3 = new CartItem(service.findDishById(1L), (byte) 1);
+        item3 = cartItemService.createOrderDish(item3);
+        order.setCartItems(Set.of(item3));
+        order.setOrderTime(LocalDateTime.now());
+        order.setOrderStatus(orderStatusService.findOrderStatusByName("В обработке"));
+        order.setCourier(cur);
+        a=orderService.createOrder(order);
+
+        order = new Order();
+        order.setAddress(user.getAddress());
+        order.setClient(user);
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Курьер"));
+        order.setDeliveryTime(LocalDateTime.now());
+        CartItem item4 = new CartItem(service.findDishById(3L), (byte) 1);
+        item4 = cartItemService.createOrderDish(item4);
+        order.setCartItems(Set.of(item4));
+        order.setOrderTime(LocalDateTime.now());
+        order.setOrderStatus(orderStatusService.findOrderStatusByName("Принят"));
+        order.setCourier(cur);
+        a=orderService.createOrder(order);
+
+        order = new Order();
+        order.setAddress(user.getAddress());
+        order.setClient(user);
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Курьер"));
+        order.setDeliveryTime(LocalDateTime.now());
+        CartItem item5 = new CartItem(service.findDishById(2L), (byte) 3);
+        item5 = cartItemService.createOrderDish(item5);
+        order.setCartItems(Set.of(item5));
+        order.setOrderTime(LocalDateTime.now());
+        order.setOrderStatus(orderStatusService.findOrderStatusByName("Готовится"));
+        order.setCourier(cur);
+        a=orderService.createOrder(order);
+
+        order = new Order();
+        order.setAddress(user.getAddress());
+        order.setClient(user);
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Курьер"));
+        order.setDeliveryTime(LocalDateTime.now());
+        CartItem item6 = new CartItem(service.findDishById(2L), (byte) 3);
+        item6 = cartItemService.createOrderDish(item6);
+        order.setCartItems(Set.of(item6));
+        order.setOrderTime(LocalDateTime.now());
+        order.setOrderStatus(orderStatusService.findOrderStatusByName("Передан курьеру"));
+        order.setCourier(cur);
+        a=orderService.createOrder(order);
+
+        order = new Order();
+        order.setAddress(user.getAddress());
+        order.setClient(user);
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Курьер"));
+        order.setDeliveryTime(LocalDateTime.now());
+        CartItem item7 = new CartItem(service.findDishById(1L), (byte) 5);
+        item7 = cartItemService.createOrderDish(item7);
+        order.setCartItems(Set.of(item7));
+        order.setOrderTime(LocalDateTime.now());
+        order.setOrderStatus(orderStatusService.findOrderStatusByName("Готов"));
+        order.setCourier(cur);
+        a=orderService.createOrder(order);
+
+        order = new Order();
+        order.setAddress(user.getAddress());
+        order.setClient(user);
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Курьер"));
+        order.setDeliveryTime(LocalDateTime.now());
+        CartItem item8 = new CartItem(service.findDishById(4L), (byte) 1);
+        item8 = cartItemService.createOrderDish(item8);
+        order.setCartItems(Set.of(item8));
+        order.setOrderTime(LocalDateTime.now());
+        order.setOrderStatus(orderStatusService.findOrderStatusByName("Доставлен"));
+        order.setCourier(cur);
+        a=orderService.createOrder(order);
+
+        order = new Order();
+        order.setAddress(user.getAddress());
+        order.setClient(user);
+        order.setReceivingType(receivingTypeService.findReceivingTypeByName("Курьер"));
+        order.setDeliveryTime(LocalDateTime.now());
+        CartItem item9 = new CartItem(service.findDishById(5L), (byte) 3);
+        item9 = cartItemService.createOrderDish(item9);
+        order.setCartItems(Set.of(item9));
+        order.setOrderTime(LocalDateTime.now());
+        order.setOrderStatus(orderStatusService.findOrderStatusByName("Завершен"));
+        order.setCourier(cur);
+        a=orderService.createOrder(order);
+
         return 1;
     }
 }

@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -26,8 +27,40 @@ public class OrderService {
     private final CartItemService cartItemService;
 
 
-    public List<Order> findAllByCourier(Long id){
-        return orderRepository.getAllByCourierId(id);
+    public List<Order> findAllByCourier(Long id, Boolean actual){
+        if (id==null)
+            id=userService.findUserByEmailOrPhone(SecurityHelper.getCurrentUser().getUsername()).getId();
+        if (actual)
+            return findActualOrders(id);
+        return findNotActualOrders(id);
+    }
+
+    public List<Order> findActualOrders(Long id) {
+        List<Order> orderList = orderRepository.getAllByCourierId(id);
+        List<Order> hz = new ArrayList<Order>();
+        Order order;
+        for(int i=0;i<orderList.size();i++) {
+            order = orderList.get(i);
+            if(!order.getOrderStatus().getName().equals("Доставлен")
+                    && !order.getOrderStatus().getName().equals("Завершен")) {
+                hz.add(order);
+            }
+        }
+        return hz;
+    }
+
+    public List<Order> findNotActualOrders(Long id) {
+        List<Order> orderList = orderRepository.getAllByCourierId(id);
+        List<Order> hz = new ArrayList<Order>();
+        Order order;
+        for(int i=0;i<orderList.size();i++) {
+            order = orderList.get(i);
+            if(order.getOrderStatus().getName().equals("Доставлен")
+                    || order.getOrderStatus().getName().equals("Завершен")) {
+                hz.add(order);
+            }
+        }
+        return hz;
     }
 
     //TODO: сделать проверку на количество мест, если заказали в зале
@@ -45,7 +78,8 @@ public class OrderService {
                 .stream()
                 .map(cartItemService::createOrderDish)
                 .collect(Collectors.toSet()));
-        newOrder.setOrderStatus(orderStatusService.findOrderStatusByName("В обработке"));
+        if(newOrder.getOrderStatus()==null)
+            newOrder.setOrderStatus(orderStatusService.findOrderStatusByName("В обработке"));
         if (newOrder.getAddress() == null && newOrder.getClient().getAddress() != null)
             newOrder.setAddress(newOrder.getClient().getAddress());
         return orderRepository.save(newOrder);
@@ -102,6 +136,7 @@ public class OrderService {
         List<String> allAddressesByUserId = orderRepository.getAllAddressesByUserId(id);
         return allAddressesByUserId;
     }
+
     public List<String> findAllAddressesByUser(User user){
         return findAllAddressesByUserId(user.getId());
     }
@@ -136,6 +171,21 @@ public class OrderService {
     public List<Order> findOrderByOrderStatus(Long orderStatusId) {
         return orderRepository.findAllByOrderStatus(orderStatusService.findOrderStatusById(orderStatusId));
     }
+
+    /*public List<Order> findActualOrders() {
+        List<Order> orderList = findOrderByOrderStatus(orderStatusService.findOrderStatusByName("В обработке").getId());
+        orderList.addAll(findOrderByOrderStatus(orderStatusService.findOrderStatusByName("Принят").getId()));
+        orderList.addAll(findOrderByOrderStatus(orderStatusService.findOrderStatusByName("Готовится").getId()));
+        orderList.addAll(findOrderByOrderStatus(orderStatusService.findOrderStatusByName("Передан курьеру").getId()));
+        orderList.addAll(findOrderByOrderStatus(orderStatusService.findOrderStatusByName("Готов").getId()));
+        return orderList;
+    }
+
+    public List<Order> findNotActualOrders() {
+        List<Order> orderList = findOrderByOrderStatus(orderStatusService.findOrderStatusByName("Доставлен").getId());
+        orderList.addAll(findOrderByOrderStatus(orderStatusService.findOrderStatusByName("Завершен").getId()));
+        return orderList;
+    }*/
 
 
     //изменение статуса заказа

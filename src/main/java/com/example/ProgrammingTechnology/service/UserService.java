@@ -46,7 +46,7 @@ public class UserService {
     
     //TODO: на проверку, те же вопроси что и в createOrUpdate
     public User updateUser(User upUser) {
-        User user = userRepository.findByEmail(upUser.getEmail()).orElseThrow();
+        User user = findUserByEmailOrPhone(upUser.getEmail()==null?upUser.getPhone():upUser.getEmail());
         //User user = userRepository.findById(upUser.getId()).orElseThrow();
         //Role role = roleRepository.findById(upUser.getRole().getId()).orElseThrow();
         upUser.setRole(user.getRole());
