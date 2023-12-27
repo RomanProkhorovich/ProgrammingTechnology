@@ -1,3 +1,5 @@
+import Alert from "./alert.js";
+
 export default class Courier {
   constructor() {
     this.tabActive = document.querySelector("#tab-active");
@@ -12,6 +14,7 @@ export default class Courier {
 
     setInterval(() => {
       this.getActiveOrders();
+      this.getFinishedOrders();
     }, 30000);
   }
 
@@ -25,12 +28,11 @@ export default class Courier {
     document.querySelectorAll(".order-button").forEach((item) => {
       item.addEventListener("click", (e) => {
         const order = e.target.closest(".order");
-        if (!this.changeOrderStatus(order.dataset.orderId)) return false;
-        if (e.target.textContent === "Заказ взят в работу") {
-          e.target.textContent = "Заказ доставлен";
-          return;
+        if (!this.changeOrderStatus(order.dataset.orderId)) {
+          new Alert("error", "Ошибка изменения статуса заказа", 3000);
         }
-        order.remove();
+
+        this.getActiveOrders();
       });
     });
   }
@@ -58,14 +60,12 @@ export default class Courier {
     if (!user) return;
     const username = user.username;
     const password = user.password;
-    xhr.onerror = () => {
-      return false;
-    };
     xhr.setRequestHeader(
       "Authorization",
       "Basic " + btoa(`${username}:${password}`)
     );
     xhr.setRequestHeader("Content-Type", "application/json");
+
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;

@@ -13,6 +13,10 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PayMethod {
 
+    public PayMethod(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
