@@ -548,13 +548,13 @@ footer {
 /* Cabinet */
 
 /* Data */
-.content-cabinet-tabs {
+.tabs {
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 1em;
 }
 
-.content-cabinet-tab {
+.tab {
   flex-grow: 1;
   font-weight: 600;
   padding: 0.5em 1em;
@@ -575,11 +575,11 @@ footer {
   -o-transition: 0.2s ease-out;
 }
 
-.content-cabinet-tab:hover {
+.tab:hover {
   opacity: 80%;
 }
 
-.content-cabinet-tab-active {
+.tab-active {
   color: #fff;
   background-color: var(--main-dark);
 }

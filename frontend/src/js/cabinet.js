@@ -137,9 +137,9 @@ export default class Cabinet {
         .querySelector(".content-cabinet-about")
         .classList.add("display-none");
 
-      this.tabOrders.classList.add("content-cabinet-tab-active");
-      this.tabData.classList.remove("content-cabinet-tab-active");
-      this.tabAbout.classList.remove("content-cabinet-tab-active");
+      this.tabOrders.classList.add("tab-active");
+      this.tabData.classList.remove("tab-active");
+      this.tabAbout.classList.remove("tab-active");
     });
     this.tabData.addEventListener("click", () => {
       document
@@ -154,9 +154,9 @@ export default class Cabinet {
         .querySelector(".content-cabinet-about")
         .classList.add("display-none");
 
-      this.tabOrders.classList.remove("content-cabinet-tab-active");
-      this.tabData.classList.add("content-cabinet-tab-active");
-      this.tabAbout.classList.remove("content-cabinet-tab-active");
+      this.tabOrders.classList.remove("tab-active");
+      this.tabData.classList.add("tab-active");
+      this.tabAbout.classList.remove("tab-active");
     });
     this.tabAbout.addEventListener("click", () => {
       document
@@ -171,9 +171,9 @@ export default class Cabinet {
         .querySelector(".content-cabinet-about")
         .classList.remove("display-none");
 
-      this.tabOrders.classList.remove("content-cabinet-tab-active");
-      this.tabData.classList.remove("content-cabinet-tab-active");
-      this.tabAbout.classList.add("content-cabinet-tab-active");
+      this.tabOrders.classList.remove("tab-active");
+      this.tabData.classList.remove("tab-active");
+      this.tabAbout.classList.add("tab-active");
     });
     // SAVE USER DATA LISTENER
     this.saveData.addEventListener("click", () => {

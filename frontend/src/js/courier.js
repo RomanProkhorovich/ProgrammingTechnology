@@ -203,14 +203,14 @@ export default class Courier {
 
   registerEvents() {
     this.tabActive.addEventListener("click", () => {
-      this.tabActive.classList.add("content-cabinet-tab-active");
-      this.tabFinished.classList.remove("content-cabinet-tab-active");
+      this.tabActive.classList.add("tab-active");
+      this.tabFinished.classList.remove("tab-active");
       this.contentActive.classList.remove("display-none");
       this.contentFinished.classList.add("display-none");
     });
     this.tabFinished.addEventListener("click", () => {
-      this.tabActive.classList.remove("content-cabinet-tab-active");
-      this.tabFinished.classList.add("content-cabinet-tab-active");
+      this.tabActive.classList.remove("tab-active");
+      this.tabFinished.classList.add("tab-active");
       this.contentActive.classList.add("display-none");
       this.contentFinished.classList.remove("display-none");
     });
