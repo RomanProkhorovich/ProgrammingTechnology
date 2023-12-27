@@ -39,7 +39,7 @@ export default class Courier {
 
   changeOrderStatus(id) {
     const xhr = new XMLHttpRequest();
-    xhr.open("PUT", "http://localhost:8080/api/v1/courier/");
+    xhr.open("PUT", "http://localhost:8080/api/v1/courier");
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
     const username = user.username;
@@ -60,7 +60,7 @@ export default class Courier {
   // ORDERS RENDERING XHR
   getFinishedOrders() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/api/v1/courier/");
+    xhr.open("GET", "http://localhost:8080/api/v1/courier");
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
     const username = user.username;
@@ -121,7 +121,7 @@ export default class Courier {
 
   getActiveOrders() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/api/v1/courier/");
+    xhr.open("GET", "http://localhost:8080/api/v1/courier");
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
     const username = user.username;
