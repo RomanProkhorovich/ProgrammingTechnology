@@ -39,6 +39,9 @@ export default class Restaurant {
           </div>`
         );
       });
+      this.bookButtons = document.querySelectorAll(
+        ".content-restaurants-card-button"
+      );
     };
     xhr.send();
   }
