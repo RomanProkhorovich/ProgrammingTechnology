@@ -6,10 +6,12 @@ import com.example.ProgrammingTechnology.mapper.UserMapper;
 import com.example.ProgrammingTechnology.model.Role;
 import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.security.SecurityHelper;
+import com.example.ProgrammingTechnology.service.RoleService;
 import com.example.ProgrammingTechnology.service.UserService;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +23,7 @@ import java.util.List;
 @RequestMapping("/api/v1/users")
 public class UserController {
     private final UserService service;
+    private final RoleService roleService;
     private final UserMapper mapper;
     private final PasswordEncoder encoder;
 
@@ -32,6 +35,12 @@ public class UserController {
         return mapper.toDto(service.findUserById(id));
     }
 
+    @GetMapping("/couriers")
+    @Secured("hasAuthority('Manager')")
+    public List<UserDto> getCouriers(){
+        List<User> courier = service.findUsersByRole(roleService.findRoleByName("Courier").getId());
+        return mapper.toDtoList(courier);
+    }
     public UserDto changePhone(@PathParam("id") Long id, @PathParam("phone") String phone) {
         return mapper.toDto(service.updatePhone(id, phone));
     }

@@ -21,6 +21,11 @@ public class RestaurantController {
     private final RestaurantService service;
 
 
+    @GetMapping("/addresses")
+    public ResponseEntity<List<String>> findAddresses(){
+        List<String> list = findAll().stream().map(x -> x.getAddress() + " " + x.getName()).toList();
+        return ResponseEntity.ok(list);
+    }
     @PostMapping("/all")
     public ResponseEntity<List<RestaurantDto>> saveAll(List<RestaurantDto> restaurantDtoList) {
         return ResponseEntity.ok(mapper.toDtoList(service.saveAll(mapper.toModelList(restaurantDtoList))));

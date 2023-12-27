@@ -1,6 +1,7 @@
 package com.example.ProgrammingTechnology.config;
 
 import com.example.ProgrammingTechnology.model.*;
+import com.example.ProgrammingTechnology.repository.PayMethodRepository;
 import com.example.ProgrammingTechnology.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;

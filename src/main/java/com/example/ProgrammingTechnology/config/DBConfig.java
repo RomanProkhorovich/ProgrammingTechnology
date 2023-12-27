@@ -1,9 +1,7 @@
 package com.example.ProgrammingTechnology.config;
 
-import com.example.ProgrammingTechnology.model.KitchenType;
-import com.example.ProgrammingTechnology.model.OrderStatus;
-import com.example.ProgrammingTechnology.model.ReceivingType;
-import com.example.ProgrammingTechnology.model.Role;
+import com.example.ProgrammingTechnology.model.*;
+import com.example.ProgrammingTechnology.repository.PayMethodRepository;
 import com.example.ProgrammingTechnology.service.KitchenTypeService;
 import com.example.ProgrammingTechnology.service.OrderStatusService;
 import com.example.ProgrammingTechnology.service.ReceivingTypeService;
@@ -15,6 +13,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @RequiredArgsConstructor
 public class DBConfig {
+
+    private final PayMethodRepository payMethodRepository;
     private final RoleService roleService;
     private final ReceivingTypeService receivingTypeService;
     private final KitchenTypeService kitchenTypeService;
@@ -26,6 +26,13 @@ public class DBConfig {
         roleService.createRole(new Role(2l,"Courier"));
         roleService.createRole(new Role(3l,"Admin"));
         roleService.createRole(new Role(4l,"Manager"));
+        return 1;
+    }
+    @Bean
+    public int createPayMethod(){
+        payMethodRepository.save(new PayMethod("Картой при получении"));
+        payMethodRepository.save(new PayMethod("Наличными при получении"));
+        payMethodRepository.save(new PayMethod("Картой онлайн(временно не работает)"));
         return 1;
     }
 
