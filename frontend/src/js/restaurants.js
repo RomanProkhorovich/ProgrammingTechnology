@@ -78,19 +78,30 @@ export default class Restaurant {
 
       console.log(formData);
 
+      let params = {};
+
+      params["userId"] = JSON.parse(localStorage.getItem("User")).id;
+      params["dateTime"] = formData.date + ", " + formData.time;
+      params["restId"] = id;
+      params["count"] = formData.count;
+
+      console.log(params);
+
       const xhr = new XMLHttpRequest();
       xhr.open("POST", "http://localhost:8080/api/v1/booking");
+      const user = JSON.parse(localStorage.getItem("User"));
+      if (!user) return;
+      const username = user.username;
+      const password = user.password;
+      xhr.setRequestHeader(
+        "Authorization",
+        "Basic " + btoa(`${username}:${password}`)
+      );
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onreadystatechange = () => {
         if (xhr.readyState !== 4 || xhr.status !== 200) {
           return;
         }
-        let params = {};
-
-        params["userId"] = JSON.parse(localStorage.getItem("User")).id;
-        params["dateTime"] = formData.date + ", " + formData.time;
-        params["restId"] = id;
-        params["count"] = formData.count;
 
         document.forms["booking-form"].closest(".popup").remove();
 
