@@ -2,6 +2,10 @@ import { dropdownHandler } from "./dropdown.js";
 
 export default class Admin {
   constructor() {
+    this.adminContent = document.querySelector(".content-admin");
+    this.managerContent = document.querySelector(".content-manager");
+    this.couriersHTML = "";
+
     this.tableDropdown = document.querySelector("#content-admin-dropdown");
     this.tableOptions = this.tableDropdown.querySelector(".dropdown-options");
     this.getOptions();
@@ -14,12 +18,49 @@ export default class Admin {
     this.registerEvents();
   }
 
+  getCouriers() {
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://localhost:8080/api/v1/couriers");
+    const user = JSON.parse(localStorage.getItem("User"));
+    if (!user) return;
+    const username = user.username;
+    const password = user.password;
+    xhr.setRequestHeader(
+      "Authorization",
+      "Basic " + btoa(`${username}:${password}`)
+    );
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState !== 4 || xhr.status !== 200) {
+        return;
+      }
+      const response = JSON.parse(xhr.responseText);
+
+      response.map((item) => {
+        return `<a href="#" data-courier-id="${
+          item.id
+        }">${`${item.lastname} ${item.firstname} ${item.surname}`}</a>`;
+      });
+
+      this.couriersHTML = `<div class="dropdown" style="margin: 1em;">
+          <button type="button">
+              <span class="dropdown-value">${
+                response[0]
+              }</span><span class="dropdown-arrow">▼</span>
+          </button>
+          <div class="dropdown-options">
+              ${response.join(" ")}
+          </div>
+      </div>`;
+    };
+    xhr.send();
+  }
+
   getOptions() {
     const role = JSON.parse(localStorage.getItem("User")).role;
     if ((role !== "Admin" && role !== "Manager") || !role)
       window.location.href = document.querySelector(".header-logo a").href;
     if (role === "Admin") {
-      document.querySelector('.content-admin').classList.remove('display-none')
+      document.querySelector(".content-admin").classList.remove("display-none");
       this.tableOptions.insertAdjacentHTML(
         "beforeend",
         `<a href="#" data-endpoint="users/all">Пользователи</a>
@@ -29,13 +70,30 @@ export default class Admin {
       );
       return;
     }
-    document.querySelector('.content-manager').classList.remove('display-none')
-    document.querySelector('.tabs').classList.remove('display-none')
+    document.querySelector(".content-manager").classList.remove("display-none");
+    document.querySelector(".tabs").classList.remove("display-none");
     this.tableOptions.insertAdjacentHTML(
       "beforeend",
       `<a href="#" data-endpoint="users/all">Пользователи</a>
       <a href="#" data-endpoint="orders/all">Заказы</a>`
     );
+    this.getCouriers();
+    this.getOrders();
+  }
+
+  getDishesHTML(dishes) {
+    let html = "";
+    dishes.forEach((item) => {
+      html += `<div class="order-description-dish">
+      <h1 class="order-description-dish-name">
+          ${item.dish.name}
+      </h1>
+      <p class="order-description-dish-price">
+          <span>${item.dish.price}</span> р. <span>${item.count}</span>шт.
+      </p>
+  </div>`;
+    });
+    return html;
   }
 
   inputListener() {
@@ -51,7 +109,7 @@ export default class Admin {
 
   getOrders() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/api/v1/orders");
+    xhr.open("GET", "http://localhost:8080/api/v1/orders/all?actual=true");
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
     const username = user.username;
@@ -64,8 +122,47 @@ export default class Admin {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
       }
+      const response = xhr.responseText;
+
+      response.forEach((item) => {
+        this.managerContent.insertAdjacentHTML(
+          "afterbegin",
+          `<div class="order" data-order-id="${item.id}">
+        <div class="order-header">
+            <p class="order-info">
+                Заказ №${item.id} от ${new Date(
+            item.orderTime
+          ).toLocaleString()}
+            </p>
+        </div>
+        <div class="order-description-dishes">
+            ${this.getDishesHTML(item.cartItems)}
+            <div class="order-description-sum">
+                <h1>
+                    Итого
+                </h1>
+                <p class="order-description-dish-price">
+                    <span>${item.sum}</span> р.
+                </p>
+            </div>
+        </div>
+        <div class="order-description-data">
+            <h1>Способ оплаты:</h1>
+            <p>${item.payMethod}</p>
+            <h1>Адрес:</h1>
+            <p>${item.address}</p>
+            <h1>Адрес ресторана:</h1>
+            <p>${item.restaurant.address}</p>
+        </div>
+        ${this.couriersHTML}
+        <button class="content-manager-dropdown-button" type="button">
+            Назначить
+        </button>
+    </div>`
+        );
+      });
     };
-    xhr.send({ actual: true });
+    xhr.send();
   }
 
   getTable(tableName) {

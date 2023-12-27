@@ -14,7 +14,7 @@ export default class Restaurant {
 
   getRestaurants() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/api/v1/restaurants");
+    xhr.open("GET", "http://localhost:8080/api/v1/restaurants/all");
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
