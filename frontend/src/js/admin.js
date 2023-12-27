@@ -122,7 +122,7 @@ export default class Admin {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
       }
-      const response = xhr.responseText;
+      const response = JSON.parse(xhr.responseText);
 
       response.forEach((item) => {
         this.managerContent.insertAdjacentHTML(
