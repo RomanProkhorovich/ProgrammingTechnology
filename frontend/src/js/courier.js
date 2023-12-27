@@ -53,7 +53,7 @@ export default class Courier {
 
   changeOrderStatus(id) {
     const xhr = new XMLHttpRequest();
-    xhr.open("PUT", "http://localhost:8080/api/v1/courier");
+    xhr.open("PUT", `http://localhost:8080/api/v1/courier?id=${id}`);
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
     const username = user.username;
