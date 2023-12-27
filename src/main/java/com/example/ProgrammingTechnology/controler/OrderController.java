@@ -8,6 +8,7 @@ import com.example.ProgrammingTechnology.model.Order;
 import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.security.SecurityHelper;
 import com.example.ProgrammingTechnology.service.*;
+import jakarta.transaction.Transactional;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
+@Transactional
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/orders")
 public class OrderController {
@@ -85,8 +87,8 @@ public class OrderController {
         return ResponseEntity.ok(mapper.toDtoList(service.findAll()));
     }
     @GetMapping
-    public List<OrderDto> findAllByUser(@PathParam(value = "user_id") Long id,
-                                        @PathParam(value = "actual") boolean actual) {
+    public List<OrderDto> findAllByUser(@RequestParam(value = "user_id",required = false) Long id,
+                                        @RequestParam(value = "actual", required = false) Boolean actual) {
         List<Order> ordersByUser = service.findOrdersByUser(id, actual);
         List<OrderDto> list = new ArrayList<>(mapper.toDtoList(ordersByUser).stream()
                 .sorted(Comparator.comparing(OrderDto::getOrderTime))

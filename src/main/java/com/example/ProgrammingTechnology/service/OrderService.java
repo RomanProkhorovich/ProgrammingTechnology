@@ -103,14 +103,20 @@ public class OrderService {
             throw new IllegalArgumentException();
         }
 
-        User courier = userService.findUserById(order.getCourier().getId());
-        if(!courier.getRole().getName().equals("Courier")
-                || order.getAddress().isBlank()) {
-            throw new IllegalArgumentException();
+        User orderCourier = order.getCourier();
+        if (orderCourier!=null) {
+            User courier = userService.findUserById(orderCourier.getId());
+            if (!courier.getRole().getName().equals("Courier")
+                    || order.getAddress().isBlank()) {
+                throw new IllegalArgumentException();
+            }
         }
         if(order.getId()==null) {
             return createOrder(order);
         }
+        if (order.getOrderStatus().getName().equals("Доставлен")||
+                order.getOrderStatus().getName().equals("Завершен"))
+            order.setDeliveryTime(LocalDateTime.now());
         return updateOrder(order);
     }
 
