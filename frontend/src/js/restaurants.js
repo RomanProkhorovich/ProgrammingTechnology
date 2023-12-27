@@ -27,13 +27,13 @@ export default class Restaurant {
       response.forEach((item) => {
         this.cardContainer.insertAdjacentHTML(
           "beforeend",
-          `<div class="content-restaurants-card" data-restaurant-id="${response.address}">
+          `<div class="content-restaurants-card" data-restaurant-id="${item.address}">
               <div class="content-restaurants-card-img">
                   <img src="https://pgdv.ru/images/blog/restorany-michelin-moskva/michelin-moskva-7-min.jpg" alt="">
               </div>
               <div class="content-restaurants-card-info">
-                  <h1>Roman's на ${response.address}</h1>
-                  <p>${response.description}</p>
+                  <h1>${item.name}</h1>
+                  <p>${item.description}</p>
                   <button class="content-restaurants-card-button">Забронировать столик</button>
               </div>
           </div>`
