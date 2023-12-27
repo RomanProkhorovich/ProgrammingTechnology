@@ -196,7 +196,7 @@ export default class Courier {
     </div>`;
       });
       ordersContainer.innerHTML = html;
-      addStatusListeners();
+      this.addStatusListeners();
     };
     xhr.send();
   }

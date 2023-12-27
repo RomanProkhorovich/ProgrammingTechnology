@@ -46,7 +46,7 @@ export default class Header {
 
   // GET ACTIVE ORDER
   getActiveOrder() {
-    if (sessionStorage.getItem("noActive") === 1) return;
+    if (+sessionStorage.getItem("noActive") === +1) return;
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost:8080/api/v1/orders?actual=true");
     const user = JSON.parse(localStorage.getItem("User"));
