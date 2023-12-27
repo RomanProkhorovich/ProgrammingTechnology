@@ -127,8 +127,8 @@ export default class Admin {
               return;
             }
           };
-          orderId = e.target.closest(".order").dataset.orderId;
-          courierName = e.target
+          let orderId = e.target.closest(".order").dataset.orderId;
+          let courierName = e.target
             .closest(".order")
             .querySelector(".dropdown-value").textContent;
           xhr.send(
