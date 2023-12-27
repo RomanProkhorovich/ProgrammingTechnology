@@ -66,10 +66,6 @@ export default class Courier {
     );
     xhr.setRequestHeader("Content-Type", "application/json");
 
-    xhr.onerror = () => {
-      return false;
-    };
-
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;

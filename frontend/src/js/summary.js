@@ -151,7 +151,7 @@ export default class Summary {
     xhrAddresses.send();
 
     const xhrPayMethods = new XMLHttpRequest();
-    xhrPayMethods.open("GET", "http://localhost:8080/api/v1/paymethods");
+    xhrPayMethods.open("GET", "http://localhost:8080/api/v1/payMethods");
     xhrPayMethods.setRequestHeader("Authorization", authHeader);
     xhrPayMethods.onreadystatechange = () => {
       if (xhrPayMethods.readyState !== 4 || xhrPayMethods.status !== 200) {
