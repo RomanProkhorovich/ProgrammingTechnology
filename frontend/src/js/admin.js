@@ -160,6 +160,7 @@ export default class Admin {
     </div>`
         );
       });
+      dropdownHandler();
     };
     xhr.send();
   }
@@ -261,6 +262,5 @@ export default class Admin {
         this.getTable(this.endpoint);
       }, 0);
     });
-    dropdownHandler();
   }
 }
