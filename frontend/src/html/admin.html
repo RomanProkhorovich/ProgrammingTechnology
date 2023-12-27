@@ -62,15 +62,57 @@
 
     <div class="content">
 
-        <div class="tabs">
+        <div class="tabs display-none">
             <button id="tab-data" class="tab tab-active" type="button">Назначение курьеров</button>
             <button id="tab-orders" class="tab" type="button">База данных</button>
+        </div>
+
+        <div class="content-manager display-none">
+            <div class="order" data-order-id="${item.id}">
+                <div class="order-header">
+                    <p class="order-info">
+                        Заказ №${item.id} от ${new Date(
+                        item.orderTime
+                        ).toLocaleString()}
+                    </p>
+                </div>
+                <div class="order-description-dishes">
+                    ${this.getDishesHTML(item.cartItems)}
+                    <div class="order-description-sum">
+                        <h1>
+                            Итого
+                        </h1>
+                        <p class="order-description-dish-price">
+                            <span>${item.sum}</span> р.
+                        </p>
+                    </div>
+                </div>
+                <div class="order-description-data">
+                    <h1>Способ оплаты:</h1>
+                    <p>${"Картой курьеру"}</p>
+                    <h1>Адрес:</h1>
+                    <p>${item.address}</p>
+                    <h1>Адрес ресторана:</h1>
+                    <p>${item.restaurant.address}</p>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button type="button">
+                    <span id="endpoint-value" class="dropdown-value">Пользователи</span><span
+                        class="dropdown-arrow">▼</span>
+                </button>
+                <div class="dropdown-options">
+                    <!-- <a href="#" data-endpoint="users/all">Пользователи</a>
+                    <a href="#" data-endpoint="restaurants/all">Рестораны</a>
+                    <a href="#" data-endpoint="dishes/all">Блюда</a>
+                    <a href="#" data-endpoint="orders/all">Заказы</a> -->
+                </div>
+            </div>
         </div>
 
         <div class="content-admin">
             <div class="dropdown">
                 <button type="button">
-                    <img src="" alt="">
                     <span id="endpoint-value" class="dropdown-value">Пользователи</span><span
                         class="dropdown-arrow">▼</span>
                 </button>

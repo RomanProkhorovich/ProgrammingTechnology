@@ -82,6 +82,8 @@ export default class Admin {
       }
 
       const response = JSON.parse(xhr.responseText);
+      console.log(response);
+
       if (!response[0]) {
         this.table.innerHTML = "Таблица пуста";
         return;

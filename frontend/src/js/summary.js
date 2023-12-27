@@ -178,7 +178,7 @@ export default class Summary {
     this.sum.textContent = this.cartSum.textContent;
 
     //ORDER
-    this.orderButton.addEventListener("click", () => this.sendOrder);
+    this.orderButton.addEventListener("click", this.sendOrder);
 
     this.addressButton.addEventListener("click", () => {
       document.body.insertAdjacentHTML(
