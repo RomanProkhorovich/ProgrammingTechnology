@@ -131,6 +131,10 @@ export default class Admin {
           let courierName = e.target
             .closest(".order")
             .querySelector(".dropdown-value").textContent;
+
+          console.log(
+            orderId + " " + this.couriers + " " + this.couriers[courierName]
+          );
           xhr.send(
             JSON.stringify({
               order_id: orderId,
