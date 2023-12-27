@@ -33,6 +33,7 @@ export default class Summary {
     params.address = document.querySelector("#order-address").textContent;
     params.receivingType =
       document.querySelector("#order-delivery").textContent;
+    params.payMethod = document.querySelector("#order-paymethods");
 
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:8080/api/v1/orders");

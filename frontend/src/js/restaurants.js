@@ -22,6 +22,8 @@ export default class Restaurant {
 
       const response = JSON.parse(xhr.responseText);
 
+      console.log(response);
+
       response.forEach((item) => {
         this.cardContainer.insertAdjacentHTML(
           "beforeend",
