@@ -69,7 +69,6 @@ export default class Courier {
       "Authorization",
       "Basic " + btoa(`${username}:${password}`)
     );
-    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
@@ -131,7 +130,6 @@ export default class Courier {
       "Authorization",
       "Basic " + btoa(`${username}:${password}`)
     );
-    xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
