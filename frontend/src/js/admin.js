@@ -5,6 +5,7 @@ export default class Admin {
     this.adminContent = document.querySelector(".content-admin");
     this.managerContent = document.querySelector(".content-manager");
     this.couriersHTML = "";
+    this.couriers = {};
 
     this.tableDropdown = document.querySelector("#content-admin-dropdown");
     this.tableOptions = this.tableDropdown.querySelector(".dropdown-options");
@@ -37,6 +38,9 @@ export default class Admin {
       console.log(response);
 
       let mapped = response.map((item) => {
+        this.couriers[`${item.lastname} ${item.firstname} ${item.surname}`] =
+          item.id;
+
         return `<a href="#" data-courier-id="${
           item.id
         }">${`${item.lastname} ${item.firstname} ${item.surname}`}</a>`;
@@ -99,6 +103,42 @@ export default class Admin {
   </div>`;
     });
     return html;
+  }
+
+  courierButtonHandler() {
+    document
+      .querySelectorAll(".content-manager-dropdown-button")
+      .forEach((item) => {
+        item.addEventListener("click", (e) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open("PUT", "http://localhost:8080/api/v1/manager/setCourier");
+          const user = JSON.parse(localStorage.getItem("User"));
+          if (!user) return;
+          const username = user.username;
+          const password = user.password;
+          xhr.setRequestHeader(
+            "Authorization",
+            "Basic " + btoa(`${username}:${password}`)
+          );
+          xhr.setRequestHeader("Content-Type", "application/json");
+
+          xhr.onreadystatechange = () => {
+            if (xhr.readyState !== 4 || xhr.status !== 200) {
+              return;
+            }
+          };
+          orderId = e.target.closest(".order").dataset.orderId;
+          courierName = e.target
+            .closest(".order")
+            .querySelector(".dropdown-value").textContent;
+          xhr.send(
+            JSON.stringify({
+              order_id: orderId,
+              courier_id: this.couriers[courierName],
+            })
+          );
+        });
+      });
   }
 
   inputListener() {
@@ -166,7 +206,7 @@ export default class Admin {
     </div>`
         );
       });
-      courierButtonHandler();
+      this.courierButtonHandler();
       dropdownHandler();
     };
     xhr.send();
