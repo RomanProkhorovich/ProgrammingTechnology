@@ -149,6 +149,28 @@ export default class Summary {
       });
     };
     xhrAddresses.send();
+
+    const xhrPayMethods = new XMLHttpRequest();
+    xhrPayMethods.open("GET", "http://localhost:8080/api/v1/paymethods");
+    xhrPayMethods.setRequestHeader("Authorization", authHeader);
+    xhrPayMethods.onreadystatechange = () => {
+      if (xhrPayMethods.readyState !== 4 || xhrPayMethods.status !== 200) {
+        return;
+      }
+      const response = JSON.parse(xhrPayMethods.responseText);
+      const value = document.querySelector("#order-paymethods");
+      const curDropdown = value.closest(".dropdown");
+      const options = curDropdown.querySelector(".dropdown-options");
+      curDropdown.querySelector(".dropdown-value").textContent =
+        response[0].name;
+      response.forEach((item) => {
+        options.insertAdjacentHTML(
+          "beforeend",
+          `<a href="#" data-paymethods-id="${item.id}">${item.name}</a>`
+        );
+      });
+    };
+    xhrPayMethods.send();
   }
 
   registerEvents() {

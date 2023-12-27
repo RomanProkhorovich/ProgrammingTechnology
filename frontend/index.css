@@ -637,7 +637,6 @@ footer {
   flex-wrap: wrap;
   justify-content: space-around;
   border-radius: 1em;
-  overflow: hidden;
   box-shadow: var(--main-shadow);
   transition: 0.2s ease-out;
 
@@ -649,6 +648,11 @@ footer {
   -moz-transition: 0.2s ease-out;
   -ms-transition: 0.2s ease-out;
   -o-transition: 0.2s ease-out;
+}
+
+.order .dropdown {
+  flex-basis: 40%;
+  flex-grow: 1;
 }
 
 .order-header {
@@ -830,6 +834,7 @@ h2 {
 }
 
 .dropdown {
+  min-width: 300px;
   position: relative;
   margin: 1em 0;
   position: relative;
@@ -1009,6 +1014,33 @@ th {
   -o-border-radius: 1em;
 }
 
+/* Manager */
+
+.content-manager-dropdown-button {
+  flex-basis: 40%;
+  flex-grow: 1;
+  font-size: 16px;
+  font-weight: 600;
+  background-color: var(--main-dark);
+  color: #fff;
+  border-radius: 1em;
+  transition: 0.2s ease-out;
+  margin: 1em;
+  padding: 1em;
+
+  -webkit-border-radius: 1em;
+  -moz-border-radius: 1em;
+  -ms-border-radius: 1em;
+  -o-border-radius: 1em;
+  -webkit-transition: 0.2s ease-out;
+  -moz-transition: 0.2s ease-out;
+  -ms-transition: 0.2s ease-out;
+  -o-transition: 0.2s ease-out;
+}
+.content-manager-dropdown-button:hover {
+  opacity: 80%;
+}
+
 /* Courier */
 .content-courier-active,
 .content-courier-finished {
@@ -1037,13 +1069,14 @@ th {
 }
 
 .content-restaurants-card-img {
-  max-width: 300px;
   flex-grow: 1;
-  flex-basis: 10%;
+  flex-basis: 0;
 }
 
 .content-restaurants-card-img img {
   aspect-ratio: 1/1;
+  flex-grow: 1;
+  min-width: 200px;
   width: 100%;
   border-radius: 1em;
   -webkit-border-radius: 1em;
@@ -1055,6 +1088,7 @@ th {
 .content-restaurants-card-info {
   flex-grow: 1;
   display: flex;
+  gap: 1em;
   flex-wrap: wrap;
   align-items: center;
   flex-basis: 50%;
@@ -1062,6 +1096,7 @@ th {
 
 .content-restaurants-card-info * {
   align-self: flex-start;
+  width: 100%;
 }
 
 .content-restaurants-card-button {
@@ -1130,6 +1165,10 @@ th {
   -moz-transition: 0.2s ease-out;
   -ms-transition: 0.2s ease-out;
   -o-transition: 0.2s ease-out;
+}
+
+.popup form label {
+  width: 100%;
 }
 
 .popup form input {

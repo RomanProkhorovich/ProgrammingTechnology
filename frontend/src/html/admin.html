@@ -62,12 +62,7 @@
 
     <div class="content">
 
-        <div class="tabs display-none">
-            <button id="tab-data" class="tab tab-active" type="button">Назначение курьеров</button>
-            <button id="tab-orders" class="tab" type="button">База данных</button>
-        </div>
-
-        <!-- <div class="content-manager display-none">
+        <div class="content-manager">
             <div class="order" data-order-id="${item.id}">
                 <div class="order-header">
                     <p class="order-info">
@@ -95,23 +90,25 @@
                     <h1>Адрес ресторана:</h1>
                     <p>${item.restaurant.address}</p>
                 </div>
-            </div>
-            <div class="dropdown">
-                <button type="button">
-                    <span id="endpoint-value" class="dropdown-value">Пользователи</span><span
-                        class="dropdown-arrow">▼</span>
-                </button>
-                <div class="dropdown-options">
-                    <a href="#" data-endpoint="users/all">Пользователи</a>
-                    <a href="#" data-endpoint="restaurants/all">Рестораны</a>
-                    <a href="#" data-endpoint="dishes/all">Блюда</a>
-                    <a href="#" data-endpoint="orders/all">Заказы</a>
+                <div class="dropdown" style="margin: 1em;">
+                    <button type="button">
+                        <span class="dropdown-value"></span><span class="dropdown-arrow">▼</span>
+                    </button>
+                    <div class="dropdown-options">
+                        <!-- <a href="#" data-endpoint="users/all">Пользователи</a>
+                        <a href="#" data-endpoint="restaurants/all">Рестораны</a>
+                        <a href="#" data-endpoint="dishes/all">Блюда</a>
+                        <a href="#" data-endpoint="orders/all">Заказы</a> -->
+                    </div>
                 </div>
+                <button class="content-manager-dropdown-button" type="button">
+                    Назначить
+                </button>
             </div>
-        </div> -->
+        </div>
 
-        <div class="content-admin">
-            <div class="dropdown">
+        <div class="content-admin display-none">
+            <div id="content-admin-dropdown" class="dropdown">
                 <button type="button">
                     <span id="endpoint-value" class="dropdown-value">Пользователи</span><span
                         class="dropdown-arrow">▼</span>

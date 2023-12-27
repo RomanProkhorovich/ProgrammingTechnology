@@ -5,7 +5,8 @@ export default class Admin {
     this.getOptions();
     dropdownHandler();
     this.table = document.querySelector("#content-admin-table");
-    this.options = document.querySelector(".dropdown-options");
+    this.tableDropdown = document.querySelector("#content-admin-dropdown");
+    this.tableOptions = this.tableDropdown.querySelector(".dropdown-options");
     this.inputListener();
     this.endpoint = "users/all";
     this.getTable(this.endpoint);
@@ -17,21 +18,27 @@ export default class Admin {
     const role = JSON.parse(localStorage.getItem("User")).role;
     if ((role !== "Admin" && role !== "Manager") || !role)
       window.location.href = document.querySelector(".header-logo a").href;
-    const container = document.querySelector(".dropdown-options");
     if (role === "Admin") {
-      container.insertAdjacentHTML(
+      this.tableOptions.insertAdjacentHTML(
         "beforeend",
         `<a href="#" data-endpoint="users/all">Пользователи</a>
-      <a href="#" data-endpoint="restaurants/all">Рестораны</a>
-      <a href="#" data-endpoint="dishes/all">Блюда</a>
-      <a href="#" data-endpoint="orders/all">Заказы</a>`
+        <a href="#" data-endpoint="restaurants/all">Рестораны</a>
+        <a href="#" data-endpoint="dishes/all">Блюда</a>
+        <a href="#" data-endpoint="orders/all">Заказы</a>`
       );
       return;
     }
-    container.insertAdjacentHTML(
+    document.querySelector("content").insertAdjacentHTML(
+      "afterbegin",
+      `<div class="tabs">
+          <button id="tab-couriers" class="tab tab-active" type="button">Назначение курьеров</button>
+          <button id="tab-database" class="tab" type="button">База данных</button>
+      </div>`
+    );
+    this.tableOptions.insertAdjacentHTML(
       "beforeend",
       `<a href="#" data-endpoint="users/all">Пользователи</a>
-    <a href="#" data-endpoint="orders/all">Заказы</a>`
+      <a href="#" data-endpoint="orders/all">Заказы</a>`
     );
   }
 
@@ -39,8 +46,8 @@ export default class Admin {
     const inputs = document.querySelectorAll("#content-admin-table input");
     inputs.forEach((item) => {
       item.addEventListener("change", (e) => {
-        e.target.closest("td").style.backgroundColor = "#00ff0020";
-        e.target.closest("tr").style.backgroundColor = "#00ff0020";
+        e.target.closest("td").style.backgroundColor = "#44cc4420";
+        e.target.closest("tr").style.backgroundColor = "#44cc4420";
         e.target.closest("tr").classList.add("changed");
       });
     });
@@ -156,7 +163,7 @@ export default class Admin {
   }
 
   registerEvents() {
-    this.options.addEventListener("click", (e) => {
+    this.tableOptions.addEventListener("click", (e) => {
       this.endpoint = e.target.dataset.endpoint;
       setTimeout(() => {
         this.getTable(this.endpoint);

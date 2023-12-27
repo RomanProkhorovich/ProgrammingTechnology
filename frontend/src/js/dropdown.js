@@ -35,4 +35,9 @@ export const dropdownHandler = () => {
         e.target.textContent;
     });
   });
+  document.body.addEventListener('click',(e)=>{
+    if(!e.target.closest('.dropdown')){
+      
+    }
+  })
 };
