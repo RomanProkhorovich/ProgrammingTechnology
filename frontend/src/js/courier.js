@@ -60,7 +60,7 @@ export default class Courier {
   // ORDERS RENDERING XHR
   getFinishedOrders() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/api/v1/courier");
+    xhr.open("GET", "http://localhost:8080/api/v1/courier?actual=false");
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
     const username = user.username;
@@ -116,12 +116,12 @@ export default class Courier {
         );
       });
     };
-    xhr.send(new URLSearchParams({ actual: false }));
+    xhr.send();
   }
 
   getActiveOrders() {
     const xhr = new XMLHttpRequest();
-    xhr.open("GET", "http://localhost:8080/api/v1/courier");
+    xhr.open("GET", "http://localhost:8080/api/v1/courier?actual=true");
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
     const username = user.username;
