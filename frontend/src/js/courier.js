@@ -117,7 +117,7 @@ export default class Courier {
         );
       });
     };
-    xhr.send(JSON.stringify({ actual: false }));
+    xhr.send(new URLSearchParams({ actual: false }));
   }
 
   getActiveOrders() {
@@ -183,7 +183,7 @@ export default class Courier {
         );
       });
     };
-    xhr.send(JSON.stringify({ actual: true }));
+    xhr.send(new URLSearchParams({ actual: true }));
   }
 
   registerEvents() {
