@@ -110,8 +110,20 @@ export default class Admin {
       .querySelectorAll(".content-manager-dropdown-button")
       .forEach((item) => {
         item.addEventListener("click", (e) => {
+          let orderId = e.target.closest(".order").dataset.orderId;
+          let courierName = e.target
+            .closest(".order")
+            .querySelector(".dropdown-value").textContent;
+
+          console.log(
+            orderId + " " + this.couriers + " " + this.couriers[courierName]
+          );
           const xhr = new XMLHttpRequest();
-          xhr.open("PUT", "http://localhost:8080/api/v1/manager/setCourier");
+          xhr.open(
+            "PUT",
+            `http://localhost:8080/api/v1/manager/setCourier?order_id=${+orderId}&courier_id=${+this
+              .couriers[courierName]}`
+          );
           const user = JSON.parse(localStorage.getItem("User"));
           if (!user) return;
           const username = user.username;
@@ -127,14 +139,6 @@ export default class Admin {
               return;
             }
           };
-          let orderId = e.target.closest(".order").dataset.orderId;
-          let courierName = e.target
-            .closest(".order")
-            .querySelector(".dropdown-value").textContent;
-
-          console.log(
-            orderId + " " + this.couriers + " " + this.couriers[courierName]
-          );
           xhr.send(
             JSON.stringify({
               order_id: orderId,
