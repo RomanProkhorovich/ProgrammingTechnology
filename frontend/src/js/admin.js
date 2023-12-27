@@ -50,9 +50,13 @@ export default class Admin {
     const xhr = new XMLHttpRequest();
     xhr.open("GET", `http://localhost:8080/api/v1/${tableName}`);
     const user = JSON.parse(localStorage.getItem("User"));
-    const email = user.username;
-    const pass = user.password;
-    xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
+    if (!user) return;
+    const username = user.username;
+    const password = user.password;
+    xhr.setRequestHeader(
+      "Authorization",
+      "Basic " + btoa(`${username}:${password}`)
+    );
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;

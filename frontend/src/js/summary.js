@@ -38,9 +38,13 @@ export default class Summary {
     const xhr = new XMLHttpRequest();
     xhr.open("POST", "http://localhost:8080/api/v1/orders");
     const user = JSON.parse(localStorage.getItem("User"));
-    const email = user.username;
-    const pass = user.password;
-    xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
+    if (!user) return;
+    const username = user.username;
+    const password = user.password;
+    xhr.setRequestHeader(
+      "Authorization",
+      "Basic " + btoa(`${username}:${password}`)
+    );
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
@@ -100,9 +104,10 @@ export default class Summary {
 
   getDropdownContent() {
     const user = JSON.parse(localStorage.getItem("User"));
-    const email = user.username;
-    const pass = user.password;
-    const authHeader = "Basic " + btoa(`${email}:${pass}`);
+    if (!user) return;
+    const username = user.username;
+    const password = user.password;
+    const authHeader = "Basic " + btoa(`${username}:${password}`);
 
     const xhrDelivery = new XMLHttpRequest();
     xhrDelivery.open("GET", "http://localhost:8080/api/v1/receiving");

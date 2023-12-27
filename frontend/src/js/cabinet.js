@@ -27,22 +27,25 @@ export default class Cabinet {
     xhr.open("GET", "http://localhost:8080/api/v1/users");
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
-    const email = user.username;
-    const pass = user.password;
-    xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
+    const username = user.username;
+    const password = user.password;
+    xhr.setRequestHeader(
+      "Authorization",
+      "Basic " + btoa(`${username}:${password}`)
+    );
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
       }
 
-      const user = JSON.parse(xhr.responseText);
+      const response = JSON.parse(xhr.responseText);
 
-      this.firstname.value = user.firstname;
-      this.lastname.value = user.lastname;
-      this.surname.value = user.surname;
-      this.email.value = user.email;
-      this.phone.value = user.phone;
-      this.password.value = pass;
+      this.firstname.value = response.firstname;
+      this.lastname.value = response.lastname;
+      this.surname.value = response.surname;
+      this.email.value = response.email;
+      this.phone.value = response.phone;
+      this.password.value = password;
     };
     xhr.send();
   }
@@ -69,9 +72,12 @@ export default class Cabinet {
     xhr.open("GET", "http://localhost:8080/api/v1/orders");
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
-    const email = user.username;
-    const pass = user.password;
-    xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
+    const username = user.username;
+    const password = user.password;
+    xhr.setRequestHeader(
+      "Authorization",
+      "Basic " + btoa(`${username}:${password}`)
+    );
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
@@ -170,8 +176,9 @@ export default class Cabinet {
     // SAVE USER DATA LISTENER
     this.saveData.addEventListener("click", () => {
       const user = JSON.parse(localStorage.getItem("User"));
-      const email = user.username;
-      const pass = user.password;
+      if (!user) return;
+      const username = user.username;
+      const password = user.password;
 
       let params = {};
 
@@ -190,7 +197,7 @@ export default class Cabinet {
       xhr.open("PUT", "http://localhost:8080/api/v1/users");
       xhr.setRequestHeader(
         "Authorization",
-        "Basic " + btoa(`${email}:${pass}`)
+        "Basic " + btoa(`${username}:${password}`)
       );
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onreadystatechange = () => {

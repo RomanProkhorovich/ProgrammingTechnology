@@ -4,24 +4,24 @@ export default class Header {
   constructor() {
     this.accountButton = document.querySelector(".header-account");
     this.accountMenu = document.querySelector(".header-account-menu");
+    this.accountCabinet = document.querySelector("#header-account-menu-logout");
+    this.accountLogout = document.querySelector("#header-account-menu-logout");
+
     this.cartButton = document.querySelector(".header-cart-logo");
     this.cartSum = document.querySelector(".header-cart-sum-value");
     this.cartContentSum = document.querySelector(
       ".header-cart-content-sum-value"
     );
     this.cartContent = document.querySelector(".header-cart-content");
+    this.cartDishes = [];
+    if (localStorage.getItem("Cart")) {
+      this.cartDishes = JSON.parse(localStorage.getItem("Cart"));
+    }
+
     this.toSummarize = document.querySelector("#cart-to-order");
     this.summary = document.querySelector(
       ".content-summary-paymethods-total-value"
     );
-    this.cartDishes = [];
-
-    this.accountCabinet = document.querySelector("#header-account-menu-logout");
-    this.accountLogout = document.querySelector("#header-account-menu-logout");
-
-    if (localStorage.getItem("Cart")) {
-      this.cartDishes = JSON.parse(localStorage.getItem("Cart"));
-    }
 
     this.registerEvents();
     this.getActiveOrder();
@@ -46,13 +46,17 @@ export default class Header {
 
   // GET ACTIVE ORDER
   getActiveOrder() {
+    if (sessionStorage.getItem("noActive") === 1) return;
     const xhr = new XMLHttpRequest();
     xhr.open("GET", "http://localhost:8080/api/v1/orders");
     const user = JSON.parse(localStorage.getItem("User"));
     if (!user) return;
-    const email = user.username;
-    const pass = user.password;
-    xhr.setRequestHeader("Authorization", "Basic " + btoa(`${email}:${pass}`));
+    const username = user.username;
+    const password = user.password;
+    xhr.setRequestHeader(
+      "Authorization",
+      "Basic " + btoa(`${username}:${password}`)
+    );
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
         return;
@@ -75,6 +79,7 @@ export default class Header {
         .querySelector(".content-status-close")
         .addEventListener("click", (e) => {
           e.target.closest(".content-status").remove();
+          sessionStorage.setItem("noActive", 1);
         });
     };
     xhr.send(JSON.stringify({ actual: true }));
@@ -210,13 +215,13 @@ export default class Header {
   }
 
   // AUTH POPUP
-  popupAuthForm() {
+  popupAuthForm(message) {
     document.body.insertAdjacentHTML(
       "afterbegin",
       `<div class="popup hidden">
       <form id="authorization-form">
           <h1>
-              Войдите, чтобы сделать заказ
+              ${message}
           </h1>
           <input type="text" placeholder="Номер телефона или E-Mail" name="username" value="">
           <input type="password" placeholder="Пароль" name="password" value="">
@@ -343,7 +348,7 @@ export default class Header {
       }
       e.preventDefault();
       if (e.target === this.accountButton.querySelector(".header-account-logo"))
-        this.popupAuthForm();
+        this.popupAuthForm("Регистрация и вход");
     });
 
     this.accountLogout.addEventListener("click", (e) => {
@@ -394,7 +399,7 @@ export default class Header {
         return;
       }
       e.preventDefault();
-      this.popupAuthForm();
+      this.popupAuthForm("Войдите или зарегистрируйтесь, чтобы сделать заказ");
     });
     // CART QUANTITY LISTENER CLICK
     this.cartContent.addEventListener("click", (e) => {
