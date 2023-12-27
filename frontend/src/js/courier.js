@@ -21,6 +21,20 @@ export default class Courier {
       window.location.href = document.querySelector(".header-logo a").href;
   }
 
+  addStatusListeners() {
+    document.querySelectorAll(".order-button").forEach((item) => {
+      item.addEventListener("click", (e) => {
+        const order = e.target.closest(".order");
+        if (!this.changeOrderStatus(order.dataset.orderId)) return false;
+        if (e.target.textContent === "Заказ взят в работу") {
+          e.target.textContent = "Заказ доставлен";
+          return;
+        }
+        order.remove();
+      });
+    });
+  }
+
   // CARTITEMS TO HTML
   getDishesHTML(dishes) {
     let html = "";
@@ -44,6 +58,9 @@ export default class Courier {
     if (!user) return;
     const username = user.username;
     const password = user.password;
+    xhr.onerror = () => {
+      return false;
+    };
     xhr.setRequestHeader(
       "Authorization",
       "Basic " + btoa(`${username}:${password}`)
@@ -82,15 +99,14 @@ export default class Courier {
         ".content-courier-finished"
       );
 
+      let html = "";
       orders.forEach((item) => {
-        ordersContainer.insertAdjacentHTML(
-          "afterbegin",
-          `<div class="order" data-order-id="${item.id}">
+        html += `<div class="order" data-order-id="${item.id}">
         <div class="order-header">
             <p class="order-info">
                 Заказ №${item.id} от ${new Date(
-            item.orderTime
-          ).toLocaleString()}
+          item.orderTime
+        ).toLocaleString()}
             </p>
         </div>
         <div class="order-description-dishes">
@@ -112,9 +128,9 @@ export default class Courier {
             <h1>Адрес ресторана:</h1>
             <p>${item.restaurant.address}</p>
         </div>
-    </div>`
-        );
+    </div>`;
       });
+      ordersContainer.innerHTML = html;
     };
     xhr.send();
   }
@@ -141,18 +157,18 @@ export default class Courier {
 
       const ordersContainer = document.querySelector(".content-courier-active");
 
+      let html = "";
+
       orders.forEach((item) => {
         let caption;
         if (item.orderStatus.id === 4) caption = "Заказ доставлен";
-        else caption = "Заказ получен";
-        ordersContainer.insertAdjacentHTML(
-          "afterbegin",
-          `<div class="order" data-order-id="${item.id}">
+        else caption = "Заказ взят в работу";
+        html += `<div class="order" data-order-id="${item.id}">
         <div class="order-header">
             <p class="order-info">
                 Заказ №${item.id} от ${new Date(
-            item.orderTime
-          ).toLocaleString()}
+          item.orderTime
+        ).toLocaleString()}
             </p>
             <button class="order-button">
                 ${caption}
@@ -177,11 +193,12 @@ export default class Courier {
             <h1>Адрес ресторана:</h1>
             <p>${item.restaurant.address}</p>
         </div>
-    </div>`
-        );
+    </div>`;
       });
+      ordersContainer.innerHTML = html;
+      addStatusListeners();
     };
-    xhr.send(new URLSearchParams({ actual: true }));
+    xhr.send();
   }
 
   registerEvents() {
@@ -198,16 +215,5 @@ export default class Courier {
       this.contentFinished.classList.remove("display-none");
     });
     // CHANGE STATUS
-    document.querySelectorAll(".order-button").forEach((item) => {
-      item.addEventListener("click", (e) => {
-        const order = e.target.closest(".order");
-        this.changeOrderStatus(order.dataset.orderId);
-        if (e.target.textContent === "Заказ получен") {
-          e.target.textContent = "Заказ доставлен";
-          return;
-        }
-        order.remove();
-      });
-    });
   }
 }
