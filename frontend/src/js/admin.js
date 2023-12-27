@@ -35,7 +35,7 @@ export default class Admin {
       }
       const response = JSON.parse(xhr.responseText);
 
-      response.map((item) => {
+      let mapped = response.map((item) => {
         return `<a href="#" data-courier-id="${
           item.id
         }">${`${item.lastname} ${item.firstname} ${item.surname}`}</a>`;
@@ -44,11 +44,11 @@ export default class Admin {
       this.couriersHTML = `<div class="dropdown" style="margin: 1em;">
           <button type="button">
               <span class="dropdown-value">${
-                response[0]
+                mapped[0]
               }</span><span class="dropdown-arrow">▼</span>
           </button>
           <div class="dropdown-options">
-              ${response.join(" ")}
+              ${mapped.join(" ")}
           </div>
       </div>`;
     };
