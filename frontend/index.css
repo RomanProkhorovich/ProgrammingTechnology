@@ -434,6 +434,7 @@ footer {
 .content-status {
   color: var(--main-dark);
   display: flex;
+  justify-content: space-between;
   align-items: center;
   font-weight: 600;
   border-radius: 1em;
@@ -450,13 +451,7 @@ footer {
 
 .content-status-close {
   user-select: none;
-  float: right;
   cursor: pointer;
-  border-radius: 100%;
-  -webkit-border-radius: 100%;
-  -moz-border-radius: 100%;
-  -ms-border-radius: 100%;
-  -o-border-radius: 100%;
 }
 
 /* Menu */

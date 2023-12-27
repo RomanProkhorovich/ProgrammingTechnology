@@ -70,9 +70,8 @@ export default class Header {
         `<div class="content-status">
           <p>Ваш заказ №${order.id} от ${new Date(
           order.orderTime
-        ).toLocaleString()} на данный момент ${
-          order.orderStatus.name
-        }<span class="content-status-close">✕</span></p>
+        ).toLocaleString()} на данный момент ${order.orderStatus.name}</p>
+        <p class="content-status-close">✕</p>
         </div>`
       );
       document
