@@ -178,6 +178,7 @@ export default class Admin {
       const response = JSON.parse(xhr.responseText);
 
       response.forEach((item) => {
+      debugger;
         this.managerContent.insertAdjacentHTML(
           "afterbegin",
           `<div class="order" data-order-id="${item.id}">

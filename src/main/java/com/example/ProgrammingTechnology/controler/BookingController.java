@@ -5,10 +5,12 @@ import com.example.ProgrammingTechnology.model.Restaurant;
 import com.example.ProgrammingTechnology.model.User;
 import com.example.ProgrammingTechnology.repository.BookingRepository;
 import com.example.ProgrammingTechnology.repository.UserRepository;
+import com.example.ProgrammingTechnology.security.SecurityHelper;
 import com.example.ProgrammingTechnology.service.RestaurantService;
 import com.example.ProgrammingTechnology.service.UserService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
@@ -29,19 +31,26 @@ public class BookingController {
         return ResponseEntity.ok(repository.findAll());
     }
     @PostMapping
-    @Secured("hasAnyAuthority('Admin','Manager')")
-    public ResponseEntity<Booking> create(@RequestBody Dto dto){
+    //@Secured("hasAnyAuthority('Admin','Manager')")
+    public ResponseEntity<?> create(@RequestBody Dto dto){
         Restaurant rest = restaurantService.findRestaurantById(dto.restId);
-        User user = userService.findUserById(dto.userId);
+        User user;
+        if (dto.userId!=null)
+            user = userService.findUserById(dto.userId);
+        else
+            user=userService.findUserByEmailOrPhone(SecurityHelper.getCurrentUser().getUsername());
         Booking booking= Booking.builder()
                 .dateTime(dto.dateTime)
                 .personCount(dto.count)
                 .restaurant(rest)
                 .user(user)
                 .build();
-        return ResponseEntity.ok(repository.save(booking));
+        Booking save = repository.save(booking);
+        return ResponseEntity.ok("saved");
     }
 
+    @Setter
+    @Getter
     static class Dto{
         private Long userId;
         private byte count;

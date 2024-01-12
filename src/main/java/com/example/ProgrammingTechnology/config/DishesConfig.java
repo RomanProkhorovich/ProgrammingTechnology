@@ -284,11 +284,13 @@ public class DishesConfig {
         CartItem item = new CartItem(service.findDishById(1l), (byte) 4);
         item = cartItemService.createOrderDish(item);
         order.setCartItems(Set.of(item));
+        order.setRestaurant(rest1);
         order.setOrderTime(LocalDateTime.now());
         var a = orderService.createOrder(order);
 
         order.setAddress("адрес1");
         order.setId(null);
+        order.setRestaurant(rest2);
         order.setClient(user);
         order.setReceivingType(receivingTypeService.findReceivingTypeByName("Самовывоз"));
         //CartItem item = new CartItem(service.findDishById(1l), (byte) 4);
@@ -302,6 +304,7 @@ public class DishesConfig {
         order.setAddress("адрес2");
         order.setId(null);
         order.setClient(user);
+        order.setRestaurant(rest1);
         order.setReceivingType(receivingTypeService.findReceivingTypeByName("Самовывоз"));
         //CartItem item = new CartItem(service.findDishById(1l), (byte) 4);
         item.setId(null);
@@ -314,6 +317,7 @@ public class DishesConfig {
         order.setAddress("адрес4");
         order.setId(null);
         order.setClient(user);
+        order.setRestaurant(rest1);
         order.setReceivingType(receivingTypeService.findReceivingTypeByName("Самовывоз"));
         //CartItem item = new CartItem(service.findDishById(1l), (byte) 4);
         item.setId(null);
@@ -329,6 +333,7 @@ public class DishesConfig {
         CartItem item2 = new CartItem(service.findDishById(2L), (byte) 1);
         item2 = cartItemService.createOrderDish(item2);
         order.setCartItems(Set.of(item2));
+        order.setRestaurant(rest1);
         order.setOrderTime(LocalDateTime.now());
         a=orderService.createOrder(order);
 
