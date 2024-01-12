@@ -3,11 +3,13 @@ package com.example.ProgrammingTechnology.controler;
 
 import com.example.ProgrammingTechnology.dto.RestaurantDto;
 import com.example.ProgrammingTechnology.mapper.RestaurantMapper;
+import com.example.ProgrammingTechnology.model.Restaurant;
 import com.example.ProgrammingTechnology.service.RestaurantService;
 import jakarta.transaction.Transactional;
 import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,9 +35,12 @@ public class RestaurantController {
 
     @GetMapping("/all")
     @Transactional
-    @PreAuthorize("hasAnyAuthority('Admin','Manager')")
+    //@PreAuthorize("hasAnyAuthority('Admin','Manager')")
+    //@Secured("permitAll()")
     public List<RestaurantDto> findAll() {
-        return mapper.toDtoList(service.findRestaurants());
+        List<Restaurant> restaurants = service.findRestaurants();
+        List<RestaurantDto> dtoList = mapper.toDtoList(restaurants);
+        return dtoList;
     }
 
     @GetMapping("/byName")
@@ -43,7 +48,7 @@ public class RestaurantController {
         return mapper.toDtoList(service.findRestaurantsByName(name));
     }
 
-    @GetMapping("/btKitchenType")
+    @GetMapping("/byKitchenType")
     public List<RestaurantDto> findByKitchen(@PathParam("kitchen_type") String type) {
         return mapper.toDtoList(service.findRestaurantsByKitchenType(type));
     }

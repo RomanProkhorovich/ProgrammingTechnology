@@ -76,18 +76,24 @@ public class OrderController {
         thread.start();
 
 
-
         OrderDto orderDto = mapper.toDto(order);
         return ResponseEntity.ok(orderDto);
     }
 
     @GetMapping("/all")
     @PreAuthorize("hasAnyAuthority('Admin','Manager')")
-    public ResponseEntity<List<OrderDto>> fundAll(){
-        return ResponseEntity.ok(mapper.toDtoList(service.findAll()));
+    public ResponseEntity<List<OrderDto>> fundAll(@RequestParam(value = "actual", required = false) boolean actual) {
+        List<Order> all = service.findAll();
+        if (actual)
+            all = all.stream()
+                    .filter(x -> !x.getOrderStatus().getName().equals("Завершен") &&
+                            !x.getOrderStatus().getName().equals("Доставлен"))
+                    .toList();
+        return ResponseEntity.ok(mapper.toDtoList(all));
     }
+
     @GetMapping
-    public List<OrderDto> findAllByUser(@RequestParam(value = "user_id",required = false) Long id,
+    public List<OrderDto> findAllByUser(@RequestParam(value = "user_id", required = false) Long id,
                                         @RequestParam(value = "actual", required = false) Boolean actual) {
         List<Order> ordersByUser = service.findOrdersByUser(id, actual);
         List<OrderDto> list = new ArrayList<>(mapper.toDtoList(ordersByUser).stream()
