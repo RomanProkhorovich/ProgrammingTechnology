@@ -82,7 +82,6 @@ export default class Admin {
       return;
     }
     document.querySelector(".content-manager").classList.remove("display-none");
-    document.querySelector(".tabs").classList.remove("display-none");
     this.tableOptions.insertAdjacentHTML(
       "beforeend",
       `<a href="#" data-endpoint="users/all">Пользователи</a>
@@ -142,6 +141,7 @@ export default class Admin {
             if (xhr.readyState !== 4 || xhr.status !== 200) {
               return;
             }
+            location.reload();
           };
           xhr.send(
             JSON.stringify({
@@ -213,7 +213,11 @@ export default class Admin {
               item.address ? item.address : "ул. Мичурина, д. 148, кв. 139"
             }</p>
             <h1>Адрес ресторана:</h1>
-            <p>${item.restaurant.address ? item.restaurant.address : "г. Самара, ул. Калужская, 11"}</p>
+            <p>${
+              item.restaurant.address
+                ? item.restaurant.address
+                : "г. Самара, ул. Калужская, 11"
+            }</p>
         </div>
         ${this.couriersHTML}
         <button class="content-manager-dropdown-button" type="button">
