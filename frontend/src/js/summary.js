@@ -60,9 +60,6 @@ export default class Summary {
       );
     };
     xhr.send(JSON.stringify(params));
-    setTimeout(() => {
-      this.orderButton.disabled = false;
-    }, 4000);
   }
 
   insertDish(id, name, quantity, description, photo, price) {
