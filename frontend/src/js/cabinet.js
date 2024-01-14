@@ -93,7 +93,9 @@ export default class Cabinet {
           `<div class="order">
               <div class="order-header">
                   <p class="order-info">
-                      Заказ №${item.id} от ${new Date(item.orderTime).toLocaleString()}
+                      Заказ №${item.id} от ${new Date(
+            item.orderTime
+          ).toLocaleString()}
                   </p>
               </div>
               <div class="order-description-dishes">
@@ -133,13 +135,8 @@ export default class Cabinet {
         .querySelector(".content-cabinet-orders")
         .classList.remove("display-none");
 
-      document
-        .querySelector(".content-cabinet-about")
-        .classList.add("display-none");
-
       this.tabOrders.classList.add("tab-active");
       this.tabData.classList.remove("tab-active");
-      this.tabAbout.classList.remove("tab-active");
     });
     this.tabData.addEventListener("click", () => {
       document
@@ -150,30 +147,8 @@ export default class Cabinet {
         .querySelector(".content-cabinet-orders")
         .classList.add("display-none");
 
-      document
-        .querySelector(".content-cabinet-about")
-        .classList.add("display-none");
-
       this.tabOrders.classList.remove("tab-active");
       this.tabData.classList.add("tab-active");
-      this.tabAbout.classList.remove("tab-active");
-    });
-    this.tabAbout.addEventListener("click", () => {
-      document
-        .querySelector(".content-cabinet-data")
-        .classList.add("display-none");
-
-      document
-        .querySelector(".content-cabinet-orders")
-        .classList.add("display-none");
-
-      document
-        .querySelector(".content-cabinet-about")
-        .classList.remove("display-none");
-
-      this.tabOrders.classList.remove("tab-active");
-      this.tabData.classList.remove("tab-active");
-      this.tabAbout.classList.add("tab-active");
     });
     // SAVE USER DATA LISTENER
     this.saveData.addEventListener("click", () => {
