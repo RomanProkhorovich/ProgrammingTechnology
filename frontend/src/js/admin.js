@@ -207,11 +207,13 @@ export default class Admin {
         </div>
         <div class="order-description-data">
             <h1>Способ оплаты:</h1>
-            <p>${item.payMethod}</p>
+            <p>${item.payMethod}}</p>
             <h1>Адрес:</h1>
-            <p>${item.address}</p>
+            <p>${
+              item.address ? item.address : "ул. Мичурина, д. 148, кв. 139"
+            }</p>
             <h1>Адрес ресторана:</h1>
-            <p>${item.restaurant.address}</p>
+            <p>${item.restaurant.address ? item.restaurant.address : "ул. Калужская, 11"}</p>
         </div>
         ${this.couriersHTML}
         <button class="content-manager-dropdown-button" type="button">
