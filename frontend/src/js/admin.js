@@ -213,7 +213,7 @@ export default class Admin {
               item.address ? item.address : "ул. Мичурина, д. 148, кв. 139"
             }</p>
             <h1>Адрес ресторана:</h1>
-            <p>${item.restaurant.address ? item.restaurant.address : "ул. Калужская, 11"}</p>
+            <p>${item.restaurant.address ? item.restaurant.address : "г. Самара, ул. Калужская, 11"}</p>
         </div>
         ${this.couriersHTML}
         <button class="content-manager-dropdown-button" type="button">
