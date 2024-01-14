@@ -28,9 +28,7 @@ export default class Courier {
     document.querySelectorAll(".order-button").forEach((item) => {
       item.addEventListener("click", (e) => {
         const order = e.target.closest(".order");
-        if (!this.changeOrderStatus(order.dataset.orderId)) {
-          //new Alert("error", "Ошибка изменения статуса заказа", 3000);
-        }
+        this.changeOrderStatus(order.dataset.orderId);
 
         this.getActiveOrders();
       });
@@ -67,8 +65,10 @@ export default class Courier {
     xhr.setRequestHeader("Content-Type", "application/json");
 
     xhr.onreadystatechange = () => {
-      if (xhr.readyState !== 4 || xhr.status !== 200) {
-        //location.reload();
+      if (xhr.readyState === 4 || xhr.status === 200) {
+        this.getActiveOrders();
+      } else {
+        new Alert("error", "Ошибка изменения статуса заказа", 3000);
       }
     };
     xhr.send(JSON.stringify({ id: id }));
