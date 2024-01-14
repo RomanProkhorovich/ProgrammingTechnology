@@ -31,6 +31,7 @@ export default class Courier {
         this.changeOrderStatus(order.dataset.orderId);
 
         this.getActiveOrders();
+        this.getFinishedOrders();
       });
     });
   }
@@ -67,6 +68,7 @@ export default class Courier {
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4 || xhr.status === 200) {
         this.getActiveOrders();
+        this.getFinishedOrders();
       } else {
         new Alert("error", "Ошибка изменения статуса заказа", 3000);
       }
