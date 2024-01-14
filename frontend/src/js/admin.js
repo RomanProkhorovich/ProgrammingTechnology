@@ -75,7 +75,8 @@ export default class Admin {
         `<a href="#" data-endpoint="users/all">Пользователи</a>
         <a href="#" data-endpoint="restaurants/all">Рестораны</a>
         <a href="#" data-endpoint="dishes/all">Блюда</a>
-        <a href="#" data-endpoint="orders/all">Заказы</a>`
+        <a href="#" data-endpoint="orders/all">Заказы</a>
+        <a href="#" data-endpoint="booking">Брони</a>`
       );
       dropdownHandler();
       return;
@@ -85,7 +86,8 @@ export default class Admin {
     this.tableOptions.insertAdjacentHTML(
       "beforeend",
       `<a href="#" data-endpoint="users/all">Пользователи</a>
-      <a href="#" data-endpoint="orders/all">Заказы</a>`
+      <a href="#" data-endpoint="orders/all">Заказы</a>
+      <a href="#" data-endpoint="booking">Брони</a>`
     );
     dropdownHandler();
     this.getCouriers();
