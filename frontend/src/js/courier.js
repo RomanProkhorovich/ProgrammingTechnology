@@ -29,7 +29,7 @@ export default class Courier {
       item.addEventListener("click", (e) => {
         const order = e.target.closest(".order");
         if (!this.changeOrderStatus(order.dataset.orderId)) {
-          new Alert("error", "Ошибка изменения статуса заказа", 3000);
+          //new Alert("error", "Ошибка изменения статуса заказа", 3000);
         }
 
         this.getActiveOrders();
@@ -68,7 +68,7 @@ export default class Courier {
 
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
-        return;
+        return true;
       }
     };
     xhr.send(JSON.stringify({ id: id }));
@@ -148,7 +148,7 @@ export default class Courier {
     );
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
-        return;
+        location.reload();
       }
 
       const orders = JSON.parse(xhr.responseText);
