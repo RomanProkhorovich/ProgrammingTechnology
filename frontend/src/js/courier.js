@@ -68,7 +68,7 @@ export default class Courier {
 
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== 4 || xhr.status !== 200) {
-        location.reload();
+        //location.reload();
       }
     };
     xhr.send(JSON.stringify({ id: id }));
