@@ -181,6 +181,8 @@ export default class Admin {
       }
       const response = JSON.parse(xhr.responseText);
 
+      console.log(response);
+
       response.forEach((item) => {
         this.managerContent.insertAdjacentHTML(
           "afterbegin",
