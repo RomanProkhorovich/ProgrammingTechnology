@@ -207,7 +207,7 @@ export default class Admin {
         </div>
         <div class="order-description-data">
             <h1>Способ оплаты:</h1>
-            <p>${item.payMethod}}</p>
+            <p>${item.payMethod.name}}</p>
             <h1>Адрес:</h1>
             <p>${
               item.address ? item.address : "ул. Мичурина, д. 148, кв. 139"
