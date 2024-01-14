@@ -77,6 +77,7 @@ export default class Admin {
         <a href="#" data-endpoint="dishes/all">Блюда</a>
         <a href="#" data-endpoint="orders/all">Заказы</a>`
       );
+      dropdownHandler();
       return;
     }
     document.querySelector(".content-manager").classList.remove("display-none");
@@ -86,6 +87,7 @@ export default class Admin {
       `<a href="#" data-endpoint="users/all">Пользователи</a>
       <a href="#" data-endpoint="orders/all">Заказы</a>`
     );
+    dropdownHandler();
     this.getCouriers();
     this.getOrders();
   }
@@ -178,7 +180,6 @@ export default class Admin {
       const response = JSON.parse(xhr.responseText);
 
       response.forEach((item) => {
-      debugger;
         this.managerContent.insertAdjacentHTML(
           "afterbegin",
           `<div class="order" data-order-id="${item.id}">
@@ -216,7 +217,6 @@ export default class Admin {
         );
       });
       this.courierButtonHandler();
-      dropdownHandler();
     };
     xhr.send();
   }
